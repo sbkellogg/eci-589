@@ -30,20 +30,20 @@ The following learning objectives are aligned with the overarching learning obje
 
 This course is divided into 4 four-week units focused on common techniques associated with social network theory and analysis. Part 1 of each unit introduce terminology, core concepts, and applications of an analytical approach through readings, course videos, and discussion. Part 2 focuses on applying knowledge acquired in Part 1 to gain insight into text-based data sources. Students will also develop technical skills through various tutorials and apply these skills to design and implement a self-directed analysis of a data source of their choosing.
 
-| **Welcome: Course Overview & Introductions**                     |
-|------------------------------------------------------------------|
-| Week 1                                                           |
-| **Unit 1: Introduction to Social Network Analysis in Education** |
-| Week 2                                                           |
-| Week 3                                                           |
-| Week 4                                                           |
-| **Unit 2: Network Structure and Measures**                       |
-| Week 5                                                           |
-| Week 6                                                           |
-| Week 7                                                           |
-| **Unit 3: Cliques, Communities, and Learner Roles**              |
-| Week 8                                                           |
-| Week 9                                                           |
-| Week 10                                                          |
+| **Welcome: Course Overview & Introductions**                                                                                                                                           |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Week 1 Orientation.** Introductions, syllabus review, and software installation                                                                                                      |
+| **Unit 1: Introduction to SNA in Education**                                                                                                                                           |
+| **Week 2 Readings & Discussion.** Introduction to social network theory, data sources, basic concepts, terminology (e.g. nodes, edges) and applications in educational contexts.       |
+| **Week 3 Software Tutorials**. Software tutorials on preparing network data, constructing network graphs, and computing basic network measures (e.g. in-degree, graph density, etc.).  |
+| Week 4                                                                                                                                                                                 |
+| **Unit 2: Network Structure and Measures**                                                                                                                                             |
+| Week 5                                                                                                                                                                                 |
+| Week 6                                                                                                                                                                                 |
+| Week 7                                                                                                                                                                                 |
+| **Unit 3: Cliques, Communities, and Learner Roles**                                                                                                                                    |
+| Week 8                                                                                                                                                                                 |
+| Week 9                                                                                                                                                                                 |
+| Week 10                                                                                                                                                                                |
 
  
