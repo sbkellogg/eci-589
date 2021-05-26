@@ -44,4 +44,4 @@ This course is divided into 4 four-week units focused on common techniques assoc
 
 ### **Unit 2: Network Structure and Measures**
 
-### **Unit 3: Cliques, Communities, and Learner Roles**  
+### **Unit 3: Cliques, Communities, and Learner Roles**
