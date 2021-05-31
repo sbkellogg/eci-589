@@ -1,0 +1,288 @@
+---
+title: 'Unit 1 Walkthrough: Peer Interaction & MOOC-Eds'
+subtitle: "ECI 589 Social Network Analysis and Education"
+author: "Dr. Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+output: 
+  html_notebook:
+    toc: true
+    toc_depth: 3
+    toc_float: yes
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. PREPARE
+
+During the second week of each unit, we'll **"walk through"** a basic
+research workflow, or data analysis process, modeled after the
+Data-Intensive Research Workflow from [Learning Analytics Goes to
+School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134) (Krumm et al.,
+2018):
+
+![Figure 2.2 Steps of Data-Intensive Research
+Workflow](img/workflow.png){width="80%"}
+
+Each walkthrough will focus on a basic analysis guided by a social
+network perspective. that you'll be expected to reproduce, and apply to
+a new research question next week, using the provided dataset or dataset
+of your own choosing.
+
+This week, we will focus on analysis of open-ended survey items from an
+evaluation of the North Carolina Department of Public Instruction
+(NCDPI) online professional development offered as part of the state's
+[Race to the Top](https://www2.ed.gov/programs/racetothetop/index.html)
+efforts. For more information about the Race to the Top evaluation work,
+visit <https://cerenc.org/rttt-evaluation/>.
+
+### 1a. Walkthrough Focus
+
+For Unit 1, our focus will be on getting our text "tidy" so we can
+perform some basic word counts, look at words that occur at a higher
+rate in a group of documents, and examine words that are unique to those
+document groups. Specifically, the Unit 1 Walkthrough will cover the
+following workflow topics:
+
+1.  **Prepare**: Prior to analysis, it's critical to understand the
+    context and data sources you're working with so you can formulate
+    useful and answerable questions. You'll also need to set up a
+    "Project" for our Unit 1 walkthrough.
+2.  **Wrangle**: Wrangling data entails the work of manipulating,
+    cleaning, transforming, and merging data. In section 2 we focus on
+    reading, reducing, and tidying our data.
+3.  **Explore**: In section 3, we use simple summary statistics, more
+    sophisticated approaches like term frequency-inverse document
+    frequency (tf-idf), and basic data visualization to explore our data
+    and see what insight it provides in response to our question.
+4.  **Model**: While we won't investigate approaches to **Model** our
+    data until Unit 3 when we learn about community detection algorithms
+    and exponential random graph models (ERGM), we will see how modeling
+    has been applied.
+5.  **Communicate**:
+
+------------------------------------------------------------------------
+
+## 1. PREPARE
+
+a.  **Context**. We learn a little bit about the North Carolina Race to
+    the Top grant and the evaluation of the online professional
+    development work, including questions and findings from the 2012
+    report.
+b.  **Questions** What aspects of online professional development
+    offerings do **teachers** find most valuable?
+c.  **Project Setup** We revisit Chapter 6 from DSIEUR to set up a
+    Project in RStudio and ready and R script for analysis.
+
+### 1a. Some Context
+
+Prior to analysis, it's critical to understand the context and data
+sources available so you can formulate useful questions that can be
+feasibly addressed by your data. For this section, we'll focus on the
+following topics:
+
+#### RTT Online Professional Development Evaluation
+
+![](img/opd.png){width="30%"}
+
+[2012 Annual
+Report](https://cerenc.org/wp-content/uploads/2011/11/RttT_OPD_Revised_FINAL_12-20-2012.pdf)
+
+North Carolina was one of 12 recipients of the 2010 federal Race to the
+Top (RttT) grants, bringing nearly \$400 million to the state's public
+school system. Over the course of four years, NC's RttT coordinated a
+set of activities and policy reforms designed to collectively improve
+the performances of students, teachers, leaders, and schools.
+
+The North Carolina Race to the Top (RttT) proposal (North Carolina
+Office of the Governor, 2010) specifies that the state's Professional
+Development Initiative will focus on the "use of e- learning tools to
+meet the professional development needs of teachers, schools, and
+districts" (p. 191). It points to research demonstrating that
+"well-designed and -implemented online professional development programs
+are not only valued by teachers but also positively impact classroom
+practices and student learning."
+
+**Data Source & Analysis**
+
+The evaluation used a wide range of data sources including interviews,
+document review, site analytics, and surveys, which we'll focus on for
+this walkthrough. Survey protocols were designed in cooperation with
+NCDPI to systematically collect information about local professional
+development, state-level supports, use of available RttT professional
+development resources, and organizational and classroom practices in the
+schools, which will serve as a baseline to assess changes over the
+period of the North Carolina RttT initiatives.
+
+Quantitative analyses focused primarily on descriptive analysis of
+item-level responses. In addition, quantitative data from these surveys
+were analyzed to examine patterns in responses by participants' role,
+event type (e.g., module, webinar, resource), and region. Responses to
+open-ended survey items of the Online Resources Survey were manually
+coded by their relation to each Learning Forward professional
+development standard.
+
+Note that the dataset we'll be using for analysis in this walkthrough is
+exported as is from Qualtrics with personal identifiers, select
+demographics, metadata, and closed-ended responses removed.
+
+**Summary of Findings**
+
+Approximately half of the state's educators completed at least one
+online module by the end of the 2011-12 school year. Overall, most
+participants agreed that the webinars and modules were relevant to their
+professional development needs, though some content was redundant with
+prior PD activities and not always content- or grade-specific, and some
+modules did not meet national standards. Most online modules were
+completed independently and not in Professional Learning Community
+groups.
+
+A common theme from focus groups and open-ended survey responses was the
+**convenience** of online professional development. One teacher in a
+focus group stated, "I liked the format. And the way that it was given,
+it was at your own pace, which works well for our schedules..."
+Educators also frequently cited that the **information and resources**
+provided through the modules improved their understanding of the new
+standards and the teacher evaluation process. Webinar participants
+appreciated the useful, updated information presented through a
+combination of PowerPoint slides and **video clips**.
+
+While the majority of educators have indicated their satisfaction with
+these resources, the findings suggest that the use of these resources at
+both the state and local level was not wholly consistent with national
+standards for online professional development. Many LEAs likely needed
+additional guidance, training, support, technology tools, and/or content
+resources to ensure that local efforts contribute to the quality of the
+experiences for educators and that the vision for online professional
+development outlined in the state's RttT proposal is realized and can be
+sustained beyond RttT.
+
+### 1b. Guiding Questions
+
+The State's progress on designing and implementing online professional
+development was originally guided by the following (very) general
+evaluation questions:
+
+1.  State Strategies: To what extent did the state implement and support
+    proposed RttT professional development efforts?
+2.  Short-Term Outcomes: What were direct outcomes of state-level RttT
+    professional development efforts?
+
+For this walkthrough, we'll use text mining to complement prior
+qualitative analyses conducted as part of the RttT Evaluation by
+examining responses to open-ended questions on the RttT Online PD Survey
+administered to over 15,000 NC educators.
+
+Our (very) specific questions of interest for this walkthrough are:
+
+1.  What aspects of online professional development offerings do
+    *teachers* find most valuable?
+2.  How might resources differ in the value they afford teachers?
+
+Finally, one overarching question we'll explore throughout this course,
+and that Silge and Robinson (2018) identify as a central question to
+text mining and natural language processing, is:
+
+> How do we to **quantify** what a document or collection of documents
+> is about?
+
+### 1c. Set Up a Project
+
+As highlighted in Chapter 6 of Data Science in Education Using R
+(DSIEUR), one of the first steps of every workflow should be to set up a
+"Project" within RStudio. This will be your "home" for any files and
+code used or created in Unit 1. Open RStudio and follow these steps from
+DESIUR 6.6 to create a Project for Unit 1:
+
+1.  Click on "File"
+2.  Select "New Project"
+3.  Choose "New Directory"
+4.  Click on "New Project"
+5.  Enter your Project's name in the box that says, "Directory name".
+    Choose a Project name that helps you remember that this is a project
+    is part of Unit 1: Tidy Text & Word Counts. Avoid using spaces in
+    your Project name, and instead, separate words with hyphens or
+    underscore characters.
+6.  Choose where to save your Project by clicking on "Browse" next to
+    the box labeled "Create project as a subdirectory of:". If you are
+    just using this to learn and test out creating a Project, consider
+    placing it in your downloads or another temporary directory so that
+    you remember to remove it later.
+7.  Click "Create Project"
+
+![Create New File](img/file.png){width="40%"}
+
+Now that you have a Project to store .R scripts that you create as you
+work through this unit, let's create our first .R script:
+
+1.  Click on "File"
+2.  Select "R script"
+3.  Click the disk icon or select "Save" from file menu to save.
+4.  Enter a file name. See the [R Style
+    Guide](https://style.tidyverse.org/files.html#names) for standard
+    file naming conventions.
+
+#### Install Packages
+
+Finally, using your newly created R script, type the following code to
+load the packages we installed last week and that we'll be needing for
+this walkthrough.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("igraph") 
+install.packages("network") 
+install.packages("sna")
+install.packages("ggraph")
+```
+
+#### Load Libraries
+
+```{r}
+
+
+```
+
+At the end of this week, I'll ask that you share with me your r script
+as evidence that you have complete the walkthrough. Although I highly
+recommend that that you manually type the code shared throughout this
+walkthrough, for large blocks of text it may be easier to cut and paste.
+
+------------------------------------------------------------------------
+
+## 2. WRANGLE
+
+\
+
+### Import Data
+
+\
+
+```{r}
+library(readr)
+```
+
+```{r}
+ties <- read_csv("data/DLT1 Edgelist.csv", 
+                 col_types = cols(Sender = col_character(), 
+                                  Receiver = col_character(), 
+                                  `Category Text` = col_skip(), 
+                                  `Comment ID` = col_character(), 
+                                  `Discussion ID` = col_character()))
+
+View(ties)
+```
+
+\
+
+\
+
+```{r}
+
+
+
+```
