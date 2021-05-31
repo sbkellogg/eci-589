@@ -4,10 +4,11 @@ subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output: 
-  html_notebook:
-    toc: true
-    toc_depth: 3
+  html_notebook: 
+    toc: yes
+    toc_depth: 5
     toc_float: yes
+    number_sections: yes
 editor_options: 
   markdown: 
     wrap: 72
@@ -17,7 +18,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 1. PREPARE
+# PREPARE
 
 During the second week of each unit, we'll **"walk through"** a basic
 research workflow, or data analysis process, modeled after the
@@ -39,8 +40,6 @@ evaluation of the North Carolina Department of Public Instruction
 [Race to the Top](https://www2.ed.gov/programs/racetothetop/index.html)
 efforts. For more information about the Race to the Top evaluation work,
 visit <https://cerenc.org/rttt-evaluation/>.
-
-### 1a. Walkthrough Focus
 
 For Unit 1, our focus will be on getting our text "tidy" so we can
 perform some basic word counts, look at words that occur at a higher
@@ -65,20 +64,7 @@ following workflow topics:
     has been applied.
 5.  **Communicate**:
 
-------------------------------------------------------------------------
-
-## 1. PREPARE
-
-a.  **Context**. We learn a little bit about the North Carolina Race to
-    the Top grant and the evaluation of the online professional
-    development work, including questions and findings from the 2012
-    report.
-b.  **Questions** What aspects of online professional development
-    offerings do **teachers** find most valuable?
-c.  **Project Setup** We revisit Chapter 6 from DSIEUR to set up a
-    Project in RStudio and ready and R script for analysis.
-
-### 1a. Some Context
+## Some Context
 
 Prior to analysis, it's critical to understand the context and data
 sources available so you can formulate useful questions that can be
@@ -161,7 +147,7 @@ experiences for educators and that the vision for online professional
 development outlined in the state's RttT proposal is realized and can be
 sustained beyond RttT.
 
-### 1b. Guiding Questions
+## Guiding Questions
 
 The State's progress on designing and implementing online professional
 development was originally guided by the following (very) general
@@ -190,7 +176,7 @@ text mining and natural language processing, is:
 > How do we to **quantify** what a document or collection of documents
 > is about?
 
-### 1c. Set Up a Project
+## Set Up a Project
 
 As highlighted in Chapter 6 of Data Science in Education Using R
 (DSIEUR), one of the first steps of every workflow should be to set up a
@@ -243,8 +229,7 @@ install.packages("ggraph")
 #### Load Libraries
 
 ```{r}
-
-
+library(tidyverse)
 ```
 
 At the end of this week, I'll ask that you share with me your r script
@@ -254,11 +239,11 @@ walkthrough, for large blocks of text it may be easier to cut and paste.
 
 ------------------------------------------------------------------------
 
-## 2. WRANGLE
+# WRANGLE
 
 \
 
-### Import Data
+## Import Data
 
 \
 
@@ -266,23 +251,155 @@ walkthrough, for large blocks of text it may be easier to cut and paste.
 library(readr)
 ```
 
-```{r}
-ties <- read_csv("data/DLT1 Edgelist.csv", 
+Screenshot of data import
+
+code example
+
+```{r import-ties}
+ties <- read_csv("data/dlt1-edgelist.csv", 
                  col_types = cols(Sender = col_character(), 
                                   Receiver = col_character(), 
                                   `Category Text` = col_skip(), 
                                   `Comment ID` = col_character(), 
                                   `Discussion ID` = col_character()))
-
-View(ties)
 ```
 
 \
+view and explain\
+
+```{r}
+ glimpse(ties)
+```
+
+```{r import-actors}
+library(readr)
+actors <- read_csv("data/dlt1-nodes.csv", 
+                       col_types = cols(UID = col_character(), 
+                                        Facilitator = col_character(), 
+                                        expert = col_character(), 
+                                        connect = col_character()))
+```
+
+\
+view and explain
+
+```{r}
+
+```
+
+```{r load-igraph}
+library(igraph)
+```
+
+\
+
+```{r}
+net <- graph_from_data_frame(d=ties, 
+                             vertices=actors, 
+                             directed=T) 
+net
+```
+
+## Calculate Edge Weight
+
+```{r}
+edges <- ties %>% 
+  count(Sender, Receiver) %>%
+  rename(weight = n)
+
+edges
+```
+
+\
+
+```{r}
+net <- graph_from_data_frame(d=edges, 
+                             vertices=actors, 
+                             directed=T) 
+net
+```
+
+\
+\
+
+```{r}
+plot(net)
+```
+
+## 3. EXPLORE
+
+```{r}
+library(ggraph)
+```
+
+```{r}
+ggraph(net) +
+  geom_edge_link() +   # add edges to the plot
+  geom_node_point()    # add nodes to the plot
+
+```
+
+```{r}
+ggraph(net, layout = "fr") +
+  geom_edge_link() +   # add edges to the plot
+  geom_node_point()    # add nodes to the plot
+```
+
+### Network Stats
+
+#### density
+
+```{r}
+
+edge_density(net, loops=F)
+
+```
+
+```{r}
+ecount(net)/(vcount(net)*(vcount(net)-1)) #for a directed network
+```
+
+#### reciprocity
+
+```{r}
+reciprocity(net)
+```
+
+\
+
+### Community
+
+```{r}
+ceb <- cluster_edge_betweenness(net) 
+
+dendPlot(ceb, mode="hclust")
+
+```
+
+\
+
+### Sociograms
 
 \
 
 ```{r}
 
+deg <- degree(net, mode="out")
+
+l <- layout_with_fr(net)
+
+net <- simplify(net, remove.multiple = F, remove.loops = T) 
+
+plot(net, 
+     layout = l,
+     edge.arrow.size=.05,
+     edge.width = .5,
+     vertex.label=NA,
+     vertex.size=deg*.04)
 
 
 ```
+
+\
+
+\
