@@ -3,15 +3,15 @@ title: 'Unit 0: Getting Started Walkthrough'
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
+  html_notebook:
+    toc: yes
+    toc_depth: '5'
+    toc_float: yes
   html_document:
     toc: yes
     toc_depth: '5'
     toc_float: yes
     df_print: paged
-  html_notebook:
-    toc: yes
-    toc_depth: '5'
-    toc_float: yes
 subtitle: ECI 589 SNA in Education
 name: ''
 editor_options:
