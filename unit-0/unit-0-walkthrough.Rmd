@@ -72,8 +72,8 @@ You can check that out (literally, it's [available online through the
 NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU4862134)), but
 don't feel any need to dive deep for now - we'll be spending more time
 on this process throughout the course. For now, know that this document
-is organized around the five components of what we're referring to as
-the **LASER cycle**.
+is organized around these five components of the Data Intensive Research
+Workflow.
 
 Click the arrow to the right of the code chunk below to view the image
 (more on that process of clicking the green arrow and what it does, too,
