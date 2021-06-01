@@ -152,7 +152,7 @@ Digital Learning Transition in K-12 Schools (DLT 1) which was not
 included in this study so we can make comparisons in our analysis to the
 DLT 2 course reported in the study.
 
-#### ✅ Comprehension Check
+#### [**Your Turn**]{style="color: green;"} **⤵**
 
 Take a quick look at the Description of the Dataset section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
@@ -196,7 +196,7 @@ basic questions about our educator network:
 > How, and to what extent, did educators engage with other participants
 > in the discussion forums?
 
-#### ✅ Comprehension Check
+#### [**Your Turn**]{style="color: green;"} **⤵**
 
 Based on our course readings and your self-selected readings, what
 subquestions, or more specific research questions, might ask that help
@@ -218,25 +218,19 @@ R](https://datascienceineducation.com/c06.html#c06p) (DSIEUR):
 > a variety of needs.
 
 Let's check to see which packages have already been loaded into our
-RStudio Cloud workspace. Click the green arrow to run the
-`sessionInfo()` function and take a look at the "attached" packages:
-
-```{r}
-sessionInfo()
-```
-
-You should see some familiar tidytext packages from out like {dplyr} and
-{readr} which we'll be using shortly. You should also see an important
-package call {igraph} that will rely on heavily for our network
-analyses.
-
-Note that you can also manually check the Files, Plots, & Packages Pane
-in the lower right hand corner of RStudio Cloud to make sure these
+RStudio Cloud workspace. Take a look at the the Files, Plots, & Packages
+Pane in the lower right hand corner of RStudio Cloud to make sure these
 packages have been installed and loaded:
 
 ![](img/packages-pane.png){width="90%"}
 
-If you are working in RStudio Desktop or notice that the packages have
+You should see some familiar tidytext packages from our [Getting Started
+Walkthrough](https://sbkellogg.github.io/eci-589/unit-0/unit-0-walkthrough.html)
+like {dplyr} and {readr} which we'll be using again shortly. You should
+also see an important package call {igraph} that will rely on heavily
+for our network analyses.
+
+If you are working in RStudio Desktop, or notice that the packages have
 not been installed and/or loaded, run the following code:
 
 ```{r, eval=FALSE}
@@ -247,13 +241,9 @@ library(tidyverse)
 library(igraph)
 ```
 
-### igraph
+### igraph **📦**
 
 ![](img/igraph.png){width="30%"}
-
-```{r}
-library(igraph)
-```
 
 At the end of this week, I'll ask that you share with me your r script
 as evidence that you have complete the walkthrough. Although I highly
@@ -270,175 +260,17 @@ The importance of data wrangling is difficult to overstate, as it
 involves the initial steps of going from the raw data to a dataset that
 can be explored and modeled (Krumm et al, 2018).
 
-For our data wrangling this week, we'll keep it simple
+For our data wrangling this week, we'll keep it simple. Our primary
+goals for Unit 1 are to learning how to:
 
 a.  **Import Data**. Before working with data, we need to "read" it into
     R and once imported, we'll take at different ways to view our data
     in R.
 
-b.  **Create a Network Object**. We focus on tools from
-    the `dplyr` package to view, `rename`, select, slice, and filter our
-    data in preparation for analysis.
+b.  **Create a Network Object**.
 
 c.  **Simplify Network**. Finally, we'll learn about a handy
     `simplify()` function in the {igraph} package for removing ties that
     .\
 
 ## Import Data
-
-\
-
-```{r}
-library(readr)
-```
-
-Screenshot of data import
-
-code example
-
-```{r import-ties}
-ties <- read_csv("data/dlt1-edgelist.csv", 
-                 col_types = cols(Sender = col_character(), 
-                                  Receiver = col_character(), 
-                                  `Category Text` = col_skip(), 
-                                  `Comment ID` = col_character(), 
-                                  `Discussion ID` = col_character()))
-```
-
-\
-view and explain\
-
-```{r}
- glimpse(ties)
-```
-
-```{r import-actors}
-library(readr)
-actors <- read_csv("data/dlt1-nodes.csv", 
-                       col_types = cols(UID = col_character(), 
-                                        Facilitator = col_character(), 
-                                        expert = col_character(), 
-                                        connect = col_character()))
-```
-
-\
-view and explain
-
-```{r}
-
-```
-
-```{r load-igraph}
-library(igraph)
-```
-
-\
-
-```{r}
-net <- graph_from_data_frame(d=ties, 
-                             vertices=actors, 
-                             directed=T) 
-net
-```
-
-## Calculate Edge Weight
-
-```{r}
-edges <- ties %>% 
-  count(Sender, Receiver) %>%
-  rename(weight = n)
-
-edges
-```
-
-\
-
-```{r}
-net <- graph_from_data_frame(d=edges, 
-                             vertices=actors, 
-                             directed=T) 
-net
-```
-
-\
-\
-
-```{r}
-plot(net)
-```
-
-## 3. EXPLORE
-
-```{r}
-library(ggraph)
-```
-
-```{r}
-ggraph(net) +
-  geom_edge_link() +   # add edges to the plot
-  geom_node_point()    # add nodes to the plot
-
-```
-
-```{r}
-ggraph(net, layout = "fr") +
-  geom_edge_link() +   # add edges to the plot
-  geom_node_point()    # add nodes to the plot
-```
-
-### Network Stats
-
-#### density
-
-```{r}
-
-edge_density(net, loops=F)
-
-```
-
-```{r}
-ecount(net)/(vcount(net)*(vcount(net)-1)) #for a directed network
-```
-
-#### reciprocity
-
-```{r}
-reciprocity(net)
-```
-
-\
-
-### Community
-
-```{r}
-ceb <- cluster_edge_betweenness(net) 
-
-dendPlot(ceb, mode="hclust")
-
-```
-
-\
-
-### Sociograms
-
-\
-
-```{r}
-
-deg <- degree(net, mode="out")
-
-net <- simplify(net, remove.multiple = F, remove.loops = T) 
-
-plot(net, 
-     layout = layout_with_kk,
-     edge.arrow.size=.01,
-     edge.width = .1,
-     vertex.label=NA,
-     vertex.size=deg*.1)
-
-
-```
-
-\
-
-\
