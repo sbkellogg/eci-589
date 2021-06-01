@@ -3,15 +3,15 @@ title: 'Unit 0: Getting Started Walkthrough'
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
-  html_notebook:
-    toc: yes
-    toc_depth: '5'
-    toc_float: yes
   html_document:
     toc: yes
     toc_depth: '5'
     toc_float: yes
     df_print: paged
+  html_notebook:
+    toc: yes
+    toc_depth: '5'
+    toc_float: yes
 subtitle: ECI 589 SNA in Education
 name: ''
 editor_options:
@@ -20,7 +20,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+knitr::opts_chunk$set(echo = TRUE, error = FALSE)
 ```
 
 ## 0. INTRODUCTION
@@ -66,7 +66,7 @@ about preparing, wrangling, exploring, and modeling data - and
 communicating results? We're using these terms as a part of a framework,
 or workflow, that comes from the work of Krumm et al.'s [*Learning
 Analytics Goes to
-School*](https://www.routledge.com/Learning-Analytics-Goes-to-School-A-Collaborative-Approach-to-Improving/Krumm-Means-Bienkowski/p/book/9781138121836)*.*\
+School*](https://www.routledge.com/Learning-Analytics-Goes-to-School-A-Collaborative-Approach-to-Improving/Krumm-Means-Bienkowski/p/book/9781138121836)*.*
 
 You can check that out (literally, it's [available online through the
 NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU4862134)), but
@@ -122,7 +122,7 @@ Click the green arrow in the right corner of the block-or "chunk"-of
 code that follows and see if you can identify which packages have been
 installed in the console below.
 
-```{r}
+```{r, eval=FALSE}
 install.packages("tidyverse")
 ```
 
@@ -152,7 +152,7 @@ export from Microsoft Excel or Google Sheets - into R, using the
 Clicking the green arrow runs the code; do that next.
 
 ```{r}
-d <- read_csv("unit-0/data/sci-online-classes.csv")
+d <- read_csv("data/sci-online-classes.csv")
 ```
 
 Notice that we "assigned" our data set to a new object in R named `d`
@@ -250,7 +250,7 @@ inspecting your data)!
 In addition to `glimpse()` function, you can use a function named
 `View()` to do this. Try it out and see what happens!
 
-```{r}
+```{r, eval=FALSE}
 View(d)
 ```
 
@@ -406,7 +406,7 @@ plot for the relationship between two variables. You will need to pass
 the names of two variables to the code below for what is now simply XXX
 (a placeholder).
 
-```{r}
+```{r, eval=FALSE}
 ggplot(d, aes(x = XXX, y = XXX)) +
   geom_point)
 ```
