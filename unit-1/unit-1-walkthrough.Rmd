@@ -6,9 +6,9 @@ date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output: 
   html_notebook: 
     toc: yes
-    toc_depth: 5
     toc_float: yes
-    number_sections: yes
+    theme: default
+    toc_depth: 4
 editor_options: 
   markdown: 
     wrap: 72
@@ -18,7 +18,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# PREPARE
+# 1. PREPARE
 
 During the second week of each unit, we'll **"walk through"** a basic
 research workflow, or data analysis process, modeled after the
@@ -32,29 +32,33 @@ Workflow](img/workflow.png){width="80%"}
 Each walkthrough will focus on a basic analysis guided by the social
 network perspective.
 
-This week, our focus will be on getting familiar with familiar with
-preparing relational data for analysis, looking at some basic network
-stats, and creating a network visualization that . Specifically, the
-Unit 1 Walkthrough will cover the following workflow topics:
+This week, our focus will be on preparing relational data for analysis,
+looking at some basic network stats, and creating a network
+visualization that helps illustrate key findings. Specifically, the Unit
+1 Walkthrough will cover the following workflow topics:
 
-1.  **Prepare**: Prior to analysis, it's critical to understand the
-    context and data sources you're working with so you can formulate
+1.  **Prepare**: Prior to analysis, we'll take a look at the context in
+    which are data is derived, you're working with so you can formulate
     useful and answerable questions. You'll also need to set up a
     "Project" for our Unit 1 walkthrough.
+
 2.  **Wrangle**: Wrangling data entails the work of manipulating,
     cleaning, transforming, and merging data. In section 2 we focus on
     reading, reducing, and tidying our data.
+
 3.  **Explore**: In section 3, we use simple summary statistics, more
     sophisticated approaches like term frequency-inverse document
     frequency (tf-idf), and basic data visualization to explore our data
     and see what insight it provides in response to our question.
+
 4.  **Model**: While we won't investigate approaches to **Model** our
     data until Unit 3 when we learn about community detection algorithms
     and exponential random graph models (ERGM), we will see how modeling
     has been applied.
+
 5.  **Communicate**:
 
-## Review the Research
+## 1a. Review the Research
 
 Prior to analysis, it's critical to understand the context and data
 sources available so you can formulate useful questions that can be
@@ -69,8 +73,8 @@ Carolyn (2013) notes that:
 > of relations and the implication this structure has on individual or
 > group behavior and attitudes
 
-More specifically, Carolyn cites the the following four features used by
-Freeman (2004) that define the social network perspective:
+More specifically, Carolyn cites the following four features used by
+Freeman (2004) to define the social network perspective:
 
 1.  Social network analysis is **motivated by a relational intuition**
     based on ties connecting social actors.
@@ -83,174 +87,172 @@ Freeman (2004) that define the social network perspective:
 4.  It **relies** **on** **mathematical and/or computational models** to
     succinctly represent the complexity of social life.
 
-For Unit 1,
+For Unit 1, our walkthrough will be guided by previous research and
+evaluation work conducted by the Friday Institute for Educational
+Innovation as part of the Massively Open Online Courses for Educators
+(MOOC-Ed) initiative.
 
-### A Social Network Perspective on Peer Supported Learning in MOOCs for Educators
+### A Social Network Perspective in MOOC-Eds
 
 ![](img/irrodl-article.png){width="40%"}
 
-Kellogg, S., Booth, S., & Oliver, K. (2014). A social network
+Kellogg, S., Booth, S., & Oliver, K. (2014). [A social network
 perspective on peer supported learning in MOOCs for
-educators. *International Review of Research in Open and Distributed
-Learning*, *15*(5), 263-289.
+educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf). *International
+Review of Research in Open and Distributed Learning*, *15*(5), 263-289.
 
-#### Abstract
+#### Research Context
 
-A recent phenomenon in the MOOC space has been the development of
-courses tailored to educators serving in K-12 settings. MOOCs,
-particularly as a form of educator professional development, face a
-number of challenges. Academics, as well as pundits from traditional and
-new media, have raised a number of concerns about MOOCs, including the
-lack of instructional and social supports. It is an assumption of this
-study that challenges arising form this problem of scale can be
-addressed by leveraging these massive numbers to develop robust online
-learning communities. This mixed-methods case study addresses critical
-gaps in the literature and issues of peer support in MOOCs through an
-examination of the characteristics, mechanisms, and outcomes of peer
-networks. Findings from this study demonstrate that even with technology
-as basic as a discussion forum, MOOCs can be leveraged to foster these
-networks and facilitate peer- supported learning. Although this study
-was limited to two unique cases along the wide spectrum of MOOCs, the
-methods applied provide other researchers with an approach for better
-understanding the dynamic process of peer supported learning in MOOCs.
+In the spring of 2013, The Friday Institute launched the MOOC-Ed
+Initiative to explore the potential of delivering personalized,
+high-quality professional development to educators at scale (Kleiman et
+al., 2013). In collaboration with the Alliance for Excellent Education,
+the Friday Institute launched this initiative with a 6-week pilot course
+called Planning for the Digital Learning Transition in K-12 Schools (DLT
+1), which was offered again in September 2013 (DLT 2). This course was
+designed to help school and district leaders plan and implement K-12
+digital learning initiatives.
 
-**Data Source & Analysis**
+Academics, as well as pundits from traditional and new media, have
+raised a number of concerns about MOOCs, including the lack of
+instructional and social supports. Among the core design principles of
+MOOC-Eds are collaboration and peer-supported learning. It is an
+assumption of this study that challenges arising form this problem of
+scale can be addressed by leveraging these massive numbers to develop
+robust online learning communities.
 
-The evaluation used a wide range of data sources including interviews,
-document review, site analytics, and surveys, which we'll focus on for
-this walkthrough. Survey protocols were designed in cooperation with
-NCDPI to systematically collect information about local professional
-development, state-level supports, use of available RttT professional
-development resources, and organizational and classroom practices in the
-schools, which will serve as a baseline to assess changes over the
-period of the North Carolina RttT initiatives.
+This mixed-methods case study used both SNA and qualitative methods to
+better understand peer support in MOOC-Eds through an examination of the
+characteristics, mechanisms, and outcomes of peer networks. Findings
+from this study demonstrate that even with technology as basic as a
+discussion forum, MOOCs can be leveraged to foster these networks and
+facilitate peer-supported learning. Although this study was limited to
+two unique cases along the wide spectrum of MOOCs, the methods applied
+provide other researchers with an approach for better understanding the
+dynamic process of peer supported learning in MOOCs.
 
-Quantitative analyses focused primarily on descriptive analysis of
-item-level responses. In addition, quantitative data from these surveys
-were analyzed to examine patterns in responses by participants' role,
-event type (e.g., module, webinar, resource), and region. Responses to
-open-ended survey items of the Online Resources Survey were manually
-coded by their relation to each Learning Forward professional
-development standard.
+#### Data Sources
 
-Note that the dataset we'll be using for analysis in this walkthrough is
-exported as is from Qualtrics with personal identifiers, select
-demographics, metadata, and closed-ended responses removed.
+**MOOC-Ed registration form.** All participants completed a registration
+form for each MOOC-Ed course. The registration form consists of
+self-reported demographic data, including information related to their
+professional role and work setting, years of experience in education,
+and personal learning goals.
 
-**Summary of Findings**
+**MOOC-Ed discussion forums.** All peer interaction, including peer
+discussion, feedback, and reactions (e.g., likes), take place within the
+forum area of MOOC-Eds, which are powered by Vanilla Forums. Because of
+the specific focus on peer supported learning, postings to or from
+course facilitators and staff were removed from the data set. Finally,
+analyses described below exclude more passive forms of interactions
+(i.e., read and reaction logs), and include only postings among peers.
 
-Approximately half of the state's educators completed at least one
-online module by the end of the 2011-12 school year. Overall, most
-participants agreed that the webinars and modules were relevant to their
-professional development needs, though some content was redundant with
-prior PD activities and not always content- or grade-specific, and some
-modules did not meet national standards. Most online modules were
-completed independently and not in Professional Learning Community
-groups.
+For our Unit 1 walkthrough, we'll take a look at data from the original
+Digital Learning Transition in K-12 Schools (DLT 1) which was not
+included in this study so we can make comparisons in our analysis to the
+DLT 2 course reported in the study.
 
-A common theme from focus groups and open-ended survey responses was the
-**convenience** of online professional development. One teacher in a
-focus group stated, "I liked the format. And the way that it was given,
-it was at your own pace, which works well for our schedules..."
-Educators also frequently cited that the **information and resources**
-provided through the modules improved their understanding of the new
-standards and the teacher evaluation process. Webinar participants
-appreciated the useful, updated information presented through a
-combination of PowerPoint slides and **video clips**.
+#### ✅ Comprehension Check
 
-While the majority of educators have indicated their satisfaction with
-these resources, the findings suggest that the use of these resources at
-both the state and local level was not wholly consistent with national
-standards for online professional development. Many LEAs likely needed
-additional guidance, training, support, technology tools, and/or content
-resources to ensure that local efforts contribute to the quality of the
-experiences for educators and that the vision for online professional
-development outlined in the state's RttT proposal is realized and can be
-sustained beyond RttT.
+Take a quick look at the Description of the Dataset section from the
+[Massively Open Online Course for Educators (MOOC-Ed) network
+dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf),
+as well as the accompanying data sets that we'll be using for this
+walkthrough stored on [Harvard
+Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB).
 
-## Refine Questions
+In the space below, type a brief response to the following questions:
 
-The State's progress on designing and implementing online professional
-development was originally guided by the following (very) general
-evaluation questions:
+1.  How was this dataset constructed?
 
-1.  State Strategies: To what extent did the state implement and support
-    proposed RttT professional development efforts?
-2.  Short-Term Outcomes: What were direct outcomes of state-level RttT
-    professional development efforts?
+    -   
 
-For this walkthrough, we'll use text mining to complement prior
-qualitative analyses conducted as part of the RttT Evaluation by
-examining responses to open-ended questions on the RttT Online PD Survey
-administered to over 15,000 NC educators.
+2.  Name two "node attributes" from the dataset that might be useful for
+    predicting participants who may be more engaged or central to the
+    network? Why did you select those two?
 
-Our (very) specific questions of interest for this walkthrough are:
+    -   
 
-1.  What aspects of online professional development offerings do
-    *teachers* find most valuable?
-2.  How might resources differ in the value they afford teachers?
+## 1b. Identify Research Questions
 
-Finally, one overarching question we'll explore throughout this course,
-and that Silge and Robinson (2018) identify as a central question to
-text mining and natural language processing, is:
+A Social Network Perspective on Peer Supported Learning in MOOC-Eds was
+framed by three primary research questions related to peer supported
+learning:
 
-> How do we to **quantify** what a document or collection of documents
-> is about?
+1.  What are the patterns of peer interaction and the structure of peer
+    networks that emerge over the course of a MOOC-Ed?
 
-## Set Up a Project
+2.  To what extent do participant and network attributes (e.g.,
+    homophily, reciprocity, transitivity) account for the structure of
+    these networks?
 
-As highlighted in Chapter 6 of Data Science in Education Using R
-(DSIEUR), one of the first steps of every workflow should be to set up a
-"Project" within RStudio. This will be your "home" for any files and
-code used or created in Unit 1. Open RStudio and follow these steps from
-DESIUR 6.6 to create a Project for Unit 1:
+3.  To what extent do these networks result in the co-construction of
+    new knowledge?
 
-1.  Click on "File"
-2.  Select "New Project"
-3.  Choose "New Directory"
-4.  Click on "New Project"
-5.  Enter your Project's name in the box that says, "Directory name".
-    Choose a Project name that helps you remember that this is a project
-    is part of Unit 1: Tidy Text & Word Counts. Avoid using spaces in
-    your Project name, and instead, separate words with hyphens or
-    underscore characters.
-6.  Choose where to save your Project by clicking on "Browse" next to
-    the box labeled "Create project as a subdirectory of:". If you are
-    just using this to learn and test out creating a Project, consider
-    placing it in your downloads or another temporary directory so that
-    you remember to remove it later.
-7.  Click "Create Project"
+For our very first walkthrough, we are going to focus exclusively on RQ1
+from the original study. Our question of interest is focused on very
+basic questions about our educator network:
 
-![Create New File](img/file.png){width="40%"}
+> How, and to what extent, did educators engage with other participants
+> in the discussion forums?
 
-Now that you have a Project to store .R scripts that you create as you
-work through this unit, let's create our first .R script:
+#### ✅ Comprehension Check
 
-1.  Click on "File"
-2.  Select "R script"
-3.  Click the disk icon or select "Save" from file menu to save.
-4.  Enter a file name. See the [R Style
-    Guide](https://style.tidyverse.org/files.html#names) for standard
-    file naming conventions.
+Based on our course readings and your self-selected readings, what
+subquestions, or more specific research questions, might ask that help
+you answer the broader question we'll be focused on for this
+walkthrough?
 
-### Install Packages
+In the space below, type a brief response to the following questions:
 
-Finally, using your newly created R script, type the following code to
-load the packages we installed last week and that we'll be needing for
-this walkthrough.
+\-
+
+## 1c. Check Packages
+
+As highlighted in [Chapter 6 of Data Science in Education Using
+R](https://datascienceineducation.com/c06.html#c06p) (DSIEUR):
+
+> Packages are shareable collections of R code that can contain
+> functions, data, and/or documentation. Packages increase the
+> functionality of R by providing access to additional functions to suit
+> a variety of needs.
+
+Let's check to see which packages have already been loaded into our
+RStudio Cloud workspace. Click the green arrow to run the
+`sessionInfo()` function and take a look at the "attached" packages:
+
+```{r}
+sessionInfo()
+```
+
+You should see some familiar tidytext packages from out like {dplyr} and
+{readr} which we'll be using shortly. You should also see an important
+package call {igraph} that will rely on heavily for our network
+analyses.
+
+Note that you can also manually check the Files, Plots, & Packages Pane
+in the lower right hand corner of RStudio Cloud to make sure these
+packages have been installed and loaded:
+
+![](img/packages-pane.png){width="90%"}
+
+If you are working in RStudio Desktop or notice that the packages have
+not been installed and/or loaded, run the following code:
 
 ```{r, eval=FALSE}
 install.packages("tidyverse")
 install.packages("igraph") 
-install.packages("network") 
-install.packages("sna")
-install.packages("ggraph")
+
+library(tidyverse)
+library(igraph)
 ```
 
-### Load Libraries
+### igraph
+
+![](img/igraph.png){width="30%"}
 
 ```{r}
-library(tidyverse)
+library(igraph)
 ```
 
 At the end of this week, I'll ask that you share with me your r script
@@ -260,9 +262,27 @@ walkthrough, for large blocks of text it may be easier to cut and paste.
 
 ------------------------------------------------------------------------
 
-# WRANGLE
+# 2. WRANGLE
 
-\
+In general, data wrangling involves some combination of cleaning,
+reshaping, transforming, and merging data (Wickham & Grolemund, 2017).
+The importance of data wrangling is difficult to overstate, as it
+involves the initial steps of going from the raw data to a dataset that
+can be explored and modeled (Krumm et al, 2018).
+
+For our data wrangling this week, we'll keep it simple
+
+a.  **Import Data**. Before working with data, we need to "read" it into
+    R and once imported, we'll take at different ways to view our data
+    in R.
+
+b.  **Create a Network Object**. We focus on tools from
+    the `dplyr` package to view, `rename`, select, slice, and filter our
+    data in preparation for analysis.
+
+c.  **Simplify Network**. Finally, we'll learn about a handy
+    `simplify()` function in the {igraph} package for removing ties that
+    .\
 
 ## Import Data
 

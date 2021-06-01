@@ -112,12 +112,11 @@ net <- simplify(net, remove.multiple = F, remove.loops = T)
 E(net)$width <- E(net)$weight/10
 
 plot(net, 
-     layout = layout_with_fr,
+     layout = layout_with_kk,
      edge.arrow.size=.04,
      edge.width = .5,
      vertex.label=NA,
-     vertex.size=deg*.04,
-     vertex.color=V(net)$facilitator)
+     vertex.size=deg*.04)
 
 edge_attr_names(network)
 
