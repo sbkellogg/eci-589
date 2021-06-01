@@ -29,23 +29,13 @@ School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134) (Krumm et al.,
 ![Figure 2.2 Steps of Data-Intensive Research
 Workflow](img/workflow.png){width="80%"}
 
-Each walkthrough will focus on a basic analysis guided by a social
-network perspective. that you'll be expected to reproduce, and apply to
-a new research question next week, using the provided dataset or dataset
-of your own choosing.
+Each walkthrough will focus on a basic analysis guided by the social
+network perspective.
 
-This week, we will focus on analysis of open-ended survey items from an
-evaluation of the North Carolina Department of Public Instruction
-(NCDPI) online professional development offered as part of the state's
-[Race to the Top](https://www2.ed.gov/programs/racetothetop/index.html)
-efforts. For more information about the Race to the Top evaluation work,
-visit <https://cerenc.org/rttt-evaluation/>.
-
-For Unit 1, our focus will be on getting our text "tidy" so we can
-perform some basic word counts, look at words that occur at a higher
-rate in a group of documents, and examine words that are unique to those
-document groups. Specifically, the Unit 1 Walkthrough will cover the
-following workflow topics:
+This week, our focus will be on getting familiar with familiar with
+preparing relational data for analysis, looking at some basic network
+stats, and creating a network visualization that . Specifically, the
+Unit 1 Walkthrough will cover the following workflow topics:
 
 1.  **Prepare**: Prior to analysis, it's critical to understand the
     context and data sources you're working with so you can formulate
@@ -64,34 +54,65 @@ following workflow topics:
     has been applied.
 5.  **Communicate**:
 
-## Some Context
+## Review the Research
 
 Prior to analysis, it's critical to understand the context and data
 sources available so you can formulate useful questions that can be
 feasibly addressed by your data. For this section, we'll focus on the
 following topics:
 
-#### RTT Online Professional Development Evaluation
+In [Social Network Analysis and Education: Theory, Methods &
+Applications](https://methods.sagepub.com/book/social-network-analysis-and-education),
+Carolyn (2013) notes that:
 
-![](img/opd.png){width="30%"}
+> the **social network perspective** is one concerned with the structure
+> of relations and the implication this structure has on individual or
+> group behavior and attitudes
 
-[2012 Annual
-Report](https://cerenc.org/wp-content/uploads/2011/11/RttT_OPD_Revised_FINAL_12-20-2012.pdf)
+More specifically, Carolyn cites the the following four features used by
+Freeman (2004) that define the social network perspective:
 
-North Carolina was one of 12 recipients of the 2010 federal Race to the
-Top (RttT) grants, bringing nearly \$400 million to the state's public
-school system. Over the course of four years, NC's RttT coordinated a
-set of activities and policy reforms designed to collectively improve
-the performances of students, teachers, leaders, and schools.
+1.  Social network analysis is **motivated by a relational intuition**
+    based on ties connecting social actors.
 
-The North Carolina Race to the Top (RttT) proposal (North Carolina
-Office of the Governor, 2010) specifies that the state's Professional
-Development Initiative will focus on the "use of e- learning tools to
-meet the professional development needs of teachers, schools, and
-districts" (p. 191). It points to research demonstrating that
-"well-designed and -implemented online professional development programs
-are not only valued by teachers but also positively impact classroom
-practices and student learning."
+2.  It is firmly **grounded in systematic empirical data**.
+
+3.  It **makes** **use of graphic imagery** to represent actors and
+    their relations with one another.
+
+4.  It **relies** **on** **mathematical and/or computational models** to
+    succinctly represent the complexity of social life.
+
+For Unit 1,
+
+### A Social Network Perspective on Peer Supported Learning in MOOCs for Educators
+
+![](img/irrodl-article.png){width="40%"}
+
+Kellogg, S., Booth, S., & Oliver, K. (2014). A social network
+perspective on peer supported learning in MOOCs for
+educators. *International Review of Research in Open and Distributed
+Learning*, *15*(5), 263-289.
+
+#### Abstract
+
+A recent phenomenon in the MOOC space has been the development of
+courses tailored to educators serving in K-12 settings. MOOCs,
+particularly as a form of educator professional development, face a
+number of challenges. Academics, as well as pundits from traditional and
+new media, have raised a number of concerns about MOOCs, including the
+lack of instructional and social supports. It is an assumption of this
+study that challenges arising form this problem of scale can be
+addressed by leveraging these massive numbers to develop robust online
+learning communities. This mixed-methods case study addresses critical
+gaps in the literature and issues of peer support in MOOCs through an
+examination of the characteristics, mechanisms, and outcomes of peer
+networks. Findings from this study demonstrate that even with technology
+as basic as a discussion forum, MOOCs can be leveraged to foster these
+networks and facilitate peer- supported learning. Although this study
+was limited to two unique cases along the wide spectrum of MOOCs, the
+methods applied provide other researchers with an approach for better
+understanding the dynamic process of peer supported learning in MOOCs.
 
 **Data Source & Analysis**
 
@@ -147,7 +168,7 @@ experiences for educators and that the vision for online professional
 development outlined in the state's RttT proposal is realized and can be
 sustained beyond RttT.
 
-## Guiding Questions
+## Refine Questions
 
 The State's progress on designing and implementing online professional
 development was originally guided by the following (very) general
@@ -212,7 +233,7 @@ work through this unit, let's create our first .R script:
     Guide](https://style.tidyverse.org/files.html#names) for standard
     file naming conventions.
 
-#### Install Packages
+### Install Packages
 
 Finally, using your newly created R script, type the following code to
 load the packages we installed last week and that we'll be needing for
@@ -226,7 +247,7 @@ install.packages("sna")
 install.packages("ggraph")
 ```
 
-#### Load Libraries
+### Load Libraries
 
 ```{r}
 library(tidyverse)
@@ -386,16 +407,14 @@ dendPlot(ceb, mode="hclust")
 
 deg <- degree(net, mode="out")
 
-l <- layout_with_fr(net)
-
 net <- simplify(net, remove.multiple = F, remove.loops = T) 
 
 plot(net, 
-     layout = l,
-     edge.arrow.size=.05,
-     edge.width = .5,
+     layout = layout_with_kk,
+     edge.arrow.size=.01,
+     edge.width = .1,
      vertex.label=NA,
-     vertex.size=deg*.04)
+     vertex.size=deg*.1)
 
 
 ```
