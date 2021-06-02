@@ -24,14 +24,11 @@ network <- graph_from_data_frame(d=ties,
 
 network
 
-network <- simplify(network, 
-                    remove.multiple = T, 
-                    remove.loops = F, 
-                    edge.attr.comb=c(weight="sum", 
-                                     type="ignore")
-                    )
+simple_network <- simplify(network)
 
-network
+simple_network
+
+is_weighted(simp)
 
 edges <- ties %>% 
   count(Sender, Receiver) %>%

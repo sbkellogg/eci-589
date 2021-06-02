@@ -1,5 +1,6 @@
 ---
 title: 'Unit 1 Walkthrough: Peer Interaction & MOOC-Eds'
+subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
@@ -13,7 +14,6 @@ output:
     toc_float: yes
     theme: default
     toc_depth: 4
-subtitle: ECI 589 Social Network Analysis and Education
 editor_options:
   markdown:
     wrap: 72
@@ -159,7 +159,7 @@ DLT 2 course reported in this study. Also, for your independent
 analysis, you may want to consider working with the DLT 2 data to see if
 you can replicate some of the findings from this paper!
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### [**Your Turn**]{style="color: green;"} **⤵**
 
 Take a quick look at the *Description of the Dataset* section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
@@ -324,7 +324,7 @@ function used to import your data will depend on the file format of the
 data you are trying to import, but R is pretty adept at working with
 many files types.
 
-Take a look in the `data` folder in your Files pane. You should see the
+Take a look in the `/data` folder in your Files pane. You should see the
 following .csv files:
 
 -   `dlt1-edgelist.csv`
@@ -539,7 +539,8 @@ basic information about our network and answer the following questions:
     -   
 
 2.  The D and the N indicate that this is a **D**irected network and has
-    the **N**ame vertex attributes set. Why are the other two blank?
+    the **N**ame vertex attributes set. Why are two sister spaces that
+    follow these letters blank? Hint: check the help files.
 
     -   
 
@@ -548,6 +549,19 @@ basic information about our network and answer the following questions:
     -   
 
 ### Simplify Graph
+
+As you saw from the `network` output, our dataset has 2529 edges or
+ties. But how many of these are unique?
+
+```{r}
+edge_counts <- count_multiple(network)
+
+edge_counts
+```
+
+As you can see from the output under the edges
+
+\
 
 ### Add Edge Weights
 
