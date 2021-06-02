@@ -22,6 +22,8 @@ network <- graph_from_data_frame(d=ties,
                              vertices=actors, 
                              directed=T) 
 
+network
+
 network <- simplify(network, 
                     remove.multiple = T, 
                     remove.loops = F, 
@@ -29,6 +31,7 @@ network <- simplify(network,
                                      type="ignore")
                     )
 
+network
 
 edges <- ties %>% 
   count(Sender, Receiver) %>%

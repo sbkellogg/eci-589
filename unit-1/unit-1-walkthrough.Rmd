@@ -1,16 +1,21 @@
 ---
 title: 'Unit 1 Walkthrough: Peer Interaction & MOOC-Eds'
-subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
-output: 
-  html_notebook: 
+output:
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    df_print: paged
+  html_notebook:
     toc: yes
     toc_float: yes
     theme: default
     toc_depth: 4
-editor_options: 
-  markdown: 
+subtitle: ECI 589 Social Network Analysis and Education
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -150,26 +155,32 @@ analyses described below exclude more passive forms of interactions
 For our Unit 1 walkthrough, we'll take a look at data from the original
 Digital Learning Transition in K-12 Schools (DLT 1) which was not
 included in this study so we can make comparisons in our analysis to the
-DLT 2 course reported in the study.
+DLT 2 course reported in this study. Also, for your independent
+analysis, you may want to consider working with the DLT 2 data to see if
+you can replicate some of the findings from this paper!
 
 #### [**Your Turn**]{style="color: green;"} **⤵**
 
-Take a quick look at the Description of the Dataset section from the
+Take a quick look at the *Description of the Dataset* section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
-dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf),
-as well as the accompanying data sets that we'll be using for this
-walkthrough stored on [Harvard
+dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf)
+BJET article, as well as the accompanying data sets that we'll be using
+for this walkthrough stored on [Harvard
 Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB).
 
 In the space below, type a brief response to the following questions:
 
-1.  How was this dataset constructed?
+1.  What were some of the steps necessary to construct this dataset?
 
     -   
 
 2.  Name two "node attributes" from the dataset that might be useful for
     predicting participants who may be more engaged or central to the
     network? Why did you select those two?
+
+    -   
+
+3.  What else do you notice/wonder about this dataset?
 
     -   
 
@@ -196,7 +207,7 @@ basic questions about our educator network:
 > How, and to what extent, did educators engage with other participants
 > in the discussion forums?
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### [**Your Turn**]{style="color: green;"} **⤵**
 
 Based on our course readings and your self-selected readings, what
 subquestions, or more specific research questions, might ask that help
@@ -231,12 +242,17 @@ also see an important package call {igraph} that will rely on heavily
 for our network analyses.
 
 If you are working in RStudio Desktop, or notice that the packages have
-not been installed and/or loaded, run the following code:
+not been installed and/or loaded, run the following `install.packages()`
+function code to install the {tidyverse} and {igraph} packages:
 
 ```{r, eval=FALSE}
 install.packages("tidyverse")
 install.packages("igraph") 
+```
 
+And `library()` function to load them:
+
+```{r}
 library(tidyverse)
 library(igraph)
 ```
@@ -246,7 +262,7 @@ library(igraph)
 ![](img/igraph.png){width="30%"}
 
 At the end of this week, I'll ask that you share with me your r script
-as evidence that you have complete the walkthrough. Although I highly
+as evidence that you have completed the walkthrough. Although I highly
 recommend that that you manually type the code shared throughout this
 walkthrough, for large blocks of text it may be easier to cut and paste.
 
@@ -260,8 +276,10 @@ The importance of data wrangling is difficult to overstate, as it
 involves the initial steps of going from the raw data to a dataset that
 can be explored and modeled (Krumm et al, 2018).
 
-For our data wrangling this week, we'll keep it simple. Our primary
-goals for Unit 1 are to learning how to:
+For our data wrangling this week, we're keeping it simple since working
+with network data is a bit of a departure from our working with
+rectangular data frames. Our primary goals for Unit 1 are learning how
+to:
 
 a.  **Import Data**. Before working with data, we need to "read" it into
     R and once imported, we'll take at different ways to view our data
@@ -271,6 +289,183 @@ b.  **Create a Network Object**.
 
 c.  **Simplify Network**. Finally, we'll learn about a handy
     `simplify()` function in the {igraph} package for removing ties that
-    .\
+    .
 
-## Import Data
+## 2a. Import Data
+
+### The Edge-List Format
+
+To get started, we need to import, or "read", our data into R. The
+function used to import your data will depend on the file format of the
+data you are trying to import, but R is pretty adept at working with
+many files types.
+
+Take a look in the `data` folder in your Files pane. You should see the
+following .csv files:
+
+-   `dlt1-edgelist.csv`
+
+-   `dlt1-nodes.csv`
+
+As its name implies, the first file `dlt1-edgelist.csv` is an edge-list
+that contains information about each tie, or relation between two actors
+in a network. In this context, a "tie" is a reply by one participant in
+the discussion forum to the post of another participant - or in some
+cases to their own post! These ties between a single actor are called
+"self-loops" and as we'll see later in this section, igraph has a
+special function to remove these self loops from a sociogram, or network
+visualization.
+
+The edge-list format is slightly different than other formats you have
+likely worked with before in that the values in the first two columns
+each row represent a dyad, or tie between two nodes in a network. An
+edge-list can also contain other information regarding the strength or
+duration of the relationship, sometime called "weight", in addition to
+other "edge attributes."
+
+In addition to
+
+-   `Sender` = Unique identifier of author of comment
+
+-   `Receiver` = Unique identifier of identified recipient of comment
+
+-   `Timestamp` = Time comment was posted
+
+-   `Parent` = Primary category or topic of thread
+
+-   `Category` = Subcategory or subtopic of thread
+
+-   `Thread_id` = Unique identifier of a thread
+
+-   `Comment_id` = Unique identifier of a comment\\
+
+Let's use the `read_csv()` function from the {readr} package introduced
+in the Getting Started walkthrough to read in our edge-list and print
+the new `ties` data frame:
+
+```{r}
+ties <- read_csv("data/dlt1-edgelist.csv", 
+                 col_types = cols(Sender = col_character(), 
+                                  Receiver = col_character(), 
+                                  `Category Text` = col_skip(), 
+                                  `Comment ID` = col_character(), 
+                                  `Discussion ID` = col_character()))
+
+ties
+```
+
+Note the addition of the `col_types =` argument for changing the column
+types to character strings since the numbers for for those particular
+columns indicate actors (`Sender` and `Reciever`) and attributes
+(`Comment_ID` and `Discussion_Id`). We also skipped the `Category Text`.
+
+**RStudio Tip:** Importing data and dealing with data types can be a bit
+tricky, especially for beginners. Fortunately, RStudio has an "Import
+Dataset" feature in the Environment Pane that can help you use the
+{readr} package and associated functions to greatly facilitate this
+process.
+
+![](img/import-data.png)
+
+#### [**Your Turn**]{style="color: green;"} **⤵**
+
+Consider the example pictured below of a discussion thread from the
+Planning for the Digital Learning Transition in K-12 Schools (DLT 1)
+where our data orginated. This thread was initiated by participant I, so
+the comments by J and N are considered to be directed at I. The comment
+of B, however, is a direct response to the comment by N as signaled by
+the use of the quote-feature as well as the explicit mentioning of N's
+name within B's comment.
+
+![](img/discussion-thread.png)
+
+Now answer the following questions as they relate to the DLT 1 edge-list
+we just read into R.
+
+1.  Which actors in this thread are the `Sender` and the `Reciever`?
+    Which actor is both?
+
+    -   
+
+2.  How many dyads are in this thread? Which pairs of actors are dyads?
+
+    -   
+
+**Sidebar:** Unfortunately, these types of nuances in discussion forum
+data as illustrated by this simple example are rarely captured through
+automated approaches to constructing networks. Fortunately, the dataset
+you are working with was carefully reviewed to try and capture more
+accurately the intended recipients of each reply.
+
+### Node Attributes
+
+The second file is we'll be using to help understand out network and the
+actors involved contains all the nodes or actors (i.e., participants who
+posted to the discussion forum) as well as some of their attributes such
+as gender and years of experience in education.
+
+Carolyn (2013) notes that most social network analyses include variables
+that describe attributes of actors, ones that are either categorical
+(e.g., sex, race, etc.) or continuous in nature (e.g., test scores,
+number of times absent, etc.). These attributes that can be incorporated
+into a network graph or model to making it much more informative and can
+aid in testing or generating hypotheses.
+
+These attribute variables are typically included in a rectangular array,
+or dataframe, that mimics the actor-by-attribute that is the dominant
+convention in social science, i.e. rows represent cases, columns
+represent variables, and cells consist of values on those variables.
+
+As and aside, Carolyn also refers to this historical preference by
+researchers for "actor-by-attribute" data, in the absence of relational
+data in which the actor has been removed their social context, as the
+"sociological meatgrinder" in action. Specifically, this historical
+approach assumes that the actor does not interact with anyone else in
+the study and that outcomes are solely dependent of the characteristics
+of the individual.
+
+Regardless, let's read in our node attribute file and take a look at the
+`actors` and their attributes included in our dataset:
+
+```{r}
+actors <- read_csv("data/dlt1-nodes.csv", 
+                   col_types = cols(UID = col_character(), 
+                                    Facilitator = col_character(), 
+                                    expert = col_character(), 
+                                    connect = col_character()))
+```
+
+#### [**Your Turn**]{style="color: green;"} **⤵**
+
+Use the code chunk below and a function of your choosing to take a look
+at the `actors` data frame:
+
+```{r}
+
+```
+
+Match up the attributes included in the node file with the following
+codebook descriptors. The first one has been done as an example.
+
+-   `Facilitator` = Identification of course facilitator (1 **=**
+    instructor)
+-   Dummy variable for whether participants listed
+    networking/collaboration with others as one of their course goals on
+    the registration form
+-   Identifier of "expert panelists" invited to course to share
+    experience through recorded Q&A
+-   Identification of course facilitator (1 **=** instructor)
+-   Professional role (eg, teacher, librarian, administrator)
+-   Years of experience as an educator
+-   Works with elementary, middle, and/or high school students
+-   Initial assignment of discussion group
+
+## 2b. Create a Network Object
+
+```{r}
+network <- graph_from_data_frame(d=ties, 
+                                 vertices=actors, 
+                                 directed=T) 
+
+network
+```
