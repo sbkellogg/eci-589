@@ -164,9 +164,10 @@ you can replicate some of the findings from this paper!
 Take a quick look at the *Description of the Dataset* section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
 dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf)
-BJET article, as well as the accompanying data sets that we'll be using
-for this walkthrough stored on [Harvard
-Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB).
+BJET article, and feel free to download and open the accompanying data
+sets stored on [Harvard
+Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB)
+that we'll be using for this walkthrough.
 
 In the space below, type a brief response to the following questions:
 
@@ -174,7 +175,7 @@ In the space below, type a brief response to the following questions:
 
     -   
 
-2.  Name two "node attributes" from the dataset that might be useful for
+2.  What two "node attributes" from the dataset that might be useful for
     predicting participants who may be more engaged or central to the
     network? Why did you select those two?
 
@@ -184,7 +185,7 @@ In the space below, type a brief response to the following questions:
 
     -   
 
-## 1b. Identify Research Questions
+## 1b. Identify a Question(s)
 
 A Social Network Perspective on Peer Supported Learning in MOOC-Eds was
 framed by three primary research questions related to peer supported
@@ -218,7 +219,7 @@ In the space below, type a brief response to the following questions:
 
 \-
 
-## 1c. Check Packages
+## 1c. Load Libraries
 
 As highlighted in [Chapter 6 of Data Science in Education Using
 R](https://datascienceineducation.com/c06.html#c06p) (DSIEUR):
@@ -250,21 +251,44 @@ install.packages("tidyverse")
 install.packages("igraph") 
 ```
 
-And `library()` function to load them:
+Let's go ahead and use `library()` function for the {tidyverse} package
+just to review the other packages from the [tidyverse collection of
+packages](https://www.tidyverse.org) that this package contains:
 
 ```{r}
 library(tidyverse)
-library(igraph)
 ```
 
 ### igraph **📦**
 
 ![](img/igraph.png){width="30%"}
 
-At the end of this week, I'll ask that you share with me your r script
-as evidence that you have completed the walkthrough. Although I highly
-recommend that that you manually type the code shared throughout this
-walkthrough, for large blocks of text it may be easier to cut and paste.
+For our Unit 1 Walkthrough, we will rely heavily on the [igraph network
+analysis package](https://igraph.org). The main goals of the igraph
+package and the collection of network analysis tools it contains are to
+provide a set of data types and functions for:
+
+1.  pain-free implementation of graph algorithms,
+
+2.  fast handling of large graphs, with millions of vertices and edges.
+
+3.  allowing rapid prototyping via high level languages like R.
+
+Run the code chunk below to load the {igraph] library:
+
+```{r}
+library(igraph)
+```
+
+### [**Your Turn**]{style="color: green;"} **⤵**
+
+Take a look at the messages from the output of after loading the igraph
+library. What tidyverse packages share identically named functions with
+igraph?
+
+Write your response in the space below.
+
+\-
 
 ------------------------------------------------------------------------
 
@@ -462,6 +486,8 @@ codebook descriptors. The first one has been done as an example.
 
 ## 2b. Create a Network Object
 
+B
+
 ```{r}
 network <- graph_from_data_frame(d=ties, 
                                  vertices=actors, 
@@ -469,3 +495,98 @@ network <- graph_from_data_frame(d=ties,
 
 network
 ```
+
+# 3. EXPLORE
+
+# 4. MODEL
+
+As highlighted in [Chapter 3 of Data Science in Education Using
+R](https://datascienceineducation.com/c03.html), the **Model** step of
+the data science process entails "using statistical models, from simple
+to complex, to understand trends and patterns in the data." The authors
+note that while descriptive statistics and data visualization during
+the **Explore** step can help us to identify patterns and relationships
+in our data, statistical models can be used to help us determine if
+relationships, patterns and trends are actually meaningful.
+
+We will not explore the use of models for SNA until Unit 3, recall from
+the PREPARE section that the Kellogg et al. study was guided by the
+following questions:
+
+1.  What are the patterns of peer interaction and the structure of peer
+    networks that emerge over the course of a MOOC-Ed?
+
+2.  To what extent do participant and network attributes (e.g.,
+    homophily, reciprocity, transitivity) account for the structure of
+    these networks?
+
+3.  To what extent do these networks result in the co-construction of
+    new knowledge?
+
+To address Question 1, actors in the network were categorized into
+distinct mutually exclusive groups using the core-periphery and regular
+equivalence functions of UCINET. The former used the CORR algorithm to
+divide the network into actors that are part of a densely connected
+subgroup, or "core", from those that are part of the sparsely connected
+periphery. Regular equivalence employs the REGE blockmodeling algorithm
+to partition, or group, actors in the network based on the similarity of
+their ties to others with similar ties. In essence, blockmodeling
+provides a systematic way for categorizing educators based on the ways
+in which they interacted with peers.
+
+As we saw upon just a basic visual inspection of our network during the
+Explore section, there was a small core of highly connected participants
+surrounded by those on the "periphery," or edge, of the network with
+very few connections. In the DLT 2 course, those on the periphery made
+up roughly 90% of network. The study also found relatively high levels
+of reciprocation, but also found that roughly a quarter of participants
+were characterized as "brodcasters" -- educators who initiated a
+discussion thread, but neither reciprocated with those who replied, nor
+posted to threads initiated by others.
+
+To address Question 2, this study use the exponential family of random
+graph models (ERGM; also known as p\* models), which provide a
+statistical approach to network modeling that addresses the complex
+dependencies within networks. ERGMs predict network ties and determine
+the statistical likelihood of a given network structure, based on an
+assumed dependency structure, the attributes of the individuals (e.g.,
+gender, popularity, location, previous ties) and prior states of the
+network.
+
+Finally, in [Learning Analytics Goes to
+School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134), the authors
+describe modeling as simply developing a mathematical summary of a
+dataset and note that there are two general types to modeling:
+unsupervised and supervised learning. Clustering algorithms, like REGE
+function used to address Q2, are used to explore the structure of a
+dataset, while supervised models "help to quantify relationships between
+features and a known outcome," similar to the use of actor, relational,
+and network attributes to predict tie formation among educators in a
+discussion forum using ERGM models.
+
+### [**Your Turn**]{style="color: green;"} **⤵**
+
+Recall from the [1a. Review the Research] that you were asked to
+identify two "node attributes" from the dataset that might be useful for
+predicting participants who may be more engaged or central to the
+network.
+
+Take look at page 276 of the article, [A social network perspective on
+peer supported learning in MOOCs for
+educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf).
+Were your predictions correct?
+
+\-
+
+Now that you've become a little familiar with this dataset and the
+social network perspective, what other aspects of this dataset, or a
+dataset you are interested in exploring, might be modeled to better
+understand the structure of this network, and the relationships between
+structures or attributes and learning outcomes of interest for those in
+network?
+
+Use the space below to write a brief response:
+
+\-
+
+# 5. COMMUNICATE
