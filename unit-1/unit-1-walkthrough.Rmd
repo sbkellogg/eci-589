@@ -484,17 +484,72 @@ codebook descriptors. The first one has been done as an example.
 -   Works with elementary, middle, and/or high school students
 -   Initial assignment of discussion group
 
-## 2b. Create a Network Object
+## 2b. Create Network Object
 
-B
+Before we can begin using many of the functions from the {igraph} for
+summarizing and visualizing our DLT 1 network, we first need to convert
+the data frames that we imported into an igraph network object, or an
+igraph graph.
+
+### Convert to an igraph Graph
+
+To do that, we will use the `graph_from_data_frame()` function. Run the
+following code to take a look at the help documentation for this
+function:
 
 ```{r}
-network <- graph_from_data_frame(d=ties, 
-                                 vertices=actors, 
-                                 directed=T) 
+?graph_from_data_frame
+```
+
+You probably saw that this particular function take the following three
+arguments, two of which are data frames:
+
+-   **d** describes the edges of the network. The first two columns are
+    the IDs of the source and the target node for each edge, in our case
+    the `Sender` and `Reviever` of a discussion post. The order matters!
+    The following columns are edge attributes such as weight, type,
+    label, or anything else.
+
+-   **vertices** starts with a column of node IDs and any following
+    columns are interpreted as node attributes.
+
+-   **directed** is determines whether or not to create a directed
+    graph.
+
+Run the following code to specify our `ties` data frame as the edges of
+our network, our `actors` data frame for the vertices of our network and
+their attributes, and indicate that this is indeed a directed network.
+
+```{r}
+network <- graph_from_data_frame(d = ties, 
+                                 vertices = actors, 
+                                 directed = T) 
 
 network
 ```
+
+#### [**Your Turn**]{style="color: green;"} **⤵**
+
+Take a look at the very first line of the output which contains some
+basic information about our network and answer the following questions:
+
+1.  How many actors and ties are in our network? Is this consistent with
+    the number of observations in our data frames?
+
+    -   
+
+2.  The D and the N indicate that this is a **D**irected network and has
+    the **N**ame vertex attributes set. Why are the other two blank?
+
+    -   
+
+3.  Which vertex attribute did igraph interpret as numeric?
+
+    -   
+
+### Simplify Graph
+
+### Add Edge Weights
 
 # 3. EXPLORE
 
