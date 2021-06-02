@@ -99,7 +99,7 @@ clp <- cluster_label_prop(net.sp)
 plot(clp, net.sp)
 
 
-deg <- degree(net, mode="all")
+
 
 fr <- layout_with_fr(net)
 su <- layout_with_sugiyama(net)
@@ -111,10 +111,13 @@ net <- simplify(net, remove.multiple = F, remove.loops = T)
 
 E(net)$width <- E(net)$weight/10
 
-plot(net, 
+
+deg <- degree(simple_network, mode="in")
+
+plot(simple_network, 
      layout = layout_with_kk,
      edge.arrow.size=.04,
-     edge.width = .5,
+     edge.width = .2,
      vertex.label=NA,
      vertex.size=deg*.04)
 

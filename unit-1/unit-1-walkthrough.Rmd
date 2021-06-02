@@ -164,8 +164,7 @@ you can replicate some of the findings from this paper!
 Take a quick look at the *Description of the Dataset* section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
 dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf)
-BJET article, and feel free to download and open the accompanying data
-sets stored on [Harvard
+BJET article and the accompanying data sets stored on [Harvard
 Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB)
 that we'll be using for this walkthrough.
 
@@ -343,9 +342,9 @@ visualization.
 The edge-list format is slightly different than other formats you have
 likely worked with before in that the values in the first two columns
 each row represent a dyad, or tie between two nodes in a network. An
-edge-list can also contain other information regarding the strength or
-duration of the relationship, sometime called "weight", in addition to
-other "edge attributes."
+edge-list can also contain other information regarding the strength,
+duration, or frequency of the relationship, sometime called "weight", in
+addition to other "edge attributes."
 
 In addition to
 
@@ -491,7 +490,7 @@ summarizing and visualizing our DLT 1 network, we first need to convert
 the data frames that we imported into an igraph network object, or an
 igraph graph.
 
-### Convert to an igraph Graph
+### Convert to igraph Graph
 
 To do that, we will use the `graph_from_data_frame()` function. Run the
 following code to take a look at the help documentation for this
@@ -550,20 +549,95 @@ basic information about our network and answer the following questions:
 
 ### Simplify Graph
 
-As you saw from the `network` output, our dataset has 2529 edges or
-ties. But how many of these are unique?
+As you saw from the `network` output, our dataset has 2529 edges or ties
+and just a quick scan of the edges in the network shows that edges like
+356 -\> 444 occur at least more than once so we know that participant
+356 has replied to participant 444 at least twice.
+
+How many unique edges does our network have though?
+
+Fortunately, the {igraph} package has a `simplify()` function for
+collapsing these duplicate edges so they are not represented more than
+once when we want visually depict our network with a sociogram.
+
+Let's use that function to simplify our network and save it as a
+`simple_network,` or a simple graph, which contains no self-loops or
+duplicate edges and which by default the `simplify()` function removes:
 
 ```{r}
-edge_counts <- count_multiple(network)
+simple_network <- simplify(network)
 
-edge_counts
+simple_network
 ```
 
-As you can see from the output under the edges
+#### [**Your Turn**]{style="color: green;"} **⤵**
 
-\
+Take a look at the output for our simple graph now and answer the
+following questions:
+
+1.  How many unique edges are in the network?
+
+    -   
+
+2.  Did we lose any important or potentially useful information by
+    collapsing multiple edges into a single edge?
+
+    -   
 
 ### Add Edge Weights
+
+We noted earlier that edges can also contain attributes such as
+strength, duration or frequency, sometime called "weight." These weight
+can help us better understand the relationship itself, but also aid in
+visualization and modeling later on.
+
+When we used the `simplify()` function earlier, it collapsed our
+duplicate edges but we lost some vital information as a result, namely
+the frequency of replies among pairs of educators in our discussion
+forum.
+
+Fortunately, the `simplify()` function contains an argument that will
+allow us to count the number of ties between two actors, similar to how
+we might use the `count()` function in the {dplyr} package like so:
+
+```{r}
+count(ties, Sender, Receiver)
+```
+
+In this case, we see that participant 1 replied to participant 144 twice
+throughout the course.
+
+To add weights to our simplified network, we first need to add a
+`weight` variable to the edges in our original `network` igraph object.
+
+The {igraph} package has a unique syntax for working with attributes of
+network objects. To add a weight attribute to the `E()` edges in our
+`network` we'll use the `$` operator which can be used to create a new
+`weight` variable and use the `<-` assignment operator to add an initial
+value of `1` for the weight of each edge.
+
+Let's put that all together and run the code to add a weight of 1 to
+each edge in our network
+
+```{r}
+E(network)$weight <- 1  
+```
+
+Now let's take a look at our igraph network object again:
+
+```{r}
+network
+```
+
+```{r}
+simple_network <- simplify(network,
+                           edge.attr.comb=list(weight="sum")
+                           )
+```
+
+```{r, eval=FALSE}
+simple_network
+```
 
 # 3. EXPLORE
 
