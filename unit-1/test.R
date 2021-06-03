@@ -37,8 +37,11 @@ edges <- ties %>%
 edges
 
 
-hist(edges$weight)
+hist(edges$weight, breaks = 20)
 mean(edges$weight)
+median(edges$weight)
+
+medi
 sd(edges$weight)
 
 hist(deg, breaks = 50)

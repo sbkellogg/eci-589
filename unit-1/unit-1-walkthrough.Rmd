@@ -42,26 +42,27 @@ looking at some basic network stats, and creating a network
 visualization that helps illustrate key findings. Specifically, the Unit
 1 Walkthrough will cover the following workflow topics:
 
-1.  **Prepare**: Prior to analysis, we'll take a look at the context in
-    which are data is derived, you're working with so you can formulate
-    useful and answerable questions. You'll also need to set up a
-    "Project" for our Unit 1 walkthrough.
+1.  **Prepare**: Prior to analysis, we'll take a look at the context
+    from which our data came, formulate some research questions, and get
+    introduced the {igraph} R package for network analysis.
 
 2.  **Wrangle**: Wrangling data entails the work of manipulating,
     cleaning, transforming, and merging data. In section 2 we focus on
-    reading, reducing, and tidying our data.
+    importing network data, converting our familiar data frames into a
+    network object that can be analyzed and graphed, and learn about
+    "simple graphs."
 
-3.  **Explore**: In section 3, we use simple summary statistics, more
-    sophisticated approaches like term frequency-inverse document
-    frequency (tf-idf), and basic data visualization to explore our data
-    and see what insight it provides in response to our question.
+3.  **Explore**: In section 3, we calculate some basic network
+    descriptives and learn how to summarize the descriptives through a
+    network visualization.
 
-4.  **Model**: While we won't investigate approaches to **Model** our
-    data until Unit 3 when we learn about community detection algorithms
-    and exponential random graph models (ERGM), we will see how modeling
-    has been applied.
+4.  **Model**: While we won't dig into approaches for modeling network
+    data Unit 3, we will take a quick look at some approaches used in
+    the study guiding this walkthrough.
 
-5.  **Communicate**:
+5.  **Communicate**: We'll learn more about communicating key findings
+    next week, but for now will learn some basic components of a data
+    product.
 
 ## 1a. Review the Research
 
@@ -159,7 +160,7 @@ DLT 2 course reported in this study. Also, for your independent
 analysis, you may want to consider working with the DLT 2 data to see if
 you can replicate some of the findings from this paper!
 
-### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Take a quick look at the *Description of the Dataset* section from the
 [Massively Open Online Course for Educators (MOOC-Ed) network
@@ -201,22 +202,25 @@ learning:
     new knowledge?
 
 For our very first walkthrough, we are going to focus exclusively on RQ1
-from the original study. Our question of interest is focused on very
-basic questions about our educator network:
+from the original study and our question of interest about our educator
+network is:
 
-> How, and to what extent, did educators engage with other participants
-> in the discussion forums?
+> To what extent, did educators engage with other participants in the
+> discussion forums?
 
-### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
-Based on our course readings and your self-selected readings, what
-subquestions, or more specific research questions, might ask that help
-you answer the broader question we'll be focused on for this
-walkthrough?
+Based on what you know about networks and the context so far, what
+subquestions or more specific research questions might ask we ask that a
+social network perspective might be able to answer?
 
 In the space below, type a brief response to the following questions:
 
 \-
+
+We'll revisit your response towards the end and provide an opportunity
+to refine your research question after you know the data a little
+better.
 
 ## 1c. Load Libraries
 
@@ -258,7 +262,7 @@ packages](https://www.tidyverse.org) that this package contains:
 library(tidyverse)
 ```
 
-### igraph **📦**
+### 🎉  igraph Package **📦**
 
 ![](img/igraph.png){width="30%"}
 
@@ -279,7 +283,7 @@ Run the code chunk below to load the {igraph] library:
 library(igraph)
 ```
 
-### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Take a look at the messages from the output of after loading the igraph
 library. What tidyverse packages share identically named functions with
@@ -288,6 +292,12 @@ igraph?
 Write your response in the space below.
 
 \-
+
+### 🧶 Knit and Check ✅
+
+Congrats! You made it to the end of data wrangling section and are ready
+to start analysis! Before proceeding further, knit your document and
+check to see if you encounter any errors.
 
 ------------------------------------------------------------------------
 
@@ -390,7 +400,7 @@ process.
 
 ![](img/import-data.png)
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Consider the example pictured below of a discussion thread from the
 Planning for the Digital Learning Transition in K-12 Schools (DLT 1)
@@ -458,7 +468,7 @@ actors <- read_csv("data/dlt1-nodes.csv",
                                     connect = col_character()))
 ```
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Use the code chunk below and a function of your choosing to take a look
 at the `actors` data frame:
@@ -492,15 +502,20 @@ igraph graph.
 
 ### Convert to igraph Graph
 
-To do that, we will use the `graph_from_data_frame()` function. Run the
-following code to take a look at the help documentation for this
+To do that, we will use the `graph_from_data_frame()` function. Note
+that I included the `eval=FALSE` argument in the code block below to
+prevent this code from running when we knit our final document.
+Otherwise it will produce an error since we can't include help
+documentation in our knitted HTML file.
+
+Run the following code to take a look at the help documentation for this
 function:
 
-```{r}
+```{r, eval=FALSE}
 ?graph_from_data_frame
 ```
 
-You probably saw that this particular function take the following three
+You probably saw that this particular function takes the following three
 arguments, two of which are data frames:
 
 -   **d** describes the edges of the network. The first two columns are
@@ -527,19 +542,20 @@ network <- graph_from_data_frame(d = ties,
 network
 ```
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Take a look at the very first line of the output which contains some
 basic information about our network and answer the following questions:
 
 1.  How many actors and ties are in our network? Is this consistent with
-    the number of observations in our data frames?
+    the number of observations in our data frames? **Hint:** Check the
+    Environment pane.
 
     -   
 
-2.  The D and the N indicate that this is a **D**irected network and has
-    the **N**ame vertex attributes set. Why are two sister spaces that
-    follow these letters blank? Hint: check the help files.
+2.  The "D" and the "N" indicate that this is a **D**irected network and
+    has the **N**ame vertex attributes set. Why do the two spaces that
+    follow these letters have dashes? **Hint:** check the help files.
 
     -   
 
@@ -551,10 +567,8 @@ basic information about our network and answer the following questions:
 
 As you saw from the `network` output, our dataset has 2529 edges or ties
 and just a quick scan of the edges in the network shows that edges like
-356 -\> 444 occur at least more than once so we know that participant
+356 -\> 444 occur at least more than once. So we know that participant
 356 has replied to participant 444 at least twice.
-
-How many unique edges does our network have though?
 
 Fortunately, the {igraph} package has a `simplify()` function for
 collapsing these duplicate edges so they are not represented more than
@@ -570,7 +584,7 @@ simple_network <- simplify(network)
 simple_network
 ```
 
-#### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Take a look at the output for our simple graph now and answer the
 following questions:
@@ -587,9 +601,9 @@ following questions:
 ### Add Edge Weights
 
 We noted earlier that edges can also contain attributes such as
-strength, duration or frequency, sometime called "weight." These weight
-can help us better understand the relationship itself, but also aid in
-visualization and modeling later on.
+strength, duration or frequency, sometime called "weight." These weights
+can not only help us better understand the relationship between two
+actors, but also aid in visualization and modeling later on.
 
 When we used the `simplify()` function earlier, it collapsed our
 duplicate edges but we lost some vital information as a result, namely
@@ -601,7 +615,9 @@ allow us to count the number of ties between two actors, similar to how
 we might use the `count()` function in the {dplyr} package like so:
 
 ```{r}
-count(ties, Sender, Receiver)
+edge_weights <- count(ties, Sender, Receiver)
+
+edge_weights
 ```
 
 In this case, we see that participant 1 replied to participant 144 twice
@@ -613,8 +629,9 @@ To add weights to our simplified network, we first need to add a
 The {igraph} package has a unique syntax for working with attributes of
 network objects. To add a weight attribute to the `E()` edges in our
 `network` we'll use the `$` operator which can be used to create a new
-`weight` variable and use the `<-` assignment operator to add an initial
-value of `1` for the weight of each edge.
+`weight` variable -- or select a variable as we'll see later on -- and
+use the `<-` assignment operator to add an initial value of `1` for the
+weight of each edge.
 
 Let's put that all together and run the code to add a weight of 1 to
 each edge in our network
@@ -629,17 +646,240 @@ Now let's take a look at our igraph network object again:
 network
 ```
 
+We can see that our network is now weighted as indicated by the "W" and
+that our new `weight` attribute has been added.
+
 ```{r}
-simple_network <- simplify(network,
-                           edge.attr.comb=list(weight="sum")
+weighted_network <- simplify(network,
+                           edge.attr.comb = list(weight="sum")
                            )
 ```
 
+\
+
 ```{r, eval=FALSE}
-simple_network
+weighted_network
 ```
 
+### **👉 Your Turn** **⤵**
+
+### 🧶 Knit and Check ✅
+
+Congrats! You made it to the end of data wrangling section and are ready
+to start analysis! Before proceeding further, knit your document and
+check to see if you encounter any errors.
+
+------------------------------------------------------------------------
+
 # 3. EXPLORE
+
+## Get Descriptives
+
+won't spend a ton of time
+
+### Edge Weights
+
+\
+
+```{r}
+mean(edge_weights$n)
+median(edge_weights$n)
+hist(edge_weights$n, breaks = 10)
+
+```
+
+### Node Degree
+
+```{r}
+node_degree <- degree(weighted_network, mode="all")
+```
+
+\
+
+```{r}
+hist(node_degree, breaks = 30)
+```
+
+```{r}
+mean(node_degree)
+median(node_degree)
+```
+
+#### In-Degree
+
+```{r}
+in_degree <- degree(weighted_network, mode="in")
+```
+
+\
+
+```{r}
+hist(in_degree, breaks = 30)
+```
+
+```{r}
+mean(in_degree)
+median(in_degree)
+```
+
+\
+
+### **👉 Your Turn** **⤵**
+
+Use the code chunk
+
+```{r}
+
+```
+
+In the space below, write your interpretation of these results.
+
+\-
+
+\
+
+## Make a Sociogram
+
+igraph arguments only\
+
+```{r}
+plot(weighted_network)
+```
+
+Hair ball
+
+#### Remove Labels
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA)
+```
+
+\
+
+#### Change vertex size
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = 1)
+```
+
+\
+degree
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree)
+```
+
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.1)
+```
+
+\
+
+#### Reduce arrow size
+
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.1,
+     edge.arrow.size = .04)
+```
+
+#### Adjust Edge Width
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .04,
+     edge.width = .2)
+```
+
+\
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.1,
+     edge.arrow.size = .04,
+     edge.width = E(weighted_network)$weight)
+```
+
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .05,
+     edge.width = E(weighted_network)$weight/5)
+```
+
+\
+
+#### Change Layout
+
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .05,
+     edge.width = E(weighted_network)$weight/5,
+     layout = layout_with_fr)
+```
+
+\
+
+```{r}
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .05,
+     edge.width = E(weighted_network)$weight/5,
+     layout = layout_with_kk)
+
+```
+
+\
+
+```{r}
+
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .05,
+     edge.width = E(weighted_network)$weight/5,
+     layout = layout_in_circle)
+
+```
+
+### **👉 Your Turn** **⤵**
+
+We've only scratched the surface of what's possible with network
+plotting but hopefully this have given you a sense of
+
+```{r}
+
+```
+
+### 🧶 Knit and Check ✅
+
+Congrats! You made it to the end of the Explore section and are ready to
+learn a little about network modeling! Before proceeding further, knit
+your document and check to see if you encounter any errors.
 
 # 4. MODEL
 
@@ -733,3 +973,29 @@ Use the space below to write a brief response:
 \-
 
 # 5. COMMUNICATE
+
+The final step in our workflow/process is sharing the results of
+analysis with wider audience. Krumm et al. (2018) have outline the
+following 3-step process for communicating with education stakeholders
+what you have learned through analysis:
+
+1.  **Select**. Communicating what one has learned involves selecting
+    among those analyses that are most important and most useful to an
+    intended audience, as well as selecting a form for displaying that
+    information, such as a graph or table in static or interactive form,
+    i.e. a "data product."
+
+2.  **Polish**. After creating initial versions of data products,
+    research teams often spend time refining or polishing them, by
+    adding or editing titles, labels, and notations and by working with
+    colors and shapes to highlight key points.
+
+3.  **Narrate**. Writing a narrative to accompany the data products
+    involves, at a minimum, pairing a data product with its related
+    research question, describing how best to interpret the data
+    product, and explaining the ways in which the data product helps
+    answer the research question.
+
+In Week 4 of Unit 1 we'll take a look at
+
+### 🧶 Knit and Check ✅
