@@ -1086,7 +1086,7 @@ arguments/parameters or adding new arguments/parameters to make our plot
 either more "aesthetically pleasing" or more purposeful in what it's
 trying to communicate.
 
-Your also welcome to try out some of the other graphing options from
+You're also welcome to try out some of the other graphing options from
 from Katya Ognyanova's tutorial on [Static and Dynamic Network
 Visualization with R](https://kateto.net/network-visualization/).
 
