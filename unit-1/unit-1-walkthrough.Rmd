@@ -46,22 +46,20 @@ Specifically, the Unit 1 Walkthrough will cover the following topics:
     "simple graphs."
 
 3.  **Explore**: In section 3, we calculate some basic network
-    descriptives and learn how to summarize the stats with a sociogram.
+    descriptives and learn how to illustrate some of these stats through
+    network visualization.
 
 4.  **Model**: While we won't dig into approaches for modeling network
-    data Unit 3, we will take a quick look at some approaches used in
-    the study guiding this walkthrough.
+    data until Unit 3, we will take a quick look at some approaches used
+    in the study guiding this walkthrough.
 
 5.  **Communicate**: We'll learn more about communicating key findings
-    next week, but for now will be introduced to the basic components of
-    a data product.
+    next week, but for now you will be introduced to the basic
+    components of a data product.
 
 ## 1a. Review the Research
 
-Prior to analysis, it's critical to understand the context and data
-sources available so you can formulate useful questions that can be
-feasibly addressed by your data. In [Social Network Analysis and
-Education: Theory, Methods &
+In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education),
 Carolyn (2013) notes that:
 
@@ -86,7 +84,9 @@ Freeman (2004) to define the social network perspective:
 For Unit 1, our walkthrough will be guided by previous research and
 evaluation work conducted by the Friday Institute for Educational
 Innovation as part of the Massively Open Online Courses for Educators
-(MOOC-Ed) initiative.
+(MOOC-Ed) initiative. The study introduced next and the hands-on
+analysis with R in this walkthrough will help to illustrate these four
+defining features of the social network perspective.
 
 ### A Social Network Perspective in MOOC-Eds
 
@@ -146,9 +146,14 @@ analyses described below exclude more passive forms of interactions
 For our Unit 1 walkthrough, we'll take a look at data from the original
 Digital Learning Transition in K-12 Schools (DLT 1) that was not
 included in this study to allow for comparisons to the findings in this
-study. Also, for your independent analysis, you may want to consider
+study. For your independent analysis next week, you may want to consider
 working with the DLT 2 data to see if you can replicate some of the
 findings from this paper!
+
+**Note**: In the data we're using, instructors have not yet been removed
+and only direct replies to forum posts have been included, though
+"weaker" ties like reactions with emoticons and even views of posts were
+captured in this study.
 
 ### **👉 Your Turn** **⤵**
 
@@ -192,8 +197,8 @@ learning:
     new knowledge?
 
 For our very first walkthrough, we are going to focus exclusively on RQ1
-from the original study and our question of interest about our educator
-network is:
+from the original study and our question of interest about our
+discussion network is:
 
 > To what extent, did educators engage with other participants in the
 > discussion forums?
@@ -266,11 +271,12 @@ provide a set of data types and functions for:
 
 1.  pain-free implementation of graph algorithms,
 
-2.  fast handling of large graphs, with millions of vertices and edges.
+2.  fast handling of large graphs, with millions of vertices (i.e.,
+    actors or nodes) and edges.
 
 3.  allowing rapid prototyping via high level languages like R.
 
-Run the code chunk below to load the {igraph] library:
+Run the code chunk below to load the {igraph} library:
 
 ```{r}
 library(igraph)
@@ -278,7 +284,7 @@ library(igraph)
 
 ### **👉 Your Turn** **⤵**
 
-Take a look at the messages from the output of after loading the igraph
+Take a look at the messages from the output after loading the igraph
 library. What tidyverse packages share identically named functions with
 igraph?
 
