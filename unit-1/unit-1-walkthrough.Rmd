@@ -8,12 +8,6 @@ output:
     toc: yes
     toc_depth: 4
     toc_float: yes
-    df_print: paged
-  html_notebook:
-    toc: yes
-    toc_float: yes
-    theme: default
-    toc_depth: 4
 editor_options:
   markdown:
     wrap: 72
@@ -96,7 +90,7 @@ Innovation as part of the Massively Open Online Courses for Educators
 
 ### A Social Network Perspective in MOOC-Eds
 
-![](img/irrodl-article.png){width="40%"}
+![](img/irrodl-article.png){width="30%"}
 
 Kellogg, S., Booth, S., & Oliver, K. (2014). [A social network
 perspective on peer supported learning in MOOCs for
@@ -228,18 +222,19 @@ R](https://datascienceineducation.com/c06.html#c06p) (DSIEUR):
 > functionality of R by providing access to additional functions to suit
 > a variety of needs.
 
-Let's check to see which packages have already been loaded into our
-RStudio Cloud workspace. Take a look at the the Files, Plots, & Packages
-Pane in the lower right hand corner of RStudio Cloud to make sure these
-packages have been installed and loaded:
+You can always check to see which packages have already been installed
+and loaded into RStudio Cloud by looking at the the Files, Plots, &
+Packages Pane in the lower right hand corner of RStudio as shown in the
+following screenshot:
 
 ![](img/packages-pane.png){width="90%"}
 
-You should see some familiar tidytext packages from our [Getting Started
+You should see installed some familiar tidytext packages from our
+[Getting Started
 Walkthrough](https://sbkellogg.github.io/eci-589/unit-0/unit-0-walkthrough.html)
 like {dplyr} and {readr} which we'll be using again shortly. You should
-also see an important package call {igraph} that will rely on heavily
-for our network analyses.
+also see an important package call {igraph} that we will rely on heavily
+for our network analyses in this course.
 
 If you are working in RStudio Desktop, or notice that the packages have
 not been installed and/or loaded, run the following `install.packages()`
@@ -250,9 +245,11 @@ install.packages("tidyverse")
 install.packages("igraph") 
 ```
 
-Let's go ahead and use `library()` function for the {tidyverse} package
-just to review the other packages from the [tidyverse collection of
-packages](https://www.tidyverse.org) that this package contains:
+Let's go ahead and use the `library()` function for the {tidyverse}
+package and review which packages from the [tidyverse collection of
+packages](https://www.tidyverse.org) that this package also loads.
+
+Click the green arrow to run the following code and load our packages:
 
 ```{r}
 library(tidyverse)
@@ -704,18 +701,15 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
 
 ## 3a. Examine Basic Descriptives
 
-### Edge Weights
-
-\
-
-```{r}
-mean(edge_weights$n)
-median(edge_weights$n)
-hist(edge_weights$n, breaks = 10)
-
-```
-
-Now that we've looked at the typical frequency of those
+As noted in the Getting Started Walkthrough, exploratory data analysis
+involves processes of *describing* your data (such as by calculating the
+means and standard deviations of numeric variables, or counting the
+frequency of categorical variables) and, often, visualizing your data
+prior to modeling. Many analyses of social networks are primarily
+descriptive. As Carolyn (2013) notes that these descriptive studies aim
+either to represent the network's underlying social structure through
+data-reduction techniques or to characterize network properties through
+network measures.
 
 ### Node Degree
 
@@ -785,7 +779,7 @@ mean(in_degree)
 median(in_degree)
 ```
 
-\
+XXX\
 
 ### **👉 Your Turn** **⤵**
 
@@ -799,19 +793,92 @@ In the space below, write your interpretation of these results.
 
 \-
 
-\
+### Edge Weights
+
+Finally, let's also take a look at the distribution, mean and median of
+the edge weights we added to our graph.
+
+Recall from earlier that the {igraph} package has a unique syntax for
+accessing node and edge attributes. For edges we use `E()` and included
+the name of the network object we want to use, followed by the `$`
+operator to select the attribute.
+
+```{r}
+weights <- E(weighted_network)$weight
+
+hist(weights, breaks = 10)
+mean(weights)
+median(weights)
+
+```
+
+It looks like the vast majority or participants either sent or received
+a reply from just one other participant.
+
+### **👉 Your Turn** **⤵**
+
+The use of the `$` is actually standard across R and a very useful
+operator. For example, if you recall from the [Add Edge Weights] section
+where we used the `count()` function from {dplyr} to quickly tally our
+`edge_weights`.
+
+Use the code chunk below to create a histogram and calculate the mean
+and median from the edge weighs created earlier by using the
+`edge_weights` data frame, the `$` operator, and column `n` which
+contains the counts for each unique edge.
+
+```{r}
+
+```
+
+Were these results consistent with our summary of edge weights we
+created above?
+
+\-
 
 ## 3b. Make a Sociogram
 
-igraph arguments only\
+If you recall from our [1a. Review the Research] section, one of the
+defining characteristics of the social network perspective is its use of
+graphic imagery to represent actors and their relations with one
+another. Network visualization can be used for a variety of purposes, as
+illustrated by this excellent figure from Katya Ognyanova's also
+excellent tutorial on [Static and Dynamic Network Visualization with
+R](https://kateto.net/network-visualization/).
+
+![](img/viz-goals.jpeg){width="80%"}
+
+These visual representations of the actors and their relations, i.e. the
+network, are called a sociogram. Actors who are most central to the
+network, such as those with higher node degrees, are usually placed in
+the center of the sociogram and their ties are placed near them. As
+we'll see in just a bit, those two actors with hundreds of ties will be
+placed by most graph layout algorithms in the center of the graph.
+
+The easier way to to make a sociogram is to use the `plot()` function
+from R's built in {graphics} package
+
+Let's run the code and see what we get without any tweaking and see what
+the plot function produces:
 
 ```{r}
 plot(weighted_network)
+
 ```
 
-Hair ball
+If this had been a smaller network like one generated from a teacher
+professional development workshop, this might have been useful, but for
+large networks like our MOOC-Ed discussion forums, this doesn't
+communicate much. In fact, it's visualizations like these that give
+sociograms the unflattering nickname of "hair ball" plots.
+
+Fortunately, {igraph} includes a [plethora of plotting
+parameters](https://kateto.net/sunbelt2019#plotting-parameters) for
+improving the layout and visual design of network graphs!
 
 #### Remove Labels
+
+One quick fix is to simply remove the labels.
 
 ```{r}
 plot(weighted_network,
@@ -821,6 +888,11 @@ plot(weighted_network,
 \
 
 #### Change vertex size
+
+There are many ways to arrange actors in a sociogram, as there are many
+ways to represent actors or their ties. Up to four attributes of each
+actor can be layered onto the sociogram by altering the color, shape,
+label, and size of the symbol.
 
 ```{r}
 plot(weighted_network,

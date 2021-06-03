@@ -41,6 +41,13 @@ hist(edges$weight, breaks = 20)
 mean(edges$weight)
 median(edges$weight)
 
+
+weights <- E(weighted_network)$weight
+
+hist(weights, breaks = 10)
+mean(weights)
+median(weights)
+
 medi
 sd(edges$weight)
 
