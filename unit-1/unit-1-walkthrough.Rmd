@@ -272,7 +272,7 @@ provide a set of data types and functions for:
 1.  pain-free implementation of graph algorithms,
 
 2.  fast handling of large graphs, with millions of vertices (i.e.,
-    actors or nodes) and edges.
+    actors or nodes) and edges,
 
 3.  allowing rapid prototyping via high level languages like R.
 
@@ -344,7 +344,7 @@ following .csv files:
 As its name implies, the first file `dlt1-edgelist.csv` is an edge-list
 that contains information about each tie, or relation between two actors
 in a network. In this context, a "tie" is a reply by one participant in
-the discussion forum to the post of another participant - or in some
+the discussion forum to the post of another participant -- or in some
 cases to their own post! These ties between a single actor are called
 "self-loops" and as we'll see later in this section, igraph has a
 special function to remove these self loops from a sociogram, or network
@@ -390,9 +390,10 @@ ties
 ```
 
 Note the addition of the `col_types =` argument for changing the column
-types to character strings since the numbers for for those particular
+types to character strings since the numbers for those particular
 columns indicate actors (`Sender` and `Reciever`) and attributes
-(`Comment_ID` and `Discussion_Id`). We also skipped the `Category Text`.
+(`Comment_ID` and `Discussion_Id`). We also skipped the `Category Text`
+since this was left blank for deidentification purposes.
 
 **RStudio Tip:** Importing data and dealing with data types can be a bit
 tricky, especially for beginners. Fortunately, RStudio has an "Import
@@ -434,24 +435,23 @@ accurately the intended recipients of each reply.
 
 ### Node Attributes
 
-The second file is we'll be using to help understand out network and the
-actors involved contains all the nodes or actors (i.e., participants who
-posted to the discussion forum) as well as some of their attributes such
-as gender and years of experience in education.
+The second file we'll be using contains all the nodes or actors (i.e.,
+participants who posted to the discussion forum) as well as some of
+their attributes such as gender and years of experience in education.
 
 Carolyn (2013) notes that most social network analyses include variables
 that describe attributes of actors, ones that are either categorical
 (e.g., sex, race, etc.) or continuous in nature (e.g., test scores,
 number of times absent, etc.). These attributes that can be incorporated
-into a network graph or model to making it much more informative and can
-aid in testing or generating hypotheses.
+into a network graph or model, making it more informative and can aid in
+testing or generating hypotheses.
 
 These attribute variables are typically included in a rectangular array,
 or dataframe, that mimics the actor-by-attribute that is the dominant
 convention in social science, i.e. rows represent cases, columns
 represent variables, and cells consist of values on those variables.
 
-As and aside, Carolyn also refers to this historical preference by
+As an aside, Carolyn also refers to this historical preference by
 researchers for "actor-by-attribute" data, in the absence of relational
 data in which the actor has been removed their social context, as the
 "sociological meatgrinder" in action. Specifically, this historical
@@ -497,10 +497,10 @@ codebook descriptors. The first one has been done as an example.
 
 ## 2b. Create Network Object
 
-Before we can begin using many of the functions from the {igraph} for
-summarizing and visualizing our DLT 1 network, we first need to convert
-the data frames that we imported into an igraph network object, or an
-igraph graph.
+Before we can begin using many of the functions from the {igraph}
+package for summarizing and visualizing our DLT 1 network, we first need
+to convert the data frames that we imported into an igraph network
+object, or an igraph graph. 🤷‍♂
 
 ### Convert to igraph Graph
 
@@ -522,15 +522,14 @@ arguments, two of which are data frames:
 
 -   **d** describes the edges of the network. The first two columns are
     the IDs of the source and the target node for each edge, in our case
-    the `Sender` and `Reviever` of a discussion post. The order matters!
-    The following columns are edge attributes such as weight, type,
-    label, or anything else.
+    the `Sender` and `Reviever` of a discussion post -- the order
+    matters! The following columns are edge attributes such as weight,
+    type, label, or anything else.
 
 -   **vertices** starts with a column of node IDs and any following
     columns are interpreted as node attributes.
 
--   **directed** is determines whether or not to create a directed
-    graph.
+-   **directed** determines whether or not to create a directed graph.
 
 Run the following code to specify our `ties` data frame as the edges of
 our network, our `actors` data frame for the vertices of our network and
@@ -560,7 +559,7 @@ consisted of hundreds or even thousands of students like in a MOOC.
 Take a look at the very first line of the output which contains some
 basic information about our network and answer the following questions:
 
-1.  How many notes and edges are in our network? Is this consistent with
+1.  How many nodes and edges are in our network? Is this consistent with
     the number of observations in our data frames? **Hint:** Check the
     Environment pane.
 
@@ -584,8 +583,8 @@ and just a quick scan of the edges in the network shows that edges like
 356 has replied to participant 444 at least twice.
 
 Fortunately, the {igraph} package has a `simplify()` function for
-collapsing these duplicate edges so they are not represented more than
-once when we want visually depict our network with a sociogram.
+collapsing multiple edges so they are not represented more than once
+when we want visually depict our network with a sociogram.
 
 Let's use that function to simplify our network and save it as a
 `simple_network,` or a simple graph, which contains no self-loops or
@@ -597,7 +596,7 @@ simple_network <- simplify(network, remove.loops = TRUE)
 simple_network
 ```
 
-Note that by simplify() removes self-loops by default, this does not
+Note that `simplify()` removes self-loops by default, this does not
 really need to be included. If you wanted to keep them, you would simply
 set this to `FALSE`.
 
@@ -606,7 +605,8 @@ set this to `FALSE`.
 Take a look at the output for our simple graph now and answer the
 following questions:
 
-1.  How many unique edges are in the network?
+1.  How many unique edges are in the network? Why do you think this is
+    considerably less than our total edges?
 
     -   
 
@@ -648,8 +648,8 @@ The {igraph} package has a unique syntax for working with attributes of
 network objects. To add a weight attribute to the `E()` edges in our
 `network` we'll use the `$` operator which can be used to create a new
 `weight` variable -- or select a variable as we'll see later on -- and
-use the `<-` assignment operator to add an initial value of `1` for the
-weight of each edge.
+we'll use the `<-` assignment operator to add an initial value of `1`
+for the weight of each edge.
 
 Let's put that all together and run the code to add a weight of 1 to
 each edge in our network
@@ -667,19 +667,35 @@ network
 We can see that our network is now weighted as indicated by the "W" and
 that our new `weight` attribute has been added.
 
+We can now use the `edge.attr.comb =` argument to "sum" the weights for
+each occurrence of a pair of actors, so if 1 replied to participant 144
+five times over the course of the MOOC-Ed, there would be a weight of 5
+for that pair.
+
+Run the code to simplify our weighted network:
+
 ```{r}
 weighted_network <- simplify(network,
-                           edge.attr.comb = list(weight="sum")
-                           )
+                             edge.attr.comb = list(weight="sum")
+                             )
 ```
 
-\
+Let's take a look at the output and ignore the error message for now:
 
 ```{r, eval=FALSE}
 weighted_network
 ```
 
 ### **👉 Your Turn** **⤵**
+
+Take a look at the output for our simple graph now and answer the
+following questions:
+
+1.  How does the number of total edges and unique edges this compare to
+    the totals reported for the DLT 2 course in our [guiding
+    study](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf)?
+
+    -   
 
 ### 🧶 Knit & Check ✅
 
@@ -691,16 +707,15 @@ check to see if you encounter any errors.
 
 # 3. EXPLORE
 
-As highlighted in both DSEIUR and Learning Analytics Goes to School,
-calculating summary statistics, data visualization, and feature
-engineering (the process of creating new variables from a dataset) are a
-key part of exploratory data analysis. One goal in this phase is explore
-questions that drove the original analysis and develop new questions and
-hypotheses to test in later stages.
+As noted in the Getting Started Walkthrough, exploratory data analysis
+involves the processes of describing your data (such as by calculating
+the means and standard deviations of numeric variables, or counting the
+frequency of categorical variables) and, often, visualizing your data
+prior to modeling.
 
 In Section 3, we will learn some new functions for retrieving basic
 network descriptives related to our research question and create a
-network visualization to help illustrate key findings. Specifically,
+network visualization to help illustrate key findings. Specifically, in
 this section we'll learn to:
 
 a.  **Examine Basic Descriptives**. We focus primarily on actors and
@@ -715,15 +730,10 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
 
 ## 3a. Examine Basic Descriptives
 
-As noted in the Getting Started Walkthrough, exploratory data analysis
-involves processes of *describing* your data (such as by calculating the
-means and standard deviations of numeric variables, or counting the
-frequency of categorical variables) and, often, visualizing your data
-prior to modeling. Many analyses of social networks are primarily
-descriptive. As Carolyn (2013) notes that these descriptive studies aim
-either to represent the network's underlying social structure through
-data-reduction techniques or to characterize network properties through
-network measures.
+Many analyses of social networks are primarily descriptive. As Carolyn
+(2013) notes that these descriptive studies aim either to represent the
+network's underlying social structure through data-reduction techniques
+or to characterize network properties through network measures.
 
 ### Node Degree
 
@@ -731,10 +741,10 @@ A key structural property of networks is the concept of centralization.
 A network that is highly centralized is one in which relations are
 focused on a small number of actors or even a single actor in a network,
 whereas ties in a decentralized network are diffuse and spread over a
-number of actors. One of the most common measure of centralization is
-degree
+number of actors. One of the most common descriptives reported in
+network studies and a primary measure of centralization is **degree**.
 
-> **Degree** is the number of ties to and from an ego. In a directed
+> Degree is the number of ties to and from an ego. In a directed
 > network, in-degree is the number of ties received, whereas out-degree
 > is the number of ties sent.
 
@@ -749,7 +759,7 @@ which we'll examine in just a bit:
 node_degree <- degree(weighted_network, mode = "all")
 ```
 
-Note that we set the `mode =` argument in this function to "all" which
+**Note**. We set the `mode =` argument in this function to "all" which
 give us the total number of participants that each actor in our network
 with sent or received a reply.
 
@@ -764,7 +774,7 @@ hist(node_degree, breaks = 30)
 
 We can see that most actors in the network are connected to very few
 individuals while a couple actors in this network are connected to a
-very larger number of alters, nearly 200 and 350 respectively!
+very larger number, nearly 200 and 350 respectively!
 
 Now let's take a look at the mean and median for `node_degree` using
 some other {base} R functions:
@@ -793,11 +803,13 @@ mean(in_degree)
 median(in_degree)
 ```
 
-XXX\
+Again, most participants received a reply from small number of
+individuals.
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk
+Use the code chunk below to examine the distribution, mean and median of
+`out_degree`:
 
 ```{r}
 
@@ -832,21 +844,19 @@ a reply from just one other participant.
 ### **👉 Your Turn** **⤵**
 
 The use of the `$` is actually standard across R and a very useful
-operator. For example, if you recall from the [Add Edge Weights] section
-where we used the `count()` function from {dplyr} to quickly tally our
-`edge_weights`.
+operator.
 
 Use the code chunk below to create a histogram and calculate the mean
-and median from the edge weighs created earlier by using the
-`edge_weights` data frame, the `$` operator, and column `n` which
-contains the counts for each unique edge.
+and median from the edge weighs created earlier in the [Add Edge
+Weights] section by using the `edge_weights` data frame, the `$`
+operator, and column `n` which contains the counts for each unique edge.
 
 ```{r}
 
 ```
 
-Were these results consistent with our summary of edge weights we
-created above?
+Are these results consistent with our summary of edge weights we created
+above?
 
 \-
 
@@ -865,7 +875,7 @@ Network visualization can be used for a variety of purposes, ranging
 from highlighting key actors to even serving as works of art. This
 excellent figure from Katya Ognyanova's also excellent tutorial on
 [Static and Dynamic Network Visualization with
-R](https://kateto.net/network-visualization/) helps illsutrate the
+R](https://kateto.net/network-visualization/) helps illustrate the
 variety of goals a good network visualization can accomplish:
 
 ![](img/viz-goals.jpeg){width="80%"}
@@ -877,8 +887,8 @@ the center of the sociogram and their ties are placed near them. As
 we'll see in just a bit, those two actors with hundreds of ties will be
 placed by most graph layout algorithms in the center of the graph.
 
-The easier way to to make a sociogram is to use the `plot()` function
-from R's built in {graphics} package
+For Unit 1, we'll be using the `plot()` function from R's built in
+{graphics} package to make a sociogram.
 
 Let's run the code and see what we get without any tweaking and see what
 the plot function produces:
@@ -896,11 +906,13 @@ sociograms the unflattering nickname of "hair ball" plots.
 
 Fortunately, the {igraph} package includes a [plethora of plotting
 parameters](https://igraph.org/r/doc/plot.common.html) for improving the
-layout and visual design of network graphs! There are many ways to
-modify vertices and edges in sociogram to improve readability. Up to
-four attributes of each actor can be layered onto the sociogram by
-altering the color, shape, label, and size of the symbol. And attributes
-for edges can be represented in a range of ways as well.
+layout and visual design of network graphs!
+
+There are many ways to modify vertices and edges in a sociogram to
+improve readability. Up to four attributes of each actor can be layered
+onto the sociogram by altering the color, shape, label, and size of the
+symbol. And attributes for edges can be represented in a range of ways
+as well.
 
 ### Remove Labels
 
@@ -940,7 +952,7 @@ plot(weighted_network,
      vertex.size = node_degree)
 ```
 
-Well, this certainly emphasizes the disproportionate number of ties
+Whoops! This certainly emphasizes the disproportionate number of ties
 among these two participants, but not quite what we're going for.
 
 Since `node_degree` is just a list of values for each node we can treat
@@ -953,7 +965,7 @@ plot(weighted_network,
 ```
 
 That's better, and helps highlight our two main actors without
-overshadowing the rest, but those arrows are definitely an issue.
+overshadowing the rest, but those arrows are definitely an eyesore.
 
 ### Reduce arrow size
 
@@ -1012,23 +1024,22 @@ plot(weighted_network,
 Better, but since we know most edges have a weight of 1 there really
 isn't too much to work with here.
 
-We've save the best part for last. Let's move on to changing graph
-layout!
+Let's move on to changing graph layout!
 
 #### Change Layout
 
-One of the major advances in visualization since the first is the
-hand-drawn sociograms developed by Jacob Moreno (1934) to represent
-relations among children in school is the use of software and algorithms
-to automatically layout networks on a grid.
+One of the major advances in visualization since the first hand-drawn
+sociograms developed by Jacob Moreno (1934) to represent relations among
+children in school is the use of software and algorithms to
+automatically layout networks on a grid.
 
 There are may different [layout
 methods](https://en.wikipedia.org/wiki/Graph_drawing#Layout_methods),
 but we'll start with the Fruchterman-Reingold (FR) layout, which is one
-of the most used force-directed layout algorithms for network
-visualization. These types of alogrithms generally work well with large
+of the most used layout algorithms for network visualization. These
+types of force-directed algorithms generally work well with large
 networks and try to layout graphs in "an aesthetically-pleasing way" by
-making edges roughly equal length and minimizing overlap.
+making edges roughly equal in length and minimizing overlap.
 
 Let give the FR layout a try by using the `layout =` argument and
 specifying `layout_with_fr`:
@@ -1059,19 +1070,25 @@ plot(weighted_network,
 
 ```
 
+Interesting but not terribly useful!
+
 There are many other [igraph layout
-functions](https://igraph.org/r/doc/layout_.html), some more useful that
-others given the context. We've only scratched the surface of what's
-possible with network plotting but hopefully this have given you a sense
-of what required to avoid the dreaded "hair ball" plot and create a
-network viz that communicates something useful.
+functions](https://igraph.org/r/doc/layout_.html), some more useful than
+others depending on the context. We've only scratched the surface of
+what's possible with network plotting but hopefully this have given you
+a sense of what required to avoid the dreaded "hair ball" plot and
+create a network viz that communicates something useful.
 
 ### **👉 Your Turn** **⤵**
 
-Try modifying to code below by tweaking the included
+Try modifying the code below by tweaking the included
 arguments/parameters or adding new arguments/parameters to make our plot
 either more "aesthetically pleasing" or more purposeful in what it's
 trying to communicate.
+
+Your also welcome to try out some of the other graphing options from
+from Katya Ognyanova's tutorial on [Static and Dynamic Network
+Visualization with R](https://kateto.net/network-visualization/).
 
 There are no right or wrong answers, just have some fun trying out
 different approaches!
@@ -1102,8 +1119,8 @@ the **Explore** step can help us to identify patterns and relationships
 in our data, statistical models can be used to help us determine if
 relationships, patterns and trends are actually meaningful.
 
-We will not explore the use of models for SNA until Unit 3, recall from
-the PREPARE section that the Kellogg et al. study was guided by the
+We will not explore the use of models for SNA until Unit 3, but recall
+from [A Social Network Perspective in MOOC-Eds] was guided by the
 following questions:
 
 1.  What are the patterns of peer interaction and the structure of peer
@@ -1131,7 +1148,7 @@ As we saw upon just a basic visual inspection of our network during the
 Explore section, there was a small core of highly connected participants
 surrounded by those on the "periphery," or edge, of the network with
 very few connections. In the DLT 2 course, those on the periphery made
-up roughly 90% of network. The study also found relatively high levels
+up roughly 90% of network! The study also found relatively high levels
 of reciprocation, but also found that roughly a quarter of participants
 were characterized as "brodcasters" -- educators who initiated a
 discussion thread, but neither reciprocated with those who replied, nor
@@ -1153,8 +1170,8 @@ identify two "node attributes" from the dataset that might be useful for
 predicting participants who may be more engaged or central to the
 network.
 
-Take look at page 276 of the article, [A social network perspective on
-peer supported learning in MOOCs for
+Take look at page 276 of [A social network perspective on peer supported
+learning in MOOCs for
 educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf).
 Were your predictions correct?
 
@@ -1165,7 +1182,7 @@ Were your predictions correct?
 # 5. COMMUNICATE
 
 The final step in our workflow/process is sharing the results of
-analysis with wider audience. Krumm et al. (2018) have outline the
+analysis with wider a audience. Krumm et al. (2018) have outline the
 following 3-step process for communicating with education stakeholders
 what you have learned through analysis:
 
