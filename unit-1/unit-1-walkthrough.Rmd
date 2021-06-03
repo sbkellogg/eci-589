@@ -266,7 +266,8 @@ provide a set of data types and functions for:
 
 1.  pain-free implementation of graph algorithms,
 
-2.  fast handling of large graphs, with millions of vertices and edges.
+2.  fast handling of large graphs, with millions of vertices (i.e.
+    actors or nodes) and edges.
 
 3.  allowing rapid prototyping via high level languages like R.
 
@@ -288,9 +289,9 @@ Write your response in the space below.
 
 ### 🧶 Knit & Check ✅
 
-Congrats! You made it to the end of data wrangling section and are ready
-to start analysis! Before proceeding further, knit your document and
-check to see if you encounter any errors.
+Congrats! You're reading to start wrangling some data! Before proceeding
+further, knit your document and check to see if you encounter any
+errors.
 
 ------------------------------------------------------------------------
 
@@ -307,15 +308,17 @@ with network data is a bit of a departure from our working with
 rectangular data frames. Our primary goals for Unit 1 are learning how
 to:
 
-a.  **Import Data**. Before working with data, we need to "read" it into
-    R and once imported, we'll take at different ways to view our data
-    in R.
+a.  **Import Data**. An obvious and also important first step, we need
+    to "read" our data into R and learn about formatting for edge-lists
+    and node attribute files.
 
-b.  **Create a Network Object**.
+b.  **Create a Network Object**. Before performing network analyses,
+    we'll need to convert our data frames into special data format for
+    working with relational data.
 
 c.  **Simplify Network**. Finally, we'll learn about a handy
-    `simplify()` function in the {igraph} package for removing ties that
-    .
+    `simplify()` function in the {igraph} package for collapsing
+    multiple ties between actors and removing "self-loops."
 
 ## 2a. Import Data
 
@@ -349,13 +352,14 @@ edge-list can also contain other information regarding the strength,
 duration, or frequency of the relationship, sometime called "weight", in
 addition to other "edge attributes."
 
-In addition to
+In addition to our `Sender` and `Reciever` dyad pairs, our DLT 1 dataset
+contains the following edge attributes:
 
 -   `Sender` = Unique identifier of author of comment
 
 -   `Receiver` = Unique identifier of identified recipient of comment
 
--   `Timestamp` = Time comment was posted
+-   `Timestamp` = Time post or reply was posted
 
 -   `Parent` = Primary category or topic of thread
 
@@ -583,10 +587,14 @@ Let's use that function to simplify our network and save it as a
 duplicate edges and which by default the `simplify()` function removes:
 
 ```{r}
-simple_network <- simplify(network)
+simple_network <- simplify(network, remove.loops = TRUE) 
 
 simple_network
 ```
+
+Note that by simplify() removes self-loops by default, this does not
+really need to be included. If you wanted to keep them, you would simply
+set this to `FALSE`.
 
 ### **👉 Your Turn** **⤵**
 
@@ -597,8 +605,9 @@ following questions:
 
     -   
 
-2.  Did we lose any important or potentially useful information by
-    collapsing multiple edges into a single edge?
+2.  Did we potentially lose any important or useful information by
+    collapsing multiple edges into a single edge or by removing
+    self-loops?
 
     -   
 
@@ -750,7 +759,7 @@ hist(node_degree, breaks = 30)
 
 We can see that most actors in the network are connected to very few
 individuals while a couple actors in this network are connected to a
-very larger number of alters.
+very larger number of alters, nearly 200 and 350 respectively!
 
 Now let's take a look at the mean and median for `node_degree` using
 some other {base} R functions:
@@ -841,10 +850,18 @@ created above?
 If you recall from our [1a. Review the Research] section, one of the
 defining characteristics of the social network perspective is its use of
 graphic imagery to represent actors and their relations with one
-another. Network visualization can be used for a variety of purposes, as
-illustrated by this excellent figure from Katya Ognyanova's also
-excellent tutorial on [Static and Dynamic Network Visualization with
-R](https://kateto.net/network-visualization/).
+another. To emphasize this point, Carolyn (2013) reported that:
+
+> The visualization of social networks has been a core practice since
+> its foundation more than 90 years ago and remains a hallmark of
+> contemporary social network analysis. 
+
+Network visualization can be used for a variety of purposes, ranging
+from highlighting key actors to even serving as works of art. This
+excellent figure from Katya Ognyanova's also excellent tutorial on
+[Static and Dynamic Network Visualization with
+R](https://kateto.net/network-visualization/) helps illsutrate the
+variety of goals a good network visualization can accomplish:
 
 ![](img/viz-goals.jpeg){width="80%"}
 
@@ -872,27 +889,35 @@ large networks like our MOOC-Ed discussion forums, this doesn't
 communicate much. In fact, it's visualizations like these that give
 sociograms the unflattering nickname of "hair ball" plots.
 
-Fortunately, {igraph} includes a [plethora of plotting
-parameters](https://kateto.net/sunbelt2019#plotting-parameters) for
-improving the layout and visual design of network graphs!
+Fortunately, the {igraph} package includes a [plethora of plotting
+parameters](https://igraph.org/r/doc/plot.common.html) for improving the
+layout and visual design of network graphs! There are many ways to
+modify vertices and edges in sociogram to improve readability. Up to
+four attributes of each actor can be layered onto the sociogram by
+altering the color, shape, label, and size of the symbol. And attributes
+for edges can be represented in a range of ways as well.
 
-#### Remove Labels
+### Remove Labels
 
-One quick fix is to simply remove the labels.
+One quick fix is to simply remove the labels by adding the
+`vertex.label =` argument and setting it to `NA`.
+
+Since the number labels don't provide much useful information, let's go
+ahead and remove them:
 
 ```{r}
 plot(weighted_network,
      vertex.label = NA)
 ```
 
-\
+We can now at least see the nodes, or vertices, but with 445
+participants in the forums, many are masked by the default size of each
+node.
 
-#### Change vertex size
+### Change vertex size
 
-There are many ways to arrange actors in a sociogram, as there are many
-ways to represent actors or their ties. Up to four attributes of each
-actor can be layered onto the sociogram by altering the color, shape,
-label, and size of the symbol.
+By default, the size of nodes is 15. Let's add the `vertex.size =`
+argument and change that to 1:
 
 ```{r}
 plot(weighted_network,
@@ -900,8 +925,9 @@ plot(weighted_network,
      vertex.size = 1)
 ```
 
-\
-degree
+A little better, but let's use the `node_degree` we calculated to
+emphasize those wiht greater connections in the course by substitute
+`node_degree` for a specific value.
 
 ```{r}
 plot(weighted_network,
@@ -909,19 +935,24 @@ plot(weighted_network,
      vertex.size = node_degree)
 ```
 
-\
+Well, this certainly emphasizes the disproportionate number of ties
+among these two participants, but not quite what we're going for.
+
+Since `node_degree` is just a list of values for each node we can treat
+it like a number. Let's divide that by 10 to reduce the relative size:
 
 ```{r}
 plot(weighted_network,
      vertex.label = NA,
-     vertex.size = node_degree*.1)
+     vertex.size = node_degree/10)
 ```
 
-\
+That's better, and helps highlight our two main actors without
+overshadowing the rest, but those arrows are definitely an issue.
 
-#### Reduce arrow size
+### Reduce arrow size
 
-\
+Let's add the `edge.arrow.size =` argument and dramatically reduce:
 
 ```{r}
 plot(weighted_network,
@@ -930,7 +961,13 @@ plot(weighted_network,
      edge.arrow.size = .04)
 ```
 
+Much better, now let's deal with the size of the edges.
+
 #### Adjust Edge Width
+
+We can add the `edge.width =` argument to help minimize edge overlap yet
+still make them visible. This is a bit of trial and error but let's give
+.2 a try since the default is 1:
 
 ```{r}
 plot(weighted_network,
@@ -940,8 +977,10 @@ plot(weighted_network,
      edge.width = .2)
 ```
 
-\
-\
+Note that we could also set `edge.with =` to the weight of each edge,
+similar to how we used degree for the size of each node.
+
+Let's give that a try:
 
 ```{r}
 plot(weighted_network,
@@ -951,7 +990,11 @@ plot(weighted_network,
      edge.width = E(weighted_network)$weight)
 ```
 
-\
+Not much of an improvement, if at all, given how many edges are in our
+network.
+
+Let's try dividing that weight by 5 similar to reduce like with did with
+the `vertex.size =` argument:
 
 ```{r}
 plot(weighted_network,
@@ -961,11 +1004,29 @@ plot(weighted_network,
      edge.width = E(weighted_network)$weight/5)
 ```
 
-\
+Better, but since we know most edges have a weight of 1 there really
+isn't too much to work with here.
+
+We've save the best part for last. Let's move on to changing graph
+layout!
 
 #### Change Layout
 
-\
+One of the major advances in visualization since the first is the
+hand-drawn sociograms developed by Jacob Moreno (1934) to represent
+relations among children in school is the use of software and algorithms
+to automatically layout networks on a grid.
+
+There are may different [layout
+methods](https://en.wikipedia.org/wiki/Graph_drawing#Layout_methods),
+but we'll start with the Fruchterman-Reingold (FR) layout, which is one
+of the most used force-directed layout algorithms for network
+visualization. These types of alogrithms generally work well with large
+networks and try to layout graphs in "an aesthetically-pleasing way" by
+making edges roughly equal length and minimizing overlap.
+
+Let give the FR layout a try by using the `layout =` argument and
+specifying `layout_with_fr`:
 
 ```{r}
 plot(weighted_network,
@@ -976,19 +1037,11 @@ plot(weighted_network,
      layout = layout_with_fr)
 ```
 
-\
+By default, {igraph} uses `layout_nicely`, a smart function that chooses
+a layout based on the graph. Given the similarity with our previous
+graph, I'm assuming it chose the the FR layout as well.
 
-```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .05,
-     edge.width = E(weighted_network)$weight/5,
-     layout = layout_with_kk)
-
-```
-
-\
+Let's try one more just for fun:
 
 ```{r}
 
@@ -1001,13 +1054,30 @@ plot(weighted_network,
 
 ```
 
+There are many other [igraph layout
+functions](https://igraph.org/r/doc/layout_.html), some more useful that
+others given the context. We've only scratched the surface of what's
+possible with network plotting but hopefully this have given you a sense
+of what required to avoid the dreaded "hair ball" plot and create a
+network viz that communicates something useful.
+
 ### **👉 Your Turn** **⤵**
 
-We've only scratched the surface of what's possible with network
-plotting but hopefully this have given you a sense of
+Try modifying to code below by tweaking the included
+arguments/parameters or adding new arguments/parameters to make our plot
+either more "aesthetically pleasing" or more purposeful in what it's
+trying to communicate.
+
+There are no right or wrong answers, just have some fun trying out
+different approaches!
 
 ```{r}
-
+plot(weighted_network,
+     vertex.label = NA,
+     vertex.size = node_degree*.05,
+     edge.arrow.size = .05,
+     edge.width = E(weighted_network)$weight/5,
+     layout = layout_with_fr)
 ```
 
 ### 🧶 Knit & Check ✅
@@ -1082,8 +1152,6 @@ Take look at page 276 of the article, [A social network perspective on
 peer supported learning in MOOCs for
 educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf).
 Were your predictions correct?
-
-\-
 
 \-
 
