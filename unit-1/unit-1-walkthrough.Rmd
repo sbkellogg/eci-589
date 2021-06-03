@@ -31,16 +31,15 @@ Data-Intensive Research Workflow from [Learning Analytics Goes to
 School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134) (Krumm et al.,
 2018):
 
-![Figure 2.2 Steps of Data-Intensive Research
-Workflow](img/workflow.png){width="80%"}
+![](img/workflow.png){width="80%"}
 
 Each walkthrough will focus on a basic analysis guided by the social
-network perspective.
+network perspective. This week, our focus will be on preparing
+relational data for analysis, putting together some basic network
+descriptives, and plotting a network visualization to help illustrate
+key findings.
 
-This week, our focus will be on preparing relational data for analysis,
-looking at some basic network stats, and creating a network
-visualization that helps illustrate key findings. Specifically, the Unit
-1 Walkthrough will cover the following workflow topics:
+Specifically, the Unit 1 Walkthrough will cover the following topics:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
     from which our data came, formulate some research questions, and get
@@ -53,25 +52,22 @@ visualization that helps illustrate key findings. Specifically, the Unit
     "simple graphs."
 
 3.  **Explore**: In section 3, we calculate some basic network
-    descriptives and learn how to summarize the descriptives through a
-    network visualization.
+    descriptives and learn how to summarize the stats with a sociogram.
 
 4.  **Model**: While we won't dig into approaches for modeling network
     data Unit 3, we will take a quick look at some approaches used in
     the study guiding this walkthrough.
 
 5.  **Communicate**: We'll learn more about communicating key findings
-    next week, but for now will learn some basic components of a data
-    product.
+    next week, but for now will be introduced to the basic components of
+    a data product.
 
 ## 1a. Review the Research
 
 Prior to analysis, it's critical to understand the context and data
 sources available so you can formulate useful questions that can be
-feasibly addressed by your data. For this section, we'll focus on the
-following topics:
-
-In [Social Network Analysis and Education: Theory, Methods &
+feasibly addressed by your data. In [Social Network Analysis and
+Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education),
 Carolyn (2013) notes that:
 
@@ -154,11 +150,11 @@ analyses described below exclude more passive forms of interactions
 (i.e., read and reaction logs), and include only postings among peers.
 
 For our Unit 1 walkthrough, we'll take a look at data from the original
-Digital Learning Transition in K-12 Schools (DLT 1) which was not
-included in this study so we can make comparisons in our analysis to the
-DLT 2 course reported in this study. Also, for your independent
-analysis, you may want to consider working with the DLT 2 data to see if
-you can replicate some of the findings from this paper!
+Digital Learning Transition in K-12 Schools (DLT 1) that was not
+included in this study to allow for comparisons to the findings in this
+study. Also, for your independent analysis, you may want to consider
+working with the DLT 2 data to see if you can replicate some of the
+findings from this paper!
 
 ### **👉 Your Turn** **⤵**
 
@@ -210,9 +206,9 @@ network is:
 
 ### **👉 Your Turn** **⤵**
 
-Based on what you know about networks and the context so far, what
-subquestions or more specific research questions might ask we ask that a
-social network perspective might be able to answer?
+Based on what you know about networks and the context so far, what other
+research questions might ask we ask in this context that a social
+network perspective might be able to answer?
 
 In the space below, type a brief response to the following questions:
 
@@ -262,7 +258,7 @@ packages](https://www.tidyverse.org) that this package contains:
 library(tidyverse)
 ```
 
-### 🎉  igraph Package **📦**
+### 🎉 igraph Package **📦**
 
 ![](img/igraph.png){width="30%"}
 
@@ -293,7 +289,7 @@ Write your response in the space below.
 
 \-
 
-### 🧶 Knit and Check ✅
+### 🧶 Knit & Check ✅
 
 Congrats! You made it to the end of data wrangling section and are ready
 to start analysis! Before proceeding further, knit your document and
@@ -542,12 +538,23 @@ network <- graph_from_data_frame(d = ties,
 network
 ```
 
+Carolyn (2013) reminds us that one of the simplest and often ignored
+structural property of a social network is its size and explains that:
+
+> **size** is simply a measure of the number of nodes in the network.
+
+He notes that the size of a network plays an important role in
+determining what happens in the network. For example, in a classroom of
+30 students, it is not hard to imagine that the pattern of who
+communicates with whom will look much different than if the network
+consisted of hundreds or even thousands of students like in a MOOC.
+
 ### **👉 Your Turn** **⤵**
 
 Take a look at the very first line of the output which contains some
 basic information about our network and answer the following questions:
 
-1.  How many actors and ties are in our network? Is this consistent with
+1.  How many notes and edges are in our network? Is this consistent with
     the number of observations in our data frames? **Hint:** Check the
     Environment pane.
 
@@ -663,7 +670,7 @@ weighted_network
 
 ### **👉 Your Turn** **⤵**
 
-### 🧶 Knit and Check ✅
+### 🧶 Knit & Check ✅
 
 Congrats! You made it to the end of data wrangling section and are ready
 to start analysis! Before proceeding further, knit your document and
@@ -673,9 +680,29 @@ check to see if you encounter any errors.
 
 # 3. EXPLORE
 
-## Get Descriptives
+As highlighted in both DSEIUR and Learning Analytics Goes to School,
+calculating summary statistics, data visualization, and feature
+engineering (the process of creating new variables from a dataset) are a
+key part of exploratory data analysis. One goal in this phase is explore
+questions that drove the original analysis and develop new questions and
+hypotheses to test in later stages.
 
-won't spend a ton of time
+In Section 3, we will learn some new functions for retrieving basic
+network descriptives related to our research question and create a
+network visualization to help illustrate key findings. Specifically,
+this section we'll learn to:
+
+a.  **Examine Basic Descriptives**. We focus primarily on actors and
+    edges in this walkthrough, including the edges wights we added in
+    the previous section as well as node degree, and import and fairly
+    intuitive measure of centrality.
+
+b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
+    learning to plot a network and tweak key elements like the size,
+    shape, and position of nodes and edges to better at communicating
+    key findings.
+
+## 3a. Examine Basic Descriptives
 
 ### Edge Weights
 
@@ -688,36 +715,72 @@ hist(edge_weights$n, breaks = 10)
 
 ```
 
+Now that we've looked at the typical frequency of those
+
 ### Node Degree
 
+A key structural property of networks is the concept of centralization.
+A network that is highly centralized is one in which relations are
+focused on a small number of actors or even a single actor in a network,
+whereas ties in a decentralized network are diffuse and spread over a
+number of actors. One of the most common measure of centralization is
+degree
+
+> **Degree** is the number of ties to and from an ego. In a directed
+> network, in-degree is the number of ties received, whereas out-degree
+> is the number of ties sent.
+
+The {igraph} package has an aptly named function `degree()` for
+retrieving degree, in-degree, and out-degree for all actors in a
+network.
+
+Run the following code to extract measures and save to `node_degree`
+which we'll examine in just a bit:
+
 ```{r}
-node_degree <- degree(weighted_network, mode="all")
+node_degree <- degree(weighted_network, mode = "all")
 ```
 
-\
+Note that we set the `mode =` argument in this function to "all" which
+give us the total number of participants that each actor in our network
+with sent or received a reply.
+
+Let's take a look at the distribution of `node_degree` in our network by
+using R's built in `hist()` function for creating histograms. I set the
+value of `breaks =`, or bins in our histogram, to 30 since I already
+know some actors in this network have a very high degree.
 
 ```{r}
 hist(node_degree, breaks = 30)
 ```
+
+We can see that most actors in the network are connected to very few
+individuals while a couple actors in this network are connected to a
+very larger number of alters.
+
+Now let's take a look at the mean and median for `node_degree` using
+some other {base} R functions:
 
 ```{r}
 mean(node_degree)
 median(node_degree)
 ```
 
+We see that the mean suggests the participants are, on average,
+connected to about 8 other participants in the MOOC-Ed, but this is
+likely heavily skewed by the two individuals with a disproportionate
+number of connections. The median is probably a better characterization
+of the typical number of educators a participant has sent or received a
+reply.
+
 #### In-Degree
+
+Let's go ahead and take a look at in-degree next:
 
 ```{r}
 in_degree <- degree(weighted_network, mode="in")
-```
 
-\
-
-```{r}
 hist(in_degree, breaks = 30)
-```
-
-```{r}
 mean(in_degree)
 median(in_degree)
 ```
@@ -738,7 +801,7 @@ In the space below, write your interpretation of these results.
 
 \
 
-## Make a Sociogram
+## 3b. Make a Sociogram
 
 igraph arguments only\
 
@@ -875,7 +938,7 @@ plotting but hopefully this have given you a sense of
 
 ```
 
-### 🧶 Knit and Check ✅
+### 🧶 Knit & Check ✅
 
 Congrats! You made it to the end of the Explore section and are ready to
 learn a little about network modeling! Before proceeding further, knit
@@ -936,18 +999,7 @@ assumed dependency structure, the attributes of the individuals (e.g.,
 gender, popularity, location, previous ties) and prior states of the
 network.
 
-Finally, in [Learning Analytics Goes to
-School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134), the authors
-describe modeling as simply developing a mathematical summary of a
-dataset and note that there are two general types to modeling:
-unsupervised and supervised learning. Clustering algorithms, like REGE
-function used to address Q2, are used to explore the structure of a
-dataset, while supervised models "help to quantify relationships between
-features and a known outcome," similar to the use of actor, relational,
-and network attributes to predict tie formation among educators in a
-discussion forum using ERGM models.
-
-### [**Your Turn**]{style="color: green;"} **⤵**
+### **👉 Your Turn** **⤵**
 
 Recall from the [1a. Review the Research] that you were asked to
 identify two "node attributes" from the dataset that might be useful for
@@ -961,16 +1013,9 @@ Were your predictions correct?
 
 \-
 
-Now that you've become a little familiar with this dataset and the
-social network perspective, what other aspects of this dataset, or a
-dataset you are interested in exploring, might be modeled to better
-understand the structure of this network, and the relationships between
-structures or attributes and learning outcomes of interest for those in
-network?
-
-Use the space below to write a brief response:
-
 \-
+
+------------------------------------------------------------------------
 
 # 5. COMMUNICATE
 
@@ -996,6 +1041,27 @@ what you have learned through analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-In Week 4 of Unit 1 we'll take a look at
+Next week we'll take a look at refining our analysis and ways we might
+communicate and share findings with education stakeholders.
 
-### 🧶 Knit and Check ✅
+### **👉 Your Turn** **⤵**
+
+Now that you've become more familiar with this dataset and the social
+network perspective, what other aspects of this dataset, or a dataset
+you are interested in exploring, could you investigate?
+
+\-
+
+What specific research questions might you ask that would be helpful for
+being understanding and improving learning, or the context in which the
+data is collected?
+
+\-
+
+### 🧶 Knit & Check ✅
+
+Congrats! You've finished the Unit 1 Guided Walkthrough and are ready
+for some independent analysis next week!
+
+To complete this assignment, knit your document and send me an email at
+sbkellog\@ncsu.edu letting me know you're all set.
