@@ -1203,8 +1203,38 @@ what you have learned through analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-Next week we'll take a look at refining our analysis and ways we might
-communicate and share findings with education stakeholders.
+For your Independent Analysis assignment for Unit 1 next week, you'll be
+creating either a simple report or slide deck using an R Markdown
+document just like this to share out some key findings from our
+analysis. Regardless of whether you plan to talk us through your
+analysis and findings with a presentation or walk us through with a
+brief written report, your presentation or report should address the
+following questions:
+
+1.  **Purpose**. What question or questions are guiding your analysis?
+    What did you hope to learn by answering these questions and why
+    should your audience care about your findings?
+
+2.  **Methods**. What data did you selected for analysis? What steps did
+    you take took to prepare your data for analysis and what techniques
+    you used to analyze your data? These should be fairly explicit with
+    your embedded code.
+
+3.  **Findings**. What did you ultimately find? How do your "data
+    products" help to illustrate these findings? What conclusions can
+    you draw from your analysis?
+
+4.  **Discussion**. What were some of the strengths and weaknesses of
+    your analysis? How might your audience use this information? How
+    might you revisit or improve upon this analysis in the future?
+
+#### **Examples and Templates**
+
+You can view an example presentation from ECI 588
+here: [<https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html>](https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html){.uri}
+
+And use my R Markdown presentation file as a template if you
+like: [<https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd>](https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd){.uri}
 
 ### **👉 Your Turn** **⤵**
 
