@@ -1231,10 +1231,10 @@ following questions:
 #### **Examples and Templates**
 
 You can view an example presentation from ECI 588
-here: [<https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html>](https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html){.uri}
+here: [\<https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html\>](https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html){.uri}
 
 And use my R Markdown presentation file as a template if you
-like: [<https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd>](https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd){.uri}
+like: [\<https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd\>](https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd){.uri}
 
 ### **👉 Your Turn** **⤵**
 
