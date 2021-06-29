@@ -29,9 +29,8 @@ Project](https://www.hashtagcommoncore.com), the Common Core was a major
 education policy initiatives of the early 21st century that sought to
 strengthen education systems across the United States through a set of
 specific and challenging education standards. Although these standards
-once enjoyed bipartisan support, we'll see in this walkthrough how these
-standards have become a political punching bag, particularly around the
-math standards introduced.
+once enjoyed bipartisan support, we'll see later in this walkthrough how
+these standards have become a political punching bag.
 
 In addition to investigating tweets around the these controversial state
 standards, our Unit 2 Walkthrough will cover the following topics
@@ -76,7 +75,7 @@ that Carolyn (2013) cited the following four features used by Freeman
     succinctly represent the complexity of social life.
 
 The [\#COMMONCORE Project](https://www.hashtagcommoncore.com) that we'll
-briefly examine next is an exemplary illustration of these four defining
+examine next is an exemplary illustration of these four defining
 features of the social network perspective.
 
 ### The \#commoncore Project
@@ -106,14 +105,14 @@ The central question guiding this investigation was:
 
 The [methods
 page](https://www.hashtagcommoncore.com/project/methodology) of the
-\#COMMONCORE Project provides a detailed discussion of the methods used
-to arrive at the conclusions in *\#commoncore: How social media is
-changing the politics of education*. Provided below is a summary of how
-authors retrieved the Twitter data and the analyses for each of the five
-acts in the website. I highly encourage you to take a look at this
-section if you'd like to learn more about their approach and in
-particular if you're unfamiliar with how users can interact and
-communicate on Twitter.
+\#COMMONCORE Project provides a detailed discussion of the data and
+analyses used to arrive at the conclusions in *\#commoncore: How social
+media is changing the politics of education*. Provided below is a
+summary of how authors retrieved data from Twitter and the analyses
+applied for each of the five acts in the website. I highly encourage you
+to take a look at this section if you'd like to learn more about their
+approach and in particular if you're unfamiliar with how users can
+interact and communicate on Twitter.
 
 #### Data Collection
 
@@ -143,10 +142,14 @@ depicts the relations as networks and provides metrics for describing
 features of the network.
 
 In addition to data visualization and network descriptives, the authors
-ran a community detection algorithm to identify and represent structural
-sub-communities, or factions (a "faction" in this sense is a group with
-more ties within than across group even those group boundaries are
-somewhat porous).
+examined group development and lexical tendencies among users. For the
+former, they used a community detection algorithm to identify and
+represent structural sub-communities, or factions (a "faction" in this
+sense is a group with more ties within than across group even those
+group boundaries are somewhat porous). For the latter, the authors used
+the Linguistic Inquiry and Word Count (LIWC) lexicons to determine
+psychological drive, monitor moods, diagnose their level of conviction,
+and make inferences about thinking styles.
 
 For a nice summary of the data used for the analysis, as well as the
 samples of actors and tweets, the keywords, and the methods that were
@@ -204,18 +207,18 @@ by this study including some quick attempts at applying community
 detection algorithms and automated text analysis using a few new
 packages in R.
 
-Some of the techniques and approaches used in this study, however, you
-are likely already familiar with high. For example, take a quick look at
-the [*Explore the Networks*](https://www.hashtagcommoncore.com/#2-1)
+You are likely already familiar with some of the techniques and
+approaches used in this study, however. For example, take a quick look
+at the [*Explore the Networks*](https://www.hashtagcommoncore.com/#2-1)
 section from Act 2: Central Actors and the Transmitters, Transceivers
 and Transcenders identified by their analysis.
 
 In the space below, type a brief response to the following questions:
 
 1.  What network measures introduced in Unit 1 do think were used to
-    identify these three types of central actors?
+    identify these three types of "central actors"?
 
-    -   
+    -   YOUR RESPONSE HERE
 
 Now check your response by looking at the [methods
 page](https://www.hashtagcommoncore.com/project/methodology) of the
@@ -223,7 +226,7 @@ page](https://www.hashtagcommoncore.com/project/methodology) of the
 
 1.  Were you correct?
 
-    -   
+    -   YOUR RESPONSE HERE
 
 ## 1b. Identify a Question(s)
 
@@ -261,7 +264,7 @@ In the space below, type a brief response to the following questions:
 As highlighted in [Chapter 6 of Data Science in Education Using
 R](https://datascienceineducation.com/c06.html) (DSIEUR), one of the
 first steps of every workflow should be to set up your "Project" within
-RStudio. Recall that...
+RStudio. Recall that:
 
 > A **Project** is the home for all of the files, images, reports, and
 > code that are used in any given project
@@ -280,12 +283,11 @@ Cloud by looking at the the Files, Plots, & Packages Pane in the lower
 right hand corner.
 
 Let's go ahead and load the packages from Unit 1 since we'll be using
-them again:
+them again very soon:
 
 ```{r}
 library(tidyverse)
 library(igraph)
-library(tidytext)
 ```
 
 #### rtweet 📦
@@ -323,9 +325,10 @@ still interested in creating one, [these
 instructions](https://moodle-courses2122.wolfware.ncsu.edu/mod/forum/view.php?id=119499)
 outline the process and you can set one up in about 10 minutes.
 
-If you are not interested in setting an account of your own, I can
-provide you with temporary keys and tokens to download data from Twitter
-and have also provided data for this walkthrough in the data folder.
+If you are not interested in setting an account of your own, I have
+provided you with temporary keys and tokens to download data from
+Twitter and have also provided data for this walkthrough in the data
+folder.
 
 ### **What is an API?**
 
@@ -343,14 +346,13 @@ products and services:
 As Duke University's Chris Bail notes, "APIs have become one of the most
 important ways to access and transfer data online--- and increasingly
 APIs can even analyze your data as well." Compared to screen-scraping
-data from web pages, which explore in Module 2 later this year, APIs are
-considerably easier to work with than the HTML or XML data, ensure that
-data is collected legally, and with R packages like `rtweet`, are
-logistically easier to work with, as we'll see at the workshop this
-summer.
+data from web pages, APIs are considerably easier to work with than the
+HTML or XML data, ensure that data is collected legally, and with R
+packages like `rtweet`, are logistically easier to work with, as we'll
+soon see.
 
 For a more in-depth explanation of APIs, how they work, and a preview of
-some of the `rtweet` functions we'll be using this summer, we highly
+some of the `rtweet` functions we'll be using this summer, I highly
 recommend reading through Chris Bail's [Application Programming
 Interfaces in
 R](https://sicss.io/2020/materials/day2-digital-trace-data/apis/rmarkdown/Application_Programming_interfaces.html) tutorial.
@@ -397,7 +399,8 @@ token <- create_token(
 
 **Note**: these keys are named secret for a reason. We store these up in
 a separate R script file rather than in a R Markdown file that you will
-eventually share.
+eventually share. If you do not have your own keys, temporary keys have
+been provided for you in the `twitter-auth.r` file in your Files pane.
 
 #### Check Authorization
 
@@ -405,7 +408,7 @@ The `create_token()` function should automatically save your token as an
 environment variable. So next time you start an R session -- on the same
 machine -- rtweet should 🤞 automatically find your token.
 
-10. To make sure it works, you can run the following code and check to
+5.  To make sure it works, you can run the following code and check to
     make sure the app name and `api_key` match those on your dev
     account.
 
@@ -479,7 +482,7 @@ function expects is the search term included in quotation marks and that
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk below to wiew your new `ccss_tweets` data frame using
+Use the code chunk below to view your new `ccss_tweets` data frame using
 one of the [various view
 methods](https://cmdlinetips.com/2020/06/get-a-peek-at-dataframe-in-r/)
 for looking at your data in R:
@@ -569,8 +572,8 @@ our data frame.
 
 Let's take a quick count of the number of tweets in each language of our
 data frame by sending our `ccss_tweets_2` data frame to the `count()`
-function using the `%>%` operator and specifying the `lang` as the
-column whose values we want to count and sorting from high to low:
+function using the `%>%` operator, specifying `lang` as the column whose
+values we want to count and sorting from high to low:
 
 ```{r}
 ccss_tweets_2 %>%
@@ -580,8 +583,8 @@ ccss_tweets_2 %>%
 Surprisingly, the majority of these tweets are in Spanish. For the
 purpose of both limiting the size of our network for this analysis and
 also because we are interested in doing some quick sentiment analysis
-towards the end of our analysis, let's limit our tweets to just those in
-the English language.
+towards the end of our walkthrough, let's limit our tweets to just those
+in the English language.
 
 To download only English tweets, we will need include the `lang =`
 argument and set it to "en":
@@ -748,7 +751,7 @@ reply column.
 
 #### Create Edgelist
 
-Recall from Unit 1 that the first two columns in an edglist should
+Recall from Unit 1 that the first two columns in an edgelist should
 include the nodes that make up a tie or dyad. Since the only two columns
 we need to construct our edgelist is the `screen_name` of the tweet
 author and the screen names of those included in the mentions, let's
@@ -877,7 +880,7 @@ packages. In this walkthrough we won't recreate all the processes like
 simplifying graphs and adding edge weights, but will demonstrate some
 features similar and in addition to those found in the {igraph} package.
 
-### tidygraph  📦 
+### tidygraph 📦
 
 ![](img/tidygraph.png){width="20%"}
 
@@ -1102,7 +1105,7 @@ degrees, are usually placed in the center of the sociogram and their
 ties are placed near them. In this section, we'll briefly introduce the
 {ggraph} package for creating attractive network
 
-### ggraph  📦 
+### ggraph 📦
 
 ![](img/ggraph.png){width="20%"}
 
