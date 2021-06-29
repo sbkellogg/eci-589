@@ -39,25 +39,23 @@ pertaining to each data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
     from which our data came, formulate some research questions, and get
-    introduced the {igraph} R package for network analysis.
+    introduced the {rtweet} R package for using the Twitter API.
 
 2.  **Wrangle**: Wrangling data entails the work of manipulating,
-    cleaning, transforming, and merging data. In section 2 we focus on
-    importing network data, converting our familiar data frames into a
-    network object that can be analyzed and graphed, and learn about
-    "simple graphs."
+    cleaning, transforming, and merging data. In section 2 we will learn
+    about the {tidygraph} package for creating network objects.
 
-3.  **Explore**: In section 3, we calculate some basic network
-    descriptives and learn how to illustrate some of these stats through
+3.  **Explore**: In section 3, we use the {tidygraph} package and the
+    companion {ggraph} package to calculate a range of centrality
+    measures and learn how to illustrate some of these stats through
     network visualization.
 
-4.  **Model**: While we won't dig into approaches for modeling network
-    data until Unit 3, we will take a quick look at some approaches used
-    in the study guiding this walkthrough.
+4.  **Model**: We wrap up our analysis in Section 4 by introducing
+    community detection and sentiment analysis algorithms for
+    identifying groups and gauging sentiment about the common core.
 
-5.  **Communicate**: We'll learn more about communicating key findings
-    next week, but for now you will be introduced to the basic
-    components of a data product.
+5.  **Communicate**: We briefly reflect on our walkthrough in
+    preparation for our independent analysis next week.
 
 ## 1a. Review the Research
 
@@ -236,9 +234,17 @@ Project was:
 > American politics that produces and sustains social policy?
 
 For Unit 2, we are going to focus our questions on something a bit less
-ambitious:
+ambitious but inspired by this work:
 
-1.  Who are the?
+1.  Who are the transmitters, transceivers, and transcenders in our
+    Common Core Twitter network?
+2.  What subgroups, or factions, exist in our network?
+3.  Which actors in our network tend to be more opposed to the Common
+    Core?
+
+To address the latter question, we'll introduce a common text mining
+technique in the Model section for gauging sentiment of social media
+posts.
 
 ### **👉 Your Turn** **⤵**
 
@@ -248,11 +254,7 @@ network perspective might be able to answer?
 
 In the space below, type a brief response to the following questions:
 
-\-
-
-We'll revisit your response towards the end and provide an opportunity
-to refine your research question after you know the data a little
-better.
+-   YOUR RESPONSE HERE
 
 ## **1c. Set Up Project**
 
@@ -283,16 +285,17 @@ them again:
 ```{r}
 library(tidyverse)
 library(igraph)
+library(tidytext)
 ```
 
 #### rtweet 📦
 
-![](img/rtweet.jpeg){width="21%"}
+![](img/rtweet.png){width="20%"}
 
 Similar to approach used by @supovitz2017commoncore for downloading data
 in directly from Twitter's Application Programming Interface (API), we
-will be using {rtweet} package to search for and download tweets based
-on specified keywords.
+will be using {[rtweet](https://docs.ropensci.org/rtweet/)} package to
+search for and download tweets based on specified keywords.
 
 The `rtweet` package provides users a range of functions designed to
 extract data from Twitter's REST and streaming APIs and has three main
@@ -532,7 +535,7 @@ these three terms. And since we've included additional search terms
 let's also increase the number of requested tweets to 5,000.
 
 ```{r}
-ccss_tweets_2 <- search_tweets(q = "commoncore OR stopcommoncore OR ccss",
+ccss_tweets_2 <- search_tweets(q = "#commoncore OR #stopcommoncore OR #ccss",
                                n=5000)
 ```
 
@@ -584,7 +587,7 @@ To download only English tweets, we will need include the `lang =`
 argument and set it to "en":
 
 ```{r}
-ccss_tweets_3 <- search_tweets(q = "commoncore OR stopcommoncore OR ccss",
+ccss_tweets_3 <- search_tweets(q = "#commoncore OR #stopcommoncore OR #ccss",
                                n=5000,
                                lang = "en")
 ```
@@ -594,7 +597,7 @@ ccss_tweets_3 <- search_tweets(q = "commoncore OR stopcommoncore OR ccss",
 Finally, let's save our tweet files to use in later exercises since
 tweets have a tendency to change every minute.
 
-```{r}
+```{r, eval=FALSE}
 write_csv(ccss_tweets_3, "data/ccss-tweets.csv")
 ```
 
@@ -617,15 +620,24 @@ named `flatten()` function from the {rtweets} package:
 ccss_tweets_4 <- rtweet::flatten(ccss_tweets_3)
 ```
 
-Now use let's use the `read_csv()` function to save our
+Note that we included the package name followed by a double colon
+`rtweet::` when calling our function to avoid confusion with other
+functions using the same name.
+
+Now we can use the `read_csv()` function to save our data frame to our
+folder.
 
 ```{r}
 write_csv(ccss_tweets_4, "data/ccss-tweets.csv")
 ```
 
+Check your data folder to make sure this file has been save. You will
+also see a `ccss-tweets-5.csv` file which I have save earlier and which
+we will use in the next section to ensure we all have the same results.
+
 ### **👉 Your Turn** **⤵**
 
-Use the `search_tweets` function to create you own custom query for a
+Use the `search_tweets` function to create your own custom query for a
 twitter hashtag or topic(s) of interest and save as a .csv file in the
 data folder.
 
@@ -692,351 +704,232 @@ the `rtweet` vignette:
 #YOUR CODE HERE
 ```
 
-### 2b. Create Edgelist from Tweets
-
-From this point foward,
+## 2b. Create Edgelist from Tweets
 
 Recall from Unit 1 that an edge-list that contains information about
 each tie, or relation between two actors in a network. In our previous
 walkthrough, a "tie" is a reply by one participant in the discussion
 forum to the post of another participant -- or in some cases to their
 own post. For our analysis of tweets, we'll use the same approach used
-by @supovitz2017commoncore. Specifically,
+by @supovitz2017commoncore. Specifically, each node is an individual
+Twitter user (person, group, institution, etc.) and the connection
+between each node is the tweet, retweet, or mention/reply.
 
-The edge-list format is slightly different than other formats you have
-likely worked with before in that the values in the first two columns
-each row represent a dyad, or tie between two nodes in a network. An
-edge-list can also contain other information regarding the strength,
-duration, or frequency of the relationship, sometime called "weight", in
-addition to other "edge attributes."
+### Import Saved Tweets
 
-In addition to our `Sender` and `Reciever` dyad pairs, our DLT 1 dataset
-contains the following edge attributes:
-
--   `Sender` = Unique identifier of author of comment
-
--   `Receiver` = Unique identifier of identified recipient of comment
-
--   `Timestamp` = Time post or reply was posted
-
--   `Parent` = Primary category or topic of thread
-
--   `Category` = Subcategory or subtopic of thread
-
--   `Thread_id` = Unique identifier of a thread
-
--   `Comment_id` = Unique identifier of a comment\\
-
-Let's use the `read_csv()` function from the {readr} package introduced
-in the Getting Started walkthrough to read in our edge-list and print
-the new `ties` data frame:
+Before we proceed, let's first use the `read_csv()` function from the
+{readr} package introduced in the Getting Started walkthrough to read
+the `ccss-tweets-5.csv` file saved in or data folder so we are all
+working with the same data:
 
 ```{r}
-ties <- read_csv("data/dlt1-edgelist.csv", 
-                 col_types = cols(Sender = col_character(), 
-                                  Receiver = col_character(), 
-                                  `Category Text` = col_skip(), 
-                                  `Comment ID` = col_character(), 
-                                  `Discussion ID` = col_character()))
-
-ties
+ccss_tweets_5 <- read_csv("data/ccss-tweets-5.csv")
 ```
-
-Note the addition of the `col_types =` argument for changing the column
-types to character strings since the numbers for those particular
-columns indicate actors (`Sender` and `Reciever`) and attributes
-(`Comment_ID` and `Discussion_Id`). We also skipped the `Category Text`
-since this was left blank for deidentification purposes.
-
-**RStudio Tip:** Importing data and dealing with data types can be a bit
-tricky, especially for beginners. Fortunately, RStudio has an "Import
-Dataset" feature in the Environment Pane that can help you use the
-{readr} package and associated functions to greatly facilitate this
-process.
-
-![](img/import-data.png)
 
 ### **👉 Your Turn** **⤵**
 
-Consider the example pictured below of a discussion thread from the
-Planning for the Digital Learning Transition in K-12 Schools (DLT 1)
-where our data orginated. This thread was initiated by participant I, so
-the comments by J and N are considered to be directed at I. The comment
-of B, however, is a direct response to the comment by N as signaled by
-the use of the quote-feature as well as the explicit mentioning of N's
-name within B's comment.
+As highlighted in @estrellado2020e, cleaning and tidying network data
+can be even more challenging than for other data sources, network data
+often includes variables about both individuals and their relationships.
+This is especially true of our data downloaded using the Twitter API.
 
-![](img/discussion-thread.png)
+Take a look at the data we just imported using one of your favorite
+methods for inspecting data and in the space below, identify the columns
+you think could be used to construct an edge list.
 
-Now answer the following questions as they relate to the DLT 1 edge-list
-we just read into R.
+-   YOUR RESPONSE HERE
 
-1.  Which actors in this thread are the `Sender` and the `Reciever`?
-    Which actor is both?
+### Extract Edges and Nodes
 
-    -   
+If one of the columns you indicated in your response above included
+`screen_name` nice work! You may also have noticed that the
+`mentions_screen_name` column also includes the names of those in the
+reply column.
 
-2.  How many dyads are in this thread? Which pairs of actors are dyads?
+#### Create Edgelist
 
-    -   
+Recall from Unit 1 that the first two columns in an edglist should
+include the nodes that make up a tie or dyad. Since the only two columns
+we need to construct our edgelist is the `screen_name` of the tweet
+author and the screen names of those included in the mentions, let's
+`relocate()` and rename those columns and then `select()` those columns
+along with any attributes that we think might be useful for analysis
+later on, like the timestamp or content of the tweet, i.e. `text`.
 
-**Sidebar:** Unfortunately, these types of nuances in discussion forum
-data as illustrated by this simple example are rarely captured through
-automated approaches to constructing networks. Fortunately, the dataset
-you are working with was carefully reviewed to try and capture more
-accurately the intended recipients of each reply.
+```{r}
+ties_1 <-  ccss_tweets_5 %>%
+  relocate(sender = screen_name, # rename scree_name to sender
+           target = mentions_screen_name) %>% # rename to receiver
+  select(sender,
+         target,
+         created_at,
+         text)
+```
+
+Our edgelist with attributes is almost ready, but we have a couple
+issues we still need to deal with.
+
+As you may have noticed, our receiver column contains the names of
+multiple Twitter users, but a dyad or tie can only be between two actors
+or nodes.
+
+#### "Unnest" User Names
+
+Those of you that were in the text mining course
+
+```{r}
+ties_2 <- ties_1 %>%
+  unnest_tokens(input = target,
+                output = receiver,
+                to_lower = FALSE) %>%
+  relocate(sender, receiver)
+```
+
+There is A LOT to unpack with this function. First notice
+that `unnest_tokens` expects a data frame as the first argument, which
+we supplied using teh %\>% operator, followed by two column names. The
+first is an input column that the text comes from, `target` in this
+case, which we want to "unnest" into separate rows. Also notice:
+
+-   Other columns, such as `sender` and `text`, are retained.
+
+-   By default, words are changed to lowercase, which makes them easier
+    to compare or combine with other datasets. However, we can set
+    the `to_lower = FALSE` argument to turn off this behavior since
+    capitalization is important for our user names.
+
+Finally, we'll introduce the `drop_na()` function to remove the rows
+with missing values from our `receiver` column since they are incomplete
+dyads. We'll include these actors in our network later as part of our
+nodelist in just a bit.
+
+Let's drop our missing values and save as `ties` for our final data
+frame
+
+```{r}
+ties <- ties_2 %>%
+  drop_na(receiver)
+```
+
+### **👉 Your Turn** **⤵**
+
+Take a quick look at our final edgelist and answer the following
+question:
+
+How many edges our in our CCSS network?
+
+-   YOUR RESPONSE HERE
+
+Using the tweets you downloaded with your own custom query from above,
+create an edgelist with any desired edge attributes.
+
+```{r}
+# YOUR CODE HERE
+```
 
 ### Node Attributes
 
-The second file we'll be using contains all the nodes or actors (i.e.,
-participants who posted to the discussion forum) as well as some of
-their attributes such as gender and years of experience in education.
-
-Carolyn (2013) notes that most social network analyses include variables
-that describe attributes of actors, ones that are either categorical
-(e.g., sex, race, etc.) or continuous in nature (e.g., test scores,
-number of times absent, etc.). These attributes that can be incorporated
-into a network graph or model, making it more informative and can aid in
-testing or generating hypotheses.
-
-These attribute variables are typically included in a rectangular array,
-or dataframe, that mimics the actor-by-attribute that is the dominant
-convention in social science, i.e. rows represent cases, columns
-represent variables, and cells consist of values on those variables.
-
-As an aside, Carolyn also refers to this historical preference by
-researchers for "actor-by-attribute" data, in the absence of relational
-data in which the actor has been removed their social context, as the
-"sociological meatgrinder" in action. Specifically, this historical
-approach assumes that the actor does not interact with anyone else in
-the study and that outcomes are solely dependent of the characteristics
-of the individual.
+The second file we need to create is a data frame that contains all the
+nodes or actors in our network.
 
 Regardless, let's read in our node attribute file and take a look at the
 `actors` and their attributes included in our dataset:
 
 ```{r}
-actors <- read_csv("data/dlt1-nodes.csv", 
-                   col_types = cols(UID = col_character(), 
-                                    Facilitator = col_character(), 
-                                    expert = col_character(), 
-                                    connect = col_character()))
+actors_1 <- ties_2 %>%
+  pivot_longer(cols = sender:receiver, 
+               names_to = "nodes",
+               values_to = "screen_name")
+```
+
+Since
+
+```{r}
+actors <- actors_1 %>%
+  select(screen_name) %>%
+  distinct() %>%
+  drop_na()
 ```
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk below and a function of your choosing to take a look
-at the `actors` data frame:
+Take a quick look at our final `actors` data frame and answer the
+following question:
+
+How many nodes our in our CCSS network?
+
+-   YOUR RESPONSE HERE
+
+Using the tweets you downloaded with your own custom query from above,
+create an nodelist containing all the unique actors in your network.
 
 ```{r}
-
+# YOUR CODE HERE
 ```
 
-Match up the attributes included in the node file with the following
-codebook descriptors. The first one has been done as an example.
+## 2c. Create Network Object
 
--   `Facilitator` = Identification of course facilitator (1 **=**
-    instructor)
--   Dummy variable for whether participants listed
-    networking/collaboration with others as one of their course goals on
-    the registration form
--   Identifier of "expert panelists" invited to course to share
-    experience through recorded Q&A
--   Identification of course facilitator (1 **=** instructor)
--   Professional role (eg, teacher, librarian, administrator)
--   Years of experience as an educator
--   Works with elementary, middle, and/or high school students
--   Initial assignment of discussion group
+In Unit 1 we learned about the {igraph} package for preparing network
+objects for analysis. In this section we introduce a new package that
+builds upon the "the well-oiled machinery of igraph" but allows us to
+use some of the familiar functions and syntax from other {tidyverse}
+packages. In this walkthrough we won't recreate all the processes like
+simplifying graphs and adding edge weights, but will demonstrate some
+features similar and in addition to those found in the {igraph} package.
 
-## 2b. Create Network Object
+### tidygraph  📦 
 
-Before we can begin using many of the functions from the {igraph}
-package for summarizing and visualizing our DLT 1 network, we first need
-to convert the data frames that we imported into an igraph network
-object, or an igraph graph. 🤷‍♂
+![](img/tidygraph.png){width="20%"}
 
-### Convert to igraph Graph
+The {[tidygraph](https://tidygraph.data-imaginist.com)} package is a
+huge package that exports 280 different functions and methods. It more
+or less wraps the full functionality of `igraph` in a tidy API giving
+you access to almost all of the `dplyr` verbs plus a few more, developed
+for use with relational data. While network data itself is not tidy, it
+can be envisioned as two tidy tables, one for node data and one for edge
+data. The {tidygraph} package provides a way to switch between the two
+tables and `dplyr` verbs to manipulate them. Furthermore it provides
+access to a lot of graph algorithms with return values that facilitate
+their use in a tidy workflow.
 
-To do that, we will use the `graph_from_data_frame()` function. Note
-that I included the `eval=FALSE` argument in the code block below to
-prevent this code from running when we knit our final document.
-Otherwise it will produce an error since we can't include help
-documentation in our knitted HTML file.
-
-Run the following code to take a look at the help documentation for this
-function:
-
-```{r, eval=FALSE}
-?graph_from_data_frame
-```
-
-You probably saw that this particular function takes the following three
-arguments, two of which are data frames:
-
--   **d** describes the edges of the network. The first two columns are
-    the IDs of the source and the target node for each edge, in our case
-    the `Sender` and `Reviever` of a discussion post -- the order
-    matters! The following columns are edge attributes such as weight,
-    type, label, or anything else.
-
--   **vertices** starts with a column of node IDs and any following
-    columns are interpreted as node attributes.
-
--   **directed** determines whether or not to create a directed graph.
-
-Run the following code to specify our `ties` data frame as the edges of
-our network, our `actors` data frame for the vertices of our network and
-their attributes, and indicate that this is indeed a directed network.
+Let's go ahead and load the {tidygraph} library:
 
 ```{r}
-network <- graph_from_data_frame(d = ties, 
-                                 vertices = actors, 
-                                 directed = T) 
+library(tidygraph)
+```
+
+### Combine Edges & Nodes
+
+Before we can begin using many of the functions from the {tidygraph}
+package for preparing and summarizing our Twitter network, we first need
+to convert the data frames that we imported into a network object,
+similar to what we did in Unit 1.
+
+To do that, we will use the `tbl_graph()` function and include the
+following arguments:
+
+-   `edges =` expects a data frame, in our case `ties`, containing
+    information about the edges in the graph. The nodes of each edge
+    must either be in a `to` and `from` column, or in the two first
+    columns like the data frame we provided.
+
+-   `nodes =` expects a data frame, in our case `actors`, containing
+    information about the nodes in the graph. If `to` and/or `from` are
+    characters or names, like in our data frames, then they will be
+    matched to the column named according to `node_key` in nodes, if it
+    exists, or matched to the first column in the node list.
+
+-   `directed =` specifies whether the constructed graph be directed and
+    defaults to `TRUE` so we did not included it since our network is
+    directed.
+
+Let's go ahead and create our network graph and name it `network`
+
+```{r}
+network <- tbl_graph(edges = ties, 
+                     nodes = actors)
 
 network
-```
-
-Carolyn (2013) reminds us that one of the simplest and often ignored
-structural property of a social network is its size and explains that:
-
-> **size** is simply a measure of the number of nodes in the network.
-
-He notes that the size of a network plays an important role in
-determining what happens in the network. For example, in a classroom of
-30 students, it is not hard to imagine that the pattern of who
-communicates with whom will look much different than if the network
-consisted of hundreds or even thousands of students like in a MOOC.
-
-### **👉 Your Turn** **⤵**
-
-Take a look at the very first line of the output which contains some
-basic information about our network and answer the following questions:
-
-1.  How many nodes and edges are in our network? Is this consistent with
-    the number of observations in our data frames? **Hint:** Check the
-    Environment pane.
-
-    -   
-
-2.  The "D" and the "N" indicate that this is a **D**irected network and
-    has the **N**ame vertex attributes set. Why do the two spaces that
-    follow these letters have dashes? **Hint:** check the help files.
-
-    -   
-
-3.  Which vertex attribute did igraph interpret as numeric?
-
-    -   
-
-### Simplify Graph
-
-As you saw from the `network` output, our dataset has 2529 edges or ties
-and just a quick scan of the edges in the network shows that edges like
-356 -\> 444 occur at least more than once. So we know that participant
-356 has replied to participant 444 at least twice.
-
-Fortunately, the {igraph} package has a `simplify()` function for
-collapsing multiple edges so they are not represented more than once
-when we want visually depict our network with a sociogram.
-
-Let's use that function to simplify our network and save it as a
-`simple_network,` or a simple graph, which contains no self-loops or
-duplicate edges and which by default the `simplify()` function removes:
-
-```{r}
-simple_network <- simplify(network, remove.loops = TRUE) 
-
-simple_network
-```
-
-Note that `simplify()` removes self-loops by default, this does not
-really need to be included. If you wanted to keep them, you would simply
-set this to `FALSE`.
-
-### **👉 Your Turn** **⤵**
-
-Take a look at the output for our simple graph now and answer the
-following questions:
-
-1.  How many unique edges are in the network? Why do you think this is
-    considerably less than our total edges?
-
-    -   
-
-2.  Did we potentially lose any important or useful information by
-    collapsing multiple edges into a single edge or by removing
-    self-loops?
-
-    -   
-
-### Add Edge Weights
-
-We noted earlier that edges can also contain attributes such as
-strength, duration or frequency, sometime called "weight." These weights
-can not only help us better understand the relationship between two
-actors, but also aid in visualization and modeling later on.
-
-When we used the `simplify()` function earlier, it collapsed our
-duplicate edges but we lost some vital information as a result, namely
-the frequency of replies among pairs of educators in our discussion
-forum.
-
-Fortunately, the `simplify()` function contains an argument that will
-allow us to count the number of ties between two actors, similar to how
-we might use the `count()` function in the {dplyr} package like so:
-
-```{r}
-edge_weights <- count(ties, Sender, Receiver)
-
-edge_weights
-```
-
-In this case, we see that participant 1 replied to participant 144 twice
-throughout the course.
-
-To add weights to our simplified network, we first need to add a
-`weight` variable to the edges in our original `network` igraph object.
-
-The {igraph} package has a unique syntax for working with attributes of
-network objects. To add a weight attribute to the `E()` edges in our
-`network` we'll use the `$` operator which can be used to create a new
-`weight` variable -- or select a variable as we'll see later on -- and
-we'll use the `<-` assignment operator to add an initial value of `1`
-for the weight of each edge.
-
-Let's put that all together and run the code to add a weight of 1 to
-each edge in our network
-
-```{r}
-E(network)$weight <- 1  
-```
-
-Now let's take a look at our igraph network object again:
-
-```{r}
-network
-```
-
-We can see that our network is now weighted as indicated by the "W" and
-that our new `weight` attribute has been added.
-
-We can now use the `edge.attr.comb =` argument to "sum" the weights for
-each occurrence of a pair of actors, so if 1 replied to participant 144
-five times over the course of the MOOC-Ed, there would be a weight of 5
-for that pair.
-
-Run the code to simplify our weighted network:
-
-```{r}
-weighted_network <- simplify(network,
-                             edge.attr.comb = list(weight="sum")
-                             )
-```
-
-Let's take a look at the output and ignore the error message for now:
-
-```{r, eval=FALSE}
-weighted_network
 ```
 
 ### **👉 Your Turn** **⤵**
@@ -1044,11 +937,16 @@ weighted_network
 Take a look at the output for our simple graph now and answer the
 following questions:
 
-1.  How does the number of total edges and unique edges this compare to
-    the totals reported for the DLT 2 course in our [guiding
-    study](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf)?
+1.  Are the numbers and names of nodes and actors consistent with our
+    `actors` and `ties` data frames? What about the integers included in
+    the `from` and `to` columns of the Edge Data?
 
-    -   
+    -   YOUR RESPONSE HERE
+
+2.  What do you think "components" refers to? **Hint:** see Chapter 6 of
+    [@carolan2014].
+
+    -   YOUR RESPONSE HERE
 
 ### 🧶 Knit & Check ✅
 
@@ -1060,16 +958,16 @@ check to see if you encounter any errors.
 
 # 3. EXPLORE
 
-As noted in the Getting Started Walkthrough, exploratory data analysis
-involves the processes of describing your data (such as by calculating
-the means and standard deviations of numeric variables, or counting the
-frequency of categorical variables) and, often, visualizing your data
-prior to modeling.
+As noted in the Getting Started Walkthrough and experienced in Unit 1,
+exploratory data analysis involves the processes of describing your data
+(such as by calculating the means and standard deviations of numeric
+variables, or counting the frequency of categorical variables) and,
+often, visualizing your data prior to modeling.
 
-In Section 3, we will learn some new functions for retrieving basic
-network descriptives related to our research question and create a
-network visualization to help illustrate key findings. Specifically, in
-this section we'll learn to:
+In Section 3, we use the {tidygraph} package for retrieving network
+descriptives and introduce the {ggraph} package to create a network
+visualization to help illustrate these metrics. Specifically, in this
+section we'll learn to:
 
 a.  **Examine Basic Descriptives**. We focus primarily on actors and
     edges in this walkthrough, including the edges wights we added in
@@ -1083,376 +981,301 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
 
 ## 3a. Examine Basic Descriptives
 
-Many analyses of social networks are primarily descriptive. As Carolyn
-(2013) notes that these descriptive studies aim either to represent the
-network's underlying social structure through data-reduction techniques
-or to characterize network properties through network measures.
+As we noted in Unit 1, many analyses of social networks are primarily
+descriptive and aim to either represent the network's underlying social
+structure through data-reduction techniques or to characterize network
+properties through network measures.
 
-### Node Degree
+### Centrality
 
-A key structural property of networks is the concept of centralization.
-A network that is highly centralized is one in which relations are
-focused on a small number of actors or even a single actor in a network,
-whereas ties in a decentralized network are diffuse and spread over a
-number of actors. One of the most common descriptives reported in
-network studies and a primary measure of centralization is **degree**.
+#### Node Degree
 
-> Degree is the number of ties to and from an ego. In a directed
+Recall from Unit 1 that:
+
+> **Degree** is the number of ties to and from an ego. In a directed
 > network, in-degree is the number of ties received, whereas out-degree
 > is the number of ties sent.
 
-The {igraph} package has an aptly named function `degree()` for
-retrieving degree, in-degree, and out-degree for all actors in a
-network.
+The {tidygraph} package has an unique function called `activate()` that
+allows us to treat the nodes in our network object as if they were a
+standard data frame that we can then apply standard tidyverse functions
+to like `select()`, `filter()`, and `mutate()`.
 
-Run the following code to extract measures and save to `node_degree`
-which we'll examine in just a bit:
+The latter function, `mutate()`, we can use to create new variables for
+nodes such as measures of degree, in-degree, and out-degree using the
+`centrality_degree()` function in the {tidygraph} package.
 
-```{r}
-node_degree <- degree(weighted_network, mode = "all")
-```
-
-**Note**. We set the `mode =` argument in this function to "all" which
-give us the total number of participants that each actor in our network
-with sent or received a reply.
-
-Let's take a look at the distribution of `node_degree` in our network by
-using R's built in `hist()` function for creating histograms. I set the
-value of `breaks =`, or bins in our histogram, to 30 since I already
-know some actors in this network have a very high degree.
+Run the following code to add degree measures to each of our nodes and
+print the output:
 
 ```{r}
-hist(node_degree, breaks = 30)
+network_1 <- network %>%
+  activate(nodes) %>%
+  mutate(degree = centrality_degree(mode = "all")) %>%
+  mutate(in_degree = centrality_degree(mode = "in")) %>%
+  mutate(out_degree = centrality_degree(mode = "out"))
+
+network_1
 ```
 
-We can see that most actors in the network are connected to very few
-individuals while a couple actors in this network are connected to a
-very larger number, nearly 200 and 350 respectively!
+We now see that these simple measures of centrality have been added to
+the nodes in our network.
 
-Now let's take a look at the mean and median for `node_degree` using
-some other {base} R functions:
+We can also use the `activate()` function combined with the
+`data.frame()` function to extract our new measures to a separate data
+frame so we inspect our nodes individually and create some summary
+statistics using the handy `summary()` function.
 
 ```{r}
-mean(node_degree)
-median(node_degree)
+node_measures <- network_1 %>% 
+  activate(nodes) %>%
+  data.frame()
+
+summary(node_measures)
 ```
 
-We see that the mean suggests the participants are, on average,
-connected to about 8 other participants in the MOOC-Ed, but this is
-likely heavily skewed by the two individuals with a disproportionate
-number of connections. The median is probably a better characterization
-of the typical number of educators a participant has sent or received a
-reply.
-
-#### In-Degree
-
-Let's go ahead and take a look at in-degree next:
-
-```{r}
-in_degree <- degree(weighted_network, mode="in")
-
-hist(in_degree, breaks = 30)
-mean(in_degree)
-median(in_degree)
-```
-
-Again, most participants received a reply from small number of
-individuals.
+Despite a dramatic size difference from our network in Unit 1, we see
+that typical nodes in this network also have relatively few connections,
+though there are a few exceptions.
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk below to examine the distribution, mean and median of
-`out_degree`:
+Recall from the Prepare section that one of our questions guiding this
+analysis was:
+
+> Who are the transmitters, transceivers, and transcenders in our Common
+> Core Twitter network?
+
+Use the code chunk below to inspect our `node_measures` data frame and
+answer the questions above in the space below:
 
 ```{r}
-
+#YOUR CODE HERE
 ```
 
-In the space below, write your interpretation of these results.
+-   YOUR RESPONSE HERE
 
-\-
+#### Other Centrality Measures
 
-### Edge Weights
+In Chapter 7 of @carolan2014, noted that degree centrality does not take
+into account indirect ties among all the alters in an ego's network. We
+were also introduced to a few other measures of centrality commonly used
+in network analysis and applied to educational contexts:
 
-Finally, let's also take a look at the distribution, mean and median of
-the edge weights we added to our graph.
+-   **Closeness** includes data about the relation between each pair of
+    ego's named alters and is intuitively appealing in that being
+    "close" to others and may indicate how quickly an actor can exchange
+    something with others or be the first to receive information.
 
-Recall from earlier that the {igraph} package has a unique syntax for
-accessing node and edge attributes. For edges we use `E()` and included
-the name of the network object we want to use, followed by the `$`
-operator to select the attribute.
+-   **Betweenness** captures how actors control or mediate the relations
+    between pairs of actors that are not directly connected and is an
+    important indicator of control over information exchange or resource
+    flows within a network.
 
-```{r}
-weights <- E(weighted_network)$weight
-
-hist(weights, breaks = 10)
-mean(weights)
-median(weights)
-
-```
-
-It looks like the vast majority or participants either sent or received
-a reply from just one other participant.
+Carolyn also notes that in addition to these three common centrality
+measures, at many others have been developed and can be calculated in
+most common social network-analysis software applications. In fact,
+{tidygraph} includes many of these measures and includes various
+`centrality_` functions for calculating node and edge centrality. Type
+`?centrality` in your console below and hit enter to view them all.
 
 ### **👉 Your Turn** **⤵**
 
-The use of the `$` is actually standard across R and a very useful
-operator.
-
-Use the code chunk below to create a histogram and calculate the mean
-and median from the edge weighs created earlier in the [Add Edge
-Weights] section by using the `edge_weights` data frame, the `$`
-operator, and column `n` which contains the counts for each unique edge.
+Use the code chunk below to add these closeness and betweenness measures
+to our `network_1` data frame and save as `network_2`. I've included
+some basic code to get your started.
 
 ```{r}
-
+network_2 <- network_1
+  #YOUR CODE HERE
+  
 ```
-
-Are these results consistent with our summary of edge weights we created
-above?
-
-\-
 
 ## 3b. Make a Sociogram
 
-If you recall from our [1a. Review the Research] section, one of the
-defining characteristics of the social network perspective is its use of
-graphic imagery to represent actors and their relations with one
-another. To emphasize this point, Carolyn (2013) reported that:
+If you recall from Unit 1, network visualization can be used for a
+variety of purposes, ranging from highlighting key actors to even
+serving as works of art. These visual representations of the actors and
+their relations, i.e. the network, are called a **sociogram**. Actors
+who are most central to the network, such as those with higher node
+degrees, are usually placed in the center of the sociogram and their
+ties are placed near them. In this section, we'll briefly introduce the
+{ggraph} package for creating attractive network
 
-> The visualization of social networks has been a core practice since
-> its foundation more than 90 years ago and remains a hallmark of
-> contemporary social network analysis. 
+### ggraph  📦 
 
-Network visualization can be used for a variety of purposes, ranging
-from highlighting key actors to even serving as works of art. This
-excellent figure from Katya Ognyanova's also excellent tutorial on
-[Static and Dynamic Network Visualization with
-R](https://kateto.net/network-visualization/) helps illustrate the
-variety of goals a good network visualization can accomplish:
+![](img/ggraph.png){width="20%"}
 
-![](img/viz-goals.jpeg){width="80%"}
+Created by the same developer as {tidygraph},
+{[ggraph](https://ggraph.data-imaginist.com/index.html)} -- pronounced
+gg-raph or g-giraffe hence the logo -- is an extension of
+{[ggplot](https://ggplot2.tidyverse.org)} aimed at supporting relational
+data structures such as networks, graphs, and trees. Both packages are
+more modern and widely adopted approaches data visualization in R.
 
-These visual representations of the actors and their relations, i.e. the
-network, are called a sociogram. Actors who are most central to the
-network, such as those with higher node degrees, are usually placed in
-the center of the sociogram and their ties are placed near them. As
-we'll see in just a bit, those two actors with hundreds of ties will be
-placed by most graph layout algorithms in the center of the graph.
+While ggraph builds upon the foundation of ggplot and its API, it comes
+with its own self-contained set of geoms, facets, etc., as well as
+adding the concept of *layouts* to the [grammar of
+graphics](https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics),
+i.e. the "gg" in ggplot and ggraph.
 
-For Unit 1, we'll be using the `plot()` function from R's built in
-{graphics} package to make a sociogram.
-
-Let's run the code and see what we get without any tweaking and see what
-the plot function produces:
+Let's go ahead and load the {ggraph} library:
 
 ```{r}
-plot(weighted_network)
-
+library(ggraph)
 ```
 
-If this had been a smaller network like one generated from a teacher
-professional development workshop, this might have been useful, but for
-large networks like our MOOC-Ed discussion forums, this doesn't
-communicate much. In fact, it's visualizations like these that give
-sociograms the unflattering nickname of "hair ball" plots.
+### A Simple Sociogram
 
-Fortunately, the {igraph} package includes a [plethora of plotting
-parameters](https://igraph.org/r/doc/plot.common.html) for improving the
-layout and visual design of network graphs!
+Very similar to how functions in the tidyverse use the `%>%` operator to
+"pipe" functions together to progressively wrangle data, ggraph and
+ggrplot use the `+` operator to "layer" functions together to
+progressively build graphs.
 
-There are many ways to modify vertices and edges in a sociogram to
-improve readability. Up to four attributes of each actor can be layered
-onto the sociogram by altering the color, shape, label, and size of the
-symbol. And attributes for edges can be represented in a range of ways
-as well.
-
-### Remove Labels
-
-One quick fix is to simply remove the labels by adding the
-`vertex.label =` argument and setting it to `NA`.
-
-Since the number labels don't provide much useful information, let's go
-ahead and remove them:
+Let's start with the first and simplest function `ggraph` and supply our
+network graph:
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA)
+ggraph(network_1)
 ```
 
-We can now at least see the nodes, or vertices, but with 445
-participants in the forums, many are masked by the default size of each
-node.
+As you can see, this didn't produce much. All this function does is take
+care of setting up the network object to plot along with creating the
+layout for the plot based on the graph and the specified layout passed
+in.
 
-### Change vertex size
+#### Add Layout
 
-By default, the size of nodes is 15. Let's add the `vertex.size =`
-argument and change that to 1:
+Let's go ahead and include the layout argument, which in addition to
+including its own unique layouts, can incorporate layouts form {igraph}
+like `fr`.
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = 1)
+ggraph(network_1, layout = "fr")
 ```
 
-A little better, but let's use the `node_degree` we calculated to
-emphasize those wiht greater connections in the course by substitute
-`node_degree` for a specific value.
+#### Add Nodes
+
+Still nothing but that is because we haven't added the nodes yet. Let's
+do that:
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree)
+ggraph(network_1, layout = "fr") + 
+geom_node_point() 
 ```
 
-Whoops! This certainly emphasizes the disproportionate number of ties
-among these two participants, but not quite what we're going for.
+Well, at least we have our nodes now!
 
-Since `node_degree` is just a list of values for each node we can treat
-it like a number. Let's divide that by 10 to reduce the relative size:
+The "geom" in the `geom_non_point()` functions stands for "Geometric
+elements", or geoms for short, and represent what you actually see in
+the plot.
+
+These geoms can include aesthetics, or aes for short, such as `alpha`
+for transparency, as well as `colour`, `shape` and `size`.
+
+Let's now add some "aesthetics" to our points by including the `aes()`
+function and arguments such as `size =` which we can set to our
+`in_degree` measures:
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree/10)
+ggraph(network_1, layout = "fr") + 
+geom_node_point(aes(size = in_degree, 
+                    alpha = out_degree, 
+                    colour = degree))
 ```
 
-That's better, and helps highlight our two main actors without
-overshadowing the rest, but those arrows are definitely an eyesore.
-
-### Reduce arrow size
-
-Let's add the `edge.arrow.size =` argument and dramatically reduce:
+And let's add some node text and labels while were at it since this is
+not a very large network. Since node labels are a geometric element, we
+can apply aesthetics to them as well. Let's also include the `repel =`
+argument that when set to `TRUE` will avoid overlapping text.
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.1,
-     edge.arrow.size = .04)
+ggraph(network_1, layout = "fr") + 
+  geom_node_point(aes(size = in_degree, 
+                      alpha = out_degree, 
+                      colour = degree)) +
+  geom_node_text(aes(label = screen_name, 
+                     size = in_degree/2,
+                     alpha = degree),
+                 repel=TRUE)
 ```
 
-Much better, now let's deal with the size of the edges.
+Much better! Even without the edges, using size and opacity has helped
+to illustrate some of the "transmitters," "trancievers" and
+"transcenders."
 
-#### Adjust Edge Width
+#### Add Edges
 
-We can add the `edge.width =` argument to help minimize edge overlap yet
-still make them visible. This is a bit of trial and error but let's give
-.2 a try since the default is 1:
+Now, let's connect the dots and add some edges that include some arrows
+1mm in length as well as an end cap to keep them from overlapping the
+nodes:
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .04,
-     edge.width = .2)
+ggraph(network_1, layout = "fr") + 
+  geom_node_point(aes(size = in_degree, 
+                      alpha = out_degree, 
+                      colour = degree)) +
+  geom_node_text(aes(label = screen_name, 
+                     size = degree/2,
+                     alpha = degree), 
+                     repel=TRUE) +
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 alpha = .3)
 ```
 
-Note that we could also set `edge.with =` to the weight of each edge,
-similar to how we used degree for the size of each node.
+#### Add a Theme
 
-Let's give that a try:
+Finally, let's add a **theme,** which controls the finer points of
+display, like the font size and background color. The `theme_graph()`
+function add a theme specially tuned for graph visualizations. This
+function removes redundant elements in order to put focus on the data
+and if you type `?theme_graph` in the console you will get a sense of
+the level of fine tuning you can do if desired.
+
+Let's add `theme_graph()` to our sociogram and call it good for now:
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.1,
-     edge.arrow.size = .04,
-     edge.width = E(weighted_network)$weight)
+ggraph(network_1, layout = "fr") + 
+  geom_node_point(aes(size = in_degree, 
+                      alpha = out_degree, 
+                      colour = degree)) +
+  geom_node_text(aes(label = screen_name, 
+                     size = degree/2,
+                     alpha = degree), 
+                     repel=TRUE) +
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 alpha = .3) + 
+  theme_graph()
 ```
-
-Not much of an improvement, if at all, given how many edges are in our
-network.
-
-Let's try dividing that weight by 5 similar to reduce like with did with
-the `vertex.size =` argument:
-
-```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .05,
-     edge.width = E(weighted_network)$weight/5)
-```
-
-Better, but since we know most edges have a weight of 1 there really
-isn't too much to work with here.
-
-Let's move on to changing graph layout!
-
-#### Change Layout
-
-One of the major advances in visualization since the first hand-drawn
-sociograms developed by Jacob Moreno (1934) to represent relations among
-children in school is the use of software and algorithms to
-automatically layout networks on a grid.
-
-There are may different [layout
-methods](https://en.wikipedia.org/wiki/Graph_drawing#Layout_methods),
-but we'll start with the Fruchterman-Reingold (FR) layout, which is one
-of the most used layout algorithms for network visualization. These
-types of force-directed algorithms generally work well with large
-networks and try to layout graphs in "an aesthetically-pleasing way" by
-making edges roughly equal in length and minimizing overlap.
-
-Let give the FR layout a try by using the `layout =` argument and
-specifying `layout_with_fr`:
-
-```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .05,
-     edge.width = E(weighted_network)$weight/5,
-     layout = layout_with_fr)
-```
-
-By default, {igraph} uses `layout_nicely`, a smart function that chooses
-a layout based on the graph. Given the similarity with our previous
-graph, I'm assuming it chose the the FR layout as well.
-
-Let's try one more just for fun:
-
-```{r}
-
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .05,
-     edge.width = E(weighted_network)$weight/5,
-     layout = layout_in_circle)
-
-```
-
-Interesting but not terribly useful!
-
-There are many other [igraph layout
-functions](https://igraph.org/r/doc/layout_.html), some more useful than
-others depending on the context. We've only scratched the surface of
-what's possible with network plotting but hopefully this have given you
-a sense of what required to avoid the dreaded "hair ball" plot and
-create a network viz that communicates something useful.
 
 ### **👉 Your Turn** **⤵**
 
-Try modifying the code below by tweaking the included
-arguments/parameters or adding new arguments/parameters to make our plot
-either more "aesthetically pleasing" or more purposeful in what it's
-trying to communicate.
-
-You're also welcome to try out some of the other graphing options from
-from Katya Ognyanova's tutorial on [Static and Dynamic Network
-Visualization with R](https://kateto.net/network-visualization/).
+Try modifying the code below by tweaking the included function/arguments
+or adding new ones for
+[layouts](https://ggraph.data-imaginist.com/articles/Layouts.html),
+[nodes](https://ggraph.data-imaginist.com/articles/Nodes.html), and
+[edges](https://ggraph.data-imaginist.com/articles/Edges.html) to make
+our plot either more "aesthetically pleasing" or more purposeful in what
+it's trying to communicate.
 
 There are no right or wrong answers, just have some fun trying out
 different approaches!
 
 ```{r}
-plot(weighted_network,
-     vertex.label = NA,
-     vertex.size = node_degree*.05,
-     edge.arrow.size = .05,
-     edge.width = E(weighted_network)$weight/5,
-     layout = layout_with_fr)
+ggraph(network_1, layout = "kk") + 
+  geom_node_point(aes(size = in_degree, 
+                      alpha = out_degree, 
+                      colour = degree)) +
+  geom_node_text(aes(label = screen_name, 
+                     size = degree/2,
+                     alpha = degree), 
+                     repel=TRUE) +
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 alpha = .3) + 
+  theme_graph()
 ```
 
 ### 🧶 Knit & Check ✅
@@ -1466,103 +1289,191 @@ your document and check to see if you encounter any errors.
 As highlighted in [Chapter 3 of Data Science in Education Using
 R](https://datascienceineducation.com/c03.html), the **Model** step of
 the data science process entails "using statistical models, from simple
-to complex, to understand trends and patterns in the data." The authors
-note that while descriptive statistics and data visualization during
-the **Explore** step can help us to identify patterns and relationships
-in our data, statistical models can be used to help us determine if
-relationships, patterns and trends are actually meaningful.
+to complex, to understand trends and patterns in the data."
 
-We will not explore the use of models for SNA until Unit 3, but recall
-from [A Social Network Perspective in MOOC-Eds] was guided by the
-following questions:
+## 4a. Identify Groups
 
-1.  What are the patterns of peer interaction and the structure of peer
-    networks that emerge over the course of a MOOC-Ed?
+In Chapter 6: Groups and Positions in Complete Networks of SNA and
+Education [@carolan2014] we were introduced to both "bottom up" and "top
+down" approaches for identifying groups in a network, as well as why
+researchers may be interested in exploring these groups. He also notes
+that:
 
-2.  To what extent do participant and network attributes (e.g.,
-    homophily, reciprocity, transitivity) account for the structure of
-    these networks?
+> Unlike most social science, the idea is to identify these groups
+> through their relational data, not an exogenous attribute such as
+> grade level, departmental affiliation, or years of experience. 
 
-3.  To what extent do these networks result in the co-construction of
-    new knowledge?
+In this section, we'll briefly explore a "top down" approach to
+identifying these groups through the use of community detection
+algorithms.
 
-To address Question 1, actors in the network were categorized into
-distinct mutually exclusive groups using the core-periphery and regular
-equivalence functions of UCINET. The former used the CORR algorithm to
-divide the network into actors that are part of a densely connected
-subgroup, or "core", from those that are part of the sparsely connected
-periphery. Regular equivalence employs the REGE blockmodeling algorithm
-to partition, or group, actors in the network based on the similarity of
-their ties to others with similar ties. In essence, blockmodeling
-provides a systematic way for categorizing educators based on the ways
-in which they interacted with peers.
+### Community Detection
 
-As we saw upon just a basic visual inspection of our network during the
-Explore section, there was a small core of highly connected participants
-surrounded by those on the "periphery," or edge, of the network with
-very few connections. In the DLT 2 course, those on the periphery made
-up roughly 90% of network! The study also found relatively high levels
-of reciprocation, but also found that roughly a quarter of participants
-were characterized as "brodcasters" -- educators who initiated a
-discussion thread, but neither reciprocated with those who replied, nor
-posted to threads initiated by others.
+Similar to the range of functions included for calculating node and edge
+centrality, the {tidygraph} package includes various clustering
+functions provided by the {igraph} package introduced in Unit 1.
 
-To address Question 2, this study use the exponential family of random
-graph models (ERGM; also known as p\* models), which provide a
-statistical approach to network modeling that addresses the complex
-dependencies within networks. ERGMs predict network ties and determine
-the statistical likelihood of a given network structure, based on an
-assumed dependency structure, the attributes of the individuals (e.g.,
-gender, popularity, location, previous ties) and prior states of the
-network.
+Also similar to calculating centrality measures, we need to `activate()`
+our nodes first before applying these community detection algorithms to
+assign our nodes to groups.
+
+Run the following code and take a print our new network graph to the
+console to take a quick look
+
+```{r}
+network_3 <- network_2 %>%
+  activate(nodes) %>%
+  mutate(group = group_infomap())
+  
+network_3
+```
+
+**Note:** Some of these algorithms are designed for directed graphs,
+while others for undirected graphs.
+
+Now that we've assigned our nodes to a group, let's modify our sociogram
+from above to color our nodes by group assignment and remove the
+`alpha =` argument to make them a little easier to see.
+
+```{r}
+network_3 %>%
+  ggraph(layout = "kk") + 
+  geom_node_point(aes(size = in_degree, 
+                      colour = group)) +
+  geom_node_text(aes(label = screen_name, 
+                     size = degree/2,
+                     alpha = degree), 
+                     repel=TRUE) +
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 alpha = .3) + 
+  theme_graph()
+```
 
 ### **👉 Your Turn** **⤵**
 
-Recall from the [1a. Review the Research] that you were asked to
-identify two "node attributes" from the dataset that might be useful for
-predicting participants who may be more engaged or central to the
-network.
+Recall from the Prepare section that the second question guiding this
+analysis was:
 
-Take look at page 276 of [A social network perspective on peer supported
-learning in MOOCs for
-educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf).
-Were your predictions correct?
+> What subgroups, or factions, exist in our network?
 
-\-
+Use the code chunk below to extract the group assignment data frame and
+answer the question above in the space below:
+
+```{r}
+#YOUR CODE HERE
+```
+
+-   YOUR RESPONSE HERE
+
+## 4b. Identify Sentiment
+
+Sentiment analysis (also known as opinion mining) is a text mining
+technique used to "systematically identify, extract, quantify, and study
+affective states and subjective information."
+
+In this section, we'll introduce and apply the {vader} package to gain
+some
+
+#### The vader Package 📦
+
+![](img/vader.jpeg){width="20%"}\
+
+The {vader} package is for the Valence Aware Dictionary for sEntiment
+Reasoning (VADER), a rule-based model for general sentiment analysis of
+social media text and specifically attuned to measuring sentiment in
+microblog-like contexts.
+
+To learn more about the {vader} package and its development, take a look
+at the article by Hutto and Gilbert (2014), [VADER: A Parsimonious
+Rule-based Model forSentiment Analysis of Social Media
+Text](http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf).
+
+Let's go ahead and load the vader library:
+
+```{r}
+library(vader)
+```
+
+The {vader} package basically has just one function, `vader_df()` that
+does one thing and expects just one column from a data frame. Let's give
+VADER the our `ccss_tweets_6` data frame that we created earlier and
+include the `$` operator to select for analysis our `text` column
+containing our tweets.
+
+```{r}
+summary_vader <- vader_df(ties$text)
+
+summary_vader
+```
+
+Hutto, C. & Gilbert, E. (2014) provide an excellent summary of the VADER
+package on their [GitHub repository](scores) and I've copied and
+explanation of the scores below:
+
+-   The `compound` score is computed by summing the valence scores of
+    each word in the lexicon, adjusted according to the rules, and then
+    normalized to be between -1 (most extreme negative) and +1 (most
+    extreme positive). This is the most useful metric if you want a
+    single unidimensional measure of sentiment for a given sentence.
+    Calling it a 'normalized, weighted composite score' is accurate.
+
+**NOTE:** The `compound` score is the one most commonly used for
+sentiment analysis by most researchers, including the authors.
+
+Let's use the `inner_join()` function to add these sentiment scores
+values back to our `ties` data frame and take a quick look:
+
+```{r}
+tweet_sentiment <-inner_join(summary_vader, 
+                             ties,
+                             by = "text")
+
+tweet_sentiment
+```
+
+Overall, the CCSS tweets lean slightly negative as we would expect.
+
+```{r}
+user_sentiment <- tweet_sentiment %>%
+  group_by(sender) %>%
+  summarise(sentiment = mean(compound))
+
+user_sentiment
+```
+
+Note that we have effectively just created some new node and edge
+"attributes" that could be incorporated into our network visualization
+to potentially help understand why groups may have formed as they did.
+
+### **👉 Your Turn** **⤵**
+
+Recall from the Prepare section that the final question guiding this
+analysis was:
+
+> Which actors in our network tend to be more opposed to the Common
+> Core?
+
+Use the code chunk below to inspect our data frame and answer the
+question above in the space below:
+
+```{r}
+#YOUR CODE HERE
+```
+
+-   YOUR RESPONSE HERE
 
 ------------------------------------------------------------------------
 
 # 5. COMMUNICATE
 
-The final step in our workflow/process is sharing the results of
-analysis with wider a audience. Krumm et al. (2018) have outline the
-following 3-step process for communicating with education stakeholders
-what you have learned through analysis:
-
-1.  **Select**. Communicating what one has learned involves selecting
-    among those analyses that are most important and most useful to an
-    intended audience, as well as selecting a form for displaying that
-    information, such as a graph or table in static or interactive form,
-    i.e. a "data product."
-
-2.  **Polish**. After creating initial versions of data products,
-    research teams often spend time refining or polishing them, by
-    adding or editing titles, labels, and notations and by working with
-    colors and shapes to highlight key points.
-
-3.  **Narrate**. Writing a narrative to accompany the data products
-    involves, at a minimum, pairing a data product with its related
-    research question, describing how best to interpret the data
-    product, and explaining the ways in which the data product helps
-    answer the research question.
-
-For your Independent Analysis assignment for Unit 1 next week, you'll be
-creating either a simple report or slide deck using an R Markdown
-document just like this to share out some key findings from our
-analysis. Regardless of whether you plan to talk us through your
-analysis and findings with a presentation or walk us through with a
-brief written report, your presentation or report should address the
-following questions:
+For your Independent Analysis assignment for Unit 2 next week, you'll
+create either a simple report or slide deck using an R Markdown document
+just like this to share out some key findings from your analysis.
+Regardless of whether you plan to talk us through your analysis and
+findings with a presentation or walk us through with a brief written
+report, your presentation or report should address the following
+questions:
 
 1.  **Purpose**. What question or questions are guiding your analysis?
     What did you hope to learn by answering these questions and why
@@ -1581,31 +1492,23 @@ following questions:
     your analysis? How might your audience use this information? How
     might you revisit or improve upon this analysis in the future?
 
-#### **Examples and Templates**
-
-You can view an example presentation from ECI 588
-here: [\<https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html\>](https://sbkellogg.github.io/eci-588/unit-1/unit-1-product.html){.uri}
-
-And use my R Markdown presentation file as a template if you
-like: [\<https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd\>](https://github.com/sbkellogg/eci-588/blob/main/unit-1/unit-1-product.Rmd){.uri}
-
 ### **👉 Your Turn** **⤵**
 
 Now that you've become more familiar with this dataset and the social
 network perspective, what other aspects of this dataset, or a dataset
 you are interested in exploring, could you investigate?
 
-\-
+-   YOUR RESPONSE HERE
 
 What specific research questions might you ask that would be helpful for
 being understanding and improving learning, or the context in which the
-data is collected?
+data is collected? How could other approaches like sentiment analysis
 
-\-
+-   YOUR RESPONSE HERE
 
 ### 🧶 Knit & Check ✅
 
-Congrats! You've finished the Unit 1 Guided Walkthrough and are ready
+Congrats! You've finished the Unit 2 Guided Walkthrough and are ready
 for some independent analysis next week!
 
 To complete this assignment, knit your document and send me an email at

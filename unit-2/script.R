@@ -73,8 +73,9 @@ interactions_sent <-
   filter(n > 1)
 
 
-g <- 
-  as_tbl_graph(edgelist, directed = TRUE)
+g <- tbl_graph(edges = ties, 
+               nodes = actors,
+               directed = TRUE)
 
 g %>% 
   activate(nodes) %>% 
