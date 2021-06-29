@@ -73,9 +73,10 @@ interactions_sent <-
   filter(n > 1)
 
 
-g <- tbl_graph(edges = ties, 
-               nodes = actors,
+g <- as_tbl_graph(ties,
                directed = TRUE)
+
+g
 
 g %>% 
   activate(nodes) %>% 
@@ -83,8 +84,7 @@ g %>%
   ggraph("kk")  + 
   geom_edge_link()  + 
   geom_node_point(aes(color=community), size=3) + 
-  theme_graph() +
-  theme(legend.position="none")
+  theme_graph()
 
 g
 
@@ -99,16 +99,16 @@ g %>%
   theme_graph()
 
 
-g %>% 
+network_1 %>% 
   # this calculates the centrality of each individual using the built-in centrality_authority() function
   mutate(centrality = centrality_degree(mode = "in")) %>% 
   ggraph(layout = "kk") + 
   geom_node_point(aes(size = centrality, color = centrality)) +
   # this line colors the points based upon their centrality
+  geom_node_text(aes(label = screen_name), size=3, color="gray50", repel=T) +
   scale_color_continuous(guide = 'legend') + 
   geom_edge_link(alpha = .2) +
-  theme_graph() +
-  theme(legend.position="none")
+  theme_graph()
 
 g %>% 
 activate(nodes) %>% 

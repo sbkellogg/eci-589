@@ -778,7 +778,32 @@ or nodes.
 
 #### "Unnest" User Names
 
-Those of you that were in the text mining course
+In order to place each target user in a separate row that corresponds
+with each sender of the tweet, we will need to "unnest" these names
+using a package that those who took the ECI 588 Text Mining course will
+be very familiar with.
+
+#### tidytext 📦
+
+![](img/tidytext.png){width="20%"}
+
+The {tidytext} package helps to convert text into data frames of
+individual words, making it easy to to manipulate, summarize, and
+visualize text using using familiar functions form the {tidyverse}
+collection of packages.
+
+Let's go ahead and load the {tidytext} package:
+
+```{r}
+library(tidytext)
+```
+
+For a more comprehensive introduction to the `tidytext` package, we
+cannot recommend enough the free online book, *Text Mining with R: A
+Tidy Approach* [@silge2017text]. If you're interested in pursuing text
+analysis beyond this walkthrough, this will be a go to reference.
+
+Let's go ahead and apply the \`un
 
 ```{r}
 ties_2 <- ties_1 %>%
@@ -878,7 +903,8 @@ builds upon the "the well-oiled machinery of igraph" but allows us to
 use some of the familiar functions and syntax from other {tidyverse}
 packages. In this walkthrough we won't recreate all the processes like
 simplifying graphs and adding edge weights, but will demonstrate some
-features similar and in addition to those found in the {igraph} package.
+features similar to and in addition to those found in the {igraph}
+package.
 
 ### tidygraph 📦
 
@@ -926,7 +952,8 @@ following arguments:
     defaults to `TRUE` so we did not included it since our network is
     directed.
 
-Let's go ahead and create our network graph and name it `network`
+Let's go ahead and create our network graph, name it `network` and print
+the output:
 
 ```{r}
 network <- tbl_graph(edges = ties, 
@@ -1076,8 +1103,8 @@ in network analysis and applied to educational contexts:
     flows within a network.
 
 Carolyn also notes that in addition to these three common centrality
-measures, at many others have been developed and can be calculated in
-most common social network-analysis software applications. In fact,
+measures, many others have been developed and can be calculated in most
+common social network-analysis software applications. In fact,
 {tidygraph} includes many of these measures and includes various
 `centrality_` functions for calculating node and edge centrality. Type
 `?centrality` in your console below and hit enter to view them all.
@@ -1103,7 +1130,7 @@ their relations, i.e. the network, are called a **sociogram**. Actors
 who are most central to the network, such as those with higher node
 degrees, are usually placed in the center of the sociogram and their
 ties are placed near them. In this section, we'll briefly introduce the
-{ggraph} package for creating attractive network
+{ggraph} package for creating attractive network visualizations.
 
 ### ggraph 📦
 
@@ -1131,7 +1158,7 @@ library(ggraph)
 ### A Simple Sociogram
 
 Very similar to how functions in the tidyverse use the `%>%` operator to
-"pipe" functions together to progressively wrangle data, ggraph and
+"pipe" functions together and progressively wrangle data, ggraph and
 ggrplot use the `+` operator to "layer" functions together to
 progressively build graphs.
 
@@ -1332,7 +1359,7 @@ network_3
 ```
 
 **Note:** Some of these algorithms are designed for directed graphs,
-while others for undirected graphs.
+while others are for undirected graphs.
 
 Now that we've assigned our nodes to a group, let's modify our sociogram
 from above to color our nodes by group assignment and remove the
@@ -1373,10 +1400,9 @@ answer the question above in the space below:
 
 Sentiment analysis (also known as opinion mining) is a text mining
 technique used to "systematically identify, extract, quantify, and study
-affective states and subjective information."
-
-In this section, we'll introduce and apply the {vader} package to gain
-some
+affective states and subjective information." In this section, we'll
+introduce and apply the {vader} package to gain some insight into the
+"lexical tendencies" of our tweets.
 
 #### The vader Package 📦
 
@@ -1435,7 +1461,8 @@ tweet_sentiment <-inner_join(summary_vader,
 tweet_sentiment
 ```
 
-Overall, the CCSS tweets lean slightly negative as we would expect.
+Now that we have these joined, we can take a quick look at the sentiment
+.
 
 ```{r}
 user_sentiment <- tweet_sentiment %>%
