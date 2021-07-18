@@ -237,6 +237,7 @@ Let's go ahead and load the packages from Unit 1 since we'll be using
 them again very soon:
 
 ```{r}
+library(readxl)
 library(tidyverse)
 library(tidygraph)
 library(ggraph)
@@ -289,453 +290,52 @@ c.  **Simplify Network**. Finally, we'll learn about a handy
     `simplify()` function in the {igraph} package for collapsing
     multiple ties between actors and removing "self-loops."
 
-## 2a. Import Tweets
+## 2a. Import Data
 
-The Import Tweets section introduces the following functions from the
-`rtweet` package for reading Twitter data into R:
+One of our primary goals is to replicate the ERGM analysis from Chapter
+9: Network Data and Statistical Models [@carolan2014]. Specifically,
+we'll aim to reproduce the results from **Table 9.4. Results of P1 and
+P\*Analyses for the Dichotomized and Directed School Leaders
+Confidential Exchanges Network Year 3.**
 
--   [`search_tweets()`](https://www.rdocumentation.org/packages/rtweet/versions/0.7.0/topics/search_tweets)
-    Pulls up to 18,000 tweets from the last 6-9 days matching provided
-    search terms.
--   [`search_tweets2()`](https://www.rdocumentation.org/packages/rtweet/versions/0.7.0/topics/search_tweets)
-    Returns data from **multiple** search queries.
--   [`get_timelines()`](https://www.rdocumentation.org/packages/rtweet/versions/0.7.0/topics/search_tweets)
-    Returns up to 3,200 tweets of one or more specified Twitter users.
+To do so, we'll need to import two Excel files from the Social Network
+Analysis and Education companion site. The first file contains our edges
+stored as a matrix (more on this later) and second file is a standard
+rectangular data frame that contains attributes for each node, i.e.
+school leader. These files are included in the data folder of your R
+Studio project. A description of each file from the companion website
+and a direct link to the file are included below:
 
-### Search Tweets
+1.  [**School Leaders Data Chapter
+    9_d.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds10.xls) This
+    adjacency matrix reports on "confidential help" ties among 43 school
+    leaders in year 3 of a three-year study. This is a directed valued
+    (weighted) network measured on five-point scale ranging from 0 to 4,
+    with higher values indicating more frequent collaborations (1--2
+    times/week). These data are used throughout Chapter 9.
 
-Since one of our goals for this walkthrough is a very crude replication
-of the study by @supovitz2017commoncore, let's begin by introducing the
-`search_tweets()` function to try reading into R 5,000 tweets containing
-the commoncore hashtag and store as a new data frame `ngss_all_tweets`.
+2.  [**School Leaders Data Chapter
+    9_e.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds11.xlsx) This
+    rectangular matrix consists of four attribute vectors for 43 school
+    leaders. Following the first ID column, the matrix includes an
+    efficacy score, trust score, and indicators for whether one works at
+    the district-level and is male (1 = yes, 0 = no). These attribute
+    variables can be used as covariates in some of the statistical
+    models covered in Chapter 9, including regression and *p\** models.
 
-Type or copy the following code into your R script or console and run:
+Let's go ahead an import our matrix first as save as `adjacency_matrix`:
 
 ```{r}
-ccss_tweets <- search_tweets(q = "#commoncore", n=5000)
+adjacency_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx", col_names = FALSE) 
 ```
-
-You likely saw in the output or console a download message like the one
-below that stopped well short of 100%. That is pretty typical and just
-indicates the API returned fewer tweets than requested.
-
-Note also that the first argument `q =` that the `search_tweets()`
-function expects is the search term included in quotation marks and that
-`n =` specifies the maximum number of tweets
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk below to view your new `ccss_tweets` data frame using
-one of the [various view
-methods](https://cmdlinetips.com/2020/06/get-a-peek-at-dataframe-in-r/)
-for looking at your data in R:
+Read in node attribute file and save as
 
 ```{r}
 #YOUR CODE HERE
-```
-
-1.  How many tweets did our query using the Twitter API actually return?
-    How many variables?
-
-    -   YOUR RESPONSE HERE
-
-2.  Why do you think our query pulled in far less than 5,000 tweets
-    requested? **Hint:** Type `?search_tweets` in your console to see
-    the support documentation for this function.
-
-    -   YOUR RESPONSE HERE
-
-3.  Does our query also include retweets? How do you know?
-
-    -   YOUR RESPONSE HERE
-
-### Remove Retweets
-
-While the authors explicitly mentioned including retweets when
-constructing their network, `search_tweets()` function has an argument
-that includes retweets by default, but can be changed to exclude
-retweets if desired.
-
-Even though we will want to include retweets to construct our final
-network, let's test out the `include_rts =` argument and set it to
-`FALSE` to remove any retweets:
-
-```{r}
-ccss_tweets_1 <- search_tweets("#commoncore", 
-                                   n=500, 
-                                   include_rts = FALSE)
-```
-
-Take a look at your environment pane and see how many tweets were
-excluded by adding this argument.
-
-### Using the OR Operator
-
-If you recall from the Prepare section, the authors accessed tweets and
-user information from using multiple search terms, including:
-*commoncore*, *ccss* and *stopcommoncore.*
-
-Let's modify our query using the `OR` operator to also include "ccss"
-and "stopcommoncore" so it will return tweets containing either any of
-these three terms. And since we've included additional search terms
-let's also increase the number of requested tweets to 5,000.
-
-```{r}
-ccss_tweets_2 <- search_tweets(q = "#commoncore OR #stopcommoncore OR #ccss",
-                               n=5000)
-```
-
-Wow, those additional search terms dramatically increased the number of
-tweets downloaded!
-
-### **👉 Your Turn** **⤵**
-
-Try including both search terms but excluding the `OR` operator to
-answer the following question:
-
-1.  Does excluding the `OR` operator return more tweets, the same number
-    of tweets, or fewer tweets? Why?
-
-    -   YOUR RESPONSE HERE
-
-2.  What other useful arguments does the `search_tweet()` function
-    contain? Try adding one and see what happens.
-
-    -   YOUR RESPONSE HERE
-
-**Hint:** Use the `?search_tweets` help function to learn more about the
-`q` argument and other arguments for composing search queries.
-
-### Filter for English Tweets
-
-If you haven't already done so, take a look at the tweets in our
-`ccss_tweets_2` data frame. You probably noticed that many of these
-tweets were in Spanish, as indicated by the "es" in the `lang` column of
-our data frame.
-
-Let's take a quick count of the number of tweets in each language of our
-data frame by sending our `ccss_tweets_2` data frame to the `count()`
-function using the `%>%` operator, specifying `lang` as the column whose
-values we want to count and sorting from high to low:
-
-```{r}
-ccss_tweets_2 %>%
-  count(lang, sort = TRUE)
-```
-
-Surprisingly, the majority of these tweets are in Spanish. For the
-purpose of both limiting the size of our network for this analysis and
-also because we are interested in doing some quick sentiment analysis
-towards the end of our walkthrough, let's limit our tweets to just those
-in the English language.
-
-To download only English tweets, we will need include the `lang =`
-argument and set it to "en":
-
-```{r}
-ccss_tweets_3 <- search_tweets(q = "#commoncore OR #stopcommoncore OR #ccss",
-                               n=5000,
-                               lang = "en")
-```
-
-#### Save Tweets to File
-
-Finally, let's save our tweet files to use in later exercises since
-tweets have a tendency to change every minute.
-
-```{r, eval=FALSE}
-write_csv(ccss_tweets_3, "data/ccss-tweets.csv")
-```
-
-Uh oh! We received an error because data stored in the `hashtags` column
-is not stored as typical character, number, logical, or date data type,
-but rather it is stored as a "list."
-
-Use the `glimpse()` function to see which other columns store data as
-lists:
-
-```{r}
-glimpse(ccss_tweets_3)
-```
-
-Since columns containing lists can not be stored in flat files like
-.csv, we'll need to "flatten" our data in these columns using the aptly
-named `flatten()` function from the {rtweets} package:
-
-```{r}
-ccss_tweets_4 <- rtweet::flatten(ccss_tweets_3)
-```
-
-Note that we included the package name followed by a double colon
-`rtweet::` when calling our function to avoid confusion with other
-functions using the same name.
-
-Now we can use the `read_csv()` function to save our data frame to our
-folder.
-
-```{r}
-write_csv(ccss_tweets_4, "data/ccss-tweets.csv")
-```
-
-Check your data folder to make sure this file has been save. You will
-also see a `ccss-tweets-5.csv` file which I have save earlier and which
-we will use in the next section to ensure we all have the same results.
-
-### **👉 Your Turn** **⤵**
-
-Use the `search_tweets` function to create your own custom query for a
-twitter hashtag or topic(s) of interest and save as a .csv file in the
-data folder.
-
-```{r}
-#YOUR CODE HERE
-```
-
-**Note:** You may want to use this data for your independent analysis
-next week.
-
-#### Other Useful Queries
-
-For your independent analysis, you may be interest in exploring posts by
-specific users rather than topics, key words, or hashtags. Yes, there is
-a function for that too!
-
-For example, let's create another list containing the usernames of me
-and some of my colleagues at the Friday Institute using the `c()`
-function again and use the `get_timelines()` function to get the most
-recent tweets from each of those users:
-
-```{r}
-fi <- c("sbkellogg", "toosweetgeek", "haspires", "tarheel93", "drcallie_tweets", "AlexDreier")
-
-fi_tweets <- fi %>%
-  get_timelines(include_rts=FALSE)
-```
-
-And let's use the `sample_n()` function from the `dplyr` package to pick
-10 random tweets and use `select()` to select and view just the
-`screenname` and `text` columns that contains the user and the content
-of their post:
-
-```{r}
-sample_n(fi_tweets, 10) %>%
-  select(screen_name, text)
-```
-
-We've only scratched the surface of the number of functions available in
-the `rtweets` package for searching Twitter. Use the following function
-to take a look at other ways you can query data using the Twitter API:
-
-```{r, eval=F}
-vignette("intro", package="rtweet")
-```
-
-### **👉 Your Turn** **⤵**
-
-To conclude Section 2a, try one of the following search functions from
-the `rtweet` vignette:
-
-1.  `get_timelines()` Get the most recent 3,200 tweets from users.
-2.  `stream_tweets()` Randomly sample (approximately 1%) from the live
-    stream of all tweets.
-3.  `get_friends()` Retrieve a list of all the accounts a user follows.
-4.  `get_followers()` Retrieve a list of the accounts following a user.
-5.  `get_favorites()` Get the most recently favorited statuses by a
-    user.
-6.  `get_trends()` Discover what's currently trending in a city.
-7.  `search_users()` Search for 1,000 users with the specific hashtag in
-    their profile bios.
-
-```{r}
-#YOUR CODE HERE
-```
-
-## 2b. Create Edgelist from Tweets
-
-Recall from Unit 1 that an edge-list that contains information about
-each tie, or relation between two actors in a network. In our previous
-walkthrough, a "tie" is a reply by one participant in the discussion
-forum to the post of another participant -- or in some cases to their
-own post. For our analysis of tweets, we'll use the same approach used
-by @supovitz2017commoncore. Specifically, each node is an individual
-Twitter user (person, group, institution, etc.) and the connection
-between each node is the tweet, retweet, or mention/reply.
-
-### Import Saved Tweets
-
-Before we proceed, let's first use the `read_csv()` function from the
-{readr} package introduced in the Getting Started walkthrough to read
-the `ccss-tweets-5.csv` file saved in or data folder so we are all
-working with the same data:
-
-```{r}
-ccss_tweets_5 <- read_csv("data/ccss-tweets-5.csv")
-```
-
-### **👉 Your Turn** **⤵**
-
-As highlighted in @estrellado2020e, cleaning and tidying network data
-can be even more challenging than for other data sources, network data
-often includes variables about both individuals and their relationships.
-This is especially true of our data downloaded using the Twitter API.
-
-Take a look at the data we just imported using one of your favorite
-methods for inspecting data and in the space below, identify the columns
-you think could be used to construct an edge list.
-
--   YOUR RESPONSE HERE
-
-### Extract Edges and Nodes
-
-If one of the columns you indicated in your response above included
-`screen_name` nice work! You may also have noticed that the
-`mentions_screen_name` column also includes the names of those in the
-reply column.
-
-#### Create Edgelist
-
-Recall from Unit 1 that the first two columns in an edgelist should
-include the nodes that make up a tie or dyad. Since the only two columns
-we need to construct our edgelist is the `screen_name` of the tweet
-author and the screen names of those included in the mentions, let's
-`relocate()` and rename those columns and then `select()` those columns
-along with any attributes that we think might be useful for analysis
-later on, like the timestamp or content of the tweet, i.e. `text`.
-
-```{r}
-ties_1 <-  ccss_tweets_5 %>%
-  relocate(sender = screen_name, # rename scree_name to sender
-           target = mentions_screen_name) %>% # rename to receiver
-  select(sender,
-         target,
-         created_at,
-         text)
-```
-
-Our edgelist with attributes is almost ready, but we have a couple
-issues we still need to deal with.
-
-As you may have noticed, our receiver column contains the names of
-multiple Twitter users, but a dyad or tie can only be between two actors
-or nodes.
-
-#### "Unnest" User Names
-
-In order to place each target user in a separate row that corresponds
-with each sender of the tweet, we will need to "unnest" these names
-using a package that those who took the ECI 588 Text Mining course will
-be very familiar with.
-
-#### tidytext 📦
-
-![](img/tidytext.png){width="20%"}
-
-The {tidytext} package helps to convert text into data frames of
-individual words, making it easy to to manipulate, summarize, and
-visualize text using using familiar functions form the {tidyverse}
-collection of packages.
-
-Let's go ahead and load the {tidytext} package:
-
-```{r}
-library(tidytext)
-```
-
-For a more comprehensive introduction to the `tidytext` package, we
-cannot recommend enough the free online book, *Text Mining with R: A
-Tidy Approach* [@silge2017text]. If you're interested in pursuing text
-analysis beyond this walkthrough, this will be a go to reference.
-
-Let's go ahead and apply the \`un
-
-```{r}
-ties_2 <- ties_1 %>%
-  unnest_tokens(input = target,
-                output = receiver,
-                to_lower = FALSE) %>%
-  relocate(sender, receiver)
-```
-
-There is A LOT to unpack with this function. First notice
-that `unnest_tokens` expects a data frame as the first argument, which
-we supplied using teh %\>% operator, followed by two column names. The
-first is an input column that the text comes from, `target` in this
-case, which we want to "unnest" into separate rows. Also notice:
-
--   Other columns, such as `sender` and `text`, are retained.
-
--   By default, words are changed to lowercase, which makes them easier
-    to compare or combine with other datasets. However, we can set
-    the `to_lower = FALSE` argument to turn off this behavior since
-    capitalization is important for our user names.
-
-Finally, we'll introduce the `drop_na()` function to remove the rows
-with missing values from our `receiver` column since they are incomplete
-dyads. We'll include these actors in our network later as part of our
-nodelist in just a bit.
-
-Let's drop our missing values and save as `ties` for our final data
-frame
-
-```{r}
-ties <- ties_2 %>%
-  drop_na(receiver)
-```
-
-### **👉 Your Turn** **⤵**
-
-Take a quick look at our final edgelist and answer the following
-question:
-
-How many edges our in our CCSS network?
-
--   YOUR RESPONSE HERE
-
-Using the tweets you downloaded with your own custom query from above,
-create an edgelist with any desired edge attributes.
-
-```{r}
-# YOUR CODE HERE
-```
-
-### Node Attributes
-
-The second file we need to create is a data frame that contains all the
-nodes or actors in our network.
-
-Regardless, let's read in our node attribute file and take a look at the
-`actors` and their attributes included in our dataset:
-
-```{r}
-actors_1 <- ties_2 %>%
-  pivot_longer(cols = sender:receiver, 
-               names_to = "nodes",
-               values_to = "screen_name")
-```
-
-Since
-
-```{r}
-actors <- actors_1 %>%
-  select(screen_name) %>%
-  distinct() %>%
-  drop_na()
-```
-
-### **👉 Your Turn** **⤵**
-
-Take a quick look at our final `actors` data frame and answer the
-following question:
-
-How many nodes our in our CCSS network?
-
--   YOUR RESPONSE HERE
-
-Using the tweets you downloaded with your own custom query from above,
-create an nodelist containing all the unique actors in your network.
-
-```{r}
-# YOUR CODE HERE
+node_attributes <- read_excel("data/School Leaders Data Chapter 9_e.xlsx")
 ```
 
 ## 2c. Create Network Object
@@ -749,28 +349,15 @@ simplifying graphs and adding edge weights, but will demonstrate some
 features similar to and in addition to those found in the {igraph}
 package.
 
-### tidygraph 📦
-
-![](img/tidygraph.png){width="20%"}
-
-The {[tidygraph](https://tidygraph.data-imaginist.com)} package is a
-huge package that exports 280 different functions and methods. It more
-or less wraps the full functionality of `igraph` in a tidy API giving
-you access to almost all of the `dplyr` verbs plus a few more, developed
-for use with relational data. While network data itself is not tidy, it
-can be envisioned as two tidy tables, one for node data and one for edge
-data. The {tidygraph} package provides a way to switch between the two
-tables and `dplyr` verbs to manipulate them. Furthermore it provides
-access to a lot of graph algorithms with return values that facilitate
-their use in a tidy workflow.
-
-Let's go ahead and load the {tidygraph} library:
-
 ```{r}
-library(tidygraph)
+class(adjacency_matrix)
+
+matrix <- as.matrix(adjacency_matrix, header = T, row.names = 1)
+
+class(matrix)
 ```
 
-### Combine Edges & Nodes
+### Convert To Matrix
 
 Before we can begin using many of the functions from the {tidygraph}
 package for preparing and summarizing our Twitter network, we first need
@@ -799,8 +386,7 @@ Let's go ahead and create our network graph, name it `network` and print
 the output:
 
 ```{r}
-network <- tbl_graph(edges = ties, 
-                     nodes = actors)
+network <- tbl_graph(matrix, nodes = node_attributes)
 
 network
 ```
