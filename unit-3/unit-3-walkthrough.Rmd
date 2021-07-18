@@ -1,5 +1,5 @@
 ---
-title: 'Unit 2 Walkthrough: Hashtag Common Core'
+title: 'Unit 3 Walkthrough: School Leader Network Mechanism'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -20,20 +20,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. PREPARE
 
-Our Unit 2 Walkthrough: Hashtag Common Core is inspired by the work of
-Jonathan Supovitz, Alan Daly, Miguel del Fresno and Christian Kolouch
-who examined the intense debate surrounding the Common Core State
-Standards education reform as it played out on Twitter. As noted on
-their expansive and interactive website for the [\#COMMONCORE
-Project](https://www.hashtagcommoncore.com), the Common Core was a major
-education policy initiatives of the early 21st century that sought to
-strengthen education systems across the United States through a set of
-specific and challenging education standards. Although these standards
-once enjoyed bipartisan support, we'll see later in this walkthrough how
-these standards have become a political punching bag.
+For the Unit 3 Walkthrough: School Leader Selection Mechanisms we will
+once again visit research conducted by Alan Daly and colleagues as we
+attempt to replicate some of the analyses described in Chapter 9:
+Network Data and Statistical Models from Social Network Analysis and
+Education [@carolan2014]. In this walkthrough we'll revisit and and then
+move beyond the visual and mathematical descriptions of networks
+explored so far to uncover generative processes, or mechanisms, that
+attempt to explain how school leaders select peers for collaboration or
+confidential exchanges.
 
-In addition to investigating tweets around the these controversial state
-standards, our Unit 2 Walkthrough will cover the following topics
+More specifically, this walkthrough will cover the following topics
 pertaining to each data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
@@ -60,145 +57,100 @@ pertaining to each data-intensive workflow process:
 
 Recall from [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
-that Carolyn (2013) cited the following four features used by Freeman
-(2004) to define the social network perspective:
+that @carolan2014 made the following distinctions between mathematical
+and statistical approaches to social network analysis:
 
-1.  Social network analysis is **motivated by a relational intuition**
-    based on ties connecting social actors.
+1.  **Mathematical approaches** focus on what network of actors "looks
+    like" by describing the network using sociograms and/or network
+    measures such as reciprocity, centrality, and density. However,
+    these approaches "tend to regard the measured relationships and
+    their strengths as accurately reflecting the real, final, or
+    equilibrium status of the network."
 
-2.  It is firmly **grounded in systematic empirical data**.
-
-3.  It **makes** **use of graphic imagery** to represent actors and
-    their relations with one another.
-
-4.  It **relies** **on** **mathematical and/or computational models** to
-    succinctly represent the complexity of social life.
+2.  **Statistical approaches**, or statistical inference, on the other
+    hand, focuses on "assessing the reproducibility or likelihood of an
+    observed pattern" with the goal of explaining and ultimately
+    predicting network structures and outcomes.
 
 The [\#COMMONCORE Project](https://www.hashtagcommoncore.com) that we'll
 examine next is an exemplary illustration of these four defining
 features of the social network perspective.
 
-### The \#commoncore Project
+### Daly's School Leaders Dataset
 
-![](img/commoncore.jpeg){width="50%"}
+Leadership network data were collected at two school districts over 3
+consecutive years.
 
-Supovitz, J., Daly, A.J., del Fresno, M., & Kolouch, C.
-(2017). *\#commoncore Project.* Retrieved from
-[http://www.hashtagcommoncore.com](http://www.hashtagcommoncore.com/).
+#### Research Questions:
 
-#### Prologue
-
-As noted by @supovitz2017commoncore, the Common Core State Standards
-have been a "persistent flashpoint in the debate over the direction of
-American education." The \#commoncore Project explores the Common Core
-debate on Twitter using a combination of social network analyses and
-psychological investigations which help to reveal both the underlying
-social structure of the conversation and the motivations of the
-participants.
-
-The central question guiding this investigation was:
-
-> How are social media-enabled social networks changing the discourse in
-> American politics that produces and sustains social policy?
-
-#### Data Sources & Analyses
-
-The [methods
-page](https://www.hashtagcommoncore.com/project/methodology) of the
-\#COMMONCORE Project provides a detailed discussion of the data and
-analyses used to arrive at the conclusions in *\#commoncore: How social
-media is changing the politics of education*. Provided below is a
-summary of how authors retrieved data from Twitter and the analyses
-applied for each of the five acts in the website. I highly encourage you
-to take a look at this section if you'd like to learn more about their
-approach and in particular if you're unfamiliar with how users can
-interact and communicate on Twitter.
+1.  Is there a relationship between the frequency of collaboration
+    between school leaders and how often they turn to each other to
+    discuss issues of a confidential nature?
+2.  Do school leaders prefer to collaborate with those with whom they
+    have collaborated in the past, or is there some other reason?
+3.  Does gender or some other individual attribute predicts confidential
+    exchanges between school leaders, or does some previous relation
+    have a stronger effect?
+4.  Does collaboration between leaders explain one's level of trust in
+    one's administrative colleagues?
+5.  Can we distinguish among different groups of school leaders based on
+    how frequently they collaborate, and if so, are these groupings
+    related to the level at which they work (school versus district)?
 
 #### Data Collection
 
-To collect data on keywords related to the Common Core, the project used
-a customized data collection tool developed by two of our co-authors,
-Miguel del Fresno and Alan J. Daly, called *Social Runner
-Lab^TM^*. Similar to an approach we'll use later in this walkthrough,
-the authors downloaded data in real time directly from Twitter's
-Application Programming Interface (API) based on tweets using specified
-keywords, keyphrases, or hashtags and then restricted their analysis to
-the following terms: *commoncore*, *ccss* and *stopcommoncore.* They
-also captured Twitter profile names, or user names, as well as the
-tweets, retweets, and mentions posted. Data included messages that are
-public on twitter, but not private messages between individuals, nor
-from accounts which users have made private or direct messages.
+For each consecutive year, school district leaders were invited to
+complete a survey that collected individual:
+
+-   **Demographic information** (e.g., gender, ethnicity, marital
+    status, age, years of experiences),
+
+-   **Network relationships types** (e.g., collaboration, confidential,
+    energy, expertise, support you approach, support approach you,
+    work-related issues, input, recognition, best practices, and
+    innovation), efficacy, and trusting relationships.
+
+-   **Frequency of interactions** they have with those nominated
+    individuals on a four-point frequency scale ranging from 1 (the
+    least frequent) to 4 (1--2 times a week).
+
+-   **Leadership efficacy** items were designed based on the Principal
+    Efficacy Scale used in Daly et al. (2011) and Tschannen-Moran and
+    Gareis's (2004) studies. The efficacy scale includes 18 items rated
+    on a 9-point Likert scale ranging from 1 (None at all) to 9 (A great
+    deal).
+
+-   **Trust** scale contains eight items rated on a 7-point Likert scale
+    ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
+    from Tschannen-Moran and Hoy (2003)
 
 #### Analyses
 
-In order to address their research question, the authors applied social
-network analysis techniques in addition to qualitative and automated
-text mining approaches. For social network analyses, each node is an
-individual Twitter user (person, group, institution, etc.) and the
-connection between each node is the tweet, retweet, or mention/reply.
-After retrieving data from the Twitter API, the authors created a file
-that could be analyzed in Gephi, an open-source software program which
-depicts the relations as networks and provides metrics for describing
-features of the network.
+Assumptions of independence Simulations...
 
-In addition to data visualization and network descriptives, the authors
-examined group development and lexical tendencies among users. For the
-former, they used a community detection algorithm to identify and
-represent structural sub-communities, or factions (a "faction" in this
-sense is a group with more ties within than across group even those
-group boundaries are somewhat porous). For the latter, the authors used
-the Linguistic Inquiry and Word Count (LIWC) lexicons to determine
-psychological drive, monitor moods, diagnose their level of conviction,
-and make inferences about thinking styles.
+-   **QAP/MR**: The quadratic assignment procedure (QAP) developed by
+    Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
+    correlation between the two networks and adjusts for this dependence
+    between networks by repeatedly permuting the order of rows and
+    columns of one of the networks while keeping the other network
+    intact. The QAP is based on regression models and permutation tests
+    for valued (i.e., continuous) relational variables.
 
-For a nice summary of the data used for the analysis, as well as the
-samples of actors and tweets, the keywords, and the methods that were
-utilized, see [Table 1. Data and Method for Each
-Act](https://www.hashtagcommoncore.com/project/methodology) in the
-Methods section of the \#commoncore website.
+-   ERGM:
 
 #### Key Findings
 
-In the \#commoncore Project, analyses of almost 1 million tweets sent by
-about 190,000 distinct actors over a period of 32 months revealed the
-following:
+Findings here:
 
--   In **Act 1**, **The Giant Network**, the authors identified five
-    major sub-communities, or factions, in the Twitter debate
-    surrounding the Common Core, including: (1) supporters of the Common
-    Core, (2) opponents of the standards from inside education, and (3)
-    opponents from outside of education.
--   In **Act 2**, **Central Actors**, they noted that most of these
-    participants were casual contributors -- almost 95% of them made
-    fewer than 10 tweets in any given six-month period. They also
-    distinguished between two types of influence on
-    Twitter: *Transmitters* who tweeted a lot, regardless of the extent
-    of their followership; and *Transceivers*, those who gained their
-    influence by being frequently retweeted and mentioned.
--   In **Act 3**, **Key Events,** the authors identified issues driving
-    the major spikes in the conversation, like when Secretary of
-    Education Duncan spoke about white suburban moms' opposition to the
-    Common Core, or the debate over the authorization of the Every
-    Student Succeeds Act in November 2015. They also offended evidence
-    of manufactured controversies spurred by sensationalizing minor
-    issues and outright fake news stories.
--   In **Act 4**, **Lexical Tendencies**, the authors examined the
-    linguistic tendencies of the three major factions and found that
-    Common Core supporters used the highest number of conviction words,
-    tended to use more achievement-oriented language, and used more
-    words associated with a formal and analytic thinking style. By
-    contrast, opponents of the Common Core from within education tended
-    to use more words associated with sadness, and used more narrative
-    thinking style language. Opponents of the Common Core from outside
-    of education made the highest use of words associated with peer
-    affiliation, used the largest number of angry words, and exhibited
-    the lowest level of conviction in their word choices.
--   In **Act 5**, **The Tweet Machine**, examined five frames that
-    opponents of the Common Core used to appeal to values of particular
-    subgroups including the government frame, business frame, war frame,
-    experiment frame, and propaganda frame. By combining these
-    constituencies, the authors illustrated how the Common Core
-    developed a strong transpartisan coalition of opposition.
+1.  **Is there a relationship between the frequency of collaboration
+    between school leaders and how often they turn to each other to
+    discuss issues of a confidential nature?** While collaboration in
+    year 1 does not significantly predict collaboration in year 3,
+    confidential exchanges in year 1 does, which suggests that
+    collaboration among school leaders provides an important foundation
+    for more sensitive, perhaps even deeper, relations (e.g.,
+    confidential exchanges) at a later point in time
+2.  
 
 ### **👉 Your Turn** **⤵**
 
@@ -230,8 +182,8 @@ page](https://www.hashtagcommoncore.com/project/methodology) of the
 
 ## 1b. Identify a Question(s)
 
-Recall from above that the central question guiding the \#COMMONCORE
-Project was:
+Recall from above that our focus for this walkthrough is research
+question 2:
 
 > How are social media-enabled social networks changing the discourse in
 > American politics that produces and sustains social policy?
@@ -270,151 +222,42 @@ RStudio. Recall that:
 > code that are used in any given project
 
 Since we are working in RStudio Cloud, a Project has already been set up
-for you as indicated by the `eci-589.Rproj` file in your main directory
+for you as indicated by the `unit-3.Rproj` file in your main directory
 in the Files pane.
 
 ### Load Libraries
 
-In Unit 1, we also learned about **packages**, or libraries, which are
-shareable collections of R code that can contain functions, data, and/or
-documentation and extend the functionality of R. You can always check to
-see which packages have already been installed and loaded into RStudio
-Cloud by looking at the the Files, Plots, & Packages Pane in the lower
-right hand corner.
+Recall that **packages**, or libraries, are shareable collections of R
+code that can contain functions, data, and/or documentation and extend
+the functionality of R. You can always check to see which packages have
+already been installed and loaded into RStudio Cloud by looking at the
+the Files, Plots, & Packages Pane in the lower right hand corner.
 
 Let's go ahead and load the packages from Unit 1 since we'll be using
 them again very soon:
 
 ```{r}
 library(tidyverse)
-library(igraph)
+library(tidygraph)
+library(ggraph)
 ```
 
-#### rtweet 📦
+#### statnet 📦
 
-![](img/rtweet.png){width="20%"}
+![](img/statnetlogo.png){width="20%"}
 
-Similar to approach used by @supovitz2017commoncore for downloading data
-in directly from Twitter's Application Programming Interface (API), we
-will be using {[rtweet](https://docs.ropensci.org/rtweet/)} package to
-search for and download tweets based on specified keywords.
+Similar to the collection of packages contained in the {tidyverse}
+package, the Statnet Team [@handcock:statnet] has developed a suite of R
+packages for the management, exploration, statistical analysis,
+simulation and vizualization of network data. The statistical modeling
+framework used in {statnet} relies on Exponential-family Random Graph
+Models (ERGMs).
 
-The `rtweet` package provides users a range of functions designed to
-extract data from Twitter's REST and streaming APIs and has three main
-goals:
-
-1.  Formulate and send requests to Twitter's REST and stream APIs.
-
-2.  Retrieve and iterate over returned data.
-
-3.  Wrangling data into tidy structures.
-
-Let's load the {rtweet} package that we'll be using in just a bit to
+Let's load the {statnet} package that we'll be using in just a bit to
 accomplish all three of the goals listed above:
 
 ```{r}
-library(rtweet)
-```
-
-## 1c. AccessTwitter API
-
-Before you can begin downloading data using the Twitter API, you'll
-first need to create a Twitter App in your developer account. You are
-not required to set up developer account for this course, but if you are
-still interested in creating one, [these
-instructions](https://moodle-courses2122.wolfware.ncsu.edu/mod/forum/view.php?id=119499)
-outline the process and you can set one up in about 10 minutes.
-
-If you are not interested in setting an account of your own, I have
-provided you with temporary keys and tokens to download data from
-Twitter and have also provided data for this walkthrough in the data
-folder.
-
-### **What is an API?**
-
-For those new to the concept of an API, our very own Raleigh,
-NC-based [Red
-Hat](https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces) describes
-an API as a means for one product or service communicate with other
-products and services:
-
-> APIs are sometimes thought of as contracts, with documentation that
-> represents an agreement between parties: If party 1 sends a remote
-> request structured a particular way, this is how party 2's software
-> will respond.
-
-As Duke University's Chris Bail notes, "APIs have become one of the most
-important ways to access and transfer data online--- and increasingly
-APIs can even analyze your data as well." Compared to screen-scraping
-data from web pages, APIs are considerably easier to work with than the
-HTML or XML data, ensure that data is collected legally, and with R
-packages like `rtweet`, are logistically easier to work with, as we'll
-soon see.
-
-For a more in-depth explanation of APIs, how they work, and a preview of
-some of the `rtweet` functions we'll be using this summer, I highly
-recommend reading through Chris Bail's [Application Programming
-Interfaces in
-R](https://sicss.io/2020/materials/day2-digital-trace-data/apis/rmarkdown/Application_Programming_interfaces.html) tutorial.
-
-### Authorize RStudio
-
-In order to authorize R to use your Twitter App to retrieve data, you'll
-need to create a personal Twitter token by completing the following
-steps:
-
-1.  Navigate to
-    [developer.twitter.com/en/apps](https://developer.twitter.com/en/apps)
-    and select your Twitter app
-2.  Click the tab labeled `Keys and tokens` to retrieve your keys.
-3.  Locate the `Consumer API keys` (aka "API Secret").
-
-![](img/create-app-6.png){width="80%"}
-
-3.  Scroll down to `Access token & access token secret` and click
-    `Create`
-
-![](img/create-app-7.png){width="80%"}
-
-4.  Locate the following code into the R Script file named
-    `twitter-auth.R` located in files pane, replace the four fake keys
-    with your own, and pass them along to `create_token()` function.
-
-```{r api-keys, eval=FALSE}
-## store api keys (these are fake example values; replace with your own keys)
-app_name <- "Text Mining in Education"
-api_key <- "afYS4vbIlPAj096E60c4W1fiK"
-api_secret_key <- "bI91kqnqFoNCrZFbsjAWHD4gJ91LQAhdCJXCj3yscfuULtNkuu"
-access_token <- "9551451262-wK2EmA942kxZYIwa5LMKZoQA4Xc2uyIiEwu2YXL"
-access_token_secret <- "9vpiSGKg1fIPQtxc5d5ESiFlZQpfbknEN1f1m2xe5byw7"
-
-## authenticate via web browser
-token <- create_token(
-  app = app_name,
-  consumer_key = api_key,
-  consumer_secret = api_secret_key,
-  access_token = access_token,
-  access_secret = access_token_secret)
-```
-
-**Note**: these keys are named secret for a reason. We store these up in
-a separate R script file rather than in a R Markdown file that you will
-eventually share. If you do not have your own keys, temporary keys have
-been provided for you in the `twitter-auth.r` file in your Files pane.
-
-#### Check Authorization
-
-The `create_token()` function should automatically save your token as an
-environment variable. So next time you start an R session -- on the same
-machine -- rtweet should 🤞 automatically find your token.
-
-5.  To make sure it works, you can run the following code and check to
-    make sure the app name and `api_key` match those on your dev
-    account.
-
-```{r get-token}
-## check to see if the token is loaded
-get_token()
+library(statnet)
 ```
 
 That's it! You're ready ready to start wrangling some tweets!!!
