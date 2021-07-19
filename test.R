@@ -1,90 +1,73 @@
-
-library(RCurl)
+library(tidyverse)
 library(tidygraph)
 library(igraph)
 library(readxl)
+library(statnet)
 
-ga.mat<-getURL("https://docs.google.com/spreadsheet/pub?key=0Ai--oOZQWBHSdDE3Ynp2cThMamg1b0VhbEs0al9zV0E&single=true&gid=0&output=txt",
-               ssl.verifypeer = FALSE)
-ga.mat<-as.matrix(read.table(textConnection(ga.mat), sep="\t",
-                             header=T, row.names=1, quote="\""))
-#Second, read in the network attributes
-ga.atts<-getURL("https://docs.google.com/spreadsheet/pub?key=0Ai--oOZQWBHSdDE3Ynp2cThMamg1b0VhbEs0al9zV0E&single=true&gid=1&output=txt",
-                ssl.verifypeer = FALSE)
-ga.atts<-read.table(textConnection(ga.atts), sep="\t", header=T, quote="\"",
-                    stringsAsFactors=F, strip.white=T, as.is=T)
-#Third, create a network object using the sociomatrix and its corresponding attributes
-ga.net<-network(ga.mat, vertex.attr=ga.atts, vertex.attrnames=colnames(ga.atts),
-                directed=F, hyper=F, loops=F, multiple=F, bipartite=F)
-
-# WRANGLE
+# WRANGLE ####
 
 
-# Import Data
+# Import Data ####
 
-edge_matrix <- read_csv("unit-3/data/School Leaders Data Chapter 9_d.csv")
-
-
-node_list <- 
+leader_nodes <- 
   read_excel("unit-3/data/School Leaders Data Chapter 9_e.xlsx", 
              col_types = c("text", "numeric", "numeric", "numeric", "numeric"))
 
+leader_matrix <- 
+  read_excel("unit-3/data/School Leaders Data Chapter 9_d.xlsx", 
+             col_names = FALSE)
 
-## Convert to Matrix
 
-matrix <- edge_matrix %>%
+## Convert to Matrix ####
+
+leader_matrix <- leader_matrix %>%
   as.matrix()
 
-class(matrix)
+class(leader_matrix)
 
-## Dichotomize matrix
+## Dichotomize matrix ####
 
-matrix[matrix <= 2] <- 0
+leader_matrix[leader_matrix <= 2] <- 0
 
-matrix[matrix >= 3] <- 1
+leader_matrix[leader_matrix >= 3] <- 1
 
-matrix
+leader_matrix
 
-## Convert Adjacent Matrix 
+#add names to matrix object
+rownames(leader_matrix) <- leader_nodes$ID
+colnames(leader_matrix) <- leader_nodes$ID
 
-adjacency_matrix <- graph.adjacency(matrix)
+## Convert Adjacent Matrix #### 
+
+adjacency_matrix <- graph.adjacency(leader_matrix,
+                                    diag = FALSE)
 
 class(adjacency_matrix)
 
+## Convert to edge list ####
 
-## Convert to edge list
-
-
-
-edge_list <- get.data.frame(adjacency_matrix) %>%
-  to_simple()
+leader_edges <- get.data.frame(adjacency_matrix)
 
 
-edge_list
+leader_edges
 
-## Create Network Object 
+## Create Network Object #### 
 
-network <- tbl_graph(edges = edge_list,
+network <- tbl_graph(edges = leader_edges,
                      nodes = node_list,
                      directed = TRUE)
 
-simple_network <- network %>%
-  convert(to_simple)
 
-  
+network
 
-simple_network
+plot(network) 
 
 
+# EXPLORE ####
 
-plot(simple_network) 
+# Degree ####
 
-
-# EXPLORE
-
-# Degree
-
-network_measures <- simple_network %>%
+network_measures <- network %>%
   activate(nodes) %>%
   mutate(degree = centrality_degree(mode = "all")) %>%
   mutate(in_degree = centrality_degree(mode = "in")) %>%
@@ -99,16 +82,66 @@ node_measures <- network_measures %>%
 summary(node_measures)
 
 
-ergm_network <- network(edge_list, vertex.attr = node_list, matrix.type = "edgelist", ignore.eval = FALSE, loops = TRUE)
+# MODEL ####
 
-ergm_network
-
-ergm.getnetwork(ergm_network)
-
-class(network)
+## Convert to network object ####
 
 
-plot(ergm_network)
+leader_network <- as.network(leader_edges,
+                             vertices = leader_nodes)
 
-ergm_1 <- ergm(network ~ edges) # Estimate the model 
+class(leader_network)
+
+leader_network
+
+list.vertex.attributes(leader_network)
+
+
+plot(leader_network)
+
+ergm_1 <- ergm(leader_network ~ edges) 
+
+summary(ergm_1)
+
+ergm_2 <- ergm(leader_network ~ edges + 
+                 mutual)
+
+summary(ergm_2)
+
+ergm_3 <- ergm(leader_network ~ edges +
+                 mutual +
+                 nodematch('MALE'))
+  
+
+summary(ergm_3)
+
+ergm_4 <- ergm(leader_network ~ edges +
+                 mutual +
+                 nodematch('MALE') +
+                 absdiff('EFFICACY')
+               )
+  
+  
+summary(ergm_4)
+
+ergm_5 <- ergm(leader_network ~ edges +
+                 mutual +
+                 nodematch('MALE') +
+                 absdiff('EFFICACY') +
+                 absdiff('TRUST')
+)
+
+
+summary(ergm_5)
+
+ergm_6 <- ergm(leader_network ~ edges +
+                 mutual +
+                 nodematch('MALE') +
+                 nodematch('DISTRICT/SITE') +
+                 absdiff('EFFICACY') +
+                 absdiff('TRUST')
+)
+
+
+summary(ergm_6)
 
