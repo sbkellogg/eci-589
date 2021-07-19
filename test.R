@@ -18,12 +18,12 @@ ga.net<-network(ga.mat, vertex.attr=ga.atts, vertex.attrnames=colnames(ga.atts),
 
 # Import Data
 
-adjacency_matrix <- read.matrix()
-
 matrix <- read_csv("unit-3/data/School Leaders Data Chapter 9_d.csv") %>%
   as.matrix()
 
 class(matrix)
+
+
 
 adjacency_matrix <- graph.adjacency(matrix,
                              weighted = TRUE)
@@ -43,4 +43,17 @@ network <- tbl_graph(edges = edge_list,
                      nodes = node_list)
 
 network
+
+ergm_network <- network(edge_list, vertex.attr = node_list, matrix.type = "edgelist", ignore.eval = FALSE, loops = TRUE)
+
+ergm_network
+
+ergm.getnetwork(ergm_network)
+
+class(network)
+
+
+plot(ergm_network)
+
+ergm_1 <- ergm(network ~ edges) # Estimate the model 
 
