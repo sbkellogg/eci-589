@@ -138,94 +138,49 @@ Assumptions of independence Simulations...
 
 -   ERGM:
 
-#### Key Findings
+## 1b. Identify Questions
 
-Findings here:
+Recall from...
 
 1.  **Is there a relationship between the frequency of collaboration
     between school leaders and how often they turn to each other to
-    discuss issues of a confidential nature?** While collaboration in
-    year 1 does not significantly predict collaboration in year 3,
-    confidential exchanges in year 1 does, which suggests that
-    collaboration among school leaders provides an important foundation
-    for more sensitive, perhaps even deeper, relations (e.g.,
-    confidential exchanges) at a later point in time
-2.  
+    discuss issues of a confidential nature?**
+2.  **Do school leaders prefer to collaborate with those with whom they
+    have collaborated in the past, or is there some other reason?**
+
+In response to these questions, Carolyn reported that "while
+collaboration in year 1 does not significantly predict collaboration in
+year 3, confidential exchanges in year 1 does" and suggested that
+"collaboration among school leaders provides an important foundation for
+more sensitive, perhaps even deeper, relations (e.g., confidential
+exchanges) at a later point in time."
 
 ### **👉 Your Turn** **⤵**
 
-For our Unit 2 Walkthrough, we'll apply some of the same techniques used
-by this study including some quick attempts at applying community
-detection algorithms and automated text analysis using a few new
-packages in R.
+For our Unit 3 Walkthrough, we focused specifically on generative
+processes, or micro-level mechanisms, the might help explain who school
+leaders select to collaborate with or or engage in confidential
+exchanges. These are illustrated by research questions 2 & 3 from above.
 
-You are likely already familiar with some of the techniques and
-approaches used in this study, however. For example, take a quick look
-at the [*Explore the Networks*](https://www.hashtagcommoncore.com/#2-1)
-section from Act 2: Central Actors and the Transmitters, Transceivers
-and Transcenders identified by their analysis.
+Review Chapter 9 of SNA and Education and report out on the findings
+from the ERGM analysis below:
 
-In the space below, type a brief response to the following questions:
-
-1.  What network measures introduced in Unit 1 do think were used to
-    identify these three types of "central actors"?
+3.  **Does gender or some other individual attribute predicts
+    confidential exchanges between school leaders, or does some previous
+    relation have a stronger effect?**
 
     -   YOUR RESPONSE HERE
-
-Now check your response by looking at the [methods
-page](https://www.hashtagcommoncore.com/project/methodology) of the
-\#COMMONCORE Project.
-
-1.  Were you correct?
-
-    -   YOUR RESPONSE HERE
-
-## 1b. Identify a Question(s)
-
-Recall from above that our focus for this walkthrough is research
-question 2:
-
-> How are social media-enabled social networks changing the discourse in
-> American politics that produces and sustains social policy?
-
-For Unit 2, we are going to focus our questions on something a bit less
-ambitious but inspired by this work:
-
-1.  Who are the transmitters, transceivers, and transcenders in our
-    Common Core Twitter network?
-2.  What subgroups, or factions, exist in our network?
-3.  Which actors in our network tend to be more opposed to the Common
-    Core?
-
-To address the latter question, we'll introduce a common text mining
-technique in the Model section for gauging sentiment of social media
-posts.
-
-### **👉 Your Turn** **⤵**
 
 Based on what you know about networks and the context so far, what other
-research questions might ask we ask in this context that a social
-network perspective might be able to answer?
-
-In the space below, type a brief response to the following questions:
+specific question(s) might the data and analyses described allow you to
+address. For example, the concept of homophily, or the tendency for
+people to seek out or form ties to those who are similar to themselves,
+was introduced in our readings and hypotheses about homophily can easily
+be test using using ERGMs:
 
 -   YOUR RESPONSE HERE
 
-## **1c. Set Up Project**
-
-As highlighted in [Chapter 6 of Data Science in Education Using
-R](https://datascienceineducation.com/c06.html) (DSIEUR), one of the
-first steps of every workflow should be to set up your "Project" within
-RStudio. Recall that:
-
-> A **Project** is the home for all of the files, images, reports, and
-> code that are used in any given project
-
-Since we are working in RStudio Cloud, a Project has already been set up
-for you as indicated by the `unit-3.Rproj` file in your main directory
-in the Files pane.
-
-### Load Libraries
+## **1c.** Load Libraries
 
 Recall that **packages**, or libraries, are shareable collections of R
 code that can contain functions, data, and/or documentation and extend
@@ -233,12 +188,13 @@ the functionality of R. You can always check to see which packages have
 already been installed and loaded into RStudio Cloud by looking at the
 the Files, Plots, & Packages Pane in the lower right hand corner.
 
-Let's go ahead and load the packages from Unit 1 since we'll be using
-them again very soon:
+Let's go ahead and load the packages from Units 1 & 2 since we'll be
+using them again in this walkthrough:
 
 ```{r}
 library(readxl)
 library(tidyverse)
+library(igraph)
 library(tidygraph)
 library(ggraph)
 ```
@@ -254,31 +210,41 @@ simulation and vizualization of network data. The statistical modeling
 framework used in {statnet} relies on Exponential-family Random Graph
 Models (ERGMs).
 
-Let's load the {statnet} package that we'll be using in just a bit to
-accomplish all three of the goals listed above:
+As noted in the [statnet
+tutorial](http://statnet.org/Workshops/ergm_tutorial.html#The_statnet_Project)
+by the same authors, the exponential-family random graph models (ERGMs)
+are a general class of models based in exponential-family theory for
+specifying the probability distribution for a set of random graphs or
+networks. Within this framework, one can---among other tasks:
+
+1.  Define a model for a network that includes covariates representing
+    features like homophily, mutuality, triad effects, and a wide range
+    of other structural features of interest;
+
+2.  Obtain maximum-likehood estimates for the parameters of the
+    specified model for a given data set;
+
+3.  Test individual coefficients, assess models for convergence and
+    goodness-of-fit and perform various types of model comparison; and
+
+4.  Simulate new networks from the underlying probability distribution
+    implied by the fitted model.
+
+Let's load the {statnet} package that we'll be using in the Model
+section of our walkthrough for bullets 1-3 above:
 
 ```{r}
 library(statnet)
 ```
 
-That's it! You're ready ready to start wrangling some tweets!!!
-
 ------------------------------------------------------------------------
 
 # 2. WRANGLE
 
-In general, data wrangling involves some combination of cleaning,
-reshaping, transforming, and merging data [@wickham2016r]. The
-importance of data wrangling is difficult to overstate, as it involves
-the initial steps of going from the raw data to a dataset that can be
-explored and modeled [@krumm2018].
+For our data wrangling this week, we'll be . Our primary goals for Unit
+1 are learning how to:
 
-For our data wrangling this week, we're keeping it simple since working
-with network data is a bit of a departure from our working with
-rectangular data frames. Our primary goals for Unit 1 are learning how
-to:
-
-a.  **Import Tweets**. In this section, we introduce
+a.  **Import Matrices**. In this section, we introduce
     the `rtweet` package and some key functions to search for tweets or
     users of interest.
 
@@ -323,49 +289,164 @@ and a direct link to the file are included below:
     variables can be used as covariates in some of the statistical
     models covered in Chapter 9, including regression and *p\** models.
 
-Let's go ahead an import our matrix first as save as `adjacency_matrix`:
+Since we are working with Excel files, we'll need to use the
+`read_excel()` function from {readxl} tidyverse package to import our
+data. Let's import the `School Leaders Data Chapter 9_e.xlsx` node file
+located in the `data/` folder first:
 
 ```{r}
-adjacency_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx", col_names = FALSE) 
+leader_nodes <- read_excel("data/School Leaders Data Chapter 9_e.xlsx", 
+                           col_types = c("text", "numeric", "numeric", "numeric", "numeric"))
+```
+
+Note that we specified the `ID` column as "text" and the remaining
+columns as "numeric." By default, the `readxl()` function would have
+recognized each column as numeric, but the first column indicates the
+"names" for each school leader and we'll be using this column to assign
+names to our columns and rows for adjacency matrix in just a bit.
+
+### **👉 Your Turn** **⤵**
+
+Recall from above that our relations, or edges, are stored as a valued
+[adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) in
+which columns and rows consist of the same actors and each cell contains
+information about the tie between each pair of actors. In our case, the
+tie is a directed valued "arc" where the value indicates the strength of
+the relationship.
+
+Use the `read_excel()` function to import the
+`School Leaders Data Chapter 9_d.xlsx` file, add an argument setting the
+column names to `FALSE` since our file is a simple matrix with no header
+or column names, assign the matrix to a variable named `leader_matrix`:
+
+**Hint:** Type `?read_excel` into the console and check the Arguments
+section to find the name of the argument used to set column headers.
+
+```{r}
+#YOUR CODE HERE
+leader_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx", 
+                            col_names = FALSE)
+```
+
+Take a look at the matrix you imported and answer the questions that
+follow:
+
+1.  Is our network a square matrix? What does this tell you about the
+    number of nodes in our network?
+
+    -   
+
+2.  Does our network contain self-loops? How do you know?
+
+    -   
+
+3.  What do the values in each cell of our matrix indicate?
+
+    -   
+
+## 2a. Dichotomize Matrix
+
+Since one of our goals is a crude replication of the analysis
+demonstrated in Chapter 9, and since working with "valued networks" is a
+little more complex that binary networks, which indicate just the
+presence or absence relationship between two actors, we will need to
+"dichotomize" our matrix, which in practice entails converting our
+valued matrix to binary matrix with cells containing just 1s or 0s.
+
+**However,** before we can convert dichotomize our "matrix," we first
+need to convert it to a matrix object recognized by R using the
+`as.matrix()` function. We can then check to data format of our
+`leader_matrix` using the `class()` function:
+
+```{r}
+leader_matrix <- leader_matrix %>%
+  as.matrix()
+
+class(leader_matrix)
+```
+
+Both the collaboration and confidential help network data were
+dichotomized by recoding values originally coded as a 3 and 4 recoded to
+1, indicating the presence of a directed tie for both relations, and
+zero otherwise.
+
+To dichotmize our our matrix, the following code will assign 0s to all
+values in our matrix that are less than or equal to 2, and 1s to all
+values that greater the or equal to 3:
+
+```{r}
+leader_matrix[leader_matrix <= 2] <- 0
+
+leader_matrix[leader_matrix >= 3] <- 1
+```
+
+### Add Row and Column Names
+
+Before we can convert to an edge-list, we will also need to add the
+names of our nodes to the columns and rows of our matrix. These are
+stored in the `ID` column of our `leader_node` data frame. We can use
+the `$` operator to select these names and assign to our `leader_matrix`
+using the `rownames()` and `colnames()` functions respectively:
+
+```{r}
+rownames(leader_matrix) <- leader_nodes$ID
+colnames(leader_matrix) <- leader_nodes$ID
+```
+
+## 2c. Create Graph with Attributes
+
+To date in this course, we have only worked with edge-lists as a data
+format for storing network data. Recall that edge-lists contain a row
+for each dyad consisting of at minimum two columns with the name of each
+actor, and which conveniently can also contain other information or
+attributes about the relationship such as edge weight, timestamps, or
+other contextual information as demonstrated in Unit 1.
+
+Edge-lists also have the advantage of being easier to work with when
+using network packages in R.
+
+### Get Edges
+
+The {igraph} package introduced in Unit 1 has a convenient function for
+extracting an edge list from a matrix, but first we need to convert our
+matrix to an igraph graph object.
+
+```{r}
+adjacency_matrix <- graph.adjacency(leader_matrix,
+                                    diag = FALSE)
+
+class(adjacency_matrix)
+```
+
+Note that we also included the diag = FALSE argument which converts all
+values along the diagonal to 0s, thereby removing our self-loops. I
+believe they may have been included when calculating the network
+descriptives included in Table 9.1, and our own descriptives may not
+match exactly, but we'll need to remove these from our network anyways
+for the ERGM analysis so this will save us a step.
+
+Now we can use the `get.data.frame()` function to covert our matrix to a
+standard edge-list:
+
+```{r}
+leader_edges <- get.data.frame(adjacency_matrix)
+
+
+leader_edges
 ```
 
 ### **👉 Your Turn** **⤵**
 
-Read in node attribute file and save as
+Recall from Unit 2 that we introduce the {tidygraph} package for
+preparing and summarizing our Twitter network. Tidygraph incudes the
+full functionality of `igraph` in a tidy API giving you access to almost
+all of the `dplyr` verbs plus a few more, developed for use with
+relational data.
 
-```{r}
-#YOUR CODE HERE
-node_attributes <- read_excel("data/School Leaders Data Chapter 9_e.xlsx")
-```
-
-## 2c. Create Network Object
-
-In Unit 1 we learned about the {igraph} package for preparing network
-objects for analysis. In this section we introduce a new package that
-builds upon the "the well-oiled machinery of igraph" but allows us to
-use some of the familiar functions and syntax from other {tidyverse}
-packages. In this walkthrough we won't recreate all the processes like
-simplifying graphs and adding edge weights, but will demonstrate some
-features similar to and in addition to those found in the {igraph}
-package.
-
-```{r}
-class(adjacency_matrix)
-
-matrix <- as.matrix(adjacency_matrix, header = T, row.names = 1)
-
-class(matrix)
-```
-
-### Convert To Matrix
-
-Before we can begin using many of the functions from the {tidygraph}
-package for preparing and summarizing our Twitter network, we first need
-to convert the data frames that we imported into a network object,
-similar to what we did in Unit 1.
-
-To do that, we will use the `tbl_graph()` function and include the
-following arguments:
+Similar to Unit 2, use the `tbl_graph()` function to convert our
+`leader_edges` and `leader_nodes` data frames into a network graph
+object, by including the following arguments and supplying the
+appropriate code:
 
 -   `edges =` expects a data frame, in our case `ties`, containing
     information about the edges in the graph. The nodes of each edge
@@ -378,34 +459,17 @@ following arguments:
     matched to the column named according to `node_key` in nodes, if it
     exists, or matched to the first column in the node list.
 
--   `directed =` specifies whether the constructed graph be directed and
-    defaults to `TRUE` so we did not included it since our network is
-    directed.
-
-Let's go ahead and create our network graph, name it `network` and print
-the output:
+-   `directed =` specifies whether the constructed graph be directed.
 
 ```{r}
-network <- tbl_graph(matrix, nodes = node_attributes)
+# YOUR CODE HERE
+leader_graph <- tbl_graph(edges = leader_edges,
+                          nodes = leader_nodes,
+                          directed = TRUE)
 
-network
+
+leader_graph
 ```
-
-### **👉 Your Turn** **⤵**
-
-Take a look at the output for our simple graph now and answer the
-following questions:
-
-1.  Are the numbers and names of nodes and actors consistent with our
-    `actors` and `ties` data frames? What about the integers included in
-    the `from` and `to` columns of the Edge Data?
-
-    -   YOUR RESPONSE HERE
-
-2.  What do you think "components" refers to? **Hint:** see Chapter 6 of
-    [@carolan2014].
-
-    -   YOUR RESPONSE HERE
 
 ### 🧶 Knit & Check ✅
 
@@ -417,14 +481,8 @@ check to see if you encounter any errors.
 
 # 3. EXPLORE
 
-As noted in the Getting Started Walkthrough and experienced in Unit 1,
-exploratory data analysis involves the processes of describing your data
-(such as by calculating the means and standard deviations of numeric
-variables, or counting the frequency of categorical variables) and,
-often, visualizing your data prior to modeling.
-
-In Section 3, we use the {tidygraph} package for retrieving network
-descriptives and introduce the {ggraph} package to create a network
+In Section 3, we use the {tidygraph} package again for retrieving
+network descriptives and the {ggraph} package to create a network
 visualization to help illustrate these metrics. Specifically, in this
 section we'll learn to:
 
@@ -438,27 +496,28 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
     shape, and position of nodes and edges to better at communicating
     key findings.
 
-## 3a. Examine Basic Descriptives
+## 3a. Examine Descriptives
 
-As we noted in Unit 1, many analyses of social networks are primarily
-descriptive and aim to either represent the network's underlying social
-structure through data-reduction techniques or to characterize network
-properties through network measures.
+As noted in SNA and Education, many analyses of social networks are
+primarily descriptive and aim to either represent the network's
+underlying social structure through data-reduction techniques or to
+characterize network properties through network measures.
 
-### Centrality
+In the analyses described in Chapter 9, descriptives were limited to the
+mean and standard deviation for: in-degree, out-degree, trust and
+efficacy measures. The proportion of male leaders was also reported. For
+section 3a, let's see if we can reproduce these descriptives.
 
-#### Node Degree
+### Calculate Node Degree
 
-Recall from Unit 1 that:
+Recall **degree** is the number of ties to and from an ego. In a
+directed network, in-degree is the number of ties received, whereas
+out-degree is the number of ties sent.
 
-> **Degree** is the number of ties to and from an ego. In a directed
-> network, in-degree is the number of ties received, whereas out-degree
-> is the number of ties sent.
-
-The {tidygraph} package has an unique function called `activate()` that
-allows us to treat the nodes in our network object as if they were a
-standard data frame that we can then apply standard tidyverse functions
-to like `select()`, `filter()`, and `mutate()`.
+The `activate()` function from the {tidygraph} package allows us to
+treat the nodes in our network object as if they were a standard data
+frame to which we can then apply tidyverse functions such as `select()`,
+`filter()`, and `mutate()`.
 
 The latter function, `mutate()`, we can use to create new variables for
 nodes such as measures of degree, in-degree, and out-degree using the
@@ -468,346 +527,246 @@ Run the following code to add degree measures to each of our nodes and
 print the output:
 
 ```{r}
-network_1 <- network %>%
+leader_measures <- leader_graph %>%
   activate(nodes) %>%
-  mutate(degree = centrality_degree(mode = "all")) %>%
   mutate(in_degree = centrality_degree(mode = "in")) %>%
   mutate(out_degree = centrality_degree(mode = "out"))
 
-network_1
+network_measures
 ```
 
-We now see that these simple measures of centrality have been added to
-the nodes in our network.
+We now see that these in-degree and out-degree have been added to the
+nodes in our network in addition to the previously included addtributes.
 
 We can also use the `activate()` function combined with the
 `data.frame()` function to extract our new measures to a separate data
-frame so we inspect our nodes individually and create some summary
+frame so we inspect our nodes individually and view some basic summary
 statistics using the handy `summary()` function.
 
 ```{r}
-node_measures <- network_1 %>% 
+node_measures <- leader_measures %>% 
   activate(nodes) %>%
   data.frame()
 
 summary(node_measures)
 ```
 
-Despite a dramatic size difference from our network in Unit 1, we see
-that typical nodes in this network also have relatively few connections,
-though there are a few exceptions.
+It looks like our summary stats for Year 3 confidential exchanges
+network and attribute data are pretty close to those reported in Table
+9.1. For example, our average efficacy and trust scores were 6.65 and
+4.78 respectively, compared to 6.64 and 4.77 as reported in Chapter 9.
+
+The average in/out-degree for our school leaders data is 3.26, however,
+which is a little lower than that reported by Carolyn. Again, this may
+be a function of our removal of self-loops perhaps. Try changing the
+`diag = FALSE` argument added to the `graph.adjacency()` function above
+to `TRUE` to include self-loops and rerunning all the code above. Are
+these stats closer to those reported by Carolyn?
+
+#### School/District-Level Stats
+
+Since we are now working with a standard data frame, we can also apply
+[{dyplr}](https://dplyr.tidyverse.org/index.html) functions like
+[`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) and
+[`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) to
+calculate basic summary stats such as counts, mean, and standard
+deviation as follows:
+
+```{r}
+node_measures %>%
+  group_by(DISTRICT.SITE) %>%
+  summarise(n = n(),
+            mean = mean(in_degree), 
+            sd = sd(in_degree)
+            )
+```
 
 ### **👉 Your Turn** **⤵**
 
-Recall from the Prepare section that one of our questions guiding this
-analysis was:
-
-> Who are the transmitters, transceivers, and transcenders in our Common
-> Core Twitter network?
-
-Use the code chunk below to inspect our `node_measures` data frame and
-answer the questions above in the space below:
+Use the code chunk below and additional chunks if needed to try and
+replicate the school and district level findings for out-degree, trust
+and efficacy measures.
 
 ```{r}
 #YOUR CODE HERE
 ```
 
--   YOUR RESPONSE HERE
+## 3b. Visualize Network
 
-#### Other Centrality Measures
-
-In Chapter 7 of @carolan2014, noted that degree centrality does not take
-into account indirect ties among all the alters in an ego's network. We
-were also introduced to a few other measures of centrality commonly used
-in network analysis and applied to educational contexts:
-
--   **Closeness** includes data about the relation between each pair of
-    ego's named alters and is intuitively appealing in that being
-    "close" to others and may indicate how quickly an actor can exchange
-    something with others or be the first to receive information.
-
--   **Betweenness** captures how actors control or mediate the relations
-    between pairs of actors that are not directly connected and is an
-    important indicator of control over information exchange or resource
-    flows within a network.
-
-Carolyn also notes that in addition to these three common centrality
-measures, many others have been developed and can be calculated in most
-common social network-analysis software applications. In fact,
-{tidygraph} includes many of these measures and includes various
-`centrality_` functions for calculating node and edge centrality. Type
-`?centrality` in your console below and hit enter to view them all.
+In Chapter 9, a directed and dichotomous sociogram of the
+**collaboration** network for year 3 is shown in Figure 9.1.
 
 ### **👉 Your Turn** **⤵**
 
-Use the code chunk below to add these closeness and betweenness measures
-to our `network_1` data frame and save as `network_2`. I've included
-some basic code to get your started.
-
-```{r}
-network_2 <- network_1
-  #YOUR CODE HERE
-  
-```
-
-## 3b. Make a Sociogram
-
-If you recall from Unit 1, network visualization can be used for a
-variety of purposes, ranging from highlighting key actors to even
-serving as works of art. These visual representations of the actors and
-their relations, i.e. the network, are called a **sociogram**. Actors
-who are most central to the network, such as those with higher node
-degrees, are usually placed in the center of the sociogram and their
-ties are placed near them. In this section, we'll briefly introduce the
-{ggraph} package for creating attractive network visualizations.
-
-### ggraph 📦
-
-![](img/ggraph.png){width="20%"}
-
-Created by the same developer as {tidygraph},
-{[ggraph](https://ggraph.data-imaginist.com/index.html)} -- pronounced
-gg-raph or g-giraffe hence the logo -- is an extension of
-{[ggplot](https://ggplot2.tidyverse.org)} aimed at supporting relational
-data structures such as networks, graphs, and trees. Both packages are
-more modern and widely adopted approaches data visualization in R.
-
-While ggraph builds upon the foundation of ggplot and its API, it comes
-with its own self-contained set of geoms, facets, etc., as well as
-adding the concept of *layouts* to the [grammar of
-graphics](https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics),
-i.e. the "gg" in ggplot and ggraph.
-
-Let's go ahead and load the {ggraph} library:
-
-```{r}
-library(ggraph)
-```
-
-### A Simple Sociogram
-
-Very similar to how functions in the tidyverse use the `%>%` operator to
-"pipe" functions together and progressively wrangle data, ggraph and
-ggrplot use the `+` operator to "layer" functions together to
-progressively build graphs.
-
-Let's start with the first and simplest function `ggraph` and supply our
-network graph:
-
-```{r}
-ggraph(network_1)
-```
-
-As you can see, this didn't produce much. All this function does is take
-care of setting up the network object to plot along with creating the
-layout for the plot based on the graph and the specified layout passed
-in.
-
-#### Add Layout
-
-Let's go ahead and include the layout argument, which in addition to
-including its own unique layouts, can incorporate layouts form {igraph}
-like `fr`.
-
-```{r}
-ggraph(network_1, layout = "fr")
-```
-
-#### Add Nodes
-
-Still nothing but that is because we haven't added the nodes yet. Let's
-do that:
-
-```{r}
-ggraph(network_1, layout = "fr") + 
-geom_node_point() 
-```
-
-Well, at least we have our nodes now!
-
-The "geom" in the `geom_non_point()` functions stands for "Geometric
-elements", or geoms for short, and represent what you actually see in
-the plot.
-
-These geoms can include aesthetics, or aes for short, such as `alpha`
-for transparency, as well as `colour`, `shape` and `size`.
-
-Let's now add some "aesthetics" to our points by including the `aes()`
-function and arguments such as `size =` which we can set to our
-`in_degree` measures:
-
-```{r}
-ggraph(network_1, layout = "fr") + 
-geom_node_point(aes(size = in_degree, 
-                    alpha = out_degree, 
-                    colour = degree))
-```
-
-And let's add some node text and labels while were at it since this is
-not a very large network. Since node labels are a geometric element, we
-can apply aesthetics to them as well. Let's also include the `repel =`
-argument that when set to `TRUE` will avoid overlapping text.
-
-```{r}
-ggraph(network_1, layout = "fr") + 
-  geom_node_point(aes(size = in_degree, 
-                      alpha = out_degree, 
-                      colour = degree)) +
-  geom_node_text(aes(label = screen_name, 
-                     size = in_degree/2,
-                     alpha = degree),
-                 repel=TRUE)
-```
-
-Much better! Even without the edges, using size and opacity has helped
-to illustrate some of the "transmitters," "trancievers" and
-"transcenders."
-
-#### Add Edges
-
-Now, let's connect the dots and add some edges that include some arrows
-1mm in length as well as an end cap to keep them from overlapping the
-nodes:
-
-```{r}
-ggraph(network_1, layout = "fr") + 
-  geom_node_point(aes(size = in_degree, 
-                      alpha = out_degree, 
-                      colour = degree)) +
-  geom_node_text(aes(label = screen_name, 
-                     size = degree/2,
-                     alpha = degree), 
-                     repel=TRUE) +
-  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 alpha = .3)
-```
-
-#### Add a Theme
-
-Finally, let's add a **theme,** which controls the finer points of
-display, like the font size and background color. The `theme_graph()`
-function add a theme specially tuned for graph visualizations. This
-function removes redundant elements in order to put focus on the data
-and if you type `?theme_graph` in the console you will get a sense of
-the level of fine tuning you can do if desired.
-
-Let's add `theme_graph()` to our sociogram and call it good for now:
-
-```{r}
-ggraph(network_1, layout = "fr") + 
-  geom_node_point(aes(size = in_degree, 
-                      alpha = out_degree, 
-                      colour = degree)) +
-  geom_node_text(aes(label = screen_name, 
-                     size = degree/2,
-                     alpha = degree), 
-                     repel=TRUE) +
-  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 alpha = .3) + 
-  theme_graph()
-```
-
-### **👉 Your Turn** **⤵**
-
-Try modifying the code below by tweaking the included function/arguments
-or adding new ones for
+Try creating a **Year 3 Confidential Exchange Network** by modifying the
+code below and tweaking the included function/arguments or adding new
+ones for
 [layouts](https://ggraph.data-imaginist.com/articles/Layouts.html),
 [nodes](https://ggraph.data-imaginist.com/articles/Nodes.html), and
 [edges](https://ggraph.data-imaginist.com/articles/Edges.html) to make
 our plot either more "aesthetically pleasing" or more purposeful in what
 it's trying to communicate.
 
-There are no right or wrong answers, just have some fun trying out
-different approaches!
-
 ```{r}
-ggraph(network_1, layout = "kk") + 
-  geom_node_point(aes(size = in_degree, 
-                      alpha = out_degree, 
-                      colour = degree)) +
-  geom_node_text(aes(label = screen_name, 
-                     size = degree/2,
-                     alpha = degree), 
+#YOUR CODE HERE
+ggraph(leader_measures, layout = "fr") + 
+  geom_node_point(aes()) +
+  geom_node_text(aes(label = ID), 
                      repel=TRUE) +
-  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 alpha = .3) + 
+  geom_edge_link() + 
   theme_graph()
 ```
+
+After you are satisfied with your sociogram, answer the following
+questions?
+
+1.  How is the Year 3 confidential exchange network similar to the
+    collaboration network? How is it different?
+
+    -   YOUR RESPONSE HERE
 
 ### 🧶 Knit & Check ✅
 
 Congrats! You made it to the end of the Explore section and are ready to
-learn a little about network modeling! Before proceeding further, knit
-your document and check to see if you encounter any errors.
+learn a little ab out modeling network selection processes using ERGMs!
+Before proceeding further, knit your document and check to see if you
+encounter any errors.
 
 # 4. MODEL
 
-As highlighted in [Chapter 3 of Data Science in Education Using
+As highlighted in [Chapter 3 of Data Science in Education Using
 R](https://datascienceineducation.com/c03.html), the **Model** step of
 the data science process entails "using statistical models, from simple
 to complex, to understand trends and patterns in the data."
 
-## 4a. Identify Groups
-
-In Chapter 6: Groups and Positions in Complete Networks of SNA and
-Education [@carolan2014] we were introduced to both "bottom up" and "top
-down" approaches for identifying groups in a network, as well as why
-researchers may be interested in exploring these groups. He also notes
-that:
-
-> Unlike most social science, the idea is to identify these groups
-> through their relational data, not an exogenous attribute such as
-> grade level, departmental affiliation, or years of experience. 
+> **Exponential Random Graph Models** provide a way to determine whether
+> network properties (e.g., reciprocity) occur by chance as a result of
+> other network properties (e.g., density) or whether the observed
+> properties are unlikely given other parameters in the network.
 
 In this section, we'll briefly explore a "top down" approach to
 identifying these groups through the use of community detection
 algorithms.
 
-### Community Detection
+## 4a. Loading Network Data
 
-Similar to the range of functions included for calculating node and edge
-centrality, the {tidygraph} package includes various clustering
-functions provided by the {igraph} package introduced in Unit 1.
+As we've discovered in this course, network data can come in many
+different forms --- ties can be stored as edgelists or matrices, saved
+as .csv or excel files, and converted to a variety of network R objects;
+attributes for the nodes, ties and dyads in can also various forms and
+added in various ways to objects in R. For the {ergm} package, however,
+data will need to be transformed into a `network` object --- the format
+that statnet uses to store and work with network data.
 
-Also similar to calculating centrality measures, we need to `activate()`
-our nodes first before applying these community detection algorithms to
-assign our nodes to groups.
+Fortunately, we have already prepared our data for quick conversion to a
+`network` object and can supply just a couple arguments to the
+`as.network()` function from the {network} package:
 
-Run the following code and take a print our new network graph to the
-console to take a quick look
+-   `x =` a matrix giving the network structure in adjacency, incidence,
+    or edgelist form;
+
+-   `vertices` = an optional`data.frame` containing the vertex
+    attributes. The first column is assigned to the `"vertex.names"` and
+    additional columns are used to set vertex attributes using their
+    column names.
+
+Similar to the `tbl_graph` function from {tidygraph} that we used above,
+let's add our `leader_edges` edge-list and our `leader_nodes` data frame
+a the `x =` and `vertices =` attributes in the `as.network()` function
+and assign to a new object called `leader_network`:
 
 ```{r}
-network_3 <- network_2 %>%
-  activate(nodes) %>%
-  mutate(group = group_infomap())
-  
-network_3
+leader_network <- as.network(leader_edges,
+                             vertices = leader_nodes)
+
+leader_network
 ```
+
+Note that we could also have supplied our `leader_matrix` as the first
+argument, but using and edgelist vastly simplifies the process of adding
+node attributes.
+
+Let's also check the be sure that our `leader_network` is indeed a
+`network` object by using the `class()` function to identify object
+type:
+
+```{r}
+class(leader_network)
+```
+
+So far so good!
+
+## 4b. Estimate the ERGM Model
+
+Let's start by running a simple model both to demonstrate the most
+commonly used functions for ERGMs and to replicate the approach in
+Chapter 9 of @carolan2014.
+
+The syntax for specifying a model in the `ergm` package follows **R**'s
+formula convention:
+`my_network ~ ergm_term_1 + ergm_term_2 + ergm_term_3` and so forth.
+
+This syntax is used for both the `summary` and `ergm` functions.
+
+-   The `summary` function simply returns the numerical values of the
+    network statistics in the model.
+
+-   The `ergm` function estimates the model with those statistics.
+
+As noted by the [Statnet Development
+Team](http://statnet.org/Workshops/ergm_tutorial.html#The_summary_and_ergm_functions,_and_supporting_functions):
+
+> It is good practice to run a `summmary` command on any model before
+> fitting it with `ergm`. This is the ERGM equivalent of performing some
+> descriptive analysis on your covariates. This can help you make sure
+> you understand what the term represents, and it can help to flag
+> potential problems that will lead to poor modeling results.
 
 **Note:** Some of these algorithms are designed for directed graphs,
 while others are for undirected graphs.
 
-Now that we've assigned our nodes to a group, let's modify our sociogram
-from above to color our nodes by group assignment and remove the
-`alpha =` argument to make them a little easier to see.
+Let's start with with a simple model similar to the P~1~ model in Table
+9.4. This model contains the ergm-term **`edges`** that represents the
+total number of edges in the network, and the ergm-term **`mutual`**
+that examines the tendency for ties to be reciprocated, i.e.
+"mutuality".
 
 ```{r}
-network_3 %>%
-  ggraph(layout = "kk") + 
-  geom_node_point(aes(size = in_degree, 
-                      colour = group)) +
-  geom_node_text(aes(label = screen_name, 
-                     size = degree/2,
-                     alpha = degree), 
-                     repel=TRUE) +
-  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 alpha = .3) + 
-  theme_graph()
+summary(leader_network ~ edges + mutual)
 ```
+
+We see from our summary that our `leader_network` consists of 143 edges
+and 36 reciprocated dyads.
+
+Since `ergm` automatically uses a stochastic MCMC-based estimation
+algorithm, use the `set.seed()` function and set the value to 589 (note
+this could be any number besides our course number) so we produce the
+same results each time.
+
+Now let's estimate our model, save the results as `ergm_mod_1`, and use
+the `summary()` function again to take a look at our estimates. Also,
+
+```{r}
+set.seed(589)
+
+ergm_mod_1 <-ergm(leader_network ~ edges + mutual)
+
+summary(ergm_mod_1)
+```
+
+After several iterations, we see that our model finally converges and
+suggest that the estimates for our `edges` and `mutual` terms are
+statistically significant.
+
+The negative estimate for density, implying that the probability of a
+confidential exchange tie in year 3 is much smaller than 0.50.
+
+The reciprocity parameter, on the other hand, is 4.11, slightly larger
+in absolute value than the density parameter. When the reciprocity value
+is positive and large, as is the case here, this indicates a strong
+tendency for mutual ties (Wasserman & Faust, 1994). If this parameter
+estimate were negative, it would indicate that there are many
+nonreciprocated confidential exchanges in year 3.
 
 ### **👉 Your Turn** **⤵**
 
