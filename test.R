@@ -3,6 +3,7 @@ library(tidygraph)
 library(igraph)
 library(readxl)
 library(statnet)
+library(ggraph)
 
 # WRANGLE ####
 
@@ -53,21 +54,21 @@ leader_edges
 
 ## Create Network Object #### 
 
-network <- tbl_graph(edges = leader_edges,
+leader_graph <- tbl_graph(edges = leader_edges,
                      nodes = node_list,
                      directed = TRUE)
 
 
-network
+leader_graph
 
-plot(network) 
+plot(leader_graph) 
 
 
 # EXPLORE ####
 
 # Degree ####
 
-network_measures <- network %>%
+network_measures <- leader_graph %>%
   activate(nodes) %>%
   mutate(degree = centrality_degree(mode = "all")) %>%
   mutate(in_degree = centrality_degree(mode = "in")) %>%
@@ -80,6 +81,22 @@ node_measures <- network_measures %>%
   data.frame()
 
 summary(node_measures)
+
+
+# Plot
+
+ggraph(network_measures, layout = "fr") + 
+  geom_node_point(aes(size = in_degree, 
+                      alpha = out_degree, 
+                      colour = degree)) +
+  geom_node_text(aes(label = ID, 
+                     size = degree/2,
+                     alpha = degree), 
+                 repel=TRUE) +
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 alpha = .3) + 
+  theme_graph()
 
 
 # MODEL ####
@@ -104,21 +121,24 @@ ergm_1 <- ergm(leader_network ~ edges)
 summary(ergm_1)
 
 ergm_2 <- ergm(leader_network ~ edges + 
-                 mutual)
+                 mutual +
+                 gwesp(0.25, fixed=T))
 
 summary(ergm_2)
 
 ergm_3 <- ergm(leader_network ~ edges +
                  mutual +
-                 nodematch('MALE'))
+                 gwesp(0.25, fixed=T) +
+                 nodecov('MALE'))
   
 
 summary(ergm_3)
 
 ergm_4 <- ergm(leader_network ~ edges +
                  mutual +
-                 nodematch('MALE') +
-                 absdiff('EFFICACY')
+                 gwesp(0.25, fixed=T) +
+                 nodecov('MALE') +
+                 nodecov('EFFICACY')
                )
   
   
@@ -126,9 +146,10 @@ summary(ergm_4)
 
 ergm_5 <- ergm(leader_network ~ edges +
                  mutual +
-                 nodematch('MALE') +
-                 absdiff('EFFICACY') +
-                 absdiff('TRUST')
+                 gwesp(0.25, fixed=T) +
+                 nodecov('MALE') +
+                 nodecov('EFFICACY') +
+                 nodecov('TRUST')
 )
 
 
@@ -136,6 +157,8 @@ summary(ergm_5)
 
 ergm_6 <- ergm(leader_network ~ edges +
                  mutual +
+                 gwesp(0.25, fixed=T) +
+                 gwesp(0.25, fixed=T) +
                  nodematch('MALE') +
                  nodematch('DISTRICT/SITE') +
                  absdiff('EFFICACY') +
@@ -144,4 +167,16 @@ ergm_6 <- ergm(leader_network ~ edges +
 
 
 summary(ergm_6)
+
+# Goodness of fit
+
+ergm_6_gof <- gof(leader_network ~ edges +
+                    mutual +
+                    gwesp(0.25, fixed=T) +
+                    nodematch('MALE') +
+                    nodematch('DISTRICT/SITE') +
+                    absdiff('EFFICACY') +
+                    absdiff('TRUST'))
+
+plot(ergm_6_gof)
 
