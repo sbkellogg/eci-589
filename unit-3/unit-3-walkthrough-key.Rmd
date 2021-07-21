@@ -20,15 +20,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. PREPARE
 
-For the Unit 3 Walkthrough: School Leader Selection Mechanisms we will
-once again visit research conducted by Alan Daly and colleagues as we
-attempt to replicate some of the analyses described in Chapter 9:
-Network Data and Statistical Models from Social Network Analysis and
-Education [@carolan2014]. In this walkthrough we'll revisit and and then
-move beyond the visual and mathematical descriptions of networks
-explored so far to uncover generative processes, or mechanisms, that
-attempt to explain how school leaders select peers for collaboration or
-confidential exchanges.
+For the Unit 3 Walkthrough: School Leader Selection Mechanisms is once
+again visit guided by Alan Daly and colleagues as we attempt to
+replicate some of the analyses described in Chapter 9: Network Data and
+Statistical Models from Social Network Analysis and Education
+[@carolan2014]. In this walkthrough we'll revisit and then move beyond
+the visual and mathematical descriptions of networks explored so far to
+uncover generative processes, or mechanisms, that attempt to explain how
+school leaders select peers for collaboration or confidential exchanges.
 
 More specifically, this walkthrough will cover the following topics
 pertaining to each data-intensive workflow process:
