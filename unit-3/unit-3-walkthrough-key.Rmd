@@ -577,7 +577,7 @@ leader_measures <- leader_graph %>%
   mutate(in_degree = centrality_degree(mode = "in")) %>%
   mutate(out_degree = centrality_degree(mode = "out"))
 
-network_measures
+leader_measures
 ```
 
 We now see that these in-degree and out-degree have been added to the
@@ -652,7 +652,7 @@ and efficacy measures.
 
 How close your result to those reported by @carolan2014?
 
--    YOUR RESPONSE HERE
+-   YOUR RESPONSE HERE
 
 ## 3b. Visualize Network
 
@@ -699,19 +699,28 @@ encounter any errors.
 
 # 4. MODEL
 
-As highlighted in [Chapter 3 of Data Science in Education Using
-R](https://datascienceineducation.com/c03.html), the **Model** step of
-the data science process entails "using statistical models, from simple
-to complex, to understand trends and patterns in the data."
+Recall from @carolan2014 that **Exponential Random Graph Models**
+provide a means to compare whether a network's observed structural
+properties occur more frequently than you could expect from chance
+alone. More specifically, ERGMS provide a way to determine whether
+network properties (e.g., reciprocity) occur by chance as a result of
+other network properties (e.g., density) or whether the observed
+properties are unlikely given other parameters in the network.
 
-> **Exponential Random Graph Models** provide a way to determine whether
-> network properties (e.g., reciprocity) occur by chance as a result of
-> other network properties (e.g., density) or whether the observed
-> properties are unlikely given other parameters in the network.
+While the technical aspects of estimating ERGMs are complex, their
+interpretation is pretty straightforward. In this section we are
+interested exploring how these models be used make inferences about the
+social processes at work in the School Leaders data. For example, in
+this section we will explore the following questions:
 
-In this section, we'll briefly explore a "top down" approach to
-identifying these groups through the use of community detection
-algorithms.
+-   If one school leader turns to another to discuss something
+    confidential, is the latter likely to reciprocate?
+
+-   Are school leaders more likely to confide in someone if they both
+    confide in the same school leader?
+
+-   Do a leader's gender and efficacy score, predict a confidential
+    exchange between two leaders?
 
 ## 4a. Loading Network Data
 
@@ -759,12 +768,12 @@ type:
 class(leader_network)
 ```
 
-So far so good!
+So far so good! Let's start building our first ERGM model!
 
 ## 4b. Estimate the ERGM Model
 
-Let's start by running a simple model both to demonstrate the most
-commonly used functions for ERGMs and to replicate the approach in
+We'll begin by running a simple model both to demonstrate the most
+commonly used functions for ERGMs and also to replicate the approach in
 Chapter 9 of @carolan2014.
 
 The syntax for specifying a model in the `ergm` package follows **R**'s
@@ -787,9 +796,6 @@ Team](http://statnet.org/Workshops/ergm_tutorial.html#The_summary_and_ergm_funct
 > you understand what the term represents, and it can help to flag
 > potential problems that will lead to poor modeling results.
 
-**Note:** Some of these algorithms are designed for directed graphs,
-while others are for undirected graphs.
-
 ### Network Structure Parameters
 
 Let's start with with a simple model similar to the P~1~ model in Table
@@ -805,10 +811,10 @@ summary(leader_network ~ edges + mutual)
 We see from our summary that our `leader_network` consists of 143 edges
 and 36 reciprocated dyads.
 
-Since `ergm` automatically uses a stochastic MCMC-based estimation
-algorithm, use the `set.seed()` function and set the value to 589 (note
-this could be any number besides our course number) so we produce the
-same results each time.
+Since the `ergm()` function automatically uses a stochastic MCMC-based
+estimation algorithm, use the `set.seed()` function and set the value to
+589 (note this could be any number besides our course number) so we
+produce the same results each time.
 
 Now let's estimate our model, save the results as `ergm_mod_1`, and use
 the `summary()` function again to take a look at our estimates. Also,
@@ -835,10 +841,9 @@ After several iterations, we see that our model finally converges and
 suggest that the estimates for our `edges` and `mutual` terms are
 statistically significant. The negative estimate for the `edge`
 paramter, as noted by @carolan2014, implies that the probability of a
-confidential exchange tie in year 3 is much smaller than 0.50. The
-reciprocity parameter, on the other hand, is 3.11 in our model, and
-indicates a strong tendency for confidential-exchange ties to be
-reciprocated.
+confidential exchange tie in year 3 is relatively low. The reciprocity
+parameter, on the other hand, is 3.11 in our model, and indicates a
+strong tendency for confidential-exchange ties to be reciprocated.
 
 Now let's add the an ergm-term for transitivity. Modeling transitivity,
 or the "friend of a friend" phenomenon in social networks, is both
@@ -864,7 +869,7 @@ summary(leader_network ~ edges +
           gwesp(0.25, fixed=T))
 ```
 
-As you can see, we have 202 transitive triads.
+As you can see, we have 202 transitive triad types.
 
 Now lets run our model including transitivity and take a look at our
 estimates. Note that this make take a couple minutes to run. If you'd
@@ -894,15 +899,17 @@ among actors that may be shaping out network.
 As noted by @carolan2014, ERGMs have advanced to the point where actor
 attributes, or actor-level covariates, can now be incorporated into
 model estimation, such as individuals' demographic (e.g., gender) or
-behavioral (e.g., class attendance) characteristics. Two such attributes
-examined in Chapter 9 were gender and leadership efficacy as measured by
-survey items based on the [Principal Efficacy
+behavioral (e.g., efficacy) characteristics. These two attributes
+examined in Chapter 9 with leadership efficacy measured by survey items
+based on the [Principal Efficacy
 Scale](https://wmpeople.wm.edu/asset/index/mxtsch/pse).
 
 The attributes were included as both sender and receiver effects, which
 again can be very computationally intensive and thus timely to run,
-while sometimes prone to model degeneracy without some model fine tunig.
-To simplify this approach, I've include these attributes as using the
+while sometimes prone to model degeneracy without some model fine
+tuning.
+
+To simplify this approach, I've include these attributes using the
 `nodefactor()` and `nocov()` ergm-terms respectively which allow us to
 test whether those who are Male or have higher efficacy scores are more
 likely to either send or receive at tie.
@@ -921,7 +928,7 @@ summary(ergm_3)
 
 Although there appears to be a slight, though not statistically
 significant tendency towards male leaders being more likely to send or
-relieve ties, the primary drivers of network formation appear to be
+recieve ties, the primary drivers of network formation appear to be
 structural features of the network including reciprocity and
 transitivity.
 
@@ -973,11 +980,12 @@ the goodness-of-fit.
 
 ### The GOF Function
 
-The`gof()` function is a bit different than the `summary()` and `ergm()`
-functions, in that it only takes 3 ergm-terms as arguments: degree, esp
-(edgwise share partners), and distance (geodesic distances). Each of
-these terms captures an aggregate network distribution, at either the
-node level (degree), the edge level (esp), or the dyad level (distance).
+The `gof()` function is a bit different than the `summary()` and
+`ergm()` functions, in that it only takes 3 ergm-terms as arguments:
+degree, esp (edgwise share partners), and distance (geodesic distances).
+Each of these terms captures an aggregate network distribution, at
+either the node level (degree), the edge level (esp), or the dyad level
+(distance).
 
 Let's go ahead and run the `gof()` function on our `ergm_3` model and
 plot the results:
@@ -1020,12 +1028,13 @@ mcmc.diagnostics(ergm_3)
 ```
 
 One simple heuristic for interpreting `mcmc.diagnostics()` results is
-too look for "balance." The charts with all the squigglies, to use a
+too look for "balance." The charts with all the squiggles, to use a
 non-technical term, should have a scale that ideally is centered on 0
-and be roughly straight line running through it, while the chart that
+and have roughly straight line running through it, while the chart that
 looks like a simple line graph should also be ideally centered at 0 and
 roughly normally distributed on both ends. Overall, the diagnostics
-indicate there is room for improvement but nothing is wildly off.
+indicate there is room for improvement but nothing is wildly off and
+hence our model did not fail to converge.
 
 ### **👉 Your Turn** **⤵**
 
@@ -1069,14 +1078,14 @@ questions:
 
 Now that you've become more familiar with this dataset and the social
 network perspective, what other aspects of this dataset, or a dataset
-you are interested in exploring, could you investigate using these
-approaches?
+you are interested in exploring, could you investigate using the
+approaches demonstrated in Chapter 9?
 
 -   YOUR RESPONSE HERE
 
 What specific research questions might you ask that would be helpful for
 being understanding and improving learning, or the context in which the
-data is collected? How could other approaches like sentiment analysis
+data is collected?
 
 -   YOUR RESPONSE HERE
 
