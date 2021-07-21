@@ -137,7 +137,7 @@ summary(ergm_3)
 ergm_4 <- ergm(leader_network ~ edges +
                  mutual +
                  gwesp(0.25, fixed=T) +
-                 nodecov('MALE') +
+                 nodefactor('MALE') +
                  nodecov('EFFICACY')
                )
   

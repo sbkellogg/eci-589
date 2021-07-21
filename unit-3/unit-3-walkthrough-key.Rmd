@@ -1,5 +1,5 @@
 ---
-title: 'Unit 3 Walkthrough: School Leader Network Mechanism'
+title: 'Unit 3 Walkthrough: School Leader Selection Mechanism'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -35,20 +35,21 @@ pertaining to each data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
     from which our data came, formulate some research questions, and get
-    introduced the {rtweet} R package for using the Twitter API.
+    introduced the {statnet} R package for ERGMs.
 
-2.  **Wrangle**: Wrangling data entails the work of manipulating,
-    cleaning, transforming, and merging data. In section 2 we will learn
-    about the {tidygraph} package for creating network objects.
+2.  **Wrangle**: In section 2 we will learn how to work with matrices,
+    how to dichotomize matrices, and how to convert matrices into more
+    workable formats like our familiar edge-list.
 
 3.  **Explore**: In section 3, we use the {tidygraph} package and the
-    companion {ggraph} package to calculate a range of centrality
-    measures and learn how to illustrate some of these stats through
-    network visualization.
+    companion {ggraph} package once again to calculate basic summary
+    stats for our network and will try to replicate and ideally improve
+    upon the sociogram in our course text.
 
 4.  **Model**: We wrap up our analysis in Section 4 by introducing
-    community detection and sentiment analysis algorithms for
-    identifying groups and gauging sentiment about the common core.
+    trying to replicate the ergm models used in Chapter 9 of
+    @carolan2014 and checking to see how well our model "fits our data"
+    and examining diagnostics that might indicate our model has issues.
 
 5.  **Communicate**: We briefly reflect on our walkthrough in
     preparation for our independent analysis next week.
@@ -72,16 +73,16 @@ and statistical approaches to social network analysis:
     observed pattern" with the goal of explaining and ultimately
     predicting network structures and outcomes.
 
-The [\#COMMONCORE Project](https://www.hashtagcommoncore.com) that we'll
-examine next is an exemplary illustration of these four defining
-features of the social network perspective.
+For Unit 3, we move beyond previous "mathematical approaches" used so
+far and explore the use of ERGMs as a "statistical approach" to network
+analysis. Specifically, we will try to replicate the P\* models used in
+Chapter 9 of @carolan2014 in order to un
 
-### Daly's School Leaders Dataset
+### Research Questions
 
-Leadership network data were collected at two school districts over 3
-consecutive years.
-
-#### Research Questions:
+For this walkthrough, we will be using school leadership data were
+collected at two school districts over 3 consecutive years that was used
+to answer the following research questions:
 
 1.  Is there a relationship between the frequency of collaboration
     between school leaders and how often they turn to each other to
@@ -97,7 +98,7 @@ consecutive years.
     how frequently they collaborate, and if so, are these groupings
     related to the level at which they work (school versus district)?
 
-#### Data Collection
+### Data Collection
 
 For each consecutive year, school district leaders were invited to
 complete a survey that collected individual:
@@ -124,9 +125,11 @@ complete a survey that collected individual:
     ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
     from Tschannen-Moran and Hoy (2003)
 
-#### Analyses
+### Analyses
 
-Assumptions of independence Simulations...
+Two modeling techniques unique to network analysis and demonstrated in
+Chapter 9 are the quadratic assignment procedure (QAP) and Exponential
+Random Graph Models (ERGM):
 
 -   **QAP/MR**: The quadratic assignment procedure (QAP) developed by
     Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
@@ -136,34 +139,34 @@ Assumptions of independence Simulations...
     intact. The QAP is based on regression models and permutation tests
     for valued (i.e., continuous) relational variables.
 
--   ERGM:
+-   **P1 and P\* (P-Star)**: Both of these models are some of the first
+    to make use of the ERGM, which provides a basis for comparing
+    whether a network's observed structural properties occur more
+    frequently than you could expect from chance alone. ERGMs can be
+    used to model ties in complete networks but do so in a manner that
+    explains the presence (or absence) of ties as a function of
+    individual-and/or network-level characteristics. While QAP and
+    MR-QAP procedures control for network structure through
+    permutations, these ERGMs attempt to explain it.
 
-## 1b. Identify Questions
+## 1b. Key Findings
 
-Recall from...
-
-1.  **Is there a relationship between the frequency of collaboration
-    between school leaders and how often they turn to each other to
-    discuss issues of a confidential nature?**
-2.  **Do school leaders prefer to collaborate with those with whom they
-    have collaborated in the past, or is there some other reason?**
-
-In response to these questions, Carolyn reported that "while
-collaboration in year 1 does not significantly predict collaboration in
-year 3, confidential exchanges in year 1 does" and suggested that
-"collaboration among school leaders provides an important foundation for
-more sensitive, perhaps even deeper, relations (e.g., confidential
-exchanges) at a later point in time."
+In response to research questions 1 & 2 from above, Carolyn reported
+that "while collaboration in year 1 does not significantly predict
+collaboration in year 3, confidential exchanges in year 1 does" and
+suggested that "collaboration among school leaders provides an important
+foundation for more sensitive, perhaps even deeper, relations (e.g.,
+confidential exchanges) at a later point in time."
 
 ### **👉 Your Turn** **⤵**
 
-For our Unit 3 Walkthrough, we focused specifically on generative
+For our Unit 3 Walkthrough, we focus specifically on generative
 processes, or micro-level mechanisms, the might help explain who school
-leaders select to collaborate with or or engage in confidential
-exchanges. These are illustrated by research questions 2 & 3 from above.
+leaders select to collaborate with or engage in confidential exchanges.
+These are illustrated by research questions 2 & 3 from above.
 
 Review Chapter 9 of SNA and Education and report out on the findings
-from the ERGM analysis below:
+from the ERGM analysis in response to research question 3 below:
 
 3.  **Does gender or some other individual attribute predicts
     confidential exchanges between school leaders, or does some previous
@@ -725,6 +728,8 @@ Team](http://statnet.org/Workshops/ergm_tutorial.html#The_summary_and_ergm_funct
 **Note:** Some of these algorithms are designed for directed graphs,
 while others are for undirected graphs.
 
+### Network Structure Parameters
+
 Let's start with with a simple model similar to the P~1~ model in Table
 9.4. This model contains the ergm-term **`edges`** that represents the
 total number of edges in the network, and the ergm-term **`mutual`**
@@ -746,7 +751,7 @@ same results each time.
 Now let's estimate our model, save the results as `ergm_mod_1`, and use
 the `summary()` function again to take a look at our estimates. Also,
 
-```{r}
+```{r, message=FALSE}
 set.seed(589)
 
 ergm_mod_1 <-ergm(leader_network ~ edges + mutual)
@@ -754,138 +759,226 @@ ergm_mod_1 <-ergm(leader_network ~ edges + mutual)
 summary(ergm_mod_1)
 ```
 
+Since ERGMs predict the presence of a network tie, with estimates
+indicating the importance of each to the presence of a tie, estimated
+coefficients can be explained in terms similar to logistic regression.
+That is, positive significant coefficients indicate that the
+corresponding parameters in the observed network (e.g. reciprocated ties
+between school leaders, controlling for all other parameters in the
+model, occur more than would be expected by chance, thus increasing the
+likelihood that a tie will occur, and vice-versa for negative
+coefficients.
+
 After several iterations, we see that our model finally converges and
 suggest that the estimates for our `edges` and `mutual` terms are
-statistically significant.
+statistically significant. The negative estimate for the `edge`
+paramter, as noted by @carolan2014, implies that the probability of a
+confidential exchange tie in year 3 is much smaller than 0.50. The
+reciprocity parameter, on the other hand, is 3.11 in our model, and
+indicates a strong tendency for confidential-exchange ties to be
+reciprocated.
 
-The negative estimate for density, implying that the probability of a
-confidential exchange tie in year 3 is much smaller than 0.50.
+Now let's add the an ergm-term for transitivity. Modeling transitivity,
+or the "friend of a friend" phenomenon in social networks, is both
+computationally intensive because of the all the possible "triangles" in
+a directed network, and also very prone to model degeneration, i.e. when
+models that fail to converge by reaching a value expected by the
+parameters included in the model.
 
-The reciprocity parameter, on the other hand, is 4.11, slightly larger
-in absolute value than the density parameter. When the reciprocity value
-is positive and large, as is the case here, this indicates a strong
-tendency for mutual ties (Wasserman & Faust, 1994). If this parameter
-estimate were negative, it would indicate that there are many
-nonreciprocated confidential exchanges in year 3.
+Ergm-terms for transitivity such as `triangles` and `transitive` in
+particular are prone to model degeneration. Fortunately, the {ergm}
+package includes a "more robust way of modeling triangles: the
+geometrically-weighed edgewise shared partner term (GWESP)."
+
+Let's add the `gwesp` term to our model with the suggested defaults from
+the Statnet Tutorial section on [What it looks like when a model
+fails](http://statnet.org/Workshops/ergm_tutorial.html#What_it_looks_like_when_a_model_fails)
+and take a look at the summary first:
+
+```{r}
+summary(leader_network ~ edges + 
+          mutual +
+          transitive +
+          gwesp(0.25, fixed=T))
+```
+
+As you can see, we have 202 transitive triads.
+
+Now lets run our model including transitivity and take a look at our
+estimates. Note that this make take a couple minutes to run. If you'd
+like to watch the number of iterations of the model set
+`message = TRUE`.
+
+```{r, message=FALSE}
+ergm_mod_2 <-ergm(leader_network ~ edges + 
+                    mutual +
+                    gwesp(0.25, fixed=T))
+
+summary(ergm_mod_2)
+```
+
+Contrary to the analysis in Chapter 9, our model so far suggest that
+there is a tendency toward transitivity, that is a confidential exchange
+is likely to occur between two people who both confide in another
+person.
+
+At this point, however, we have only focused on structural mechanisms
+inherent to networks themselves, or "global features" of the graph
+independent of actors, and have not looked at individual attributes
+among actors that may be shaping out network.
+
+### Actor Attribute Parameters
+
+As noted by @carolan2014, ERGMs have advanced to the point where actor
+attributes, or actor-level covariates, can now be incorporated into
+model estimation, such as individuals' demographic (e.g., gender) or
+behavioral (e.g., class attendance) characteristics. Two such attributes
+examined in Chapter 9 were gender and leadership efficacy as measured by
+survey items based on the [Principal Efficacy
+Scale](https://wmpeople.wm.edu/asset/index/mxtsch/pse).
+
+The attributes were included as both sender and receiver effects, which
+again can be very computationally intensive and thus timely to run,
+while sometimes prone to model degeneracy without some model fine tunig.
+To simplify this approach, I've include these attributes as using the
+`nodefactor()` and `nocov()` ergm-terms respectively which allow us to
+test whether those who are Male or have higher efficacy scores are more
+likely to either send or receive at tie.
+
+```{r, message=FALSE}
+ergm_3 <- ergm(leader_network ~ edges +
+                 mutual +
+                 gwesp(0.25, fixed=T) +
+                 nodefactor('MALE') +
+                 nodecov('EFFICACY')
+               )
+  
+  
+summary(ergm_3)
+```
+
+Although there appears to be a slight, though not statistically
+significant tendency towards male leaders being more likely to send or
+relieve ties, the primary drivers of network formation appear to be
+structural features of the network including reciprocity and
+transitivity.
+
+Sadly, we were not able to replicated the findings from @carolan2014,
+but we did not replicate the model exactly, nor did we fine tune our
+model parameters. Regardless, this provided a practical exercise for
+demonstrating ergm models.
 
 ### **👉 Your Turn** **⤵**
 
-Recall from the Prepare section that the second question guiding this
-analysis was:
+Before moving on to checking the goodness of fit for our final model,
+try testing a new model by modifying or adding your own ergm-term. For
+example, to test for homophily among gender, the `ergm()` function
+includes a `nodematch()` argument that could be used to see if school
+leaders are more likely to confide in colleagues of their own gender.
 
-> What subgroups, or factions, exist in our network?
+You can look at a [table of common
+ergm-terms](http://statnet.org/nme/d2-ergmterms.html) or type
+"ergm-terms" into the help menu of the files pane for some suggested
+examples.
 
-Use the code chunk below to extract the group assignment data frame and
-answer the question above in the space below:
+```{r, message=FALSE}
+#YOUR CODE HERE
+ergm_4 <- ergm(leader_network ~ edges +
+                 mutual +
+                 gwesp(0.25, fixed=T) +
+                 nodematch('MALE') +
+                 nodecov('EFFICACY')
+               )
+  
+  
+summary(ergm_4)
+```
+
+Once you've checked the summary of your model estimates, write your
+interpretation of the results below:
+
+-   YOUR RESPONSE HERE
+
+## 4c. Check Model Fit
+
+One test of whether an ergm model is a "good fit" fo the data is "how
+well it reproduces the observed global network properties *that are not
+in the model*." This can be accomplished by choosing a network statistic
+that is not in the model, and comparing the value of this statistic
+observed in the original network to the distribution of values we get in
+simulated networks from our model, using the `gof()` function to test
+the goodness-of-fit.
+
+### The GOF Function
+
+The`gof()` function is a bit different than the `summary()` and `ergm()`
+functions, in that it only takes 3 ergm-terms as arguments: degree, esp
+(edgwise share partners), and distance (geodesic distances). Each of
+these terms captures an aggregate network distribution, at either the
+node level (degree), the edge level (esp), or the dyad level (distance).
+
+Let's go ahead and run the `gof()` function on our `ergm_3` model and
+plot the results:
+
+```{r}
+ergm_3_gof <- gof(ergm_3)
+
+plot(ergm_3_gof)
+```
+
+Overall, the model appears to fit reasonably well in that black line in
+our charts (the actual observed network measures) closely follows the
+aggregate measures generated from the simulations, or permutations of
+our network.
+
+### Check MCNC Diagnostics
+
+One final check on our model is to examine the Monte-Carlo Markov Chain
+(MCMC) diagnostics to make sure our model is not heading of in the wrong
+direction and likely to never produce a network similar to what was
+observed, which is referred to as "model degeneracy." As the statnet
+authors note:
+
+> When a model is not a good representation of the observed network, the
+> simulated networks produced in the MCMC chains may be far enough away
+> from the observed network that the estimation process is affected. In
+> the worst case scenario, the simulated networks will be so different
+> that the algorithm fails altogether.
+
+Fortunately, our models did not fail to converge, the AIC and BIC
+indicators seemed to improve with each term added to the model, and the
+goodness-of-fit seemed to somewhat mirror the global features of our
+network.
+
+Let run the `mcmc.diagnostics()` function on our final model anyways and
+check the results:
+
+```{r}
+mcmc.diagnostics(ergm_3)
+```
+
+One simple heuristic for interpreting `mcmc.diagnostics()` results is
+too look for "balance." The charts with all the squigglies, to use a
+non-technical term, should have a scale that ideally is centered on 0
+and be roughly straight line running through it, while the chart that
+looks like a simple line graph should also be ideally centered at 0 and
+roughly normally distributed on both ends. Overall, the diagnostics
+indicate there is room for improvement but nothing is wildly off.
+
+### **👉 Your Turn** **⤵**
+
+Use the code chunk below to check the model fit and diagnostics for the
+model the you created in [4b. Estimate the ERGM Model]:
 
 ```{r}
 #YOUR CODE HERE
 ```
-
--   YOUR RESPONSE HERE
-
-## 4b. Identify Sentiment
-
-Sentiment analysis (also known as opinion mining) is a text mining
-technique used to "systematically identify, extract, quantify, and study
-affective states and subjective information." In this section, we'll
-introduce and apply the {vader} package to gain some insight into the
-"lexical tendencies" of our tweets.
-
-#### The vader Package 📦
-
-![](img/vader.jpeg){width="20%"}\
-
-The {vader} package is for the Valence Aware Dictionary for sEntiment
-Reasoning (VADER), a rule-based model for general sentiment analysis of
-social media text and specifically attuned to measuring sentiment in
-microblog-like contexts.
-
-To learn more about the {vader} package and its development, take a look
-at the article by Hutto and Gilbert (2014), [VADER: A Parsimonious
-Rule-based Model forSentiment Analysis of Social Media
-Text](http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf).
-
-Let's go ahead and load the vader library:
-
-```{r}
-library(vader)
-```
-
-The {vader} package basically has just one function, `vader_df()` that
-does one thing and expects just one column from a data frame. Let's give
-VADER the our `ccss_tweets_6` data frame that we created earlier and
-include the `$` operator to select for analysis our `text` column
-containing our tweets.
-
-```{r}
-summary_vader <- vader_df(ties$text)
-
-summary_vader
-```
-
-Hutto, C. & Gilbert, E. (2014) provide an excellent summary of the VADER
-package on their [GitHub repository](scores) and I've copied and
-explanation of the scores below:
-
--   The `compound` score is computed by summing the valence scores of
-    each word in the lexicon, adjusted according to the rules, and then
-    normalized to be between -1 (most extreme negative) and +1 (most
-    extreme positive). This is the most useful metric if you want a
-    single unidimensional measure of sentiment for a given sentence.
-    Calling it a 'normalized, weighted composite score' is accurate.
-
-**NOTE:** The `compound` score is the one most commonly used for
-sentiment analysis by most researchers, including the authors.
-
-Let's use the `inner_join()` function to add these sentiment scores
-values back to our `ties` data frame and take a quick look:
-
-```{r}
-tweet_sentiment <-inner_join(summary_vader, 
-                             ties,
-                             by = "text")
-
-tweet_sentiment
-```
-
-Now that we have these joined, we can take a quick look at the sentiment
-.
-
-```{r}
-user_sentiment <- tweet_sentiment %>%
-  group_by(sender) %>%
-  summarise(sentiment = mean(compound))
-
-user_sentiment
-```
-
-Note that we have effectively just created some new node and edge
-"attributes" that could be incorporated into our network visualization
-to potentially help understand why groups may have formed as they did.
-
-### **👉 Your Turn** **⤵**
-
-Recall from the Prepare section that the final question guiding this
-analysis was:
-
-> Which actors in our network tend to be more opposed to the Common
-> Core?
-
-Use the code chunk below to inspect our data frame and answer the
-question above in the space below:
-
-```{r}
-#YOUR CODE HERE
-```
-
--   YOUR RESPONSE HERE
 
 ------------------------------------------------------------------------
 
 # 5. COMMUNICATE
 
-For your Independent Analysis assignment for Unit 2 next week, you'll
+For your Independent Analysis assignment for Unit 3 next week, you'll
 create either a simple report or slide deck using an R Markdown document
 just like this to share out some key findings from your analysis.
 Regardless of whether you plan to talk us through your analysis and
@@ -914,7 +1007,8 @@ questions:
 
 Now that you've become more familiar with this dataset and the social
 network perspective, what other aspects of this dataset, or a dataset
-you are interested in exploring, could you investigate?
+you are interested in exploring, could you investigate using these
+approaches?
 
 -   YOUR RESPONSE HERE
 
@@ -926,8 +1020,8 @@ data is collected? How could other approaches like sentiment analysis
 
 ### 🧶 Knit & Check ✅
 
-Congrats! You've finished the Unit 2 Guided Walkthrough and are ready
-for some independent analysis next week!
+Congrats! You've finished the Unit 3 Guided Walkthrough and are ready
+for your independent analysis next week!
 
 To complete this assignment, knit your document and send me an email at
 sbkellog\@ncsu.edu letting me know you're all set.
