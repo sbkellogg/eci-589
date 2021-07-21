@@ -41,15 +41,15 @@ pertaining to each data-intensive workflow process:
     how to dichotomize matrices, and how to convert matrices into more
     workable formats like our familiar edge-list.
 
-3.  **Explore**: In section 3, we use the {tidygraph} package and the
-    companion {ggraph} package once again to calculate basic summary
-    stats for our network and will try to replicate and ideally improve
-    upon the sociogram in our course text.
+3.  **Explore**: In section 3, we once again use the {tidygraph} package
+    and the companion {ggraph} package to calculate basic summary stats
+    for our network and will try to replicate and ideally improve upon
+    the sociogram in our course text.
 
 4.  **Model**: We wrap up our analysis in Section 4 by introducing
-    trying to replicate the ergm models used in Chapter 9 of
-    @carolan2014 and checking to see how well our model "fits our data"
-    and examining diagnostics that might indicate our model has issues.
+    exponential random graph modules used in Chapter 9 of @carolan2014,
+    learn to check how well our model "fits our data" and examine
+    diagnostics that might indicate our model has issues.
 
 5.  **Communicate**: We briefly reflect on our walkthrough in
     preparation for our independent analysis next week.
@@ -76,7 +76,9 @@ and statistical approaches to social network analysis:
 For Unit 3, we move beyond previous "mathematical approaches" used so
 far and explore the use of ERGMs as a "statistical approach" to network
 analysis. Specifically, we will try to replicate the P\* models used in
-Chapter 9 of @carolan2014 in order to un
+Chapter 9 of @carolan2014 in order to test hypotheses about individual
+and network characteristics that may explain who school leaders select
+for collaboration and confidential exchanges.
 
 ### Research Questions
 
@@ -163,8 +165,6 @@ confidential exchanges) at a later point in time."
 For our Unit 3 Walkthrough, we focus specifically on generative
 processes, or micro-level mechanisms, the might help explain who school
 leaders select to collaborate with or engage in confidential exchanges.
-These are illustrated by research questions 2 & 3 from above.
-
 Review Chapter 9 of SNA and Education and report out on the findings
 from the ERGM analysis in response to research question 3 below:
 
@@ -179,9 +179,12 @@ specific question(s) might the data and analyses described allow you to
 address. For example, the concept of homophily, or the tendency for
 people to seek out or form ties to those who are similar to themselves,
 was introduced in our readings and hypotheses about homophily can easily
-be test using using ERGMs:
+be tested using using ERGMs:
 
 -   YOUR RESPONSE HERE
+
+Save this question for later as you'll have a chance to test it by the
+end of this walkthrough.
 
 ## **1c.** Load Libraries
 
@@ -244,20 +247,20 @@ library(statnet)
 
 # 2. WRANGLE
 
-For our data wrangling this week, we'll be . Our primary goals for Unit
-1 are learning how to:
+For our data wrangling this week, we'll focus on working with network
+data stored as an adjacency matrix. Our primary goals for this section
+are learning how to:
 
-a.  **Import Matrices**. In this section, we introduce
-    the `rtweet` package and some key functions to search for tweets or
-    users of interest.
+a.  **Import Data**. In this section, we use the {readxl} package from
+    the tidyverse to read in a matrix and node .
 
-b.  **Create a Network Object**. Before performing network analyses,
-    we'll need to convert our data frames into special data format for
-    working with relational data.
+b.  **Dichotomize a Matrix**. As described in Chapter 9, we'll recode
+    our edge values to 1s and 0s changing our valued matrix to a binary
+    matrix.
 
-c.  **Simplify Network**. Finally, we'll learn about a handy
-    `simplify()` function in the {igraph} package for collapsing
-    multiple ties between actors and removing "self-loops."
+c.  **Create Network Graph**. Finally, we'll convert our matrix to an
+    edge-list and store both our edges and node attributes as a network
+    igraph object in preparation for analysis.
 
 ## 2a. Import Data
 
@@ -269,10 +272,10 @@ Confidential Exchanges Network Year 3.**
 
 To do so, we'll need to import two Excel files from the Social Network
 Analysis and Education companion site. The first file contains our edges
-stored as a matrix (more on this later) and second file is a standard
-rectangular data frame that contains attributes for each node, i.e.
-school leader. These files are included in the data folder of your R
-Studio project. A description of each file from the companion website
+stored as a square matrix (more on this later) and the second file is a
+standard rectangular data frame that contains attributes for each node,
+i.e. school leaders. These files are included in the data folder of your
+R Studio project. A description of each file from the companion website
 and a direct link to the file are included below:
 
 1.  [**School Leaders Data Chapter
@@ -289,8 +292,8 @@ and a direct link to the file are included below:
     leaders. Following the first ID column, the matrix includes an
     efficacy score, trust score, and indicators for whether one works at
     the district-level and is male (1 = yes, 0 = no). These attribute
-    variables can be used as covariates in some of the statistical
-    models covered in Chapter 9, including regression and *p\** models.
+    variables will be used as covariates in our ERGMs later in this
+    walkthrough.
 
 Since we are working with Excel files, we'll need to use the
 `read_excel()` function from {readxl} tidyverse package to import our
@@ -306,7 +309,7 @@ Note that we specified the `ID` column as "text" and the remaining
 columns as "numeric." By default, the `readxl()` function would have
 recognized each column as numeric, but the first column indicates the
 "names" for each school leader and we'll be using this column to assign
-names to our columns and rows for adjacency matrix in just a bit.
+names to our columns and rows for our adjacency matrix in just a bit.
 
 ### **👉 Your Turn** **⤵**
 
@@ -314,15 +317,16 @@ Recall from above that our relations, or edges, are stored as a valued
 [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) in
 which columns and rows consist of the same actors and each cell contains
 information about the tie between each pair of actors. In our case, the
-tie is a directed valued "arc" where the value indicates the strength of
-the relationship.
+tie is a directed and valued "arc" where the value indicates the
+strength of the relationship.
 
 Use the `read_excel()` function to import the
 `School Leaders Data Chapter 9_d.xlsx` file, add an argument setting the
 column names to `FALSE` since our file is a simple matrix with no header
-or column names, assign the matrix to a variable named `leader_matrix`:
+or column names, and assign the matrix to a variable named
+`leader_matrix`:
 
-**Hint:** Type `?read_excel` into the console and check the Arguments
+**Hint:** Type `?read_excel` into the console and check the arguments
 section to find the name of the argument used to set column headers.
 
 ```{r}
@@ -351,15 +355,53 @@ follow:
 
 Since one of our goals is a crude replication of the analysis
 demonstrated in Chapter 9, and since working with "valued networks" is a
-little more complex that binary networks, which indicate just the
-presence or absence relationship between two actors, we will need to
-"dichotomize" our matrix, which in practice entails converting our
-valued matrix to binary matrix with cells containing just 1s or 0s.
+little more complex that binary networks that indicate just the presence
+or absence relationship between two actors, we will need to
+"dichotomize" our matrix. In practice this simply entails converting our
+valued matrix to a binary matrix with cells containing just 1s or 0s.
 
-**However,** before we can convert dichotomize our "matrix," we first
-need to convert it to a matrix object recognized by R using the
-`as.matrix()` function. We can then check to data format of our
-`leader_matrix` using the `class()` function:
+In their article, *Valued Ties Tell Fewer Lies: Why Not To Dichotomize
+Network Edges With Thresholds*, Thomas and Blitzstein (2018) highlight
+several reasons why the dichotomization procedure is appealing in an
+investigation aside from convenience and simplicity:
+
+1.  **Use of Exclusively Binary Methods.** Several classes of models
+    have been designed to incorporate binary information directly,
+    including the exponential random graph model.
+
+2.  **Ease of Input and Data Collection.** The need to classify
+    continuously-valued quantities into a set of discrete groups is
+    widespread throughout all of science and technology, par- ticularly
+    because of the associated need to make clear decisions based on this
+    information.
+
+3.  **Ease of Output in Graphical Representations.** The visual appeal
+    of graphs and networks has contributed to much of the field's
+    attention in the past decade. When plotting a graphical structure, a
+    clever choice of threshold can illuminate which nodes are most
+    central, which connections the most vital.
+
+4.  **Sparsity of Structure.** In data where there are very few natural
+    zeroes (if any), di- chotomization provides a way to select for a
+    small number of connections which are thought to be of the greatest
+    importance to the system, or to nominate a number of ties for more
+    in-depth study.
+
+5.  **Binning To Address Nonlinearity and Reduce Noise.** If there is a
+    nonlinear relationship in the data, binning the data into distinct
+    ordinal categories has many advantages, namely, the reduction of
+    total mean-squared error, and a corresponding increase in power for
+    detecting a true non-zero relationship over an improperly specified
+    linear analysis.
+
+As the title of their article suggests, however, @thomas2011valued argue
+that the motivations for dichotomization should be revisited as
+dichotomization produces a range of problematic issues.
+
+With that in mind, before we can dichotomize our "matrix," we first need
+to convert it to a matrix object recognized by R using the `as.matrix()`
+function. We can then check to data format of our `leader_matrix` using
+the `class()` function:
 
 ```{r}
 leader_matrix <- leader_matrix %>%
@@ -375,7 +417,7 @@ zero otherwise.
 
 To dichotmize our our matrix, the following code will assign 0s to all
 values in our matrix that are less than or equal to 2, and 1s to all
-values that greater the or equal to 3:
+values that are greater the or equal to 3:
 
 ```{r}
 leader_matrix[leader_matrix <= 2] <- 0
@@ -421,8 +463,8 @@ adjacency_matrix <- graph.adjacency(leader_matrix,
 class(adjacency_matrix)
 ```
 
-Note that we also included the diag = FALSE argument which converts all
-values along the diagonal to 0s, thereby removing our self-loops. I
+Note that we also included the `diag = FALSE` argument which converts
+all values along the diagonal to 0s, thereby removing self-loops. I
 believe they may have been included when calculating the network
 descriptives included in Table 9.1, and our own descriptives may not
 match exactly, but we'll need to remove these from our network anyways
@@ -440,8 +482,8 @@ leader_edges
 
 ### **👉 Your Turn** **⤵**
 
-Recall from Unit 2 that we introduce the {tidygraph} package for
-preparing and summarizing our Twitter network. Tidygraph incudes the
+Recall from Unit 2 that we introduced the {tidygraph} package for
+preparing and summarizing our Twitter network. Tidygraph includes the
 full functionality of `igraph` in a tidy API giving you access to almost
 all of the `dplyr` verbs plus a few more, developed for use with
 relational data.
@@ -514,16 +556,16 @@ section 3a, let's see if we can reproduce these descriptives.
 ### Calculate Node Degree
 
 Recall **degree** is the number of ties to and from an ego. In a
-directed network, in-degree is the number of ties received, whereas
-out-degree is the number of ties sent.
+directed network, **in-degree** is the number of ties received, whereas
+**out-degree** is the number of ties sent.
 
 The `activate()` function from the {tidygraph} package allows us to
 treat the nodes in our network object as if they were a standard data
 frame to which we can then apply tidyverse functions such as `select()`,
 `filter()`, and `mutate()`.
 
-The latter function, `mutate()`, we can use to create new variables for
-nodes such as measures of degree, in-degree, and out-degree using the
+We can use the `mutate()` functions to create new variables for nodes
+such as measures of degree, in-degree, and out-degree using the
 `centrality_degree()` function in the {tidygraph} package.
 
 Run the following code to add degree measures to each of our nodes and
@@ -559,12 +601,26 @@ network and attribute data are pretty close to those reported in Table
 9.1. For example, our average efficacy and trust scores were 6.65 and
 4.78 respectively, compared to 6.64 and 4.77 as reported in Chapter 9.
 
+### **👉 Your Turn** **⤵**
+
 The average in/out-degree for our school leaders data is 3.26, however,
 which is a little lower than that reported by Carolyn. Again, this may
-be a function of our removal of self-loops perhaps. Try changing the
-`diag = FALSE` argument added to the `graph.adjacency()` function above
-to `TRUE` to include self-loops and rerunning all the code above. Are
-these stats closer to those reported by Carolyn?
+be a function of our removal of self-loops perhaps.
+
+Try changing the `diag = FALSE` argument added to the
+`graph.adjacency()` function above to `TRUE` to include self-loops and
+rerunning all the code above.
+
+Are these stats closer to those reported by Carolyn?
+
+-   YOUR RESPONSE HERE
+
+**R Markdown Tip:** You can run all code before a specific code chunk by
+clicking the "Run all code chunks above" option in the Run dropdown menu
+in the toolbar or in the code chunk itself.
+
+**Warning:** Before proceeding further, change back to `diag = FALSE`
+and rerun all code above.
 
 #### School/District-Level Stats
 
@@ -593,6 +649,10 @@ and efficacy measures.
 ```{r}
 #YOUR CODE HERE
 ```
+
+How close your result to those reported by @carolan2014?
+
+-    YOUR RESPONSE HERE
 
 ## 3b. Visualize Network
 
@@ -634,6 +694,8 @@ Congrats! You made it to the end of the Explore section and are ready to
 learn a little ab out modeling network selection processes using ERGMs!
 Before proceeding further, knit your document and check to see if you
 encounter any errors.
+
+------------------------------------------------------------------------
 
 # 4. MODEL
 
