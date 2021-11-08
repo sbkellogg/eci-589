@@ -631,7 +631,7 @@ Now we can use the `read_csv()` function to save our data frame to our
 folder.
 
 ```{r}
-write_csv(ccss_tweets_4, "data/ccss-tweets.csv")
+write_csv(ccss_tweets_4, "data/ccss-tweets-fresh.csv")
 ```
 
 Check your data folder to make sure this file has been save. You will
