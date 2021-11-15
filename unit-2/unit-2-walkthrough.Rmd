@@ -632,6 +632,7 @@ folder.
 
 ```{r}
 write_csv(ccss_tweets_4, "data/ccss-tweets-5.csv")
+
 ```
 
 Check your data folder to make sure this file has been save. You will
