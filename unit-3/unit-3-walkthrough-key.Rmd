@@ -55,12 +55,12 @@ pertaining to each data-intensive workflow process:
 
 ## 1a. Review the Research
 
-Recall from [Social Network Analysis and Education: Theory, Methods &
+In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
-that @carolan2014 made the following distinctions between mathematical
-and statistical approaches to social network analysis:
+@carolan2014 makes the following distinctions between mathematical and
+statistical approaches to social network analysis:
 
-1.  **Mathematical approaches** focus on what network of actors "looks
+1.  **Mathematical approaches** focus on what a network of actors "looks
     like" by describing the network using sociograms and/or network
     measures such as reciprocity, centrality, and density. However,
     these approaches "tend to regard the measured relationships and
@@ -105,32 +105,32 @@ For each consecutive year, school district leaders were invited to
 complete a survey that collected individual:
 
 -   **Demographic information** (e.g., gender, ethnicity, marital
-    status, age, years of experiences),
+    status, age, years of experiences);
 
--   **Network relationships types** (e.g., collaboration, confidential,
-    energy, expertise, support you approach, support approach you,
+-   **Network relationships types** (e.g., collaboration, confidential
+    exchanges, energy, expertise, leaders approached for support,
     work-related issues, input, recognition, best practices, and
-    innovation), efficacy, and trusting relationships.
+    innovation);
 
 -   **Frequency of interactions** they have with those nominated
     individuals on a four-point frequency scale ranging from 1 (the
-    least frequent) to 4 (1--2 times a week).
+    least frequent) to 4 (1--2 times a week);
 
 -   **Leadership efficacy** items were designed based on the Principal
     Efficacy Scale used in Daly et al. (2011) and Tschannen-Moran and
     Gareis's (2004) studies. The efficacy scale includes 18 items rated
     on a 9-point Likert scale ranging from 1 (None at all) to 9 (A great
-    deal).
+    deal);
 
 -   **Trust** scale contains eight items rated on a 7-point Likert scale
     ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
-    from Tschannen-Moran and Hoy (2003)
+    from Tschannen-Moran and Hoy (2003).
 
 ### Analyses
 
 Two modeling techniques unique to network analysis and demonstrated in
-Chapter 9 are the quadratic assignment procedure (QAP) and Exponential
-Random Graph Models (ERGM):
+Chapter 9 of @carolan2014 are the quadratic assignment procedure (QAP)
+and Exponential Random Graph Models (ERGM):
 
 -   **QAP/MR**: The quadratic assignment procedure (QAP) developed by
     Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
@@ -165,7 +165,7 @@ For our Unit 3 Walkthrough, we focus specifically on generative
 processes, or micro-level mechanisms, the might help explain who school
 leaders select to collaborate with or engage in confidential exchanges.
 Review Chapter 9 of SNA and Education and report out on the findings
-from the ERGM analysis in response to research question 3 below:
+from the ERGM analysis in response to Research Question 3 below:
 
 3.  **Does gender or some other individual attribute predicts
     confidential exchanges between school leaders, or does some previous
@@ -182,8 +182,8 @@ be tested using using ERGMs:
 
 -   YOUR RESPONSE HERE
 
-Save this question for later as you'll have a chance to test it by the
-end of this walkthrough.
+Save this question for later as you'll have a chance to empirically test
+it by the end of this walkthrough.
 
 ## **1c.** Load Libraries
 
@@ -269,16 +269,18 @@ we'll aim to reproduce the results from **Table 9.4. Results of P1 and
 P\*Analyses for the Dichotomized and Directed School Leaders
 Confidential Exchanges Network Year 3.**
 
-To do so, we'll need to import two Excel files from the Social Network
-Analysis and Education companion site. The first file contains our edges
-stored as a square matrix (more on this later) and the second file is a
-standard rectangular data frame that contains attributes for each node,
-i.e. school leaders. These files are included in the data folder of your
-R Studio project. A description of each file from the companion website
-and a direct link to the file are included below:
+To do so, we'll need to import two Excel files from the [Social Network
+Analysis and Education companion
+site](https://studysites.sagepub.com/carolan/study/resources.htm). The
+first file contains our edges stored as a square matrix (more on this
+later) and the second file is a standard rectangular data frame that
+contains attributes for each node, i.e. school leaders. These files are
+included in the data folder of your R Studio project. A description of
+each file from the companion website is linked above and each data file
+is linked below:
 
 1.  [**School Leaders Data Chapter
-    9_d.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds10.xls) This
+    9_d**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds10.xls)**.** This
     adjacency matrix reports on "confidential help" ties among 43 school
     leaders in year 3 of a three-year study. This is a directed valued
     (weighted) network measured on five-point scale ranging from 0 to 4,
@@ -286,7 +288,7 @@ and a direct link to the file are included below:
     times/week). These data are used throughout Chapter 9.
 
 2.  [**School Leaders Data Chapter
-    9_e.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds11.xlsx) This
+    9_e**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds11.xlsx)**.** This
     rectangular matrix consists of four attribute vectors for 43 school
     leaders. Following the first ID column, the matrix includes an
     efficacy score, trust score, and indicators for whether one works at
@@ -334,8 +336,12 @@ leader_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx",
                             col_names = FALSE)
 ```
 
-Take a look at the matrix you imported and answer the questions that
-follow:
+Use the code chunk below to inspect the matrix you just imported and
+answer the questions that follow:
+
+```{r}
+leader_matrix
+```
 
 1.  Is our network a square matrix? What does this tell you about the
     number of nodes in our network?
@@ -354,15 +360,17 @@ follow:
 
 Since one of our goals is a crude replication of the analysis
 demonstrated in Chapter 9, and since working with "valued networks" is a
-little more complex that binary networks that indicate just the presence
-or absence relationship between two actors, we will need to
-"dichotomize" our matrix. In practice this simply entails converting our
-valued matrix to a binary matrix with cells containing just 1s or 0s.
+little more complex than binary networks, which indicate just the
+presence or absence of a relationship between two actors, we will need
+to "dichotomize" our matrix. In practice this simply entails converting
+our valued matrix to a binary matrix with cells containing just 1s or
+0s.
 
-In their article, *Valued Ties Tell Fewer Lies: Why Not To Dichotomize
-Network Edges With Thresholds*, Thomas and Blitzstein (2018) highlight
-several reasons why the dichotomization procedure is appealing in an
-investigation aside from convenience and simplicity:
+In their article, [Valued Ties Tell Fewer Lies: Why Not To Dichotomize
+Network Edges With Thresholds](https://arxiv.org/abs/1101.0788), Thomas
+and Blitzstein (2018) highlight several reasons why the dichotomization
+procedure is appealing in an investigation aside from convenience and
+simplicity:
 
 1.  **Use of Exclusively Binary Methods.** Several classes of models
     have been designed to incorporate binary information directly,
@@ -370,7 +378,7 @@ investigation aside from convenience and simplicity:
 
 2.  **Ease of Input and Data Collection.** The need to classify
     continuously-valued quantities into a set of discrete groups is
-    widespread throughout all of science and technology, par- ticularly
+    widespread throughout all of science and technology, particularly
     because of the associated need to make clear decisions based on this
     information.
 
@@ -397,10 +405,10 @@ As the title of their article suggests, however, @thomas2011valued argue
 that the motivations for dichotomization should be revisited as
 dichotomization produces a range of problematic issues.
 
-With that in mind, before we can dichotomize our "matrix," we first need
-to convert it to a matrix object recognized by R using the `as.matrix()`
-function. We can then check to data format of our `leader_matrix` using
-the `class()` function:
+With that in mind, and before we can dichotomize our "matrix," we first
+need to convert it to a matrix object recognized by R using the
+`as.matrix()` function. We can then check to data format of our
+`leader_matrix` using the `class()` function:
 
 ```{r}
 leader_matrix <- leader_matrix %>%
@@ -414,9 +422,9 @@ dichotomized by recoding values originally coded as a 3 and 4 recoded to
 1, indicating the presence of a directed tie for both relations, and
 zero otherwise.
 
-To dichotmize our our matrix, the following code will assign 0s to all
-values in our matrix that are less than or equal to 2, and 1s to all
-values that are greater the or equal to 3:
+To dichotmize our our matrix, the following code will "assign" 0's to
+all values in our matrix that are less than or equal to 2, and 1's to
+all values that are greater the or equal to 3:
 
 ```{r}
 leader_matrix[leader_matrix <= 2] <- 0
@@ -434,10 +442,11 @@ using the `rownames()` and `colnames()` functions respectively:
 
 ```{r}
 rownames(leader_matrix) <- leader_nodes$ID
+
 colnames(leader_matrix) <- leader_nodes$ID
 ```
 
-## 2c. Create Graph with Attributes
+## 2c. Create Network with Attributes
 
 To date in this course, we have only worked with edge-lists as a data
 format for storing network data. Recall that edge-lists contain a row
@@ -451,9 +460,9 @@ using network packages in R.
 
 ### Get Edges
 
-The {igraph} package introduced in Unit 1 has a convenient function for
-extracting an edge list from a matrix, but first we need to convert our
-matrix to an igraph graph object.
+The {igraph} package introduced in Unit 1 has a convenient
+`get.data.frame()` function for extracting an edge list from a matrix,
+but first we need to convert our matrix to an igraph network object.
 
 ```{r}
 adjacency_matrix <- graph.adjacency(leader_matrix,
@@ -462,12 +471,12 @@ adjacency_matrix <- graph.adjacency(leader_matrix,
 class(adjacency_matrix)
 ```
 
-Note that we also included the `diag = FALSE` argument which converts
-all values along the diagonal to 0s, thereby removing self-loops. I
-believe they may have been included when calculating the network
-descriptives included in Table 9.1, and our own descriptives may not
-match exactly, but we'll need to remove these from our network anyways
-for the ERGM analysis so this will save us a step.
+Note that we included the `diag = FALSE` argument which converts all
+values along the diagonal to 0s, thereby removing self-loops. I believe
+they may have been included when calculating the network descriptives
+included in Table 9.1, and our own descriptives may not match exactly,
+but we'll need to remove these from our network for the ERGM analysis so
+this will save us a step.
 
 Now we can use the `get.data.frame()` function to covert our matrix to a
 standard edge-list:
@@ -492,16 +501,17 @@ Similar to Unit 2, use the `tbl_graph()` function to convert our
 object, by including the following arguments and supplying the
 appropriate code:
 
--   `edges =` expects a data frame, in our case `ties`, containing
-    information about the edges in the graph. The nodes of each edge
-    must either be in a `to` and `from` column, or in the two first
-    columns like the data frame we provided.
+-   `edges =` expects a data frame, in our case `leader_edges`,
+    containing information about the edges in the graph. The nodes of
+    each edge must either be in a `to` and `from` column, or in the two
+    first columns like the data frame we provided.
 
--   `nodes =` expects a data frame, in our case `actors`, containing
-    information about the nodes in the graph. If `to` and/or `from` are
-    characters or names, like in our data frames, then they will be
-    matched to the column named according to `node_key` in nodes, if it
-    exists, or matched to the first column in the node list.
+-   `nodes =` expects a data frame, in our case `leader_nodes`,
+    containing information about the nodes in the graph. If `to` and/or
+    `from` are characters or names, like in our data frames, then they
+    will be matched to the column named according to `node_key` in
+    nodes, if it exists, or matched to the first column in the node
+    list.
 
 -   `directed =` specifies whether the constructed graph be directed.
 
@@ -515,25 +525,21 @@ leader_graph <- tbl_graph(edges = leader_edges,
 leader_graph
 ```
 
-### 🧶 Knit & Check ✅
-
 Congrats! You made it to the end of data wrangling section and are ready
-to start analysis! Before proceeding further, knit your document and
-check to see if you encounter any errors.
+to start analysis!
 
 ------------------------------------------------------------------------
 
 # 3. EXPLORE
 
-In Section 3, we use the {tidygraph} package again for retrieving
-network descriptives and the {ggraph} package to create a network
-visualization to help illustrate these metrics. Specifically, in this
-section we'll learn to:
+In Section 3, we use the {tidygraph} package for retrieving network
+descriptives and the {ggraph} package to create a network visualization
+to help illustrate these metrics. Specifically, in this section we will:
 
 a.  **Examine Basic Descriptives**. We focus primarily on actors and
-    edges in this walkthrough, including the edges wights we added in
-    the previous section as well as node degree, and import and fairly
-    intuitive measure of centrality.
+    edges in this walkthrough, including whether or not ties were
+    reciprocated and node degree, an important and fairly intuitive
+    measure of centrality.
 
 b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
     learning to plot a network and tweak key elements like the size,
@@ -542,10 +548,10 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
 
 ## 3a. Examine Descriptives
 
-As noted in SNA and Education, many analyses of social networks are
-primarily descriptive and aim to either represent the network's
-underlying social structure through data-reduction techniques or to
-characterize network properties through network measures.
+As noted in SNA and Education [@carolan2014], many analyses of social
+networks are primarily descriptive and aim to either represent the
+network's underlying social structure through data-reduction techniques
+or to characterize network properties through network measures.
 
 In the analyses described in Chapter 9, descriptives were limited to the
 mean and standard deviation for: in-degree, out-degree, trust and
@@ -554,9 +560,10 @@ section 3a, let's see if we can reproduce these descriptives.
 
 ### Calculate Node Degree
 
-Recall **degree** is the number of ties to and from an ego. In a
-directed network, **in-degree** is the number of ties received, whereas
-**out-degree** is the number of ties sent.
+Recall that **degree** is the number of ties to and from an ego, or put
+more simply, a measure of how many In a directed network, **in-degree**
+is the number of ties received, whereas **out-degree** is the number of
+ties sent.
 
 The `activate()` function from the {tidygraph} package allows us to
 treat the nodes in our network object as if they were a standard data
