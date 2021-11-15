@@ -464,7 +464,7 @@ The Import Tweets section introduces the following functions from the
 Since one of our goals for this walkthrough is a very crude replication
 of the study by @supovitz2017commoncore, let's begin by introducing the
 `search_tweets()` function to try reading into R 5,000 tweets containing
-the commoncore hashtag and store as a new data frame `ngss_all_tweets`.
+the commoncore hashtag and store as a new data frame `ccss_tweets`.
 
 Type or copy the following code into your R script or console and run:
 
@@ -631,7 +631,7 @@ Now we can use the `read_csv()` function to save our data frame to our
 folder.
 
 ```{r}
-write_csv(ccss_tweets_4, "data/ccss-tweets.csv")
+write_csv(ccss_tweets_4, "data/ccss-tweets-5.csv")
 ```
 
 Check your data folder to make sure this file has been save. You will
