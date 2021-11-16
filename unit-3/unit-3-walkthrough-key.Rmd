@@ -202,6 +202,7 @@ library(tidyverse)
 library(igraph)
 library(tidygraph)
 library(ggraph)
+library(janitor)
 ```
 
 #### statnet 📦
@@ -303,7 +304,10 @@ located in the `data/` folder first:
 
 ```{r}
 leader_nodes <- read_excel("data/School Leaders Data Chapter 9_e.xlsx", 
-                           col_types = c("text", "numeric", "numeric", "numeric", "numeric"))
+                           col_types = c("text", "numeric", "numeric", "numeric", "numeric")) %>%
+  clean_names()
+
+leader_nodes
 ```
 
 Note that we specified the `ID` column as "text" and the remaining
@@ -479,10 +483,12 @@ but we'll need to remove these from our network for the ERGM analysis so
 this will save us a step.
 
 Now we can use the `get.data.frame()` function to covert our matrix to a
-standard edge-list:
+standard edge-list, and :
 
 ```{r}
-leader_edges <- get.data.frame(adjacency_matrix)
+leader_edges <- get.data.frame(adjacency_matrix) %>% 
+  mutate(from = as.character(from)) %>%
+  mutate(to = as.character(to))
 
 
 leader_edges
@@ -561,9 +567,10 @@ section 3a, let's see if we can reproduce these descriptives.
 ### Calculate Node Degree
 
 Recall that **degree** is the number of ties to and from an ego, or put
-more simply, a measure of how many In a directed network, **in-degree**
-is the number of ties received, whereas **out-degree** is the number of
-ties sent.
+more simply, a the number of people to whome someone is connected. In a
+directed network, **in-degree** is the number of connections or ties
+received, whereas **out-degree** is the number of connections or ties
+sent.
 
 The `activate()` function from the {tidygraph} package allows us to
 treat the nodes in our network object as if they were a standard data
@@ -574,8 +581,8 @@ We can use the `mutate()` functions to create new variables for nodes
 such as measures of degree, in-degree, and out-degree using the
 `centrality_degree()` function in the {tidygraph} package.
 
-Run the following code to add degree measures to each of our nodes and
-print the output:
+Run the following code to add in- and out-degree measures to each of our
+nodes and examine the output:
 
 ```{r}
 leader_measures <- leader_graph %>%
@@ -586,13 +593,36 @@ leader_measures <- leader_graph %>%
 leader_measures
 ```
 
-We now see that these in-degree and out-degree have been added to the
-nodes in our network in addition to the previously included addtributes.
+### **👉 Your Turn** **⤵**
+
+We now see that, in addition to the previously included attributes
+`trust` and `efficacy`, in-degree and out-degree measures have been
+added to the nodes in our network. But what if we also want to know to
+total number of "alters" each "ego" is connected to, i.e. the total
+number of individuals each school leader are connected to?
+
+Modify the code below to calculate `degree` for each school leader in
+our network. **Hint:** `centrality_degree` is a wrapper for
+`igraph::degree()` and the `mode =` argument can be found in the
+corresponding help documentation.
+
+```{r}
+leader_measures <- leader_graph %>%
+  activate(nodes) %>%
+  mutate(degree = centrality_degree(mode = "all")) %>%
+  mutate(in_degree = centrality_degree(mode = "in")) %>%
+  mutate(out_degree = centrality_degree(mode = "out"))
+
+leader_measures
+```
+
+### Summarize Node Measures
 
 We can also use the `activate()` function combined with the
 `data.frame()` function to extract our new measures to a separate data
 frame so we inspect our nodes individually and view some basic summary
-statistics using the handy `summary()` function.
+statistics using the handy `summary()` function included in the R {base}
+package.
 
 ```{r}
 node_measures <- leader_measures %>% 
@@ -604,29 +634,18 @@ summary(node_measures)
 
 It looks like our summary stats for Year 3 confidential exchanges
 network and attribute data are pretty close to those reported in Table
-9.1. For example, our average efficacy and trust scores were 6.65 and
-4.78 respectively, compared to 6.64 and 4.77 as reported in Chapter 9.
+9.1 copied from @carolan2014. For example, our average total efficacy
+and trust scores were 6.65 and 4.78 respectively, compared to 6.64 and
+4.77 as reported in Chapter 9.
 
-### **👉 Your Turn** **⤵**
+![](img/table-9-1.jpg){width="90%"}
 
 The average in/out-degree for our school leaders data is 3.26, however,
-which is a little lower than that reported by Carolyn. Again, this may
-be a function of our removal of self-loops perhaps.
-
-Try changing the `diag = FALSE` argument added to the
+which is a little lower than that reported by Carolyn. Again, this is
+likely a function of our removal of self-loops. To test this theory, we
+could simply change the `diag = FALSE` argument added to the
 `graph.adjacency()` function above to `TRUE` to include self-loops and
-rerunning all the code above.
-
-Are these stats closer to those reported by Carolyn?
-
--   YOUR RESPONSE HERE
-
-**R Markdown Tip:** You can run all code before a specific code chunk by
-clicking the "Run all code chunks above" option in the Run dropdown menu
-in the toolbar or in the code chunk itself.
-
-**Warning:** Before proceeding further, change back to `diag = FALSE`
-and rerun all code above.
+then try rerunning all the code above.
 
 #### School/District-Level Stats
 
@@ -639,12 +658,18 @@ deviation as follows:
 
 ```{r}
 node_measures %>%
-  group_by(DISTRICT.SITE) %>%
+  group_by(district_site) %>%
   summarise(n = n(),
             mean = mean(in_degree), 
             sd = sd(in_degree)
             )
 ```
+
+We see that our measures are pretty close, but not an exact match.
+Again, this is likely due to the self-loops we excluded. For example,
+our average in-degree for district-level (coded "1") and school-level
+(coded "0") leaders is 4.66 and 2.36 respectively, but reported as 4.72
+and 2.64 by @carolan2014.
 
 ### **👉 Your Turn** **⤵**
 
@@ -653,17 +678,38 @@ replicate the school and district level findings for out-degree, trust
 and efficacy measures.
 
 ```{r}
-#YOUR CODE HERE
+node_measures %>%
+  group_by(district_site) %>%
+  summarise(n = n(),
+            mean = mean(out_degree), 
+            sd = sd(out_degree)
+            )
+
+node_measures %>%
+  group_by(district_site) %>%
+  summarise(n = n(),
+            mean = mean(trust), 
+            sd = sd(trust)
+            )
+
+node_measures %>%
+  group_by(district_site) %>%
+  summarise(n = n(),
+            mean = mean(efficacy), 
+            sd = sd(efficacy)
+            )
 ```
 
-How close your result to those reported by @carolan2014?
+How close your result to those reported by Carolyn Table 9.1?
 
 -   YOUR RESPONSE HERE
 
 ## 3b. Visualize Network
 
-In Chapter 9, a directed and dichotomous sociogram of the
-**collaboration** network for year 3 is shown in Figure 9.1.
+In Chapter 9, @carolan2014 depictgs a directed and dichotomous sociogram
+of the **collaboration** network for year 3 is shown in .
+
+![](img/figure-9-1.jpg){width="90%"}
 
 ### **👉 Your Turn** **⤵**
 
@@ -678,10 +724,9 @@ it's trying to communicate.
 
 ```{r}
 #YOUR CODE HERE
-ggraph(leader_measures, layout = "fr") + 
-  geom_node_point(aes()) +
-  geom_node_text(aes(label = ID), 
-                     repel=TRUE) +
+leader_measures %>%
+ggraph(layout = "fr") + 
+  geom_node_point() +
   geom_edge_link() + 
   theme_graph()
 ```
@@ -693,8 +738,6 @@ questions?
     collaboration network? How is it different?
 
     -   YOUR RESPONSE HERE
-
-### 🧶 Knit & Check ✅
 
 Congrats! You made it to the end of the Explore section and are ready to
 learn a little ab out modeling network selection processes using ERGMs!
@@ -752,7 +795,7 @@ Fortunately, we have already prepared our data for quick conversion to a
 
 Similar to the `tbl_graph` function from {tidygraph} that we used above,
 let's add our `leader_edges` edge-list and our `leader_nodes` data frame
-a the `x =` and `vertices =` attributes in the `as.network()` function
+as the `x =` and `vertices =` attributes in the `as.network()` function
 and assign to a new object called `leader_network`:
 
 ```{r}
@@ -851,8 +894,8 @@ confidential exchange tie in year 3 is relatively low. The reciprocity
 parameter, on the other hand, is 3.11 in our model, and indicates a
 strong tendency for confidential-exchange ties to be reciprocated.
 
-Now let's add the an ergm-term for transitivity. Modeling transitivity,
-or the "friend of a friend" phenomenon in social networks, is both
+Now let's add an ergm-term for transitivity. Modeling transitivity, or
+the "friend of a friend" phenomenon in social networks, is both
 computationally intensive because of the all the possible "triangles" in
 a directed network, and also very prone to model degeneration, i.e. when
 models that fail to converge by reaching a value expected by the
@@ -892,8 +935,8 @@ summary(ergm_mod_2)
 
 Contrary to the analysis in Chapter 9, our model so far suggest that
 there is a tendency toward transitivity, that is a confidential exchange
-is likely to occur between two people who both confide in another
-person.
+is likely to occur between two people who both have a confidential
+exchange with the same individual.
 
 At this point, however, we have only focused on structural mechanisms
 inherent to networks themselves, or "global features" of the graph
@@ -918,30 +961,30 @@ tuning.
 To simplify this approach, I've include these attributes using the
 `nodefactor()` and `nocov()` ergm-terms respectively which allow us to
 test whether those who are Male or have higher efficacy scores are more
-likely to either send or receive at tie.
+likely to either send or receive a confidential exchange.
 
 ```{r, message=FALSE}
 ergm_3 <- ergm(leader_network ~ edges +
                  mutual +
                  gwesp(0.25, fixed=T) +
-                 nodefactor('MALE') +
-                 nodecov('EFFICACY')
+                 nodefactor('male') +
+                 nodecov('efficacy')
                )
   
   
 summary(ergm_3)
 ```
 
-Although there appears to be a slight, though not statistically
+Although there appears to be a very slight, though not statistically
 significant tendency towards male leaders being more likely to send or
 recieve ties, the primary drivers of network formation appear to be
 structural features of the network including reciprocity and
 transitivity.
 
-Sadly, we were not able to replicated the findings from @carolan2014,
-but we did not replicate the model exactly, nor did we fine tune our
+Sadly, we were not able to replicate the findings from @carolan2014, but
+we also did not replicate their model exactly, nor did we fine tune our
 model parameters. Regardless, this provided a practical exercise for
-demonstrating ergm models.
+demonstrating ERGMs.
 
 ### **👉 Your Turn** **⤵**
 
@@ -961,8 +1004,8 @@ examples.
 ergm_4 <- ergm(leader_network ~ edges +
                  mutual +
                  gwesp(0.25, fixed=T) +
-                 nodematch('MALE') +
-                 nodecov('EFFICACY')
+                 nodematch('male') +
+                 nodecov('efficacy')
                )
   
   
