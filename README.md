@@ -40,8 +40,8 @@ This course is divided into 4 four-week units focused on common techniques assoc
 
 **Week 3 Software Tutorials**. Software tutorials on preparing network data, constructing network graphs, and computing basic network measures (e.g. in-degree, graph density, etc.). 
 
-**Week 4 Independent Analysis**: Analysis and write-up of social of a prepared network dataset from an educational data source (e.g. online discussion forums, \#nced twitter posts, etc.)
+**Week 4 Independent Analysis**: Analysis and write-up of social of a prepared network dataset from an educational data source (e.g. online discussion forums, #nced twitter posts, etc.)
 
-### **Unit 2: Network Structure and Measures**
+### **Unit 2: Components, Cliques, Communities**
 
-### **Unit 3: Cliques, Communities, and Learner Roles**
+### **Unit 3: Influence**
