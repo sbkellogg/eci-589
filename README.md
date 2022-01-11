@@ -4,89 +4,35 @@
 
 Although social network analysis and its educational antecedents date back to the early 1900s, the popularity of social networking sites like Twitter and Facebook have raised awareness of and renewed interests in networks and their influence. As the use of digital resources continues expand in education, data collected by these educational technologies has also greatly facilitated the application of network analysis to teaching and learning. This introductory course is designed to prepare education researchers and practitioners to apply network analysis in order to better understand and improve student learning and the contexts in which learning occurs. This course will provide students with an overview of social network theory, examples of network analysis in educational contexts, and applied experience with widely adopted tools and techniques. As participants gain experience in the collection, analysis, and reporting of data throughout the course, they will be better prepared help educational organizations understand and improve both online and blended learning environments.
 
+This course part of the [Graduate Certificate in Learning Analytics Program](https://ced.ncsu.edu/graduate/programs/certificate/learning-analytics/) and is open to all Masters and Doctoral students. ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing as using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
+
 **Number of Credits:** 3
 
-## Instructor, Time and Location 
+## Instructor Information
 
 **Name:** Dr. Shaun Kellogg
 
 **Email:** shaun.kellogg\@ncsu.edu
 
+**Website:** [https://www.fi.ncsu.edu/people/sbkellog](https://www.fi.ncsu.edu/people/sbkellog/)
+
 **Location:** Friday Institute for Educational Innovation (Office 223)
 
 **Phone:** (919) 513-8563
 
-**Office Hours:** any weekday by appointment [calendly.com/sbkellogg](applewebdata://1C1ADE9B-69FF-4630-9C22-4A09159FF85B/calendly.com/sbkellogg)
-
 **Zoom/Calendly/Twitter/GitHub:** sbkellogg
+
+## Time and Location 
 
 **Meeting Time:** This distance education course is predominantly asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
 
 **Virtual Class Locations:** This course will be taught online through NC State's *Moodle* course management platform. Access <http://wolfware.ncsu.edu/> and log-in with your Unity ID and password. After logging-in, locate and click on ECI 589 to access the course site.
 
-## **Course Requisites** 
+**Office Hours:** Any weekday by appointment [calendly.com/sbkellogg](applewebdata://1C1ADE9B-69FF-4630-9C22-4A09159FF85B/calendly.com/sbkellogg)
 
-### **Prior Coursework**
+## **Course Goals**
 
-This course part of the Graduate Certificate in Learning Analytics Program and is open to all Masters and Doctoral students. ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing as using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
-
-### **Course Readings**
-
-#### Required Texts
-
-1.  Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
-
-2.  *R for Data Science* is available free online at <https://r4ds.had.co.nz> 
-
-3.  Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
-
-#### **Optional Texts**
-
-1.     Daly, A. J. (2010). *Social Network Theory and Educational Change*. Cambridge, MA: Harvard Education Press. Physical copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2505433).
-
-2.     Froehlich, D., Rehm, M., & Rienties, B. (2019). *Mixed methods social network analysis: Theories and methodologies in learning and education.* Routledge. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU4843392). 
-
- 
-
-**Required and Recommended Software:** Students must have Internet access and access to a Web browser (e.g., Safari, Firefox, chrome) to participate in this course. The Moodle course site and Web-based software required for completing course projects may only be accessed online. It is strongly recommended that students have high-speed Internet access (e.g., cable modem). 
-
- 
-
-This course requires R and R Studio or Gephi (linked below) that will be used to provide hands-on experience with the concepts and skills addressed in course readings. R, R studio, and Gephi can be installed on computers running Windows, MacOS, Chrome, and Linux operating systems. 
-
- 
-
-Finally, students should feel comfortable installing new software programs and navigating unfamiliar graphical user interfaces. It is also recommended that students in this class have some background knowledge of online learning environments (e.g. LMS, MOOCs, etc.) and an understanding of basic descriptive statistics (e.g. distribution, frequencies, mean, variability, etc.). 
-
- 
-
-*Required Software*
-
- 
-
-1.  **R** (<https://www.r-project.org>) is an open-source language and computing environment for data manipulation, analysis, and visualization. Installation files for Windows, Mac, and Linux can be found at the website for the Comprehensive R Archive Network (CRAN), <http://cran.r-project.org/>. 
-
-2.  **R Studio Cloud** (<https://rstudio.cloud>) is an online integrated development environment (IDE) for R which includes an R console, syntax-highlighting editor, and tools for plotting, packages, and workspace management. The R Desktop application can also be downloaded from <https://www.rstudio.com/products/RStudio/#Desktop>. 
-
-*Optional*
-
- 
-
-1.     **Gephi** (<https://gephi.org>) is the leading GUI-based visualization and exploration software for all kinds of graphs and networks. Gephi is open-source and free and runs on Windows, Mac OS X and Linux.
-
-2.     **DataQuest** (<https://www.dataquest.io>) offers interactive R, Python, Sheets, and SQL courses and tutorials on topics in data science, statistics and machine learning. An email will be sent providing free access to our DataQuest site, full catalogue of courses and resources for 6 months.
-
-3.     **LinkedIn Learning** (<https://www.linkedin.com/learning)> offers tutorials and training courses on R, R Studio, and Tableau. LinkedIn Learning is available at no charge to students.
-
-4.     **GitHub** is a web-based hosting service for version control using Git. You can create an account here: <https://github.com> 
-
-5.     **Git** is a free and open source distributed version control system. Jenny Bryan's very thorough installation and R Studio set up process for Mac and Windows can be found here: <http://happygitwithr.com>.
-
- 
-
-**Server Space:** NC State is a Google Apps for Education institution. Your Google Drive provides "an infinitely large, ultra-secure, and entirely free bookbag for the 21st century."  This space may be useful for your project work, or you may use a third-party Internet service provider to place your data files and projects online (e.g., [Github](https://github.com/), Dropbox). In addition, Moodle provides space for storing private files. 
-
-**Course Goals:** Goals for the Analyzing Learning Networks course are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
+Goals for the Analyzing Learning Networks course are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
 
 1.  **Think.** Students will deepen their understanding of Social Network Analysis as an emerging approach within the field of Learning Analytics and education research, including its application in a wide range of educational settings. 
 
@@ -122,23 +68,19 @@ This course is divided into three-week units focused on common techniques associ
 
 **Unit 5: Social Capital and Network Diffusion (Certificate Track Only)** concludes this course and focuses on the concept of social capital and how it has been defined, measured, and modeled in the context of educational research. chapter will help you understand what social capital is (and isn't) and how the conceptual and methodological tools associated with social network analysis are essential to testing and refining this rich theory. Students are also introduced to diffusion theory and the major models used to understand how diffusion through networks occurs. 
 
- 
-
-**Major Assignments & Assessment**
+## **Major Assignments & Assessment**
 
 1.  **Housekeeping (4 pts)**: Students will review Syllabus, access necessary software and post a brief introduction of themselves and respond to their peers. Student who are not in the Learning Analytics Certificate program or have not completed ECI 586: Intro to Learning Analytics will also be required to complete [The Basics R Primer](https://rstudio.cloud/learn/primers/1) accessible through R Studio Cloud. 
 
-2.     **Readings & Discussion (24 pts)**: Each unit begins unit introduces terminology, core concepts, and applications of an analytical approach through readings, course videos, and discussion. Students will log in throughout week and engage in informal discussion with other members of our learning community. To help guide discussions, students are provided a set of essential questions to address and are also encouraged to explore their own areas of interest. Provided readings are embedded in each discussion topic and are intended to help address guiding questions and foster a deeper understanding SNA and its application in educational contexts. 
+2.  **Readings & Discussion (24 pts)**: Each unit begins unit introduces terminology, core concepts, and applications of an analytical approach through readings, course videos, and discussion. Students will log in throughout week and engage in informal discussion with other members of our learning community. To help guide discussions, students are provided a set of essential questions to address and are also encouraged to explore their own areas of interest. Provided readings are embedded in each discussion topic and are intended to help address guiding questions and foster a deeper understanding SNA and its application in educational contexts. 
 
-3.     **Case Studies (24 pts**): During the second week of each unit, we will complete a case study to illustrate how Learning Analytics methods and techniques can be applied to address research questions of interest, create useful data products, and conduct reproducible research. Each case study is structured around a basic research workflow modeled after the Data-Intensive Research Workflow from [Learning Analytics Goes to School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134).
+3.  **Case Studies (24 pts**): During the second week of each unit, we will complete a case study to illustrate how Learning Analytics methods and techniques can be applied to address research questions of interest, create useful data products, and conduct reproducible research. Each case study is structured around a basic research workflow modeled after the Data-Intensive Research Workflow from [Learning Analytics Goes to School](https://catalog.lib.ncsu.edu/catalog/NCSU4862134).
 
-1.  **Data Products (24 pts; Certificate Track)**: In the final week of each unit, certificate-track students will prepare a brief report or data product on an independent analysis they conducted using an instructor provided dataset or a data source of their choosing. The data product will include key findings and insights gained from the analysis. Students are asked to use an instructor provided rubric to reflect on and self-assess on their data product and will be provided exemplar products from prior course offerings.
+4.  **Data Products (24 pts; Certificate Track)**: In the final week of each unit, certificate-track students will prepare a brief report or data product on an independent analysis they conducted using an instructor provided dataset or a data source of their choosing. The data product will include key findings and insights gained from the analysis. Students are asked to use an instructor provided rubric to reflect on and self-assess on their data product and will be provided exemplar products from prior course offerings.
 
-2.  **R Tutorials (24 pts; Non-Certificate Track):** In the final week of each unit, non-certificate track students will gain hands-on experience with tools and processes using R. Tutorials and resources will introduce students to importing and wrangling data for analysis, exploring data for interesting patterns or trends, and reporting data in a reproducible way. Full credit will be provided for successful completion of tutorials. 
+5.  **R Tutorials (24 pts; Non-Certificate Track):** In the final week of each unit, non-certificate track students will gain hands-on experience with tools and processes using R. Tutorials and resources will introduce students to importing and wrangling data for analysis, exploring data for interesting patterns or trends, and reporting data in a reproducible way. Full credit will be provided for successful completion of tutorials. 
 
-6.     **Final Project (24 pts)**: In lieu of a final exam, students will conduct an independent analysis and develop For your final course project, you'll be asked to prepare your own small scale "case study" that brings together some of the workflow approaches we've learned this semester to help answer a research question you have about a dataset of your own choosing. a data product that demonstrates concepts learned in each unit (i.e. mechanics, visual design, ethics, & story telling) as applied to a dataset of their choosing. 
-
- 
+6.  **Final Project (24 pts)**: In lieu of a final exam, students will conduct an independent analysis and develop For your final course project, you'll be asked to prepare your own small scale "case study" that brings together some of the workflow approaches we've learned this semester to help answer a research question you have about a dataset of your own choosing. a data product that demonstrates concepts learned in each unit (i.e. mechanics, visual design, ethics, & story telling) as applied to a dataset of their choosing. 
 
 **Grading Scale:** The grading scale is based on 100 points:
 
@@ -179,6 +121,52 @@ Reasonable accommodations will be made for students with verifiable disabilities
  
 
 For more information on NC State's policy on working with students with disabilities, please see <http://www.ncsu.edu/policies/academic_affairs/courses_undergrad/REG02.20.1.php>
+
+## **Course Readings**
+
+#### Required Texts
+
+1.  Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
+
+2.  *R for Data Science* is available free online at <https://r4ds.had.co.nz> 
+
+3.  Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
+
+#### **Optional Texts**
+
+1.  Daly, A. J. (2010). *Social Network Theory and Educational Change*. Cambridge, MA: Harvard Education Press. Physical copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2505433).
+
+2.  Froehlich, D., Rehm, M., & Rienties, B. (2019). *Mixed methods social network analysis: Theories and methodologies in learning and education.* Routledge. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU4843392). 
+
+## **Course Software**
+
+Students must have Internet access and access to a Web browser (e.g., Safari, Firefox, chrome) to participate in this course. The Moodle course site and Web-based software required for completing course projects may only be accessed online. It is strongly recommended that students have high-speed Internet access (e.g., cable modem). 
+
+This course requires R and R Studio or Gephi (linked below) that will be used to provide hands-on experience with the concepts and skills addressed in course readings. R, R studio, and Gephi can be installed on computers running Windows, MacOS, Chrome, and Linux operating systems. 
+
+Finally, students should feel comfortable installing new software programs and navigating unfamiliar graphical user interfaces. It is also recommended that students in this class have some background knowledge of online learning environments (e.g. LMS, MOOCs, etc.) and an understanding of basic descriptive statistics (e.g. distribution, frequencies, mean, variability, etc.).
+
+1.  **R** (<https://www.r-project.org>) is an open-source language and computing environment for data manipulation, analysis, and visualization. Installation files for Windows, Mac, and Linux can be found at the website for the Comprehensive R Archive Network (CRAN), <http://cran.r-project.org/>. 
+
+2.  **R Studio Cloud** (<https://rstudio.cloud>) is an online integrated development environment (IDE) for R which includes an R console, syntax-highlighting editor, and tools for plotting, packages, and workspace management. The R Desktop application can also be downloaded from <https://www.rstudio.com/products/RStudio/#Desktop>. 
+
+*Optional*
+
+ 
+
+1.     **Gephi** (<https://gephi.org>) is the leading GUI-based visualization and exploration software for all kinds of graphs and networks. Gephi is open-source and free and runs on Windows, Mac OS X and Linux.
+
+2.     **DataQuest** (<https://www.dataquest.io>) offers interactive R, Python, Sheets, and SQL courses and tutorials on topics in data science, statistics and machine learning. An email will be sent providing free access to our DataQuest site, full catalogue of courses and resources for 6 months.
+
+3.     **LinkedIn Learning** (<https://www.linkedin.com/learning)> offers tutorials and training courses on R, R Studio, and Tableau. LinkedIn Learning is available at no charge to students.
+
+4.     **GitHub** is a web-based hosting service for version control using Git. You can create an account here: <https://github.com> 
+
+5.     **Git** is a free and open source distributed version control system. Jenny Bryan's very thorough installation and R Studio set up process for Mac and Windows can be found here: <http://happygitwithr.com>.
+
+ 
+
+**Server Space:** NC State is a Google Apps for Education institution. Your Google Drive provides "an infinitely large, ultra-secure, and entirely free bookbag for the 21st century."  This space may be useful for your project work, or you may use a third-party Internet service provider to place your data files and projects online (e.g., [Github](https://github.com/), Dropbox). In addition, Moodle provides space for storing private files. 
 
 **Optional Course Readings**
 
