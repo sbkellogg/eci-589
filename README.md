@@ -4,6 +4,8 @@
 
 Although social network analysis and its educational antecedents date back to the early 1900s, the popularity of social networking sites like Twitter and Facebook have raised awareness of and renewed interests in networks and their influence. As the use of digital resources continues expand in education, data collected by these educational technologies has also greatly facilitated the application of network analysis to teaching and learning. This introductory course is designed to prepare education researchers and practitioners to apply network analysis in order to better understand and improve student learning and the contexts in which learning occurs. This course will provide students with an overview of social network theory, examples of network analysis in educational contexts, and applied experience with widely adopted tools and techniques. As participants gain experience in the collection, analysis, and reporting of data throughout the course, they will be better prepared help educational organizations understand and improve both online and blended learning environments.
 
+test
+
 **Number of Credits:** 3
 
 **Course Prerequisites/Co-requisites:** ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing a researcher/programming track using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
