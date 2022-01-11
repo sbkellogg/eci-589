@@ -6,7 +6,7 @@ Although social network analysis and its educational antecedents date back to th
 
 **Number of Credits:** 3
 
-## Instructor Information, Time and Location 
+## Instructor, Time and Location 
 
 **Name:** Dr. Shaun Kellogg
 
@@ -30,7 +30,9 @@ Although social network analysis and its educational antecedents date back to th
 
 This course part of the Graduate Certificate in Learning Analytics Program and is open to all Masters and Doctoral students. ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing as using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
 
-### **Course Texts**
+### **Course Readings**
+
+#### Required Texts
 
 1.  Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
 
@@ -38,7 +40,7 @@ This course part of the Graduate Certificate in Learning Analytics Program and i
 
 3.  Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
 
-**Optional Textbooks**
+#### **Optional Texts**
 
 1.     Daly, A. J. (2010). *Social Network Theory and Educational Change*. Cambridge, MA: Harvard Education Press. Physical copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2505433).
 
