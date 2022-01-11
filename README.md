@@ -1,6 +1,6 @@
 # ECI 589: Social Network Analysis and Education
 
-## **Course Overview** 
+## **Course Overview**
 
 Although social network analysis and its educational antecedents date back to the early 1900s, the popularity of social networking sites like Twitter and Facebook have raised awareness of and renewed interests in networks and their influence. As the use of digital resources continues expand in education, data collected by these educational technologies has also greatly facilitated the application of network analysis to teaching and learning. This introductory course is designed to prepare education researchers and practitioners to apply network analysis in order to better understand and improve student learning and the contexts in which learning occurs. This course will provide students with an overview of social network theory, examples of network analysis in educational contexts, and applied experience with widely adopted tools and techniques. As participants gain experience in the collection, analysis, and reporting of data throughout the course, they will be better prepared help educational organizations understand and improve both online and blended learning environments.
 
@@ -22,7 +22,7 @@ This course part of the [Graduate Certificate in Learning Analytics Program](htt
 
 **Zoom/Calendly/Twitter/GitHub:** sbkellogg
 
-## Time and Location 
+## Time and Location
 
 **Meeting Time:** This distance education course is predominantly asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
 
@@ -54,11 +54,11 @@ The following learning objectives are aligned with the overarching learning obje
 
 This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis.
 
-### **Unit 1: The Social Network Perspective (Non-Certificate Track Only)** 
+### **Unit 1: The Social Network Perspective (Non-Certificate Track Only)**
 
 Unit 1 is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R. 
 
-### **Unit 2: Network Methods and Measures (All Students)** 
+### **Unit 2: Network Methods and Measures (All Students)**
 
 This unit moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis.
 
@@ -220,7 +220,7 @@ Golbeck, J. (2013). [*Network structure*](https://www.youtube.com/watch?v=89mxO
 
  
 
-Hanneman, R., & Riddle, M. (2005).[ *Introduction to social network methods*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64258/Hanneman%2C%20Riddle%20-%202005%20-%20Introduction%20to%20social%20network%20methods.pdf). Retrieved from <http://www.researchgate.net/publication/235737492_Introduction_to_social_network_methods/file/3deec52261e1577e6c.pdf>
+Hanneman, R., & Riddle, M. (2005).[*Introduction to social network methods*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64258/Hanneman%2C%20Riddle%20-%202005%20-%20Introduction%20to%20social%20network%20methods.pdf). Retrieved from <http://www.researchgate.net/publication/235737492_Introduction_to_social_network_methods/file/3deec52261e1577e6c.pdf>
 
  
 
@@ -232,8 +232,7 @@ Kellogg, S., & Edelmann, A. (2015). [*Massively Open Online Course for Educator
 
  
 
-Kellogg, S. (2013). [*A SNA cheat sheet*](https://docs.google.com/a/ncsu.edu/document/d/1XHxzK1bAOj1Benw5GYKqbxfyKGf7Y-h8d8kWA6NVzwY/mobilebasic). Handout from and SNA Workshop conducted at the Friday Institute.  
-  
+Kellogg, S. (2013). [*A SNA cheat sheet*](https://docs.google.com/a/ncsu.edu/document/d/1XHxzK1bAOj1Benw5GYKqbxfyKGf7Y-h8d8kWA6NVzwY/mobilebasic). Handout from and SNA Workshop conducted at the Friday Institute.
 
 Kellogg, S. (2014). [*Social learning theories and education: A review of the literature*](https://moodle1516-courses.wolfware.ncsu.edu/draftfile.php/44554/user/draft/87048915/Social%20Learning%20Theories.pdf). 
 
