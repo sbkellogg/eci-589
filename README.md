@@ -4,19 +4,9 @@
 
 Although social network analysis and its educational antecedents date back to the early 1900s, the popularity of social networking sites like Twitter and Facebook have raised awareness of and renewed interests in networks and their influence. As the use of digital resources continues expand in education, data collected by these educational technologies has also greatly facilitated the application of network analysis to teaching and learning. This introductory course is designed to prepare education researchers and practitioners to apply network analysis in order to better understand and improve student learning and the contexts in which learning occurs. This course will provide students with an overview of social network theory, examples of network analysis in educational contexts, and applied experience with widely adopted tools and techniques. As participants gain experience in the collection, analysis, and reporting of data throughout the course, they will be better prepared help educational organizations understand and improve both online and blended learning environments.
 
-test
-
 **Number of Credits:** 3
 
-**Course Prerequisites/Co-requisites:** ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing a researcher/programming track using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
-
-## Time and Location
-
-**Meeting Time:** This distance education course is predominantly asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
-
-**Virtual Class Locations:** This course will be taught online through NC State's *Moodle* course management platform. Access <http://wolfware.ncsu.edu/> and log-in with your Unity ID and password. After logging-in, locate and click on ECI 589 to access the course site.
-
-## **Instructor Information**
+## Instructor Information, Time and Location 
 
 **Name:** Dr. Shaun Kellogg
 
@@ -30,13 +20,23 @@ test
 
 **Zoom/Calendly/Twitter/GitHub:** sbkellogg
 
-## **Required Course Texts**
+**Meeting Time:** This distance education course is predominantly asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
 
-1.     Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
+**Virtual Class Locations:** This course will be taught online through NC State's *Moodle* course management platform. Access <http://wolfware.ncsu.edu/> and log-in with your Unity ID and password. After logging-in, locate and click on ECI 589 to access the course site.
 
-2.     *R for Data Science* is available free online at <https://r4ds.had.co.nz> 
+## **Course Requisites** 
 
-3.     Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
+### **Prior Coursework**
+
+This course part of the Graduate Certificate in Learning Analytics Program and is open to all Masters and Doctoral students. ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing as using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
+
+### **Course Texts**
+
+1.  Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
+
+2.  *R for Data Science* is available free online at <https://r4ds.had.co.nz> 
+
+3.  Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
 
 **Optional Textbooks**
 
