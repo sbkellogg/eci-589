@@ -30,15 +30,15 @@ This course part of the [Graduate Certificate in Learning Analytics Program](htt
 
 **Office Hours:** Any weekday by appointment [calendly.com/sbkellogg](applewebdata://1C1ADE9B-69FF-4630-9C22-4A09159FF85B/calendly.com/sbkellogg)
 
-## **Course Goals**
+## **Goals and Objectives**
 
-Goals for the Analyzing Learning Networks course are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
+Course goals for ECI 589: Analyzing Learning Networks are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
 
 1.  **Think.** Students will deepen their understanding of Social Network Analysis as an emerging approach within the field of Learning Analytics and education research, including its application in a wide range of educational settings. 
 
 2.  **Do.** Scholars will develop proficiency with the processes, tools, and techniques necessary to efficiently, effectively, and ethically apply network analysis to understand and improve learning and the contexts in which learning occurs. 
 
-**Student Learning Outcomes:** The following learning objectives are aligned with the overarching learning objectives of the Graduate Certificate in Learning Analytics program and are embedded in each unit of the course: 
+The following learning objectives are aligned with the overarching learning objectives of the Graduate Certificate in Learning Analytics program and are embedded in each unit of the course: 
 
 1.  **Conceptual Foundations:** Describe social network theory (e.g. history, concepts, ethics, etc.) and how it has been applied to address important problems, questions, and issues in education;
 
@@ -48,17 +48,19 @@ Goals for the Analyzing Learning Networks course are guided by the North Carolin
 
 4.  **Processes & Techniques**: Understand and apply analytic processes and network analysis techniques (e.g. sociograms, clustering, ERGMs) in order to understand and improve learning and the contexts in which learning occurs; and, 
 
-5.     **Communication:** Clearly communicate methods, analyses, findings, and recommendations that can provide actionable insight into learning contexts for a range of education stakeholders.
+5.  **Communication:** Clearly communicate methods, analyses, findings, and recommendations that can provide actionable insight into learning contexts for a range of education stakeholders.
 
-**Course Structure & Unit Overview**
+## **Course Structure & Unit Overview**
 
-This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis. 
+This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis.
 
- 
+### **Unit 1: The Social Network Perspective (Non-Certificate Track Only)** 
 
-**Unit 1: The Social Network Perspective (Non-Certificate Track Only)** is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R. 
+Unit 1 is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R. 
 
-**Unit 2: Network Methods and Measures (All Students)** moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis.
+### **Unit 2: Network Methods and Measures (All Students)** 
+
+This unit moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis.
 
  
 
