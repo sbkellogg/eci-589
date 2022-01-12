@@ -60,17 +60,23 @@ Unit 1 is a gentle introduction to social network theory, analysis and applicati
 
 ### **Unit 2: Network Methods and Measures (All Students)**
 
-This unit moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis.
+Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis. 
 
- 
+### **Unit 3: Groups, Positions and Egocentric Analysis (All Students)** 
 
-**Unit 3: Group, Position and Egocentric Analysis (All Students)** focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis. 
+Groups, Positions and Egocentric Analysis focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis. 
 
-**Unit 4: Statistical Inference and Network Selection (All Students)** examines the different techniques that make use of simulations when statistically modeling network data. These models enable researchers to employ social network analysis in ways that move beyond description toward explanation, an important goal of social science. In Unit 4, students are also introduced to Exponential Random Graph Models, which provide a means to compare whether a network's observed structural properties occur more frequently than one could expect from chance alone. More specifically, ERGMS provide a way to determine how networks develop and factors that contribute to formation of relations between students and/or educators.
+### **Unit 4: Statistical Inference and Network Selection (All Students)**
 
-**Unit 5: Social Capital and Network Diffusion (Certificate Track Only)** concludes this course and focuses on the concept of social capital and how it has been defined, measured, and modeled in the context of educational research. chapter will help you understand what social capital is (and isn't) and how the conceptual and methodological tools associated with social network analysis are essential to testing and refining this rich theory. Students are also introduced to diffusion theory and the major models used to understand how diffusion through networks occurs. 
+Statistical Inference and Network Selection examines the different techniques that make use of simulations when statistically modeling network data. These models enable researchers to employ social network analysis in ways that move beyond description toward explanation, an important goal of social science. In Unit 4, students are also introduced to Exponential Random Graph Models, which provide a means to compare whether a network's observed structural properties occur more frequently than one could expect from chance alone. More specifically, ERGMS provide a way to determine how networks develop and factors that contribute to formation of relations between students and/or educators.
+
+### **Unit 5: Social Capital and Network Diffusion (Certificate Track Only)**
+
+Social Capital and Network Diffusion concludes this course and focuses on the concept of social capital and how it has been defined, measured, and modeled in the context of educational research. chapter will help you understand what social capital is (and isn't) and how the conceptual and methodological tools associated with social network analysis are essential to testing and refining this rich theory. Students are also introduced to diffusion theory and the major models used to understand how diffusion through networks occurs. 
 
 ## **Assignments and Grading**
+
+### Major Course Assignments
 
 1.  **Housekeeping (4 pts)**: Students will review Syllabus, access necessary software and post a brief introduction of themselves and respond to their peers. Student who are not in the Learning Analytics Certificate program or have not completed ECI 586: Intro to Learning Analytics will also be required to complete [The Basics R Primer](https://rstudio.cloud/learn/primers/1) accessible through R Studio Cloud. 
 
@@ -84,7 +90,9 @@ This unit moves beyond basic network analysis concepts and takes a closer look 
 
 6.  **Final Project (24 pts)**: In lieu of a final exam, students will conduct an independent analysis and develop For your final course project, you'll be asked to prepare your own small scale "case study" that brings together some of the workflow approaches we've learned this semester to help answer a research question you have about a dataset of your own choosing. a data product that demonstrates concepts learned in each unit (i.e. mechanics, visual design, ethics, & story telling) as applied to a dataset of their choosing.
 
-**Grading Scale:**
+### **Grading Policies**
+
+Course grades are based on the following 100 point scale:
 
 A+ (97-100), A (94-96), A- (90-93), 
 
@@ -99,20 +107,6 @@ F (59 or less)
 Late work is accepted but may be penalized at 15% per week it is late. Assignments submitted by the due date, however, may be revised and resubmitted for a higher grade by the following week.
 
 **Course Feedback Expectations:** Please contact your instructor via email ([shaun.kellogg\@ncsu.edu](mailto:Sophia_stone@ncsu.edu)) with any questions about the course project or other assignments. Your instructor will strive to answer any emails within 24 hours (M-F) and 48 hours on the weekend, and grade submitted assignments within 5-7 days of the due date. In addition, students will be provided ongoing opportunities, and are strongly encourage, to provide course feedback for to help improve the design of current and future courses.
-
-## NCSU Policies
-
-**Academic Integrity:** Students are bound by the academic integrity policy as stated in the code of student conduct. Therefore, students are required to uphold the university pledge of honor and exercise honesty in completing any assignment. See the website for a full explanation:
-
-<http://www.ncsu.edu/policies/student_services/student_discipline/POL11.35.1.php> 
-
-**N.C. State University Polices, Regulations, and Rules (PRR)**: Students are responsible for reviewing the PRRs which pertain to their course rights and responsibilities. These include: <http://policies.ncsu.edu/policy/pol-04-25-05> (Equal Opportunity and Non-Discrimination Policy Statement), <http://oied.ncsu.edu/oied/policies.php> (Office for Institutional Equity and Diversity), <http://policies.ncsu.edu/policy/pol-1135-01> (Code of Student Conduct), and <http://policies.ncsu.edu/regulation/reg-02-50-03> (Grades and Grade Point Average).
-
-**University Non-Discrimination Policies:** It is the policy of the State of North Carolina to provide equality of opportunity in education and employment for all students and employees. Accordingly, the university does not practice or condone unlawful discrimination in any form against students, employees or applicants on the grounds of race, color, religion, creed, sex, national origin, age, disability, or veteran status. In addition, North Carolina State University regards discrimination based on sexual orientation to be inconsistent with its goal of providing a welcoming environment in which all its students, faculty, and staff may learn and work up to their full potential.
-
-Reasonable accommodations will be made for students with verifiable disabilities. In order to take advantage of available accommodations, students must register with the Disability Resource Office at Holmes Hall, Suite 304, Campus Box 7509, 919-515-7653. For more information on NC State's policy on working with students with disabilities, please see the Academic Accommodations for Students with Disabilities Regulation (REG02.20.01)
-
-For more information on NC State's policy on working with students with disabilities, please see <http://www.ncsu.edu/policies/academic_affairs/courses_undergrad/REG02.20.1.php>
 
 ## **Course Software**
 
@@ -201,3 +195,17 @@ Finally, students should feel comfortable installing new software programs and n
 -   Smith, M., et al. (2009). [*Analyzing (social media) networks with NodeXL*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64258/Smith%20et%20al.%20-%202009%20-%20Analyzing%20%28social%20media%29%20networks%20with%20NodeXL.pdf). In *Proceedings of the fourth international conference on Communities and technologies - C&T '09* (p. 255). New York, New York, USA: ACM Press. <http://doi.org/10.1145/1556460.1556497>
 
 -   Supovitz, J. Daly, A., & Del Fresno, M. (2015, Feb 23). [*#Commoncore Project*](http://www.hashtagcommoncore.com/). Retrieved from: <http://www.hashtagcommoncore.com/>
+
+## NCSU Policies
+
+**Academic Integrity:** Students are bound by the academic integrity policy as stated in the code of student conduct. Therefore, students are required to uphold the university pledge of honor and exercise honesty in completing any assignment. See the website for a full explanation:
+
+<http://www.ncsu.edu/policies/student_services/student_discipline/POL11.35.1.php> 
+
+**N.C. State University Polices, Regulations, and Rules (PRR)**: Students are responsible for reviewing the PRRs which pertain to their course rights and responsibilities. These include: <http://policies.ncsu.edu/policy/pol-04-25-05> (Equal Opportunity and Non-Discrimination Policy Statement), <http://oied.ncsu.edu/oied/policies.php> (Office for Institutional Equity and Diversity), <http://policies.ncsu.edu/policy/pol-1135-01> (Code of Student Conduct), and <http://policies.ncsu.edu/regulation/reg-02-50-03> (Grades and Grade Point Average).
+
+**University Non-Discrimination Policies:** It is the policy of the State of North Carolina to provide equality of opportunity in education and employment for all students and employees. Accordingly, the university does not practice or condone unlawful discrimination in any form against students, employees or applicants on the grounds of race, color, religion, creed, sex, national origin, age, disability, or veteran status. In addition, North Carolina State University regards discrimination based on sexual orientation to be inconsistent with its goal of providing a welcoming environment in which all its students, faculty, and staff may learn and work up to their full potential.
+
+Reasonable accommodations will be made for students with verifiable disabilities. In order to take advantage of available accommodations, students must register with the Disability Resource Office at Holmes Hall, Suite 304, Campus Box 7509, 919-515-7653. For more information on NC State's policy on working with students with disabilities, please see the Academic Accommodations for Students with Disabilities Regulation (REG02.20.01)
+
+For more information on NC State's policy on working with students with disabilities, please see <http://www.ncsu.edu/policies/academic_affairs/courses_undergrad/REG02.20.1.php>
