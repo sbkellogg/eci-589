@@ -201,5 +201,3 @@ Finally, students should feel comfortable installing new software programs and n
 -   Smith, M., et al. (2009). [*Analyzing (social media) networks with NodeXL*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64258/Smith%20et%20al.%20-%202009%20-%20Analyzing%20%28social%20media%29%20networks%20with%20NodeXL.pdf). In *Proceedings of the fourth international conference on Communities and technologies - C&T '09* (p. 255). New York, New York, USA: ACM Press. <http://doi.org/10.1145/1556460.1556497>
 
 -   Supovitz, J. Daly, A., & Del Fresno, M. (2015, Feb 23). [*#Commoncore Project*](http://www.hashtagcommoncore.com/). Retrieved from: <http://www.hashtagcommoncore.com/>
-
--    
