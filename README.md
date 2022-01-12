@@ -1,4 +1,4 @@
-# ECI 589: Social Network Analysis and Education
+# Syllabus
 
 ## **Course Overview**
 
