@@ -60,9 +60,9 @@ Unit 1 is a gentle introduction to social network theory, analysis and applicati
 
 ### **Unit 2: Network Methods and Measures (All Students)**
 
-Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. This unit also explores ego network data and how it differs from complete network data, particularly in terms of data collection, management, and analysis. 
+Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. More specifically, these concepts and measures apply to the analysis of complete networks, i.e. networks for which you have complete relational information on each pair of individuals in the network. These measures are necessary to first figure out a network's "topography", or what the network looks like at one point in time.
 
-### **Unit 3: Groups, Positions and Egocentric Analysis (All Students)** 
+### **Unit 3: Groups, Positions and Egocentric Analysis (All Students)**
 
 Groups, Positions and Egocentric Analysis focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis. 
 
@@ -134,9 +134,9 @@ Finally, students should feel comfortable installing new software programs and n
 
 **Server Space:** NC State is a Google Apps for Education institution. Your Google Drive provides "an infinitely large, ultra-secure, and entirely free bookbag for the 21st century."  This space may be useful for your project work, or you may use a third-party Internet service provider to place your data files and projects online (e.g., [Github](https://github.com/), Dropbox). In addition, Moodle provides space for storing private files.
 
-## **Course Readings** 
+## **Course Readings**
 
-### Required Textbooks   
+### Required Textbooks
 
 1.  Carolan, B. V. (2013). *Social network analysis and education: Theory, methods & applications.* Sage Publications. Digital copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
 
@@ -144,7 +144,7 @@ Finally, students should feel comfortable installing new software programs and n
 
 3.  Researcher and Practitioner Articles (see References for potential readings). Provided through [NCSU Course](https://moodle-courses2122.wolfware.ncsu.edu/course/view.php?id=8249).   
 
-### **Optional Textbooks** 
+### **Optional Textbooks**
 
 1.  Daly, A. J. (2010). *Social Network Theory and Educational Change*. Cambridge, MA: Harvard Education Press. Physical copy available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2505433).
 
