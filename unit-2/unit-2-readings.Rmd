@@ -1,5 +1,5 @@
 ---
-title: 'Unit 1 Readings: What is SNA?'
+title: 'Unit 2 Readings: Data Management & Network Measurement'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -20,18 +20,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-Our primary goal in this unit is to build a basic understanding of
-social network analysis (SNA) as an approach to understand and improve
-learning processes and outcomes. The required and self-selected readings
-provide an introduction to SNA in the field of education, including the
-historical, theoretical, and analytical foundations of a social network
-perspective.
+Our primary goal in this unit is to examine common approaches to data
+management and measurement in network analysis. The required and
+self-selected readings provide an introduction the collection and
+management of relational data, as well as how we can begin to describe
+what a complete network looks like, not just visually, but
+mathematically.
 
 A secondary goal of readings and discussion is to help you start
 generating ideas for independent application of network analysis. As
-part of our discussion, you'll be asked to generate a basic research
-question about a population of interest and that could be answered using
-relational data.
+part of our readings, for example, you'll learn how to specify a network
+"boundary" for your study based on different approaches.
 
 Course readings, discussion guidelines, and assessment criteria are
 further described in this [this
@@ -42,10 +41,9 @@ me an email or schedule a time to talk at
 
 ## Readings
 
-For Unit read chapters 1 and 2 from Social Network Analysis and
-Education [@carolan2014] and locate one additional research article,
-presentation, or informal study to help address our discussion questions
-for the week.
+For Unit read chapters 3-5 from Social Network Analysis and Education
+[@carolan2014] and locate one additional research article, presentation,
+or informal study to help address our discussion questions for the week.
 
 ### SNA and Education Part I: Theory and Concepts
 
@@ -56,16 +54,16 @@ explicitly account for the importance of one's relationships with
 others, as well as the larger pattern in which these relationships are
 embedded.
 
-1.  [Chapter 1: The Social Network Perspective and Educational Research
-    Introduction](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml)
-
-2.  [Chapter 2: Historical, Theoretical, and Analytical
-    Foundations](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n2.xml)
-
-3.  [Chapter
+1.  [Chapter
     3](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml):
     [Basic
     Concepts](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)
+
+2.  [Chapter 4: Collecting and Managing Network
+    Data](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n4.xml)
+
+3.  [Chapter 5: Structural Measures for Complete
+    Networks](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n5.xml)
 
 ### Self-Selected Study
 
@@ -100,37 +98,6 @@ To help guide our discussions, we will collectively address a set of
 guiding questions provided below. You are also welcome to add your own
 topics or questions for the class to discuss.
 
-#### Chapter 1: The Social Network Perspective and Educational Research Introduction
-
-1.  Consider a network of which you are a part. Who are the network's
-    actors? What ties connect these actors? Are there any groups within
-    this network? What relations within this network might be of
-    interest to a researcher? Finally, what makes this collection of
-    actors a social network?
-
-2.  Using the same question from the previous response, explain the
-    analytical level at which these data would need to be collected and
-    analyzed.
-
-#### Chapter 2: Historical, Theoretical, and Analytical Foundations
-
-Draft a research question for a population you may be interested in
-studying, or that would be of interest to educational researchers, and
-that would require the collection of relational data. Share your
-research question and then answer the following questions:
-
-1.  What relational data would need to be collected? 
-
-2.  For what reason would relational data need to be collected in order
-    to address this question?
-
-3.  Explain the analytical level at which these data would need to be
-    collected and analyzed.
-
-4.  How does this differ from the ways in which individual or group
-    behavior is typically conceptualized and modeled in conventional
-    educational research?
-
 #### Chapter 3: Basic Concepts
 
 Refer to the graph below to answer the following questions:
@@ -158,52 +125,44 @@ and answer the following questions:
 4.  Is this matrix symmetric? Explain the values on the diagonal of the
     matrix.
 
-![](img/graph.jpeg){width="100%"}
+![](images/graph.jpeg)
 
-#### Self-Selected Study: The Four Hallmarks of SNA
-
-**Required**
+#### Chapter 4: Basic Concepts (Required)
 
 For your self-selected study, provide a APA citation and abstract, then
 briefly answer the following questions:
 
-1.  To what degree does the study emphasize one or more of the
-    following:
+1.  Does the study employs a positional, relational, or event-based
+    approach to specify the network's boundary.
 
-    -   individuals and their actions are viewed as interdependent;
+2.  Were the data collected on the complete, ego, or partial network?
+    Describe the sources of these network data.
 
-    -   relational ties between individuals are opportunities for
-        transmission of resources;
+3.  What relations were measured and what instruments were used to
+    measure them? Evaluate the quality of these relational data in terms
+    of validity, reliability, error, and patterns of missingness.
 
-    -   the pattern of relations among individuals---the social
-        structure---is an environment that can provide either
-        opportunities for or constraints on individual action; and (4)
-        social structure as an enduring pattern of relations among
-        actors?
+#### Chapter 5: Structural Measures for Complete Networks
 
-2.  At which level are the social network data measured and collected:
-    ego, dyad, triad, or complete?
+Assume you have complete network-level data on school leaders in a large
+urban district that is transitioning to a new teacher-evaluation system.
+You have relational data on the frequency with which ego discusses this
+new system with each alter (0 = never, 1 = sometimes, 2 = regularly, and
+3 = frequently) and whether ego turns to alter for advice regarding
+general professional matters (1 = yes, 0 = no).
 
-3.  What relations have been measured among actors? Why were these
-    relations measured and others excluded?
+1.  Which structural properties of the complete network might be of
+    interest to you? Please explain why these properties might be of
+    interest.
 
-4.  How and to what degree does the study reflects the four hallmarks of
-    social network analysis: 
+2.  Given the same network described above, what would high
+    centralization scores on both relations indicate about this
+    network's ability to successfully transition to a new evaluation
+    system?
 
-    -   emphasis on structuralism based on ties among actors, 
-
-    -   firmly grounded in empirical data, 
-
-    -   use of graphical imagery, and 
-
-    -   mathematically based.
-
-Bonus Questions:
-
-1.  How does the study straddle qualitative and quantitative paradigms?
-
-2.  How does the use of the social network analysis bridge the gap
-    between sociological theory and empirical reality?
+3.  How might your response to #2 differ if you knew that the networks
+    also had high density scores? Given this new information, what would
+    you predict about the transition to a new evaluation system?\
 
 ## Assessment
 
