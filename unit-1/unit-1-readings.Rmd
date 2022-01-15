@@ -6,7 +6,7 @@ date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
   html_document:
     toc: yes
-    toc_depth: 4
+    toc_depth: 2
     toc_float: yes
 editor_options:
   markdown:
@@ -18,54 +18,83 @@ bibliography: lit/references.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Overview
+
+Our primary goal in this unit is to build a basic understanding of
+social network analysis (SNA) as an approach to understand and improve
+learning processes and outcomes. The required and self-selected readings
+provide an introduction to SNA in the field of education, including the
+historical, theoretical, and analytical foundations of a social network
+perspective.
+
+A secondary goal of readings and discussion is to help you start
+generating ideas for independent application of network analysis. As
+part of our discussion, you'll be asked to generate a basic research
+question about a population of interest and that could be answered using
+relational data.
+
+Course readings, discussion guidelines, and assessment criteria are
+further described in this [this
+document](https://sbkellogg.github.io/eci-589/unit-1/unit-1-readings.html).
+If you have any questions about this assignment, don't hesitate to send
+me an email or schedule a time to talk at
+[calendly.com/sbkellogg](calendly.com/sbkellogg).
+
 ## Readings
 
-This week you'll be required to read chapters 1-2 of Social Network
-Analysis and Education [@carolan2014] and find one additional research
-article, presentation, or informal study to help address our discussion
-questions for the week.
+For Unit read chapters 1 and 2 from Social Network Analysis and
+Education [@carolan2014] and locate one additional research article,
+presentation, or informal study to help address our discussion questions
+for the week.
 
 ### SNA and Education Part I: Theory and Concepts
 
-1.  [Chapter 1: The Social Network Perspective and Educational Research
+The following readings for this unit illustrate how social network
+analysis provides educational researchers with a different way of
+thinking about and measuring an learning processes and outcomes by that
+explicitly account for the importance of one's relationships with
+others, as well as the larger pattern in which these relationships are
+embedded.
+
+1.  [Chapter 1: The Social Network Perspective and Educational Research
     Introduction](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml)
 
-2.  [Chapter 2: Historical, Theoretical, and Analytical
+2.  [Chapter 2: Historical, Theoretical, and Analytical
     Foundations](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n2.xml)
+
+3.  [Ch[apter
+    3]{.ul}](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)[:
+    [Basic](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)]{.ul}[
+    Concepts](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)
 
 ### Self-Selected Study
 
 Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google
 Scholar](https://scholar.google.com/) or search engine to locate a
 research or practitioner-focused article, presentation, or resource that
-applies social network analysis to study a topic of interest. You are
-also welcome to select one of the research papers listed in
+demonstrates the application of social network analysis to study a
+context or topic of interest. You are also welcome to select one of the
+research papers listed in
 the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course
 text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have
-peaked your interest and you'd like to follow up on it. Your selection
-should address one or more of the discussion topics/questions (see
-below) and you're welcome to identify SNA resources outside of the field
-of education.
+peaked your interest. Your selection should address one or more of the
+discussion topics/questions (see below) and you're welcome to identify
+SNA resources outside of the field of education.
 
 ## Discussion
 
-In lieu of the peer interaction and discussion of course materials that
+In lieu of the peer interaction and discussion of course materials that
 normally take place "in-class", you'll be asked to log in this
 week and engage with other members of our learning community through
-this discussion forum. With the exception of the [Resource
-Review](https://moodle-courses2122.wolfware.ncsu.edu/mod/forum/discuss.php?d=4366)
-topic, you are not required to address every guiding question,
+this discussion forum. **With the exception of the Self-Selected Study
+questions, you are not required to address every guiding question**,
 particularly if you feel others in the class have thoroughly addressed
-the topic or questions.
+the topic or questions. Our aim for these discussions is to collectively
+build our understanding of these readings through back-and-forth
+dialogue and avoid a "collective monologue" in which we see 20
+variations of effectively the same post.
 
-The primary goal for these discussions is to collectively build our
-understanding of this week's topics through back-and-forth dialogue and
-avoid a "collective monologue" in which we see 20 variations of
-effectively the same post. A secondary goal of these discussion is to
-help you brainstorm ideas for independently analysis assignments and/or
-your final course project.
-
-## Assessment
+### Assessment 
 
 Grading for this assignment is fairly lenient, provided that it's clear
 from your posts that you've done the required reading. Readings and
@@ -87,7 +116,7 @@ discussion
 model](https://moodle-courses2122.wolfware.ncsu.edu/pluginfile.php/287931/mod_forum/post/6203/Gao%2C%20Wang%2C%20Sun%20-%202009%20-%20A%20new%20model%20of%20productive%20online%20discussion%20and%20its%20implications%20for%20research%20and%20instruction.pdf) [@gao2009]
 for ways to contribute to the conversation. 
 
-At minimum, your collective posts should also help us interpret or
+At minimum, your collective posts should also help us interpret or
 elaborate on discussion topics, questions, or ideas others have shared
 by "making connection to the learning materials" and should reference at
 some point each of the required chapters and your self-selected reading
@@ -99,7 +128,7 @@ To help guide our discussions, we will collectively address a set of
 guiding questions provided below. You are also welcome to add your own
 topics or questions for the class to discuss.
 
-### Chapter 1: The Social Network Perspective and Educational Research Introduction
+### Chapter 1: **The Social Network Perspective and Educational Research Introduction**
 
 1.  Consider a network of which you are a part. Who are the network's
     actors? What ties connect these actors? Are there any groups within
@@ -107,13 +136,7 @@ topics or questions for the class to discuss.
     interest to a researcher? Finally, what makes this collection of
     actors a social network?
 
-2.  Draft a research question that would be of interest to educational
-    researchers that would require the collection of relational data.
-    What relational data would need to be collected? For what reason
-    would relational data need to be collected in order to address this
-    question?
-
-3.  Using the same question from the previous response, explain the
+2.  Using the same question from the previous response, explain the
     analytical level at which these data would need to be collected and
     analyzed.
 
@@ -136,12 +159,41 @@ research question and then answer the following questions:
     behavior is typically conceptualized and modeled in conventional
     educational research?
 
+### Chapter 3: Basic Concepts
+
+Refer to the graph below to answer the following questions:
+
+-   Is this graph directed or undirected? Are the lines arcs or edges?
+    Given your responses to these questions, what type of relation might
+    this graph represent?
+
+-   Based on what you see in this graph, is this relation valued or
+    binary?
+
+-   What attribute data might you want to incorporate into analysis?
+
+Bonus Questions:
+
+Create a matrix that represents the relational data evident in the graph
+and answer the following questions:
+
+-   How many actors are in this matrix?
+
+-    How many rows and columns are in this matrix?
+
+-   What type of data are in the cells of this matrix?
+
+-   Is this matrix symmetric? Explain the values on the diagonal of the
+    matrix.
+
+![](img/graph.jpeg){width="100%"}
+
 ### Self-Selected Study: The Four Hallmarks of SNA
 
-#### Required
+**Required**
 
-For your self-selected study, briefly answer the following questions
-(Required):
+For your self-selected study, provide a APA citation and abstract, then
+briefly answer the following questions:
 
 1.  To what degree does the study emphasize one or more of the
     following:
@@ -173,8 +225,6 @@ For your self-selected study, briefly answer the following questions
     3.  use of graphical imagery, and 
 
     4.  mathematically based.
-
-#### Optional
 
 Bonus Questions:
 
