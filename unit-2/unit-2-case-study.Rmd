@@ -1,0 +1,429 @@
+---
+title: 'Unit 2 Case Study: Topology over Time'
+subtitle: "ECI 589 Social Network Analysis and Education"
+author: "Dr. Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+editor_options:
+  markdown:
+    wrap: 72
+bibliography: lit/references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Prepare
+
+Our Unit 2 Case Study: Hashtag Common Core revisits Alan Daly, Miguel
+del Fresno and Christian Kolouch who examined the intense debate
+surrounding the Common Core State Standards education reform as it
+played out on Twitter. As noted on their expansive and interactive
+website for the [#COMMONCORE
+Project](https://www.hashtagcommoncore.com), the Common Core was a major
+education policy initiatives of the early 21st century that sought to
+strengthen education systems across the United States through a set of
+specific and challenging education standards. Although these standards
+once enjoyed bipartisan support, we'll see later in this walkthrough how
+these standards have become a political punching bag.
+
+In addition to investigating tweets around the these controversial state
+standards, our Unit 2 Walkthrough will cover the following topics
+pertaining to each data-intensive workflow process:
+
+1.  **Prepare**: Prior to analysis, we'll take a look at the context
+    from which our data came, formulate some research questions, and get
+    introduced the {rtweet} R package for using the Twitter API.
+
+2.  **Wrangle**: Wrangling data entails the work of manipulating,
+    cleaning, transforming, and merging data. In section 2 we will learn
+    about the {tidygraph} package for creating network objects.
+
+3.  **Explore**: In section 3, we use the {tidygraph} package and the
+    companion {ggraph} package to calculate a range of centrality
+    measures and learn how to illustrate some of these stats through
+    network visualization.
+
+4.  **Model**: We wrap up our analysis in Section 4 by introducing
+    community detection and sentiment analysis algorithms for
+    identifying groups and gauging sentiment about the common core.
+
+5.  **Communicate**: We briefly reflect on our walkthrough in
+    preparation for our independent analysis next week.
+
+### Review the Research
+
+In [Social Network Analysis and Education: Theory, Methods &
+Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
+@carolan2014 makes the following distinctions between mathematical and
+statistical approaches to social network analysis:
+
+> **Mathematical approaches** focus on what a network of actors "looks
+> like" by describing the network using sociograms and/or network
+> measures such as reciprocity, centrality, and density. However, these
+> approaches "tend to regard the measured relationships and their
+> strengths as accurately reflecting the real, final, or equilibrium
+> status of the network."
+
+For Unit 3, we move beyond previous "mathematical approaches"
+
+Specifically, we will try to replicate the P\* models used in Chapter 9
+of @carolan2014 in order to test hypotheses about individual and network
+characteristics that may explain who school leaders select for
+collaboration and confidential exchanges.
+
+#### Research Questions
+
+For this walkthrough, we will be using school leadership data were
+collected at two school districts over 3 consecutive years that was used
+to answer the following research questions:
+
+1.  Is there a relationship between the frequency of collaboration
+    between school leaders and how often they turn to each other to
+    discuss issues of a confidential nature?
+2.  Do school leaders prefer to collaborate with those with whom they
+    have collaborated in the past, or is there some other reason?
+3.  Does gender or some other individual attribute predicts confidential
+    exchanges between school leaders, or does some previous relation
+    have a stronger effect?
+4.  Does collaboration between leaders explain one's level of trust in
+    one's administrative colleagues?
+5.  Can we distinguish among different groups of school leaders based on
+    how frequently they collaborate, and if so, are these groupings
+    related to the level at which they work (school versus district)?
+
+#### Data Collection
+
+For each consecutive year, school district leaders were invited to
+complete a survey that collected individual:
+
+-   **Demographic information** (e.g., gender, ethnicity, marital
+    status, age, years of experiences);
+
+-   **Network relationships types** (e.g., collaboration, confidential
+    exchanges, energy, expertise, leaders approached for support,
+    work-related issues, input, recognition, best practices, and
+    innovation);
+
+-   **Frequency of interactions** they have with those nominated
+    individuals on a four-point frequency scale ranging from 1 (the
+    least frequent) to 4 (1--2 times a week);
+
+-   **Leadership efficacy** items were designed based on the Principal
+    Efficacy Scale used in Daly et al. (2011) and Tschannen-Moran and
+    Gareis's (2004) studies. The efficacy scale includes 18 items rated
+    on a 9-point Likert scale ranging from 1 (None at all) to 9 (A great
+    deal);
+
+-   **Trust** scale contains eight items rated on a 7-point Likert scale
+    ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
+    from Tschannen-Moran and Hoy (2003).
+
+#### Analyses
+
+Two modeling techniques unique to network analysis and demonstrated in
+Chapter 9 of @carolan2014 are the quadratic assignment procedure (QAP)
+and Exponential Random Graph Models (ERGM):
+
+-   **QAP/MR**: The quadratic assignment procedure (QAP) developed by
+    Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
+    correlation between the two networks and adjusts for this dependence
+    between networks by repeatedly permuting the order of rows and
+    columns of one of the networks while keeping the other network
+    intact. The QAP is based on regression models and permutation tests
+    for valued (i.e., continuous) relational variables.
+
+-   **P1 and P\* (P-Star)**: Both of these models are some of the first
+    to make use of the ERGM, which provides a basis for comparing
+    whether a network's observed structural properties occur more
+    frequently than you could expect from chance alone. ERGMs can be
+    used to model ties in complete networks but do so in a manner that
+    explains the presence (or absence) of ties as a function of
+    individual-and/or network-level characteristics. While QAP and
+    MR-QAP procedures control for network structure through
+    permutations, these ERGMs attempt to explain it.
+
+#### Key Findings
+
+In response to research questions 1 & 2 from above, Carolyn reported
+that "while collaboration in year 1 does not significantly predict
+collaboration in year 3, confidential exchanges in year 1 does" and
+suggested that "collaboration among school leaders provides an important
+foundation for more sensitive, perhaps even deeper, relations (e.g.,
+confidential exchanges) at a later point in time."
+
+### 
+
+For our Unit 3 Walkthrough, we focus specifically on generative
+processes, or micro-level mechanisms, the might help explain who school
+leaders select to collaborate with or engage in confidential exchanges.
+Review Chapter 9 of SNA and Education and report out on the findings
+from the ERGM analysis in response to Research Question 3 below:
+
+3.  **Does gender or some other individual attribute predicts
+    confidential exchanges between school leaders, or does some previous
+    relation have a stronger effect?**
+
+    -   YOUR RESPONSE HERE
+
+Based on what you know about networks and the context so far, what other
+specific question(s) might the data and analyses described allow you to
+address. For example, the concept of homophily, or the tendency for
+people to seek out or form ties to those who are similar to themselves,
+was introduced in our readings and hypotheses about homophily can easily
+be tested using using ERGMs:
+
+-   YOUR RESPONSE HERE
+
+Save this question for later as you'll have a chance to empirically test
+it by the end of this walkthrough.
+
+## 
+
+Load Packages
+
+```{r cars}
+library(readxl)
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
+library(janitor)
+```
+
+\
+
+## Wrangle
+
+You can also embed plots, for example:
+
+### Import Data
+
+One of our primary goals is to replicate the ERGM analysis from Chapter
+9: Network Data and Statistical Models [@carolan2014]. Specifically,
+we'll aim to examine an
+
+To do so, we'll need to import two Excel files from the [Social Network
+Analysis and Education companion
+site](https://studysites.sagepub.com/carolan/study/resources.htm). The
+first file contains our edges stored as a square matrix (more on this
+later) and the second file is a standard rectangular data frame that
+contains attributes for each node, i.e. school leaders. These files are
+included in the data folder of your R Studio project. A description of
+each file from the companion website is linked above and each data file
+is linked below:
+
+1.  [**School Leaders Data Chapter
+    9_a.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds7.xls) This
+    adjacency matrix reports on "collaboration" ties among 43 school
+    leaders in year 1 of a three-year study. This is a directed valued
+    (weighted) network measured on five-point scale ranging from 0 to 4,
+    with higher values indicating more frequent collaborations (1--2
+    times/week). These data are used throughout Chapter 9.
+
+2.  [**School Leaders Data Chapter
+    9_b.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds8.xlsx) This
+    adjacency matrix reports on "collaboration" ties among 43 school
+    leaders in year 3 of a three-year study. This is a directed valued
+    (weighted) network measured on five-point scale ranging from 0 to 4,
+    with higher values indicating more frequent collaborations (1--2
+    times/week). 
+
+Recall from above that our relations, or edges, are stored as a valued
+[adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) in
+which columns and rows consist of the same actors and each cell contains
+information about the tie between each pair of actors. In our case, the
+tie is a directed and valued "arc" where the value indicates the
+strength of the relationship.
+
+Use the `read_excel()` function to import the
+`School Leaders Data Chapter 9_d.xlsx` file, add an argument setting the
+column names to `FALSE` since our file is a simple matrix with no header
+or column names, and assign the matrix to a variable named
+`leader_matrix`:
+
+**Hint:** Type `?read_excel` into the console and check the arguments
+section to find the name of the argument used to set column headers.
+
+```{r import year }
+year_1_collaboration <- read_excel("data/year-3-collaboration.xlsx", 
+                            col_names = FALSE)
+```
+
+Use the code chunk below to inspect the matrix you just imported and
+answer the questions that follow:
+
+**\
+**
+
+**Hint:** Type `?read_excel` into the console and check the arguments
+section to find the name of the argument used to set column headers.
+
+```{r}
+#YOUR CODE HERE
+leader_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx", 
+                            col_names = FALSE)
+```
+
+Use the code chunk below to inspect the matrix you just imported and
+answer the questions that follow:
+
+```{r}
+class(year_1_collaboration)
+
+year_1_collaboration
+```
+
+1.  Is our network a square matrix? What does this tell you about the
+    number of nodes in our network?
+
+    -   
+
+2.  Does our network contain self-loops? How do you know?
+
+    -   
+
+3.  What do the values in each cell of our matrix indicate?
+
+    -   
+
+With that in mind, and before we can dichotomize our "matrix," we first
+need to convert it to a matrix object recognized by R using the
+`as.matrix()` function. We can then check to data format of our
+`leader_matrix` using the `class()` function:
+
+```{r}
+year_1_matrix <- year_1_collaboration %>%
+  as.matrix()
+
+class(year_1_matrix)
+
+year_1_matrix
+```
+
+\
+
+## Dichotomize Matrix
+
+Since one of our goals is a crude replication of the analysis
+demonstrated in Chapter 9, and since working with "valued networks" is a
+little more complex than binary networks, which indicate just the
+presence or absence of a relationship between two actors, we will need
+to "dichotomize" our matrix. In practice this simply entails converting
+our valued matrix to a binary matrix with cells containing just 1s or
+0s.
+
+In their article, [Valued Ties Tell Fewer Lies: Why Not To Dichotomize
+Network Edges With Thresholds](https://arxiv.org/abs/1101.0788), Thomas
+and Blitzstein (2018) cautions against dichotomization but highlight
+several reasons why the procedure is appealing to social network
+analysts:
+
+1.  **Use of Exclusively Binary Methods.** Several classes of models
+    have been designed to incorporate binary information directly,
+    including the exponential random graph model.
+
+2.  **Ease of Input and Data Collection.** The need to classify
+    continuously-valued quantities into a set of discrete groups is
+    widespread throughout all of science and technology, particularly
+    because of the associated need to make clear decisions based on this
+    information.
+
+3.  **Ease of Output in Graphical Representations.** The visual appeal
+    of graphs and networks has contributed to much of the field's
+    attention in the past decade. When plotting a graphical structure, a
+    clever choice of threshold can illuminate which nodes are most
+    central, which connections the most vital.
+
+4.  **Sparsity of Structure.** In data where there are very few natural
+    zeroes (if any), di- chotomization provides a way to select for a
+    small number of connections which are thought to be of the greatest
+    importance to the system, or to nominate a number of ties for more
+    in-depth study.
+
+5.  **Binning To Address Nonlinearity and Reduce Noise.** If there is a
+    nonlinear relationship in the data, binning the data into distinct
+    ordinal categories has many advantages, namely, the reduction of
+    total mean-squared error, and a corresponding increase in power for
+    detecting a true non-zero relationship over an improperly specified
+    linear analysis.
+
+As the title of their article suggests, however, @thomas2011valued argue
+that the motivations for dichotomization should be revisited as
+dichotomization produces a range of problematic issues.
+
+Both the collaboration and confidential help network data were
+dichotomized by recoding values originally coded as a 3 and 4 recoded to
+1, indicating the presence of a directed tie for both relations, and
+zero otherwise.
+
+To dichotmize our our matrix, the following code will "assign" 0's to
+all values in our matrix that are less than or equal to 2, and 1's to
+all values that are greater the or equal to 3:
+
+```{r}
+leader_matrix[leader_matrix <= 2] <- 0
+
+leader_matrix[leader_matrix >= 3] <- 1
+```
+
+### Add Row and Column Names
+
+Before we can convert to an edge-list, we will also need to add the
+names of our nodes to the columns and rows of our matrix. These are
+stored in the `ID` column of our `leader_node` data frame. We can use
+the `$` operator to select these names and assign to our `leader_matrix`
+using the `rownames()` and `colnames()` functions respectively:
+
+```{r}
+rownames(year_1_matrix) <- 1:43
+
+colnames(year_1_matrix) <- 1:43
+
+year_1_matrix
+```
+
+## 
+
+### Network Object
+
+```{r}
+
+
+year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
+
+year_1_network
+```
+
+### 👉 Your Turn ⤵
+
+## Explore
+
+```{r}
+
+ggraph(year_1_network, layout = "fr") +
+  geom_node_point() +
+  geom_edge_link()
+
+```
+
+\
+
+```{r}
+
+gsize(year_1_network)
+
+reciprocity(year_1_network)
+
+edge_density(year_1_network)
+
+
+
+graph_diameter()
+
+```
