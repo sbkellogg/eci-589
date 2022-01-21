@@ -194,6 +194,8 @@ library(igraph)
 library(tidygraph)
 library(ggraph)
 library(janitor)
+library(knitr)
+library(DT)
 ```
 
 \
@@ -298,7 +300,7 @@ need to convert it to a matrix object recognized by R using the
 `leader_matrix` using the `class()` function:
 
 ```{r}
-year_1_matrix <- year_1_collaboration %>%
+year_1_matrix <- year_1_collaboration |>
   as.matrix()
 
 class(year_1_matrix)
@@ -404,6 +406,8 @@ year_1_network
 
 ## Explore
 
+### Describe the Network Visually
+
 ```{r}
 
 ggraph(year_1_network, layout = "fr") +
@@ -412,18 +416,60 @@ ggraph(year_1_network, layout = "fr") +
 
 ```
 
+### Describe the Network Mathematically
+
+#### Network Size
+
+```{r}
+
+year_1_network
+
+year_1_network |>
+  activate(edges) |>
+  mutate(size = graph_size())
+
+year_1_network |>
+  gsize()
+
+gsize(year_1_network)
+
+```
+
+#### Density
+
 \
 
 ```{r}
 
-gsize(year_1_network)
+year_1_network |>
+  edge_density()
 
-reciprocity(year_1_network)
-
-edge_density(year_1_network)
-
+edge_density(simplify(year_1_network))
 
 
-graph_diameter()
+```
+
+####  Reciprocity
+
+```{r}
+
+year_1_network |>
+  reciprocity()
+
+year_1_network |>
+  activate(edges) |>
+  mutate(reciprocated = edge_is_mutual()) |>
+  as_tibble() |>
+  datatable()
+
+```
+
+#### Transitivity
+
+```{r}
+
+year_1_network |>
+  transitivity()
+
 
 ```
