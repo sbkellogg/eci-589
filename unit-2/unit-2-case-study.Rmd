@@ -18,7 +18,7 @@ bibliography: lit/references.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Prepare
+## 1. Prepare
 
 Our Unit 2 Case Study: Hashtag Common Core revisits Alan Daly, Miguel
 del Fresno and Christian Kolouch who examined the intense debate
@@ -126,28 +126,6 @@ complete a survey that collected individual:
 
 #### Analyses
 
-Two modeling techniques unique to network analysis and demonstrated in
-Chapter 9 of @carolan2014 are the quadratic assignment procedure (QAP)
-and Exponential Random Graph Models (ERGM):
-
--   **QAP/MR**: The quadratic assignment procedure (QAP) developed by
-    Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
-    correlation between the two networks and adjusts for this dependence
-    between networks by repeatedly permuting the order of rows and
-    columns of one of the networks while keeping the other network
-    intact. The QAP is based on regression models and permutation tests
-    for valued (i.e., continuous) relational variables.
-
--   **P1 and P\* (P-Star)**: Both of these models are some of the first
-    to make use of the ERGM, which provides a basis for comparing
-    whether a network's observed structural properties occur more
-    frequently than you could expect from chance alone. ERGMs can be
-    used to model ties in complete networks but do so in a manner that
-    explains the presence (or absence) of ties as a function of
-    individual-and/or network-level characteristics. While QAP and
-    MR-QAP procedures control for network structure through
-    permutations, these ERGMs attempt to explain it.
-
 #### Key Findings
 
 In response to research questions 1 & 2 from above, Carolyn reported
@@ -183,7 +161,7 @@ be tested using using ERGMs:
 Save this question for later as you'll have a chance to empirically test
 it by the end of this walkthrough.
 
-## 
+### **👉 Your Turn** **⤵**
 
 Load Packages
 
@@ -253,15 +231,14 @@ or column names, and assign the matrix to a variable named
 section to find the name of the argument used to set column headers.
 
 ```{r import year }
-year_1_collaboration <- read_excel("data/year-3-collaboration.xlsx", 
+year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx", 
                             col_names = FALSE)
 ```
 
 Use the code chunk below to inspect the matrix you just imported and
 answer the questions that follow:
 
-**\
-**
+### \*\* 👉 Your Turn\*\* **⤵**
 
 **Hint:** Type `?read_excel` into the console and check the arguments
 section to find the name of the argument used to set column headers.
@@ -310,70 +287,6 @@ year_1_matrix
 
 \
 
-## Dichotomize Matrix
-
-Since one of our goals is a crude replication of the analysis
-demonstrated in Chapter 9, and since working with "valued networks" is a
-little more complex than binary networks, which indicate just the
-presence or absence of a relationship between two actors, we will need
-to "dichotomize" our matrix. In practice this simply entails converting
-our valued matrix to a binary matrix with cells containing just 1s or
-0s.
-
-In their article, [Valued Ties Tell Fewer Lies: Why Not To Dichotomize
-Network Edges With Thresholds](https://arxiv.org/abs/1101.0788), Thomas
-and Blitzstein (2018) cautions against dichotomization but highlight
-several reasons why the procedure is appealing to social network
-analysts:
-
-1.  **Use of Exclusively Binary Methods.** Several classes of models
-    have been designed to incorporate binary information directly,
-    including the exponential random graph model.
-
-2.  **Ease of Input and Data Collection.** The need to classify
-    continuously-valued quantities into a set of discrete groups is
-    widespread throughout all of science and technology, particularly
-    because of the associated need to make clear decisions based on this
-    information.
-
-3.  **Ease of Output in Graphical Representations.** The visual appeal
-    of graphs and networks has contributed to much of the field's
-    attention in the past decade. When plotting a graphical structure, a
-    clever choice of threshold can illuminate which nodes are most
-    central, which connections the most vital.
-
-4.  **Sparsity of Structure.** In data where there are very few natural
-    zeroes (if any), di- chotomization provides a way to select for a
-    small number of connections which are thought to be of the greatest
-    importance to the system, or to nominate a number of ties for more
-    in-depth study.
-
-5.  **Binning To Address Nonlinearity and Reduce Noise.** If there is a
-    nonlinear relationship in the data, binning the data into distinct
-    ordinal categories has many advantages, namely, the reduction of
-    total mean-squared error, and a corresponding increase in power for
-    detecting a true non-zero relationship over an improperly specified
-    linear analysis.
-
-As the title of their article suggests, however, @thomas2011valued argue
-that the motivations for dichotomization should be revisited as
-dichotomization produces a range of problematic issues.
-
-Both the collaboration and confidential help network data were
-dichotomized by recoding values originally coded as a 3 and 4 recoded to
-1, indicating the presence of a directed tie for both relations, and
-zero otherwise.
-
-To dichotmize our our matrix, the following code will "assign" 0's to
-all values in our matrix that are less than or equal to 2, and 1's to
-all values that are greater the or equal to 3:
-
-```{r}
-leader_matrix[leader_matrix <= 2] <- 0
-
-leader_matrix[leader_matrix >= 3] <- 1
-```
-
 ### Add Row and Column Names
 
 Before we can convert to an edge-list, we will also need to add the
@@ -390,8 +303,6 @@ colnames(year_1_matrix) <- 1:43
 year_1_matrix
 ```
 
-## 
-
 ### Network Object
 
 ```{r}
@@ -403,6 +314,10 @@ year_1_network
 ```
 
 ### 👉 Your Turn ⤵
+
+```{r}
+
+```
 
 ## Explore
 
@@ -416,28 +331,125 @@ ggraph(year_1_network, layout = "fr") +
 
 ```
 
+### **👉 Your Turn** **⤵**
+
+```{r}
+
+```
+
 ### Describe the Network Mathematically
 
+The concepts and measures that are discussed in this chapter reflect a
+variety of structural properties that have been of interest to network
+researchers for some time. This chapter allows you to ask a question
+that has been at the core of most network analyses: What does this
+network look like? Understanding these properties will eventually allow
+you to assess a network's dynamics (Hanneman & Riddle, 2011b). So, if a
+network of 25 teachers in the same school has few connections (low
+density), does this structure look the same a year after the
+introduction of teacher professional communities? To address questions
+that probe a network's dynamics (i.e., its change over time), it is
+necessary to first figure out what the network looks like at one point
+in time, what is commonly referred to as the network's topography. This
+chapter will provide the conceptual tools and precise measures that are
+needed to perform this first set of analytical steps.
+
+This chapter introduces the formal algorithms that precisely describe
+these key features of social networks.
+
+Social network and graph theorists have developed an array of indices to
+characterize these features. These indices rely on some basic---and
+not-so-basic---mathematical computation. There is no way to avoid this
+fact without distorting and oversimplifying the advances made by
+mathematics, specifically graph theory and algebra, to the study of
+social networks (a point established in Chapter 2). However, an effort
+is made not to let this fact get in the way of your understanding and
+application of these concepts and measures. The rest of this chapter
+introduces the most common ways in which features of complete networks
+are described, first starting with a set of basic network measures,
+then, in Chapter 6, moving on to the ways in which subgroups are derived
+from relational data and, finally, the related ideas of positions and
+roles.
+
+Network-level structural measures are those that are calculated from the
+entire network. Therefore, they provide an excellent snapshot of the
+network's structure---the pattern of relations among the network's
+actors.
+
+This section introduces seven indicators of network structure. In
+addition to providing a more global view, these indicators can be used
+to address questions such as whether the friendship, social support, and
+adviceseeking networks within the same fraternity, for example, are
+comparable.
+
 #### Network Size
+
+The simplest structural property of a social network is its size, an
+often ignored but important feature. Size plays an important role in
+determining what happens in the network---what resources are exchanged
+among actors, for example. In a network of 17 students, it is not hard
+to imagine that the pattern of who studies with whom, for example, would
+look much different than if the network consisted of 200 students. Size
+affects other network measures, but on a conceptual level, it influences
+the structure of relations, as actors only have so many resources and
+capacities for creating and maintaining ties with others. Also, in
+smaller networks, it is easier for actors to know each other. In formal
+terms, size is simply a measure of the number of nodes in the network.
+In the case of the Fraternity Data, it is not a terribly interesting
+property, as it simply reflects the network's boundary.
 
 ```{r}
 
 year_1_network
 
-year_1_network |>
-  activate(edges) |>
-  mutate(size = graph_size())
 
 year_1_network |>
   gsize()
 
 gsize(year_1_network)
 
+
 ```
 
 #### Density
 
-\
+Density is intricately linked to network size. Density refers to the
+number of ties in the network reported as a fraction of the total
+possible number of ties. Equation 5.1 below shows how a network's
+density is calculated: where L is the number of lines (directed ties) in
+the network and N is network size. So, in the Fraternity Data with 17
+actors and 51 directed ties, density equals 0.19. The closer this number
+is to 1.0, the denser the network. A density score of 1.0 indicates that
+all possible relations are present.
+
+It is also possible to calculate the density of the network's subgroups.
+For example, you might hypothesize that network density differs by some
+attribute, GPA, for example. That is, students with denser friendship
+networks might have access to resources---class notes, information about
+upcoming assignments, support, and so forth---that may contribute to
+their academic performance. Density could be calculated on ties among
+those with GPAs above 3.0 and then compared to those below that
+threshold.
+
+However, the density of 0.19 reported above is somewhat deceptive, at
+least in terms of what it means for the Fraternity Data set. This
+formula needs to be adjusted to account for the limited number of
+friendship nominations (three) that was imposed when the data were
+recoded. In a nomination study in which you ask SAGE 2014 SAGE
+Publications, Ltd. All Rights Reserved.
+
+SAGE Research Methods Page 6 of 13 Structural Measures for Complete
+Networks the respondent to list a certain number of alters (or you
+impose this limit after the data have been collected), it is more
+sensible to report what is referred to as effective density, which is
+the number of lines (ties) multiplied by the number of possible alters:
+where L again is the number of lines (directed ties) in the network, N
+is network size, and λ is the maximum number of alters requested or
+permitted. Using this formula, the density of the Fraternity Data is
+1.0: All possible relations are present, which is unsurprising given
+that the original ranked data were recoded (1--3 = 1, all others = 0)
+and each respondent had the maximum number of three friendship
+nominations.\
 
 ```{r}
 
@@ -446,10 +458,53 @@ year_1_network |>
 
 edge_density(simplify(year_1_network))
 
-
+graph.density(year_1_network)
 ```
 
-####  Reciprocity
+#### Reciprocity
+
+A third network measure that indicates an aspect of the networks social
+structure is reciprocity, defined as the degree to which actors in a
+directed network select one another. Stated another way, reciprocity
+indicates the mutuality of the network's ties (this is why reciprocity
+is also referred to as mutuality). This property is important because it
+reveals the direction through which resources such as help, advice, and
+support flow. It also indicates the network's stability, as reciprocated
+ties tend to be more stable over time. Finally, networks with high
+reciprocity may be more "equal," while those with lower reciprocity may
+be more hierarchical. While some relations are by definition reciprocal,
+such as "studied with," others such as friendship are potentially
+asymmetrical and indicate imbalances in influence, status, or authority.
+Borgatti, Everett, and Freeman (2006) provide the following measure of
+reciprocity: where Aij indicates a tie from actor i to j. A high degree
+of reciprocity means that a network's actors choose one another. It
+could also mean that while some actors choose one another, they are not
+choosing others, which results in a high degree of clustering within the
+network. At the complete network level, reciprocity is reported as the
+proportion of reciprocated ties in the network. Therefore, values closer
+to 1.0 indicate higher reciprocity. Applying Equation 5.3 to the
+Fraternity Data, reciprocity for the entire network is 0.31, indicating
+that slightly less than one-third of all ties are mutual. This low value
+should be considered unsurprising, as this particular network snapshot
+was taken at the beginning of the study, well before the participants
+got to know each other. One could reasonably expect that the network's
+reciprocity, as well as its density, will increase over time, which
+would be associated with a greater likelihood of engaging in behavior
+together and sharing similar attitudes. For example, Moolenaar and
+Sleegers (2010) hypothesize that teacher networks with high reciprocity
+would be positively associated with teachers' perceptions of their
+schools' innovative climate and trust. Their analyses, however, do not
+support this hypothesis. According to their models, dense networks SAGE
+2014 SAGE Publications, Ltd. All Rights Reserved. SAGE Research Methods
+Page 7 of 13 Structural Measures for Complete Networks (on two different
+network relations: "discuss work" and "regard as friend") are
+significantly related to both a teacher's perceptions of trust and the
+school's innovative climate, while reciprocity is not. However, despite
+this null finding, others have shown that networks with high reciprocity
+are associated problem solving and the exchange of complex knowledge
+(Uzzi & Spiro, 2005) but are also associated with less desirable
+outcomes such as risky drug and sexual behaviors (Valente & Vlahov,
+2001).
 
 ```{r}
 
@@ -459,17 +514,281 @@ year_1_network |>
 year_1_network |>
   activate(edges) |>
   mutate(reciprocated = edge_is_mutual()) |>
-  as_tibble() |>
-  datatable()
+  as_tibble()
+
+
 
 ```
 
 #### Transitivity
 
-```{r}
+Transitivity is another feature of complete networks that reflects the
+social structure's tendency toward stability and consistency. Whereas
+reciprocity focuses on the ties between two actors (dyads), transitivity
+is based on the triad, any "triple" of actors. The addition of this
+third "other" reflects a more authentic character of social life and has
+been the basis for much theorizing about social networks (Simmel,
+1908/1950). Much of this theorizing revolves around a triad's tendency
+toward transitivity: if Teacher A collaborates with Teacher B and
+Teacher B collaborates with Teacher C, then Teacher A collaborates with
+Teacher C. In this instance, the triad is considered transitive because
+Teachers A and B have the same relationship with C.
+
+Valente (2010) notes that early theorizing about this tendency focused
+on the concept of balance, first introduced by Heider (1958) to explain
+a person's observed preference for equilibrium with the people around
+them. The theory of cognitive dissonance grew out of this work,
+attempting to explain how people felt when their immediate environment
+was unbalanced (Festinger, 1954). The argument then extended to
+postulate that increasing the number of transitive triads of which one
+is a part could reduce cognitive dissonance. Even Granovetter's strength
+of weak ties theory (1973) emerged from this work, showing that
+intransitive triads are relatively rare, resulting in networks with
+fewer weak ties. The paradox, of course, is that the relative paucity of
+weak ties is what makes them "strong," as they provide early access to
+diverse information.
+
+Measuring triadic relations within a network of undirected (symmetric)
+relations is straightforward (Hanneman & Riddle, 2011b). There are only
+four possible types of triadic relations: no ties, one tie, two ties, or
+all three ties. Performing what is called a "triad census" on these data
+can reveal the extent to which the network can be characterized as
+consisting of isolates (actors not connected to any other actors), dyads
+(actors who are only connected to one other actor), structural holes
+(one actor connected to two others who, in turn, are not connected to
+each other), and clusters (groups of three actors that are all connected
+to each other). With undirected data, one can simply count how often
+each of these four types occurs across all possible triples.
+
+However, things get more interesting when performing a triad census on
+directed data, such as the transformed Fraternity Data. There are 16
+possible types of relations among any three of the network's actors
+(Holland & Linehardt, 1979). Different forms of relationships can be
+observed among these groups, including hierarchy, equality, and
+exclusivity. This is one of the reasons why researchers with an interest
+in social group relations suggest that the most fundamental forms of
+social relationships can be observed at the triadic level.
+
+A triad census for a network with directed data counts the proportion of
+triads that fall within each of these 16 categories. These categories
+are typically called MAN categories, which reflects the number of mutual
+(M), SAGE 2014 SAGE Publications, Ltd. All Rights Reserved.
+
+SAGE Research Methods Page 8 of 13 Structural Measures for Complete
+Networks asymmetric (A), and null (N) ties in each triad. Therefore, a
+triad with a code of 111 would have one mutual tie, one asymmetric, and
+one null tie, indicating that one actor serves as a go-between for the
+triad's other two actors. Of these 16 possible types of directed triads,
+only four can be classified as transitive (Wasserman & Faust, 1994). In
+the Fraternity Data there are, for example, five 030 triads (zero
+mutual, three asymmetric, and zero null ties); these triads are
+considered transitive because Students 1 and 2 have the same
+relationship to 3.
+
+Going one step further, a transitivity analysis divides a network's
+number of transitive triads by the number of triads of all kinds. More
+formally, the density of transitive triples is the number of triples,
+which are transitive, divided by the number of paths of length two
+(i.e., the number of triples that have the potential to be transitive).
+
+In the Fraternity Data, this value is 10.70%. This lack of transitivity
+suggests that there are numerous null ties, indicating a relatively
+sparse network in which resources will have difficulty flowing from one
+part of the network to another. This is not too surprising given that
+these relations were measured at the start of the study (week 1) and, as
+a result of the data transformation, each actor has three out-degrees
+(that is, they sent three friendship nominations). Here, too, this can
+be attributed to a measurement issue. Faust (2008) has shown that
+fixed-choice survey instruments (recall that these manipulated data
+"fixed" the number of friendship nominations to three), artificially
+limit the triad census and the subsequent analysis of transitivity.
+Regardless, establishing a network's transitivity is important, as it is
+theoretically connected to actors' tendencies to divide into exclusive
+subgroups over time, especially relational data that capture positive
+affect, such as friendship.
+
+```{r transitivity}
 
 year_1_network |>
   transitivity()
-
-
 ```
+
+```{r}
+count_triangles(year_1_network)
+```
+
+```{r}
+triad_census(year_1_network) |>
+  as_tibble()
+```
+
+#### Diameter and Distance
+
+Similarly, the next two network-level properties, diameter and distance,
+also indicate how well resources can move from one part of the network
+to another. Whereas transitivity focuses on the importance of certain
+configurations of triads, these two related concepts are more
+straightforward. A network's diameter refers to the longest path between
+any two actors. This property is important, as networks that have the
+same size (equal numbers of actors) and even the same density (equal
+percentages of ties present) can have different diameters. Consider the
+network's diameter in Figure 5.1. The length of the longest path between
+two actors is five. To "get from" Student 15 to 16 in this directed
+network requires five steps: 15 ? 5 ? 17 ? 4 ? 2 ? 16.
+
+This is the only five-step path in the network and is the maximum
+distance between any two actors.
+
+Related to this is another property that captures how "far" actors are
+from one another. The average path length measures the mean distance
+between all pairs of actors in the network. When this value is small,
+this indicates that there is a cohesive network with minimal clustering.
+Conversely, when this value is high, the network likely has little
+cohesion, thereby making it difficult for resources---whether these
+resources be advice, trust, information, or the like---to move from one
+part of the network to another. The average path length in the
+Fraternity Data is 2.18. The interpretation of this is that, on average,
+all students in the network are slightly more than two steps from
+everyone else in the network, assuming they could reach one another (an
+assumption that is incorrect given that there are no paths between some
+pairs of students). To calculate SAGE 2014 SAGE Publications, Ltd. All
+Rights Reserved.
+
+SAGE Research Methods Page 9 of 13 Structural Measures for Complete
+Networks this, you first have to identify the distances between each
+pair of actors in the network and then calculate the average of all
+these pairs.
+
+Both diameter and average path length are important network-level
+structural properties. Valente (2010) goes as far as to note that you
+need not know anything else about a network's topography to draw several
+important conclusions. For example, a network with a large diameter and
+small average path length suggests a structure in which there are parts
+of the network that some network actors may be unable to access.
+
+```{r diameter}
+diameter(simplify(year_1_network))
+```
+
+```{r distance}
+
+distances(year_1_network) |>
+  as_tibble()
+
+distance_table(year_1_network)
+```
+
+```{r}
+mean_distance(year_1_network)
+```
+
+#### Clustering
+
+Another structural network-level property that is of interest to network
+researchers is a network's clustering.
+
+Clustering is a measure of a network's actors' tendency to "group
+together" into pockets of dense connectivity (Valente, 2010). High
+clustering indicates that there are numerous pockets in which some
+actors are connected to each other but not to others. Low clustering, on
+the other hand, suggests that relations are more evenly distributed
+across the network with very few pockets of dense connectivity among
+subsets of actors. The tendency, of course, is for people to interact
+with a fairly small set of actors who share similar attributes---the
+"birds of a feather flock together" (homophily) phenomenon. Knowing the
+degree to which actors cluster says a great deal about the structure of
+these everyday relations, a structural pattern that may even seem
+somewhat paradoxical (Watts, 1999). This is related, in part, to what is
+referred to as the smallworld phenomenon.
+
+The small-world phenomenon combines two ideas (Valente, 2010). The first
+is a network with a short average path length. That is, relatively few
+steps connect each pair of actors, on average. The second part of this
+is that "small-world" networks also have a high degree of
+clustering---groups of actors who interact almost exclusively in their
+own immediate "neighborhoods." This second part is the network's
+tendency to form dense local pockets of connectivity: clusters. "Small
+worlds" are those that paradoxically have a low average path length but
+high clustering.
+
+Measuring the extent to which a network displays clustering involves two
+steps. First, one calculates the density of each actor's local
+neighborhood (the density of each ego's network, which equals the total
+number of ties present divided by the total number of possible ties).
+Then, after doing this for all actors in the network, the degree of
+clustering can be characterized by the average of all the ego
+neighborhoods in the complete network.
+
+```{r}
+clusters(year_1_network)
+```
+
+#### Centralization
+
+A final structural property of complete networks is centralization. A
+network that is highly centralized is one in which relations are focused
+on one or a small set of actors. This is, however, different than a
+structural property such as density, which measures the presence of
+relations, not whether they are focused on a small set of actors. In
+other words, a network can be dense but have low centralization (many
+relations that are spread evenly across the network's actors) and vice
+versa (few relations that are concentrated on a small set of actors).
+Networks that are centralized, regardless of their density, are ones in
+which only a small and exclusive set of actors hold positions of power
+and control. Decentralized networks, conversely, are those in which
+power and control are diffuse and spread over a number of actors.
+
+Centralization can be based on a number of metrics (these are discussed
+in Chapter 7 when individual ego centrality measures are introduced),
+with degree being one of the most common (Freeman, 1979). Degrees refers
+to the number of ties an actor either sends (out-degree) or receives
+(in-degree). Valente (2010) summarizes the calculation of network
+centralization.
+
+> A network's centralization affects the process through which resources
+> traverse the network... high centralization provides fewer actors with
+> more power and control.
+
+Imagine if Students 12, 11, and 17 have information about what was to be
+included on an upcoming exam. Their location can either accelerate or
+prevent the spread of that information to other students. These central
+actors likely wield a disproportionate amount of influence on the
+network. Therefore, high centralization provides fewer actors with more
+power and control.
+
+```{r}
+year_1_network |>
+  activate(nodes)|>
+  mutate(degree = centrality_degree(mode = "all")) |>
+  centalizatio.degree
+```
+
+```{r}
+centralization.degree(year_1_network, mode = "all")
+```
+
+## 4. Model
+
+Two modeling techniques unique to network analysis and demonstrated in
+Chapter 9 of \@carolan2014 are the quadratic assignment procedure (QAP)
+and Exponential Random Graph Models (ERGM):
+
+-   **QAP/MR:** The quadratic assignment procedure (QAP) developed by
+    Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
+    correlation between the two networks and adjusts for this dependence
+    between networks by repeatedly permuting the order of rows and
+    columns of one of the networks while keeping the other network
+    intact. The QAP is based on regression models and permutation tests
+    for valued (i.e., continuous) relational variables.
+
+-   **P1 and P\* (P-Star):** Both of these models are some of the first
+    to make use of the ERGM, which provides a basis for comparing
+    whether a network's observed structural properties occur more
+    frequently than you could expect from chance alone. ERGMs can be
+    used to model ties in complete networks but do so in a manner that
+    explains the presence (or absence) of ties as a function of
+    individual-and/or network-level characteristics. While QAP and
+    MR-QAP procedures control for network structure through
+    permutations, these ERGMs attempt to explain it.
+
+## 5. Communicate
