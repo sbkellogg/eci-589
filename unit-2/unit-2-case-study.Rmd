@@ -1,5 +1,5 @@
 ---
-title: 'Unit 2 Case Study: Topology over Time'
+title: 'Unit 2 Case Study: '
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -20,17 +20,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Prepare
 
-Our Unit 2 Case Study: Hashtag Common Core revisits Alan Daly, Miguel
-del Fresno and Christian Kolouch who examined the intense debate
-surrounding the Common Core State Standards education reform as it
-played out on Twitter. As noted on their expansive and interactive
-website for the [#COMMONCORE
-Project](https://www.hashtagcommoncore.com), the Common Core was a major
-education policy initiatives of the early 21st century that sought to
-strengthen education systems across the United States through a set of
-specific and challenging education standards. Although these standards
-once enjoyed bipartisan support, we'll see later in this walkthrough how
-these standards have become a political punching bag.
+Our Unit 2 Case Study: Collaboration revisits some of excellent research
+by Dr. Alan Daly and centers around the impact No Child Left Behind
+reform efforts on school and district leadership networks. In this unit
+we move beyond visual depictions of networks using sociograms from our
+previous SNA case study and learn to describe networks using a wide
+range
+
+> **Mathematical approaches** focus on what a network of actors "looks
+> like" by describing the network using sociograms and/or network
+> measures such as reciprocity, centrality, and density.
 
 In addition to investigating tweets around the these controversial state
 standards, our Unit 2 Walkthrough will cover the following topics
@@ -62,15 +61,6 @@ In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
 @carolan2014 makes the following distinctions between mathematical and
 statistical approaches to social network analysis:
-
-> **Mathematical approaches** focus on what a network of actors "looks
-> like" by describing the network using sociograms and/or network
-> measures such as reciprocity, centrality, and density. However, these
-> approaches "tend to regard the measured relationships and their
-> strengths as accurately reflecting the real, final, or equilibrium
-> status of the network."
-
-For Unit 3, we move beyond previous "mathematical approaches"
 
 Specifically, we will try to replicate the P\* models used in Chapter 9
 of @carolan2014 in order to test hypotheses about individual and network
@@ -184,19 +174,18 @@ You can also embed plots, for example:
 
 ### Import Data
 
-One of our primary goals is to replicate the ERGM analysis from Chapter
-9: Network Data and Statistical Models [@carolan2014]. Specifically,
-we'll aim to examine an
+One of our primary goals for this case study is to examine how
+collaboration networks among school and district leaders changed over
+time. To do so, we'll need to import two Excel files from the [Social
+Network Analysis and Education companion
+site](https://studysites.sagepub.com/carolan/study/resources.htm). Both
+files contain edges stored as a square matrix (more on this later) for
+the first and third year of a study examining the impact of national
+reform efforts [@daly2010bridge].
 
-To do so, we'll need to import two Excel files from the [Social Network
-Analysis and Education companion
-site](https://studysites.sagepub.com/carolan/study/resources.htm). The
-first file contains our edges stored as a square matrix (more on this
-later) and the second file is a standard rectangular data frame that
-contains attributes for each node, i.e. school leaders. These files are
-included in the data folder of your R Studio project. A description of
-each file from the companion website is linked above and each data file
-is linked below:
+These files are included in the data folder of your R Studio project. A
+description of each file from the companion website is linked above and
+each data file is linked below:
 
 1.  [**School Leaders Data Chapter
     9_a.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds7.xls) This
@@ -231,6 +220,7 @@ or column names, and assign the matrix to a variable named
 section to find the name of the argument used to set column headers.
 
 ```{r import year }
+
 year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx", 
                             col_names = FALSE)
 ```
@@ -238,7 +228,7 @@ year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx",
 Use the code chunk below to inspect the matrix you just imported and
 answer the questions that follow:
 
-### \*\* 👉 Your Turn\*\* **⤵**
+### 👉 Your Turn **⤵**
 
 **Hint:** Type `?read_excel` into the console and check the arguments
 section to find the name of the argument used to set column headers.
@@ -289,11 +279,13 @@ year_1_matrix
 
 ### Add Row and Column Names
 
-Before we can convert to an edge-list, we will also need to add the
-names of our nodes to the columns and rows of our matrix. These are
-stored in the `ID` column of our `leader_node` data frame. We can use
-the `$` operator to select these names and assign to our `leader_matrix`
-using the `rownames()` and `colnames()` functions respectively:
+Before we can convert to network object, we will also need to assign
+names of our nodes to the columns and rows of our matrix.
+
+These are stored in the `ID` column of our `leader_node` data frame. We
+can use the `$` operator to select these names and assign to our
+`leader_matrix` using the `rownames()` and `colnames()` functions
+respectively:
 
 ```{r}
 rownames(year_1_matrix) <- 1:43
@@ -305,12 +297,15 @@ year_1_matrix
 
 ### Network Object
 
+object
+
 ```{r}
 
 
 year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
 
 year_1_network
+
 ```
 
 ### 👉 Your Turn ⤵
@@ -319,62 +314,75 @@ year_1_network
 
 ```
 
-## Explore
+## 3. Explore
+
+As Carolan @carolan2014 notes in SNA and Education:
+
+> ... to address questions that probe a network's dynamics (i.e., its
+> change over time), it is necessary to first figure out what the
+> network looks like at one point in time, what is commonly referred to
+> as the network's topography.
+
+In order to describe a network's **topography**, social network
+researchers utilize an array of algorithms and indices to characterize
+different features of social networks. These algorithms and indices rely
+on some basic---and not-so-basic---mathematical computation.
+
+In this section we revisit the {tidygraph} and {ggraph} packages for
+creating sociograms and computing basic node and edge-level measures and
+introduce some key functions from the the {igraph} package for
+characterizing networks as a whole.
 
 ### Describe the Network Visually
 
+One of the defining characteristics of the social network perspective is
+its use of graphic imagery to represent actors and their relations with
+one another. To emphasize this point, Carolyn (2013) reported that:
+
+> The visualization of social networks has been a core practice since
+> its foundation more than 90 years ago and remains a hallmark of
+> contemporary social network analysis. 
+
+Network visualization can be used for a variety of purposes, ranging
+from highlighting key actors to even serving as works of art. Katya
+Ognyanova's also excellent tutorial on [Static and Dynamic Network
+Visualization with R](https://kateto.net/network-visualization/) helps
+illustrate the variety of goals a good network visualization can
+accomplish.
+
+Recall from our previous SNA case study examining Twitter networks
+surrounding the Common Core State Standards,
+
 ```{r}
+
+
 
 ggraph(year_1_network, layout = "fr") +
   geom_node_point() +
   geom_edge_link()
 
+
 ```
 
 ### **👉 Your Turn** **⤵**
 
+test
+
 ```{r}
+
 
 ```
 
-### Describe the Network Mathematically
+### 3b. Describe the Network Mathematically
 
-The concepts and measures that are discussed in this chapter reflect a
-variety of structural properties that have been of interest to network
-researchers for some time. This chapter allows you to ask a question
-that has been at the core of most network analyses: What does this
-network look like? Understanding these properties will eventually allow
-you to assess a network's dynamics (Hanneman & Riddle, 2011b). So, if a
-network of 25 teachers in the same school has few connections (low
-density), does this structure look the same a year after the
-introduction of teacher professional communities? To address questions
-that probe a network's dynamics (i.e., its change over time), it is
-necessary to first figure out what the network looks like at one point
-in time, what is commonly referred to as the network's topography. This
-chapter will provide the conceptual tools and precise measures that are
-needed to perform this first set of analytical steps.
+The concepts and measures that are introduce in this section include
+some of the most common ways in which features of complete networks are
+described, as well was.
 
-This chapter introduces the formal algorithms that precisely describe
-these key features of social networks.
-
-Social network and graph theorists have developed an array of indices to
-characterize these features. These indices rely on some basic---and
-not-so-basic---mathematical computation. There is no way to avoid this
-fact without distorting and oversimplifying the advances made by
-mathematics, specifically graph theory and algebra, to the study of
-social networks (a point established in Chapter 2). However, an effort
-is made not to let this fact get in the way of your understanding and
-application of these concepts and measures. The rest of this chapter
-introduces the most common ways in which features of complete networks
-are described, first starting with a set of basic network measures,
-then, in Chapter 6, moving on to the ways in which subgroups are derived
-from relational data and, finally, the related ideas of positions and
-roles.
-
-Network-level structural measures are those that are calculated from the
-entire network. Therefore, they provide an excellent snapshot of the
-network's structure---the pattern of relations among the network's
-actors.
+> Network-level structural measures are those that are calculated from
+> the entire network. Therefore, they provide an excellent snapshot of
+> the network's structure---the pattern of relations among the network's
+> actors.
 
 This section introduces seven indicators of network structure. In
 addition to providing a more global view, these indicators can be used
@@ -384,19 +392,22 @@ comparable.
 
 #### Network Size
 
-The simplest structural property of a social network is its size, an
-often ignored but important feature. Size plays an important role in
-determining what happens in the network---what resources are exchanged
-among actors, for example. In a network of 17 students, it is not hard
-to imagine that the pattern of who studies with whom, for example, would
-look much different than if the network consisted of 200 students. Size
-affects other network measures, but on a conceptual level, it influences
-the structure of relations, as actors only have so many resources and
-capacities for creating and maintaining ties with others. Also, in
-smaller networks, it is easier for actors to know each other. In formal
-terms, size is simply a measure of the number of nodes in the network.
-In the case of the Fraternity Data, it is not a terribly interesting
-property, as it simply reflects the network's boundary.
+One simple but important property of a social network is its size, or
+the number of nodes and edges in a network. As Carolan notes:
+
+> Size plays an important role in determining what happens in the
+> network--- what resources are exchanged among actors, for example.
+
+In a network of 17 students, it is not hard to imagine that the pattern
+of who studies with whom, for example, would look much different than if
+the network consisted of 200 students. Size affects other network
+measures, but on a conceptual level, it influences the structure of
+relations, as actors only have so many resources and capacities for
+creating and maintaining ties with others. Also, in smaller networks, it
+is easier for actors to know each other. In formal terms, size is simply
+a measure of the number of nodes in the network. In the case of the
+Fraternity Data, it is not a terribly interesting property, as it simply
+reflects the network's boundary.
 
 ```{r}
 
