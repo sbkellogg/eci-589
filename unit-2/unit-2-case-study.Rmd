@@ -1,5 +1,5 @@
 ---
-title: 'Unit 2 Case Study: '
+title: 'Unit 2 Case Study: Network Topography over Time'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -55,7 +55,7 @@ pertaining to each data-intensive workflow process:
 5.  **Communicate**: We briefly reflect on our walkthrough in
     preparation for our independent analysis next week.
 
-### Review the Research
+### 1a. Review the Research
 
 In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
@@ -151,28 +151,134 @@ be tested using using ERGMs:
 Save this question for later as you'll have a chance to empirically test
 it by the end of this walkthrough.
 
-### **👉 Your Turn** **⤵**
+In Unit 1, we also learned about **packages**, or libraries, which are
+shareable collections of R code that can contain functions, data, and/or
+documentation and extend the functionality of R. You can always check to
+see which packages have already been installed and loaded into RStudio
+Cloud by looking at the the Files, Plots, & Packages Pane in the lower
+right hand corner.
+
+### **👉 Your Turn** **⤵**
+
+### 1b. Load Libraries
+
+Recall that R [**packages**](https://en.wikipedia.org/wiki/R_package),
+sometimes referred to as libraries, are shareable collections of R code
+that can contain functions, data, and/or documentation and extend the
+functionality of R. Before loading an R package, you must first make
+sure it has been installed in your environment. You can always check to
+see which packages have already been installed and loaded into RStudio
+Cloud by looking at the the Files, Plots, & Packages Pane in the lower
+right hand corner.
+
+Let's go ahead and load the [tidyverse](https://www.tidyverse.org/),
+[igraph](https://igraph.org/),
+[tidygraph](https://www.data-imaginist.com/2017/introducing-tidygraph/),
+and [ggraph](https://ggraph.data-imaginist.com/index.html) packages from
+our previous SNA unit since we'll be using them again in this case
+study:
 
 Load Packages
 
-```{r cars}
+```{r libraries}
 library(readxl)
 library(tidyverse)
 library(igraph)
 library(tidygraph)
 library(ggraph)
-library(janitor)
-library(knitr)
-library(DT)
 ```
 
-\
+Next, we will introduce a few new packages that will help us with our
+social network analyses.
 
-## Wrangle
+#### tidygraph 📦
+
+![](img/tidygraph.png){width="20%"}
+
+The {[tidygraph](https://tidygraph.data-imaginist.com/)} package is a
+huge package that exports 280 different functions and methods, including
+access to almost all of the `dplyr` verbs plus a few more, developed for
+use with relational data. While network data itself is not tidy, it can
+be envisioned as two tidy tables, one for node data and one for edge
+data. The {tidygraph} package provides a way to switch between the two
+tables and uses `dplyr` verbs to manipulate them. Furthermore it
+provides access to a lot of graph algorithms with return values that
+facilitate their use in a tidy workflow.
+
+Let's go ahead and load the {tidygraph} library:
+
+#### ggraph 📦
+
+![](img/ggraph.png){width="20%"}
+
+Created by the same developer as {tidygraph},
+{[ggraph](https://ggraph.data-imaginist.com/index.html)} -- pronounced
+gg-raph or g-giraffe hence the logo -- is an extension of
+{[ggplot](https://ggplot2.tidyverse.org/)} aimed at supporting
+relational data structures such as networks, graphs, and trees. Both
+packages are more modern and widely adopted approaches data
+visualization in R.
+
+While ggraph builds upon the foundation of ggplot and its API, it comes
+with its own self-contained set of geoms, facets, etc., as well as
+adding the concept of *layouts* to the [grammar of
+graphics](https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics),
+i.e. the "gg" in ggplot and ggraph.
+
+Let's go ahead and load the {ggraph} library:
+
+```{r}
+
+```
+
+#### igraph 📦
+
+![](img/igraph.png){width="20%"}
+
+Both {tidygraph} and {ggraph} depend heavily [igraph network analysis
+package](https://igraph.org/). The main goals of the igraph package and
+the collection of network analysis tools it contains are to provide a
+set of data types and functions for:
+
+1.  pain-free implementation of graph algorithms,
+
+2.  fast handling of large graphs, with millions of vertices (i.e.,
+    actors or nodes) and edges,
+
+3.  allowing rapid prototyping via high level languages like R.
+
+Run the code chunk below to load the {igraph} library:
+
+Hide
+
+    library(igraph)
+
+####  readxl 📦
+
+![](img/readxl.png){width="20%"}
+
+The [{readxl}](https://readxl.tidyverse.org/) package makes it easy to
+get data out of Excel and into R. Compared to many of the existing
+packages (e.g. gdata, xlsx, xlsReadWrite) readxl has no external
+dependencies, so it's easy to install and use on all operating systems.
+It is designed to work with *tabular* data.
+
+Since one of our data wrangling steps in the next section is importing
+network matrices stored in excel files, the package will come in handy.
+
+### 👉 Your Turn ⤵
+
+Use the code chunk below to load the
+
+```{r}
+
+```
+
+## 2. Wrangle
 
 You can also embed plots, for example:
 
-### Import Data
+### 2a. Import Data
 
 One of our primary goals for this case study is to examine how
 collaboration networks among school and district leaders changed over
@@ -226,21 +332,7 @@ year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx",
 ```
 
 Use the code chunk below to inspect the matrix you just imported and
-answer the questions that follow:
-
-### 👉 Your Turn **⤵**
-
-**Hint:** Type `?read_excel` into the console and check the arguments
-section to find the name of the argument used to set column headers.
-
-```{r}
-#YOUR CODE HERE
-leader_matrix <- read_excel("data/School Leaders Data Chapter 9_d.xlsx", 
-                            col_names = FALSE)
-```
-
-Use the code chunk below to inspect the matrix you just imported and
-answer the questions that follow:
+answer the questions that
 
 ```{r}
 class(year_1_collaboration)
@@ -248,23 +340,11 @@ class(year_1_collaboration)
 year_1_collaboration
 ```
 
-1.  Is our network a square matrix? What does this tell you about the
-    number of nodes in our network?
+###  2b. Create a Tidy Graph
 
-    -   
-
-2.  Does our network contain self-loops? How do you know?
-
-    -   
-
-3.  What do the values in each cell of our matrix indicate?
-
-    -   
-
-With that in mind, and before we can dichotomize our "matrix," we first
-need to convert it to a matrix object recognized by R using the
-`as.matrix()` function. We can then check to data format of our
-`leader_matrix` using the `class()` function:
+Meet , we first need to convert it to a matrix object recognized by R
+using the `as.matrix()` function. We can then check to data format of
+our `leader_matrix` using the `class()` function:
 
 ```{r}
 year_1_matrix <- year_1_collaboration |>
@@ -277,7 +357,7 @@ year_1_matrix
 
 \
 
-### Add Row and Column Names
+#### Add Row and Column Names
 
 Before we can convert to network object, we will also need to assign
 names of our nodes to the columns and rows of our matrix.
@@ -295,7 +375,7 @@ colnames(year_1_matrix) <- 1:43
 year_1_matrix
 ```
 
-### Network Object
+#### Network Object
 
 object
 
@@ -310,13 +390,70 @@ year_1_network
 
 ### 👉 Your Turn ⤵
 
+Use the code chunk below to complete the following data wrangling steps
+for our Year 3 collaboration network:
+
+1.  Import the Excel file from data folder in the files pane and save as
+    a new R object;
+
+2.  Convert the resulting data frame to a matrix class object and check
+    to confirm that it is indeed a matrix;
+
+3.  Add row and column names to the matrix;
+
+4.  Convert the matrix to a network class object with directed edges;
+
+5.  Inspect the Year 3 collaboration network and answer the questions
+    after the code chunk.
+
 ```{r}
+#YOUR CODE HERE
+year_3_collaboration <- read_excel("data/year_3_collaboration.xlsx", 
+                            col_names = FALSE)
+
+
+year_3_matrix <- year_3_collaboration |>
+  as.matrix()
+
+rownames(year_3_matrix) <- 1:43
+
+colnames(year_3_matrix) <- 1:43
+
+year_3_network <- as_tbl_graph(year_3_matrix, directed = TRUE)
+
+year_3
+_network
+
 
 ```
 
+Section 2 Questions:
+
+1.  What is the size of the Year 3 collaboration network?
+
+    -   
+
+2.  How many components are in this network?
+
+    -   
+
+3.  How many nodes and edges variables are in our tidy graph and what
+    does each variable (e.g., weight) represent?
+
+    -   
+
+4.  How does collaboration in Year 3 compare to Year 1 and what
+    inferences might you already be able to make just based on the size
+    of the two networks?
+
+    -   
+
+5.  
+
 ## 3. Explore
 
-As Carolan @carolan2014 notes in SNA and Education:
+Relevant to our case study of school leader collaboration, Carolyn notes
+in SNA and Education @carolan2014 that:
 
 > ... to address questions that probe a network's dynamics (i.e., its
 > change over time), it is necessary to first figure out what the
@@ -324,16 +461,17 @@ As Carolan @carolan2014 notes in SNA and Education:
 > as the network's topography.
 
 In order to describe a network's **topography**, social network
-researchers utilize an array of algorithms and indices to characterize
-different features of social networks. These algorithms and indices rely
-on some basic---and not-so-basic---mathematical computation.
+researchers utilize an array of algorithms and indices to describe both
+visually and numerically different characteristics of social networks.
+These algorithms and indices rely on both simple and somewhat
+sophisticated mathematical computation.
 
 In this section we revisit the {tidygraph} and {ggraph} packages for
 creating sociograms and computing basic node and edge-level measures and
-introduce some key functions from the the {igraph} package for
-characterizing networks as a whole.
+introduce some key functions from the the {igraph} package for obtaining
+complete network-level measures.
 
-### Describe the Network Visually
+### 3a. Visually Describe the Network
 
 One of the defining characteristics of the social network perspective is
 its use of graphic imagery to represent actors and their relations with
@@ -351,24 +489,76 @@ illustrate the variety of goals a good network visualization can
 accomplish.
 
 Recall from our previous SNA case study examining Twitter networks
-surrounding the Common Core State Standards,
+surrounding the Common Core State Standards that we introduced the dead
+simple
+[`plot()`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot)
+function built into R to quickly generate a sociogram showing the nodes
+and edges in our network.
+
+Let's supply our `year-1-network` object as the first argument of this
+function and see what it produces:
+
+```{r}
+plot(year_1_network)
+```
+
+While not the most aesthetically pleasing plot, it definitely is
+functional. As indicated by our tidy graph output from section 1, we can
+see that there is one large network component and two additional
+components consisting of isolated school leaders with no collaboration
+ties.
+
+If this had been a larger network with more nodes and edges, however,
+the utility of the basic `plot()` function would evaporate quickly. For
+example, try this function out with the Year 3 network in the console
+and see what it produces.
+
+Fortunately, the {ggraph} package includes a plethora of plotting
+parameters for graph layouts, edges and nodes to improve the visual
+design and readability of network graphs.
+
+### **Sociograms with ggraph**
+
+One thing to keep in mind when building a network viz with the {ggraph}
+package is that just like it's {ggplot} counterpart for making more
+traditional charts and graphs, there is a minimal code template for
+producing a basic plot. Specifically, ggraph requires 3 main functions
+
+-   [`ggraph()`](https://ggraph.data-imaginist.com/articles/Layouts.html)
+    takes care of setting up the plot object along with creating the
+    layout of the graph (default = "stress").
+
+-   [`geom_node_*()`](https://ggraph.data-imaginist.com/articles/Layouts.html)
+    functions and their associated arguments add and modify the nodes of
+    the network plot.
+
+-   [`geom_edge_*()`](https://ggraph.data-imaginist.com/articles/Edges.html)
+    functions and their associated arguments add and modify the edgez of
+    the network plot.
+
+Let's first pass our `ccss_network` object to ggraph and see what
+happens:
+
+\
 
 ```{r}
 
-
-
-ggraph(year_1_network, layout = "fr") +
-  geom_node_point() +
-  geom_edge_link()
-
+ggraph(year_1_network) +
+  geom_edge_link()+
+  geom_node_point()
 
 ```
 
-### **👉 Your Turn** **⤵**
+### 👉 Your Turn ⤵
 
 test
 
-```{r}
+```{r year_3_sociogram}
+
+
+ggraph(year_3_network) +
+  geom_node_point() +
+  geom_edge_link()
 
 
 ```
