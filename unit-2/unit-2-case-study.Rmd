@@ -247,12 +247,6 @@ set of data types and functions for:
 
 3.  allowing rapid prototyping via high level languages like R.
 
-Run the code chunk below to load the {igraph} library:
-
-Hide
-
-    library(igraph)
-
 #### readxl 📦
 
 ![](img/readxl.png){width="20%"}
@@ -320,14 +314,15 @@ information about the tie between each pair of actors. In our case, the
 tie is a directed and valued "arc" where the value indicates the
 strength of the relationship.
 
-Use the `read_excel()` function to import the
+Let's use the `read_excel()` function to import the
 `School Leaders Data Chapter 9_d.xlsx` file, add an argument setting the
 column names to `FALSE` since our file is a simple matrix with no header
 or column names, and assign the matrix to a variable named
-`leader_matrix`:
+`year_1_collaboration`:
 
-**Hint:** Type `?read_excel` into the console and check the arguments
-section to find the name of the argument used to set column headers.
+**R Studio Tip:** Type `?read_excel` into the console and check the
+arguments section to examine the different arguments that can be used
+with this function.
 
 ```{r import year }
 
@@ -335,93 +330,168 @@ year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx",
                             col_names = FALSE)
 ```
 
-Use the code chunk below to inspect the matrix you just imported and
-answer the questions that
+Before importing our Year 3 file, let's quickly inspect the R object we
+just imported to see what we'll be working with.
 
-```{r}
-class(year_1_collaboration)
+```{r year_1_view}
 
 year_1_collaboration
+
+```
+
+As you can see, we have a 43 x 43
+"[tibble](https://tibble.tidyverse.org)" or data table representing our
+collaboration ties. In Section 2, we'll learn how to restructure this
+data into a formal matrix and then convert to a network class R object
+so we can explore our data through network visualization and analyses.
+
+### 👉 Your Turn ⤵
+
+Use the code chunk below to import the Year 3 collaboration network
+located in data folder of your R project and then inspect your newly
+created object to make sure it imported as expected.
+
+```{r year_3_import}
+#YOUR CODE HERE
+
+year_3_collaboration <- read_excel("data/year_3_collaboration.xlsx", 
+                                   col_names = FALSE)
+
+year_3_collaboration
+
 ```
 
 ### 2b. Create a Tidy Graph
 
-Meet , we first need to convert it to a matrix object recognized by R
-using the `as.matrix()` function. We can then check to data format of
-our `leader_matrix` using the `class()` function:
+As noted above, before we can begin exploring our data through through
+network visualization and analysis, we must first restructure our data
+into a formal matrix and then convert to a network class R object
+required by the igraph, tidygraph, and ggraph packages.
+
+However, one thing you may have noticed from our inspection of the data
+above is that our data table was missing the names of the school leaders
+in our network. Since our original file was missing names, we will need
+to supply them. R has packages for creating random names to help
+anonymize data, but to keep things simple, we'll just assign the numbers
+1-43 as names for our rows and columns.
+
+```{r assign_names}
+
+rownames(year_1_collaboration) <- 1:43
+
+colnames(year_1_collaboration) <- 1:43
+
+```
+
+Again, let quickly inspect our `year_1_collaboration` data table to see
+if this worked:
 
 ```{r}
-year_1_matrix <- year_1_collaboration |>
-  as.matrix()
+year_1_collaboration
+```
+
+As you can see, we now have names for our rows and columns corresponding
+to each school leader in our network. So we can see that leader 1
+collaborated with leader 3 and with a frequency of "3" but obviously did
+not collaborate with 2 as indicated by the "0" in the corresponding
+cell. Note that leader 3 also indicated that they collaborated with 1,
+but on a slightly more frequent basis as indicated by the "4" in the
+corresponding cell.
+
+#### Convert to Matrix 
+
+Now that we have names included for our rows and columns, we need to
+convert our data table, or tibble, to a formal matrix class object. To
+do so is relatively simple using the `as.matrix()` function built into
+R.
+
+```{r as_matrix}
+
+year_1_matrix <- as.matrix(year_1_collaboration )
+
+```
+
+The word "class" and "object" have been use quite a bit in this
+case-study and warrant a brief explanation. Classes and objects are
+basic concepts of Object-Oriented Programming. An **object** is simply a
+data structure that has some methods and attributes. Everything in R is
+essentially an object. A **class** is just a blueprint or a sketch of
+these objects. It represents the set of properties or methods that are
+common to all objects of one type.
+
+Let's use the `class()` function on the `year_1_collaboration` and
+`year_1_matrix` to see the types of objects we just created:
+
+```{r object_class}
+
+class(year_1_collaboration)
 
 class(year_1_matrix)
 
-year_1_matrix
 ```
 
-\
+Great! We can now see that our `year_1_matrix` is formally a object of
+the "matrix" class.
 
-#### Add Row and Column Names
+#### Convert to 
 
-Before we can convert to network object, we will also need to assign
-names of our nodes to the columns and rows of our matrix.
+Our final step before we're able to begin exploring our data is to
+convert our matrix to a network object recognized by the {igraph} and
+{tidygraph} packages.
+The [`as_tbl_graph()`](https://tidygraph.data-imaginist.com/reference/tbl_graph.html) function
+can easily convert relational data from all common network data formats
+such as matrices,
+`network`, `phylo`, `dendrogram`, `data.tree`, `graph`, etc. 
 
-These are stored in the `ID` column of our `leader_node` data frame. We
-can use the `$` operator to select these names and assign to our
-`leader_matrix` using the `rownames()` and `colnames()` functions
-respectively:
-
-```{r}
-rownames(year_1_matrix) <- 1:43
-
-colnames(year_1_matrix) <- 1:43
-
-year_1_matrix
-```
-
-#### Network Object
-
-object
+Run the following code to convert our matrix to directed network graph
+and save as a new object called `year_1_network`:
 
 ```{r}
-
 
 year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
+
+```
+
+Again, let's inspect the
+
+```{r year_1_network}
 
 year_1_network
 
 ```
 
+As you can see, our `year_1_network` provides a range of information
+about out network including network size, type, number of components,
+and a preview of node and edge lists that it created and can now be used
+to create new network variables like degree, reciprocity, and centrality
+measures.
+
 ### 👉 Your Turn ⤵
 
 Use the code chunk below to complete the following data wrangling steps
-for our Year 3 collaboration network:
+for our Year 3 collaboration network from the Excel file you imported
+earlier:
 
-1.  Import the Excel file from data folder in the files pane and save as
-    a new R object;
+1.  Add row and column names to the data frame;
 
 2.  Convert the resulting data frame to a matrix class object and check
     to confirm that it is indeed a matrix;
 
-3.  Add row and column names to the matrix;
+3.  Convert the matrix to a network class object with directed edges;
 
-4.  Convert the matrix to a network class object with directed edges;
-
-5.  Inspect the Year 3 collaboration network and answer the questions
+4.  Inspect the Year 3 collaboration network and answer the questions
     after the code chunk.
 
 ```{r}
 #YOUR CODE HERE
-year_3_collaboration <- read_excel("data/year_3_collaboration.xlsx", 
-                            col_names = FALSE)
 
+rownames(year_3_collaboration) <- 1:43
 
-year_3_matrix <- year_3_collaboration |>
-  as.matrix()
+colnames(year_3_collaboration) <- 1:43
 
-rownames(year_3_matrix) <- 1:43
-
-colnames(year_3_matrix) <- 1:43
+year_3_matrix <- as.matrix(year_3_collaboration)
+  
+class(year_3_matrix)
 
 year_3_network <- as_tbl_graph(year_3_matrix, directed = TRUE)
 
@@ -450,8 +520,6 @@ Section 2 Questions:
     of the two networks?
 
     -   
-
-5.  
 
 ## 3. Explore
 
@@ -614,13 +682,12 @@ Use the code chunk below created a simple sociogram for the Year 3
 collaboration network and answer the questions that follow:
 
 ```{r year_3_sociogram}
-
+#YOUR CODE HERE
 
 ggraph(year_3_network, layout = "fr") +
   geom_node_point(size = 3) +
   geom_edge_link(aes(colour = weight)) +
   theme_graph()
-
 
 ```
 
@@ -630,7 +697,10 @@ ggraph(year_3_network, layout = "fr") +
     -   
 
 2.  How might you modify this graph to make it more insightful and
-    useful to
+    useful? For ideas check out these nework viz tutorials
+    [here](http://mr.schochastics.net/netVizR.html),
+    [here](https://kateto.net/network-visualization) and
+    [here](https://rpubs.com/neloe/ggraph_intro).
 
     -   
 
@@ -662,16 +732,17 @@ the number of nodes and edges in a network. As Carolan notes:
 > resources and capacities for creating and maintaining ties with
 > others.
 
-```{r}
+As we saw in the previous section, the `year_1_network` output provided
+us with basic information about our networks size, including the number
+of nodes and edges in our network. The {igraph} package also has some
+basic function for retrieving the number of nodes and edges in a
+network.
 
-year_1_network
-
-
-year_1_network |>
-  gsize()
+```{r size}
 
 gsize(year_1_network)
 
+gorder(year_1_network)
 
 ```
 
