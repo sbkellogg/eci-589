@@ -274,6 +274,10 @@ Use the code chunk below to load the
 
 ```
 
+Section 1a. Questions:
+
+1.  
+
 ## 2. Wrangle
 
 You can also embed plots, for example:
@@ -467,7 +471,7 @@ sophisticated mathematical computation.
 
 In this section we revisit the {tidygraph} and {ggraph} packages for
 creating sociograms and computing basic node and edge-level measures and
-introduce some key functions from the the {igraph} package for obtaining
+introduce some key functions from the {igraph} package for obtaining
 complete network-level measures.
 
 ### 3a. Visually Describe the Network
@@ -497,10 +501,10 @@ and edges in our network.
 Let's supply our `year-1-network` object as the first argument of this
 function and see what it produces:
 
-```{r}
+```{r plot}
+
 plot(year_1_network)
 
-autograph(year_1_network)
 ```
 
 While not the most aesthetically pleasing plot, it definitely is
@@ -515,7 +519,7 @@ example, try this function out with the Year 3 network in the console
 and see what it produces.
 
 Fortunately, the {ggraph} package includes a plethora of plotting
-parameters for graph layouts, edges and nodes to improve the visual
+parameters for graph layouts, edges and nodes to improve the visual
 design and readability of network graphs.
 
 ### **Sociograms with ggraph**
@@ -537,10 +541,29 @@ producing a basic plot. Specifically, ggraph requires 3 main functions
     functions and their associated arguments add and modify the edgez of
     the network plot.
 
-Let's first pass our `ccss_network` object to ggraph and see what
-happens:
+Like the basic plotting function above, ggraph has a similar
+`autograph()` function for automatically generating a simple sociogram
+to get a quick snapshot of your network. Run the following code
+supplying our `year_1_network` object as the first argument for this
+function: \
 
-\
+```{r autograph}
+
+autograph(year_1_network)
+
+```
+
+As you can see, this produces a very basic plot that includes our
+network nodes and edges with minimal styling.
+
+WIthing this function, however, are the three core functions noted above
+that can be modified though different arguments or by adding additional
+layers of functions to change the visual aesthetics of your sociogram to
+highlight key characteristics of the network, like edge weight or
+central actors.
+
+Let generate the same basic plot above but explicitly call our ggraph,
+node, and edge functions:
 
 ```{r}
 
@@ -550,32 +573,66 @@ ggraph(year_1_network) +
 
 ```
 
+We won't spend a lot of time on styling our graph here. We will save
+that effort for when we're ready to communicate our findings to a
+specific audience, but lets make some quick functional and aesthetic
+changes: Run the following code to:
+
+-   Change the graph layout to the Fruchterman-Reingold (FR) layout
+    using the `layout = "fr"` argument to help highlight areas of
+    clustering;
+
+-   Change the size of our nodes using the `size = 3` argument to make
+    them more visible;
+
+-   Add color to our edges based using the `aes(colour = weight)`
+    argument to highlight more frequent collaborations; and,
+
+-   Add the `theme_graph()` layer to remove the gray background.
+
 ```{r}
 
-ggraph(year_1_network) +
+ggraph(year_1_network, layout = "fr") +
   geom_node_point(size = 3) +
-  geom_edge_link(arrow = arrow(length = unit(2, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 aes(colour = weight))
+  geom_edge_link(aes(colour = weight)) +
+  theme_graph()
   
 
 ```
 
+That is perhaps slightly better, but before sharing with an education
+partner, I would likely do quite a bit more clean up to highlight key
+findings specific to network measures that we'll explore in the next
+section. For example, I might change the size of nodes for school
+leaders based on measures of centralization to highlight more central
+actors in the network and add arrows to indicate directionality of the
+ties since this is a directed network.
+
 ### 👉 Your Turn ⤵
 
-test
+Use the code chunk below created a simple sociogram for the Year 3
+collaboration network and answer the questions that follow:
 
 ```{r year_3_sociogram}
 
 
-ggraph(year_3_network) +
-  geom_node_point() +
-  geom_edge_link()
+ggraph(year_3_network, layout = "fr") +
+  geom_node_point(size = 3) +
+  geom_edge_link(aes(colour = weight)) +
+  theme_graph()
 
 
 ```
 
-at
+1.  How does the Year 3 collaboration network compare to Year 1? What
+    are some similarities and differences?
+
+    -   
+
+2.  How might you modify this graph to make it more insightful and
+    useful to
+
+    -   
 
 ### 3b. Describe the Network Mathematically
 
