@@ -253,7 +253,7 @@ Hide
 
     library(igraph)
 
-####  readxl 📦
+#### readxl 📦
 
 ![](img/readxl.png){width="20%"}
 
@@ -340,7 +340,7 @@ class(year_1_collaboration)
 year_1_collaboration
 ```
 
-###  2b. Create a Tidy Graph
+### 2b. Create a Tidy Graph
 
 Meet , we first need to convert it to a matrix object recognized by R
 using the `as.matrix()` function. We can then check to data format of
@@ -421,8 +421,7 @@ colnames(year_3_matrix) <- 1:43
 
 year_3_network <- as_tbl_graph(year_3_matrix, directed = TRUE)
 
-year_3
-_network
+year_3_network
 
 
 ```
@@ -500,6 +499,8 @@ function and see what it produces:
 
 ```{r}
 plot(year_1_network)
+
+autograph(year_1_network)
 ```
 
 While not the most aesthetically pleasing plot, it definitely is
@@ -544,8 +545,19 @@ happens:
 ```{r}
 
 ggraph(year_1_network) +
-  geom_edge_link()+
-  geom_node_point()
+  geom_node_point() +
+  geom_edge_link()
+
+```
+
+```{r}
+
+ggraph(year_1_network) +
+  geom_node_point(size = 3) +
+  geom_edge_link(arrow = arrow(length = unit(2, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 aes(colour = weight))
+  
 
 ```
 
@@ -563,22 +575,23 @@ ggraph(year_3_network) +
 
 ```
 
+at
+
 ### 3b. Describe the Network Mathematically
 
-The concepts and measures that are introduce in this section include
-some of the most common ways in which features of complete networks are
-described, as well was.
+This section include some of the most common measures used to describe
+the features of complete networks, as well was .
 
 > Network-level structural measures are those that are calculated from
 > the entire network. Therefore, they provide an excellent snapshot of
 > the network's structure---the pattern of relations among the network's
 > actors.
 
-This section introduces seven indicators of network structure. In
-addition to providing a more global view, these indicators can be used
-to address questions such as whether the friendship, social support, and
-adviceseeking networks within the same fraternity, for example, are
-comparable.
+In addition to providing an overall summary of the network, these
+measures provide a concrete means to compare relations such as whether
+the friendship, social support, and advice seeking networks within the
+same fraternity, for example, are comparable. In our case study, for
+example, were are
 
 #### Network Size
 
@@ -586,18 +599,11 @@ One simple but important property of a social network is its size, or
 the number of nodes and edges in a network. As Carolan notes:
 
 > Size plays an important role in determining what happens in the
-> network--- what resources are exchanged among actors, for example.
-
-In a network of 17 students, it is not hard to imagine that the pattern
-of who studies with whom, for example, would look much different than if
-the network consisted of 200 students. Size affects other network
-measures, but on a conceptual level, it influences the structure of
-relations, as actors only have so many resources and capacities for
-creating and maintaining ties with others. Also, in smaller networks, it
-is easier for actors to know each other. In formal terms, size is simply
-a measure of the number of nodes in the network. In the case of the
-Fraternity Data, it is not a terribly interesting property, as it simply
-reflects the network's boundary.
+> network--- what resources are exchanged among actors, for example...
+> Size affects other network measures, but on a conceptual level, it
+> influences the structure of relations, as actors only have so many
+> resources and capacities for creating and maintaining ties with
+> others.
 
 ```{r}
 
@@ -614,43 +620,13 @@ gsize(year_1_network)
 
 #### Density
 
-Density is intricately linked to network size. Density refers to the
-number of ties in the network reported as a fraction of the total
-possible number of ties. Equation 5.1 below shows how a network's
-density is calculated: where L is the number of lines (directed ties) in
-the network and N is network size. So, in the Fraternity Data with 17
-actors and 51 directed ties, density equals 0.19. The closer this number
-is to 1.0, the denser the network. A density score of 1.0 indicates that
-all possible relations are present.
+Density is intricately linked to network size.
 
-It is also possible to calculate the density of the network's subgroups.
-For example, you might hypothesize that network density differs by some
-attribute, GPA, for example. That is, students with denser friendship
-networks might have access to resources---class notes, information about
-upcoming assignments, support, and so forth---that may contribute to
-their academic performance. Density could be calculated on ties among
-those with GPAs above 3.0 and then compared to those below that
-threshold.
+> Density refers to the number of ties in the network reported as a
+> fraction of the total possible number of ties... The closer this
+> number is to 1.0, the denser the network.
 
-However, the density of 0.19 reported above is somewhat deceptive, at
-least in terms of what it means for the Fraternity Data set. This
-formula needs to be adjusted to account for the limited number of
-friendship nominations (three) that was imposed when the data were
-recoded. In a nomination study in which you ask SAGE 2014 SAGE
-Publications, Ltd. All Rights Reserved.
-
-SAGE Research Methods Page 6 of 13 Structural Measures for Complete
-Networks the respondent to list a certain number of alters (or you
-impose this limit after the data have been collected), it is more
-sensible to report what is referred to as effective density, which is
-the number of lines (ties) multiplied by the number of possible alters:
-where L again is the number of lines (directed ties) in the network, N
-is network size, and λ is the maximum number of alters requested or
-permitted. Using this formula, the density of the Fraternity Data is
-1.0: All possible relations are present, which is unsurprising given
-that the original ranked data were recoded (1--3 = 1, all others = 0)
-and each respondent had the maximum number of three friendship
-nominations.\
+\
 
 ```{r}
 
@@ -668,15 +644,17 @@ A third network measure that indicates an aspect of the networks social
 structure is reciprocity, defined as the degree to which actors in a
 directed network select one another. Stated another way, reciprocity
 indicates the mutuality of the network's ties (this is why reciprocity
-is also referred to as mutuality). This property is important because it
-reveals the direction through which resources such as help, advice, and
-support flow. It also indicates the network's stability, as reciprocated
-ties tend to be more stable over time. Finally, networks with high
-reciprocity may be more "equal," while those with lower reciprocity may
-be more hierarchical. While some relations are by definition reciprocal,
-such as "studied with," others such as friendship are potentially
-asymmetrical and indicate imbalances in influence, status, or authority.
-Borgatti, Everett, and Freeman (2006) provide the following measure of
+is also referred to as mutuality).
+
+This property is important because it reveals the direction through
+which resources such as help, advice, and support flow. It also
+indicates the network's stability, as reciprocated ties tend to be more
+stable over time. Finally, networks with high reciprocity may be more
+"equal," while those with lower reciprocity may be more hierarchical.
+While some relations are by definition reciprocal, such as "studied
+with," others such as friendship are potentially asymmetrical and
+indicate imbalances in influence, status, or authority. Borgatti,
+Everett, and Freeman (2006) provide the following measure of
 reciprocity: where Aij indicates a tie from actor i to j. A high degree
 of reciprocity means that a network's actors choose one another. It
 could also mean that while some actors choose one another, they are not
@@ -969,6 +947,26 @@ centralization.degree(year_1_network, mode = "all")
 ```
 
 ## 4. Model
+
+A third developing area of network research that makes use of advanced
+statistical tools focuses on the examination of network change over
+time. These models show how networks evolve and whether there are
+actor-level characteristics associated with this evolution. These models
+are increasingly important, as it is obvious---or, at least it should
+be---that social networks are dynamic by nature. Ties are established
+between actors, they may flourish and perhaps evolve into close
+relationships, and they can also dissolve quietly or suddenly (Snijders,
+van de Bunt, & Steglich, 2010). These relational changes may be
+considered the result of the structural positions of the actors within
+the network---for example, when friends of friends become
+friends---characteristics of the actors (actor covariates such as
+gender), characteristics of pairs of actors (dyadic covariates such as
+whether there is a tie), and residual random influences representing
+unexplained influences.
+
+Not only test whether changes observed in a network over time, but also
+model how they have changed and potential mechanisms driving those
+changes.
 
 Two modeling techniques unique to network analysis and demonstrated in
 Chapter 9 of \@carolan2014 are the quadratic assignment procedure (QAP)
