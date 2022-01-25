@@ -23,14 +23,13 @@ knitr::opts_chunk$set(echo = TRUE)
 Our *Unit 2 Case Study: Collaboration Ties over Time* revisits the
 research of Dr. Alan Daly and centers around the impact No Child Left
 Behind reform efforts on school and district leadership networks. In
-this unit we move beyond visual depictions of networks using sociograms
-from our previous SNA case study and learn to describe networks using a
-wide range network-level measures. Specifically, our analyses are guided
-by research conducted by Daly and Finnagan @daly2011ebb on the The ebb
-and flow of social network ties between district leaders under
-high-stakes accountability. As we work through step of the
-data-intensive workflow [@krumm2018], we will focus on the following
-topics:
+this unit we move beyond visual depictions of networks from our previous
+SNA case study and learn to describe networks using common network-level
+measures. Our analyses are guided by research conducted by Daly and
+Finnagan @daly2011ebb who examined the ebb and flow of social network
+ties between district leaders under high-stakes accountability. As we
+work through each step of the data-intensive workflow [@krumm2018], we
+will focus on the following topics:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
     from which our data came and load various R packages for data
@@ -112,7 +111,7 @@ see which packages have already been installed and loaded into RStudio
 Cloud by looking at the the Files, Plots, & Packages Pane in the lower
 right hand corner.
 
-#### Core SNA Packages 
+#### Core SNA Packages
 
 **tidygraph 📦**
 
@@ -127,8 +126,6 @@ data. The {tidygraph} package provides a way to switch between the two
 tables and uses `dplyr` verbs to manipulate them. Furthermore it
 provides access to a lot of graph algorithms with return values that
 facilitate their use in a tidy workflow.
-
-Let's go ahead and load the {tidygraph} library:
 
 **ggraph 📦**
 
@@ -166,7 +163,7 @@ set of data types and functions for:
 
 #### New Packages
 
-#### readxl 📦
+**readxl 📦**
 
 ![](img/readxl.png){width="20%"}
 
@@ -177,32 +174,30 @@ dependencies, so it's easy to install and use on all operating systems.
 It is designed to work with *tabular* data.
 
 Since one of our data wrangling steps in the next section is importing
-network matrices stored in excel files, the package will come in handy.
+network matrices stored in excel files, this package will come in handy.
 
 ### 👉 Your Turn ⤵
 
-Use the code chunk below to load the Let's go ahead and load the
-tidyverse, igraph, tidygraph, ggraph, and readxl packages that we'll be
-using in this case study:
+Use the code chunk below to load the tidyverse, igraph, tidygraph,
+ggraph, and readxl packages that we'll be using in this case study:
 
 ```{r libraries}
-library(readxl)
-library(tidyverse)
-library(igraph)
-library(tidygraph)
-library(ggraph)
+# YOUR CODE HERE
+
+
+
 ```
 
 ## 2. Wrangle
 
 In general, data wrangling involves some combination of cleaning,
-reshaping, transforming, and merging data (Wickham and Grolemund 2016).
-As highlighted in Estrellado et al. (2020), wrangling network data can
-be even more challenging than other data sources since network data
-often includes variables about both individuals and their relationships.
-For our data wrangling in this unit, we're keeping it simple since
-working with relational data, especially in the form of matrices, is a
-bit of a departure from our working with rectangular data frames.
+reshaping, transforming, and merging data[@wickham2016r]. As highlighted
+in Estrellado et al. @estrellado2020e, wrangling network data can be
+even more challenging than other data sources since network data often
+includes variables about both individuals and their relationships. For
+data wrangling in this unit, we're keeping it simple since working with
+relational data, especially in the form of matrices, is a bit of a
+departure from our working with rectangular data frames.
 
 ### 2a. Import Data
 
@@ -213,39 +208,37 @@ Network Analysis and Education companion
 site](https://studysites.sagepub.com/carolan/study/resources.htm). Both
 files contain edges stored as a square matrix (more on this later) for
 the first and third year of a study examining the impact of national
-reform efforts [@daly2010bridge].
+reform efforts [@daly2011ebb].
 
 These files are included in the data folder of your R Studio project. A
 description of each file from the companion website is linked above and
 each data file is linked below:
 
-1.  [**School Leaders Data Chapter
-    9_a.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds7.xls) This
-    adjacency matrix reports on "collaboration" ties among 43 school
-    leaders in year 1 of a three-year study. This is a directed valued
-    (weighted) network measured on five-point scale ranging from 0 to 4,
-    with higher values indicating more frequent collaborations (1--2
-    times/week). These data are used throughout Chapter 9.
+1.  [**year_1\_collaboration.xlsx**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds7.xls)
+    This adjacency matrix reports on "collaboration" ties among 43
+    school leaders in year 1 of a three-year study. This is a directed
+    valued (weighted) network measured on five-point scale ranging from
+    0 to 4, with higher values indicating more frequent collaborations
+    (1--2 times/week). These data are used throughout Chapter 9.
 
-2.  [**School Leaders Data Chapter
-    9_b.**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds8.xlsx) This
-    adjacency matrix reports on "collaboration" ties among 43 school
-    leaders in year 3 of a three-year study. This is a directed valued
-    (weighted) network measured on five-point scale ranging from 0 to 4,
-    with higher values indicating more frequent collaborations (1--2
-    times/week). 
+2.  [**year_3\_collaboration.xlsx**](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds8.xlsx)
+    This adjacency matrix reports on "collaboration" ties among 43
+    school leaders in year 3 of a three-year study. This is a directed
+    valued (weighted) network measured on five-point scale ranging from
+    0 to 4, with higher values indicating more frequent collaborations
+    (1--2 times/week). 
 
 Recall from above that our relations, or edges, are stored as a valued
 [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) in
 which columns and rows consist of the same actors and each cell contains
 information about the tie between each pair of actors. In our case, the
 tie is a directed and valued "arc" where the value indicates the
-strength of the relationship.
+frequency of collaboration.
 
 Let's use the `read_excel()` function to import the
-`School Leaders Data Chapter 9_d.xlsx` file, add an argument setting the
-column names to `FALSE` since our file is a simple matrix with no header
-or column names, and assign the matrix to a variable named
+`year_1_collaboration.xlsx` file, add an argument setting the column
+names to `FALSE` since our file is a simple matrix with no header or
+column names, and assign the matrix to a variable named
 `year_1_collaboration`:
 
 **R Studio Tip:** Type `?read_excel` into the console and check the
@@ -282,10 +275,6 @@ created object to make sure it imported as expected.
 ```{r year_3_import}
 #YOUR CODE HERE
 
-year_3_collaboration <- read_excel("data/year_3_collaboration.xlsx", 
-                                   col_names = FALSE)
-
-year_3_collaboration
 
 ```
 
@@ -297,11 +286,11 @@ into a formal matrix and then convert to a network class R object
 required by the igraph, tidygraph, and ggraph packages.
 
 However, one thing you may have noticed from our inspection of the data
-above is that our data table was missing the names of the school leaders
-in our network. Since our original file was missing names, we will need
-to supply them. R has packages for creating random names to help
-anonymize data, but to keep things simple, we'll just assign the numbers
-1-43 as names for our rows and columns.
+above is that our data table is missing the names of the school leaders
+in our network, which are needed for determining dyads in our network. R
+has packages for creating random names to help anonymize data, but to
+keep things simple, we'll just assign the numbers 1-43 as names for our
+rows and columns.
 
 ```{r assign_names}
 
@@ -311,10 +300,10 @@ colnames(year_1_collaboration) <- 1:43
 
 ```
 
-You may have seen warning stating: Setting row names on a tibble is
-deprecated. You can ignore that for now but it's basically telling us
-these functions old we we need to use newer function or our code will
-some day stop working.
+You may have seen a warning stating:
+`Setting row names on a tibble is deprecated.` You can ignore that for
+now but it's basically telling us these functions are old we we need to
+use newer function or our code will some day stop working.
 
 Again, let quickly inspect our `year_1_collaboration` data table to see
 if this worked:
@@ -331,7 +320,7 @@ cell. Note that leader 3 also indicated that they collaborated with 1,
 but on a slightly more frequent basis as indicated by the "4" in the
 corresponding cell.
 
-#### Convert to Matrix 
+#### Convert to Matrix Object
 
 Now that we have names included for our rows and columns, we need to
 convert our data table, or tibble, to a formal matrix class object. To
@@ -344,13 +333,13 @@ year_1_matrix <- as.matrix(year_1_collaboration )
 
 ```
 
-The word "class" and "object" have been use quite a bit in this
+The word "class" and "object" have been used quite a bit in this
 case-study and warrant a brief explanation. Classes and objects are
-basic concepts of Object-Oriented Programming. An **object** is simply a
-data structure that has some methods and attributes. Everything in R is
-essentially an object. A **class** is just a blueprint or a sketch of
-these objects. It represents the set of properties or methods that are
-common to all objects of one type.
+basic concepts of Object-Oriented Programming environments like R. An
+**object** is simply a data structure that has some methods and
+attributes. Everything in R is essentially an object. A **class** is
+just a blueprint or a sketch of these objects. It represents the set of
+properties or methods that are common to all objects of one type.
 
 Let's use the `class()` function on the `year_1_collaboration` and
 `year_1_matrix` to see the types of objects we just created:
@@ -363,10 +352,10 @@ class(year_1_matrix)
 
 ```
 
-Great! We can now see that our `year_1_matrix` is formally a object of
+Great! We can now see that our `year_1_matrix` is formally an object of
 the "matrix" class.
 
-#### Convert to 
+#### Convert to Graph Object
 
 Our final step before we're able to begin exploring our data is to
 convert our matrix to a network object recognized by the {igraph} and
@@ -385,7 +374,7 @@ year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
 
 ```
 
-Again, let's inspect the
+Again, let's inspect our new object:
 
 ```{r year_1_network}
 
@@ -395,8 +384,10 @@ year_1_network
 
 As you can see, our `year_1_network` provides a range of information
 about out network including network size, type, number of components,
-and a preview of node and edge lists that it created and can now be used
-to create new network variables like degree, reciprocity, and centrality
+and a preview of the node and edge lists that it created. The node and
+edge lists are treated just like a typical data frame and can now be
+used with other tidyverse packages and functions to create new
+actor-level network variables like degree, reciprocity, and centrality
 measures.
 
 ### 👉 Your Turn ⤵
@@ -410,7 +401,7 @@ earlier:
 2.  Convert the resulting data frame to a matrix class object and check
     to confirm that it is indeed a matrix;
 
-3.  Convert the matrix to a network class object with directed edges;
+3.  Convert the matrix to a network graphs object with directed edges;
 
 4.  Inspect the Year 3 collaboration network and answer the questions
     after the code chunk.
@@ -418,17 +409,6 @@ earlier:
 ```{r}
 #YOUR CODE HERE
 
-rownames(year_3_collaboration) <- 1:43
-
-colnames(year_3_collaboration) <- 1:43
-
-year_3_matrix <- as.matrix(year_3_collaboration)
-  
-class(year_3_matrix)
-
-year_3_network <- as_tbl_graph(year_3_matrix, directed = TRUE)
-
-year_3_network
 
 
 ```
@@ -471,9 +451,9 @@ These algorithms and indices rely on both simple and somewhat
 sophisticated mathematical computation.
 
 In this section we revisit the {tidygraph} and {ggraph} packages for
-creating sociograms and computing basic node and edge-level measures and
-introduce some key functions from the {igraph} package for obtaining
-complete network-level measures.
+creating sociograms and computing basic node and edge-level measures,
+and then introduce some key functions from the {igraph} package for
+obtaining complete network-level measures.
 
 ### 3a. Visually Describe the Network
 
@@ -551,7 +531,7 @@ Like the basic plotting function above, ggraph has a similar
 `autograph()` function for automatically generating a simple sociogram
 to get a quick snapshot of your network. Run the following code
 supplying our `year_1_network` object as the first argument for this
-function: \
+function:
 
 ```{r autograph}
 
@@ -562,7 +542,7 @@ autograph(year_1_network)
 As you can see, this produces a very basic plot that includes our
 network nodes and edges with minimal styling.
 
-WIthing this function, however, are the three core functions noted above
+Within this function, however, are the three core functions noted above
 that can be modified though different arguments or by adding additional
 layers of functions to change the visual aesthetics of your sociogram to
 highlight key characteristics of the network, like edge weight or
@@ -579,8 +559,8 @@ ggraph(year_1_network) +
 
 ```
 
-We won't spend a lot of time on styling our graph here. We will save
-that effort for when we're ready to communicate our findings to a
+We won't spend a lot of time on polishing our graph here. We'll save
+that effort for when we are ready to communicate our findings to a
 specific audience, but lets make some quick functional and aesthetic
 changes: Run the following code to:
 
@@ -622,10 +602,6 @@ collaboration network and answer the questions that follow:
 ```{r year_3_sociogram}
 #YOUR CODE HERE
 
-ggraph(year_3_network, layout = "fr") +
-  geom_node_point(size = 3) +
-  geom_edge_link(aes(colour = weight)) +
-  theme_graph()
 
 ```
 
@@ -696,9 +672,9 @@ network studies is the concept of centralization, or the extent to which
 relations are focused on one or a small set of actors. Centralization is
 an important concept in network because, as Carolan notes:
 
-> These central actors likely wield a disproportionate amount of
-> influence on the network. Therefore, high centralization provides
-> fewer actors with more power and control.
+> Central actors likely wield a disproportionate amount of influence on
+> the network. Therefore, high centralization provides fewer actors with
+> more power and control.
 
 Centralization can be based on a number of different measures, but
 degree is one of the most common. Degree refers to the number of ties an
@@ -765,9 +741,9 @@ year_1_network
 
 ```
 
-Now we would could adjust the size of more central actors in our
-sociogram from above like so to highlight the full range of
-collaboration ties in our network:
+Now we could adjust the size of more central actors in our sociogram
+from above like so to highlight the full range of collaboration ties in
+our network:
 
 ```{r}
 ggraph(year_1_network) +
@@ -779,7 +755,7 @@ ggraph(year_1_network) +
 #### 3. Density
 
 Since we know the number of ties, or edges, in our network, we can
-examine the overall density of our network, which is direct linked to
+examine the overall density of our network, which is directly linked to
 network size. As Carolan explains:
 
 > Density refers to the number of ties in the network reported as a
@@ -827,14 +803,13 @@ function, we can directly calculate this measure:
 ```{r reciprocity}
 
 reciprocity(year_1_network)
-
 ```
 
 As illustrated by the reciprocity measure above, the tendency towards
 reciprocated collaboration ties is, surprisingly, very low in our Year 1
 network.
 
-An if we wanted to highlight this lack of reciprocity in a network
+And if we wanted to highlight this lack of reciprocity in a network
 visual, we could use the
 [`edge_is_mutual()`](https://tidygraph.data-imaginist.com/reference/edge_types.html)
 function to create a new edge variable called `reciprocated` that
@@ -899,15 +874,14 @@ transitive measures:
 transitivity(year_1_network)
 ```
 
-For our particular network, a value of 24.4% and is not too surprising
-since this is at the start of the research study and given that there
-are a limited number of edges and given the rather low density of our
-network overall.
+For our particular network, a relatively small value of 24.4% is not too
+surprising since this is the start of the research study and since the
+density of our network overall is very low.
 
 #### 6. Diameter & Distance
 
 Whereas transitivity focuses on the importance of certain configurations
-of triads, diameter and distance are more straightforward A network's
+of triads, diameter and distance are more straightforward. A network's
 diameter simply refers to the longest path between any two actors. A
 related measure is the average path length, which measures the mean
 distance between all pairs of actors in the network.
@@ -947,24 +921,22 @@ Year 3 collaboration newtwork, then answer the questions below:
 #YOUR CODE HERE
 
 #size
-gorder(year_3_network)
-gsize(year_3_network)
+
 
 #cetnralization 
-centr_degree(year_3_network, mode = "all")
+
 
 #density
-edge_density(year_3_network)
+
 
 #reciprocity
-reciprocity(year_3_network)
+
 
 #transitivity
-transitivity(year_3_network)
+
 
 #diameter & distance 
-diameter(year_3_network)
-mean_distance(year_3_network)
+
 ```
 
 1.  How do network-level measures for Year 1 and Year 3 collaboration
@@ -980,10 +952,10 @@ mean_distance(year_3_network)
 
 ## 4. Model
 
-A developing area of network research of advanced statistical models and
-tools to examine network change over time [@carolan2014]. These models
-are use to empirically test not just if changes in key structure
-measures are statistically significant, but also explain potential
+A developing area of network research is the advancement of statistical
+models and tools to examine network change over time [@carolan2014].
+These models are used to empirically test if changes in key structure
+measures are statistically significant, and also explain potential
 mechanisms driving those changes. Stochastic actor-based models, for
 example, are a family of models that have the purpose of representing
 network dynamics on the basis of observed longitudinal data. These
@@ -998,7 +970,7 @@ Take a look at the article *The Ebb and Flow of Social Network Ties
 Between District Leaders Under High-Stakes Accountability* located in
 the lit folder of your files pane and answer the following questions:
 
-1.  What method(s) did Daly and Finnagan use in their longitudinal case
+1.  What model(s) did Daly and Finnagan use in their longitudinal case
     study to examine changes in reform-related knowledge, advice, and
     innovation network structures?
 
@@ -1011,10 +983,10 @@ the lit folder of your files pane and answer the following questions:
 
 ## 5. Communicate
 
-The final step in our workflow/process is sharing the results of
-analysis with wider audience. Krumm et al. (2018) have outline the
+The final step in our workflow/process is sharing the results of our
+analysis with wider audience. Krumm et al. (2018) have outlined the
 following 3-step process for communicating with education stakeholders
-what you have learned through analysis:
+findings from an analysis:
 
 1.  **Select.** Communicating what one has learned involves selecting
     among those analyses that are most important and most useful to an
@@ -1037,11 +1009,14 @@ what you have learned through analysis:
 
 For your final Your Turn, your goal is to distill our analysis from
 above into a simple "data product" designed to illustrate key findings
-about changes in the collaboration network over time.
+about changes in the collaboration network over time. For the purposes
+of this task, imagine that your audience consists of state-level
+education policy makers with limited background in SNA and adapt the
+following steps accordingly:
 
-1.  **Select.** Select a several network-level measures that you think
-    would be interesting or relevant for our target audience and that
-    help answer our research questions.
+1.  **Select.** Select a few network-level measures that you think would
+    be interesting or relevant for your target audience and that help
+    answer our research questions.
 
 2.  **Polish.** Create and polish a data visualization and/or data table
     to communicate your selected findings.
@@ -1060,15 +1035,19 @@ about changes in the collaboration network over time.
         future.
 
 Use the code chunk below create a polished table or visualization(s) and
-write your narrative in the space that follows.
+write a brief narrative in the space that follows.
 
 #### Data Visualization or Table
 
 ```{r}
+# YOUR CODE HERE
+
 
 ```
 
-#### Narrative 
+#### Narrative
+
+NARRATIVE GOES HERE...
 
 ### 🧶 Knit & Check ✅
 
@@ -1076,8 +1055,7 @@ Congratulations - you've completed the Unit 2 case study! To share your
 work, click the drop down arrow next to the ball of yarn that says
 "Knit" at the top of this markdown file, then select "Knit top HTML".
 Assuming your code contains no errors, this will create a web page in
-your Files pane that serves as a record of your work and that anyone can
-view on the web or with an internet browser.
+your Files pane that serves as a record of your work.
 
 Once your file has been knitted, you can publish this file online using
 RPubs (see screeshot below), or share the HTML file through another
