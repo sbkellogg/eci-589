@@ -20,139 +20,86 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Prepare
 
-Our Unit 2 Case Study: Collaboration Ties over Time revisits some of
-excellent research by Dr. Alan Daly and centers around the impact No
-Child Left Behind reform efforts on school and district leadership
-networks. In this unit we move beyond visual depictions of networks
-using sociograms from our previous SNA case study and learn to describe
-networks using a wide range network-level measures. More specifically,
-our Unit 2 case study will cover the following topics pertaining to each
-data-intensive workflow process:
+Our *Unit 2 Case Study: Collaboration Ties over Time* revisits the
+research of Dr. Alan Daly and centers around the impact No Child Left
+Behind reform efforts on school and district leadership networks. In
+this unit we move beyond visual depictions of networks using sociograms
+from our previous SNA case study and learn to describe networks using a
+wide range network-level measures. Specifically, our analyses are guided
+by research conducted by Daly and Finnagan @daly2011ebb on the The ebb
+and flow of social network ties between district leaders under
+high-stakes accountability. As we work through step of the
+data-intensive workflow [@krumm2018], we will focus on the following
+topics:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
-    from which our data came, formulate some research questions, and
-    load various R packages for network analysis.
+    from which our data came and load various R packages for data
+    science and network analysis.
 
-2.  **Wrangle**: Wrangling data entails the work of manipulating,
-    cleaning, transforming, and merging data. In section 2 we will learn
-    about the {tidygraph} package for creating network objects.
+2.  **Wrangle**: In section 2 we once make use of the {readxl} and
+    {tidygraph} packages to import and prepare relational data stored as
+    as an adjacency matrix.
 
-3.  **Explore**: In section 3, we use the {tidygraph} package and the
-    companion {ggraph} package to calculate a range of centrality
-    measures and learn how to illustrate some of these stats through
-    network visualization.
+3.  **Explore**: In our prior case study, we indirectly used the
+    {igraph} package on which {tidygraph} depends. In section 3, we use
+    {igraph} directly to calculate a range of network-level measures to
+    describe and compare collaboration networks over time.
 
-4.  **Model**: We wrap up our analysis in Section 4 by introducing
-    community detection and sentiment analysis algorithms for
-    identifying groups and gauging sentiment about the common core.
+4.  **Model**: While we don't do any modeling of our data in this case
+    study, we dive a little deeper into work of Daly and Finnagan
+    @daly2011ebb to see how modeling can be used to examine longitudinal
+    network data.
 
-5.  **Communicate**: We briefly reflect on our walkthrough in
-    preparation for our independent analysis next week.
+5.  **Communicate**: Finally, we prepare a simple "data product"
+    consisting of a data visualization and/or table that highlights some
+    key findings from our analysis.
 
 ### 1a. Review the Research
 
-In [Social Network Analysis and Education: Theory, Methods &
-Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
-@carolan2014 makes the following distinctions between mathematical and
-statistical approaches to social network analysis:
+![](img/ebb-flow.png){width="40%"}
 
-Specifically, we will try to replicate the P\* models used in Chapter 9
-of @carolan2014 in order to test hypotheses about individual and network
-characteristics that may explain who school leaders select for
-collaboration and confidential exchanges.
+Daly, A. J., & Finnigan, K. S. (2011). The ebb and flow of social
+network ties between district leaders under high-stakes accountability.
+*American Educational Research Journal*, *48*(1), 39-79.
 
-#### Research Questions
+#### Abstract
 
-For this walkthrough, we will be using school leadership data were
-collected at two school districts over 3 consecutive years that was used
-to answer the following research questions:
+Recent scholarship suggests the importance of school district offices in
+supporting reform. These studies provide strategies for building
+relations between central offices and sites in order to improve change
+efforts. However, what is frequently overlooked is that organizational
+reform efforts are socially constructed. Therefore, examining the
+underlying reform-related social networks may provide insight into how
+relational structures support or constrain efforts at reform. This
+longitudinal case study draws upon social network analysis and
+interviews to examine the reform-related knowledge, advice, and
+innovation network structures of central office and site leaders in a
+district facing sanction for underperformance and engaging a
+districtwide reform. Findings indicate that over time, the networks
+increased the number of superficial interactions, and more frequent
+exchanges remained unchanged, resulting in a centralized network
+structure.
 
-1.  Is there a relationship between the frequency of collaboration
-    between school leaders and how often they turn to each other to
-    discuss issues of a confidential nature?
-2.  Do school leaders prefer to collaborate with those with whom they
-    have collaborated in the past, or is there some other reason?
-3.  Does gender or some other individual attribute predicts confidential
-    exchanges between school leaders, or does some previous relation
-    have a stronger effect?
-4.  Does collaboration between leaders explain one's level of trust in
-    one's administrative colleagues?
-5.  Can we distinguish among different groups of school leaders based on
-    how frequently they collaborate, and if so, are these groupings
-    related to the level at which they work (school versus district)?
+### 👉 Your Turn ⤵
 
-#### Data Collection
+Take a look at the article *The Ebb and Flow of Social Network Ties
+Between District Leaders Under High-Stakes Accountability* located in
+the lit folder of your files pane and answer the following questions:
 
-For each consecutive year, school district leaders were invited to
-complete a survey that collected individual:
+1.  What research questions were the authors of this study trying to
+    address and why did they consider these questions important?
 
--   **Demographic information** (e.g., gender, ethnicity, marital
-    status, age, years of experiences);
+    -   
 
--   **Network relationships types** (e.g., collaboration, confidential
-    exchanges, energy, expertise, leaders approached for support,
-    work-related issues, input, recognition, best practices, and
-    innovation);
+2.  How were participants selected for this study and what was the
+    rationale?
 
--   **Frequency of interactions** they have with those nominated
-    individuals on a four-point frequency scale ranging from 1 (the
-    least frequent) to 4 (1--2 times a week);
+    -   
 
--   **Leadership efficacy** items were designed based on the Principal
-    Efficacy Scale used in Daly et al. (2011) and Tschannen-Moran and
-    Gareis's (2004) studies. The efficacy scale includes 18 items rated
-    on a 9-point Likert scale ranging from 1 (None at all) to 9 (A great
-    deal);
+3.  How did the authors collect social network data for this study and
+    what specific information about actors and ties were collected?
 
--   **Trust** scale contains eight items rated on a 7-point Likert scale
-    ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
-    from Tschannen-Moran and Hoy (2003).
-
-#### Analyses
-
-#### Key Findings
-
-In response to research questions 1 & 2 from above, Carolyn reported
-that "while collaboration in year 1 does not significantly predict
-collaboration in year 3, confidential exchanges in year 1 does" and
-suggested that "collaboration among school leaders provides an important
-foundation for more sensitive, perhaps even deeper, relations (e.g.,
-confidential exchanges) at a later point in time."
-
-### 
-
-For our Unit 3 Walkthrough, we focus specifically on generative
-processes, or micro-level mechanisms, the might help explain who school
-leaders select to collaborate with or engage in confidential exchanges.
-Review Chapter 9 of SNA and Education and report out on the findings
-from the ERGM analysis in response to Research Question 3 below:
-
-3.  **Does gender or some other individual attribute predicts
-    confidential exchanges between school leaders, or does some previous
-    relation have a stronger effect?**
-
-    -   YOUR RESPONSE HERE
-
-Based on what you know about networks and the context so far, what other
-specific question(s) might the data and analyses described allow you to
-address. For example, the concept of homophily, or the tendency for
-people to seek out or form ties to those who are similar to themselves,
-was introduced in our readings and hypotheses about homophily can easily
-be tested using using ERGMs:
-
--   YOUR RESPONSE HERE
-
-Save this question for later as you'll have a chance to empirically test
-it by the end of this walkthrough.
-
-In Unit 1, we also learned about **packages**, or libraries, which are
-shareable collections of R code that can contain functions, data, and/or
-documentation and extend the functionality of R. You can always check to
-see which packages have already been installed and loaded into RStudio
-Cloud by looking at the the Files, Plots, & Packages Pane in the lower
-right hand corner.
-
-### **👉 Your Turn** **⤵**
+    -   
 
 ### 1b. Load Libraries
 
@@ -165,27 +112,9 @@ see which packages have already been installed and loaded into RStudio
 Cloud by looking at the the Files, Plots, & Packages Pane in the lower
 right hand corner.
 
-Let's go ahead and load the [tidyverse](https://www.tidyverse.org/),
-[igraph](https://igraph.org/),
-[tidygraph](https://www.data-imaginist.com/2017/introducing-tidygraph/),
-and [ggraph](https://ggraph.data-imaginist.com/index.html) packages from
-our previous SNA unit since we'll be using them again in this case
-study:
+#### Core SNA Packages 
 
-Load Packages
-
-```{r libraries}
-library(readxl)
-library(tidyverse)
-library(igraph)
-library(tidygraph)
-library(ggraph)
-```
-
-Next, we will introduce a few new packages that will help us with our
-social network analyses.
-
-#### tidygraph 📦
+**tidygraph 📦**
 
 ![](img/tidygraph.png){width="20%"}
 
@@ -201,7 +130,7 @@ facilitate their use in a tidy workflow.
 
 Let's go ahead and load the {tidygraph} library:
 
-#### ggraph 📦
+**ggraph 📦**
 
 ![](img/ggraph.png){width="20%"}
 
@@ -219,13 +148,7 @@ adding the concept of *layouts* to the [grammar of
 graphics](https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics),
 i.e. the "gg" in ggplot and ggraph.
 
-Let's go ahead and load the {ggraph} library:
-
-```{r}
-
-```
-
-#### igraph 📦
+**igraph 📦**
 
 ![](img/igraph.png){width="20%"}
 
@@ -240,6 +163,8 @@ set of data types and functions for:
     actors or nodes) and edges,
 
 3.  allowing rapid prototyping via high level languages like R.
+
+#### New Packages
 
 #### readxl 📦
 
@@ -256,19 +181,28 @@ network matrices stored in excel files, the package will come in handy.
 
 ### 👉 Your Turn ⤵
 
-Use the code chunk below to load the
+Use the code chunk below to load the Let's go ahead and load the
+tidyverse, igraph, tidygraph, ggraph, and readxl packages that we'll be
+using in this case study:
 
-```{r}
-
+```{r libraries}
+library(readxl)
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
 ```
-
-Section 1a. Questions:
-
-1.  
 
 ## 2. Wrangle
 
-You can also embed plots, for example:
+In general, data wrangling involves some combination of cleaning,
+reshaping, transforming, and merging data (Wickham and Grolemund 2016).
+As highlighted in Estrellado et al. (2020), wrangling network data can
+be even more challenging than other data sources since network data
+often includes variables about both individuals and their relationships.
+For our data wrangling in this unit, we're keeping it simple since
+working with relational data, especially in the form of matrices, is a
+bit of a departure from our working with rectangular data frames.
 
 ### 2a. Import Data
 
@@ -376,6 +310,11 @@ rownames(year_1_collaboration) <- 1:43
 colnames(year_1_collaboration) <- 1:43
 
 ```
+
+You may have seen warning stating: Setting row names on a tibble is
+deprecated. You can ignore that for now but it's basically telling us
+these functions old we we need to use newer function or our code will
+some day stop working.
 
 Again, let quickly inspect our `year_1_collaboration` data table to see
 if this worked:
@@ -583,6 +522,11 @@ and see what it produces.
 Fortunately, the {ggraph} package includes a plethora of plotting
 parameters for graph layouts, edges and nodes to improve the visual
 design and readability of network graphs.
+
+**Note:** If you're having trouble seeing the plot you can run the code
+in the console and see the plot in the Viewer pane or click the little
+arrow/window icon in the output of the code chunk to open the plot in a
+new window and resize.
 
 ### **Sociograms with ggraph**
 
@@ -926,11 +870,11 @@ ties!
 Transitivity, also known as the "friend of a friend" phenomenon, focuses
 on triads, or any "triple" of actors, rather than dyads like
 reciprocity. Just like a networks tendency towards reciprocity, there is
-also a tendency toward transitivity. For example, if Teacher A
-collaborates with Teacher B and Teacher B collaborates with Teacher C,
-then Teacher A is more likely at some point to collaborates with Teacher
-C and "complete" the triangle and less likely to collaborate with
-Teacher E, as illustrated by the following graph:
+also a tendency toward transitivity. For example, in the figure below
+Teacher A collaborates with Teacher B and Teacher B collaborates with
+Teacher C, then Teacher A is more likely at some point to collaborates
+with Teacher C and "complete" the triangle and less likely to
+collaborate with Teacher E since they do now share a connection:
 
 ![](img/transitivity.png){width="60%"}
 
