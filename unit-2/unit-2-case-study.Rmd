@@ -1052,9 +1052,9 @@ about changes in the collaboration network over time.
     -   The question or questions are guiding your analysis;
 
     -   The conclusions you've reached based on your analyses and
-        findings.
+        findings;
 
-    -   How your audience might use this information.
+    -   How your audience might use this information;
 
     -   How you might revisit or improve upon this analysis in the
         future.
@@ -1069,3 +1069,20 @@ write your narrative in the space that follows.
 ```
 
 #### Narrative 
+
+### 🧶 Knit & Check ✅
+
+Congratulations - you've completed the Unit 2 case study! To share your
+work, click the drop down arrow next to the ball of yarn that says
+"Knit" at the top of this markdown file, then select "Knit top HTML".
+Assuming your code contains no errors, this will create a web page in
+your Files pane that serves as a record of your work and that anyone can
+view on the web or with an internet browser.
+
+Once your file has been knitted, you can publish this file online using
+RPubs (see screeshot below), or share the HTML file through another
+means.
+
+![](img/publish.png){width="70%"}
+
+### References
