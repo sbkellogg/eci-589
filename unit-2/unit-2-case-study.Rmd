@@ -1,5 +1,5 @@
 ---
-title: 'Unit 2 Case Study: Network Topography over Time'
+title: 'Unit 2 Case Study: Collaboration Ties over Time'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -20,24 +20,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Prepare
 
-Our Unit 2 Case Study: Collaboration revisits some of excellent research
-by Dr. Alan Daly and centers around the impact No Child Left Behind
-reform efforts on school and district leadership networks. In this unit
-we move beyond visual depictions of networks using sociograms from our
-previous SNA case study and learn to describe networks using a wide
-range
-
-> **Mathematical approaches** focus on what a network of actors "looks
-> like" by describing the network using sociograms and/or network
-> measures such as reciprocity, centrality, and density.
-
-In addition to investigating tweets around the these controversial state
-standards, our Unit 2 Walkthrough will cover the following topics
-pertaining to each data-intensive workflow process:
+Our Unit 2 Case Study: Collaboration Ties over Time revisits some of
+excellent research by Dr. Alan Daly and centers around the impact No
+Child Left Behind reform efforts on school and district leadership
+networks. In this unit we move beyond visual depictions of networks
+using sociograms from our previous SNA case study and learn to describe
+networks using a wide range network-level measures. More specifically,
+our Unit 2 case study will cover the following topics pertaining to each
+data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
-    from which our data came, formulate some research questions, and get
-    introduced the {rtweet} R package for using the Twitter API.
+    from which our data came, formulate some research questions, and
+    load various R packages for network analysis.
 
 2.  **Wrangle**: Wrangling data entails the work of manipulating,
     cleaning, transforming, and merging data. In section 2 we will learn
@@ -927,7 +921,7 @@ ggraph(year_1_network) +
 As you can see, there only appear to be seven dyads with reciprocated
 ties!
 
-#### 5. Transitivity
+#### 5. Transitivity & Clustering
 
 Transitivity, also known as the "friend of a friend" phenomenon, focuses
 on triads, or any "triple" of actors, rather than dyads like
@@ -961,18 +955,22 @@ transitive measures:
 transitivity(year_1_network)
 ```
 
-For our particular network, the value is 24.4% and is not too surprising
+For our particular network, a value of 24.4% and is not too surprising
 since this is at the start of the research study and given that there
 are a limited number of edges and given the rather low density of our
 network overall.
 
-#### 6. Diameter and Distance
+#### 6. Diameter & Distance
 
 Whereas transitivity focuses on the importance of certain configurations
 of triads, diameter and distance are more straightforward A network's
 diameter simply refers to the longest path between any two actors. A
 related measure is the average path length, which measures the mean
 distance between all pairs of actors in the network.
+
+The two functions for computing diameter and average path length are
+`diameter()` and `mean_distance()` respectively. Let's apply both of
+these to our `year_1_network` object:
 
 ```{r diameter_distance}
 
@@ -983,22 +981,50 @@ mean_distance(year_1_network)
 ```
 
 Carolan notes that both diameter and average path length are important
-network-level structural properties. Like our Year 1 network, he points
-out that a network with a large diameter and small average path length
-suggests a structure in which there are parts of the network that some
-network actors may be unable to access.
+network-level structural properties. Similar to diameter and distance
+measures for our Year 1 network above, he notes that a network with a
+large diameter and small average path length suggests a structure in
+which there are parts of the network that some network actors may be
+unable to access.
 
 ### 👉 Your Turn ⤵
+
+Use the code chunk below to calculate the following measures for the
+Year 3 collaboration newtwork, then answer the questions below:
+
+1.  Size
+2.  Centralization
+3.  Density
+4.  Reciprocity
+5.  Transitivity & Clustering
+6.  Diameter & Distance
 
 ```{r 3b_turn}
 #YOUR CODE HERE
 
+#size
+gorder(year_3_network)
+gsize(year_3_network)
 
+#cetnralization 
+centr_degree(year_3_network, mode = "all")
 
+#density
+edge_density(year_3_network)
+
+#reciprocity
+reciprocity(year_3_network)
+
+#transitivity
+transitivity(year_3_network)
+
+#diameter & distance 
+diameter(year_3_network)
+mean_distance(year_3_network)
 ```
 
 1.  How do network-level measures for Year 1 and Year 3 collaboration
-    compare?
+    compare? What are some similarities and differences?
 
     -   
 
@@ -1011,35 +1037,91 @@ network actors may be unable to access.
 ## 4. Model
 
 A developing area of network research of advanced statistical models and
-tools to examine network change over time. These models are use to
-empirically test not just if changes in key structure measures are
-statistically significant, but also explain potential mechanisms driving
-those changes.
-
-Two modeling techniques unique to network analysis and demonstrated in
-Chapter 9 of SNA and Education @carolan2014 are the quadratic assignment
-procedure (QAP) and Exponential Random Graph Models (ERGM):
-
--   **QAP/MR:** The quadratic assignment procedure (QAP) developed by
-    Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no
-    correlation between the two networks and adjusts for this dependence
-    between networks by repeatedly permuting the order of rows and
-    columns of one of the networks while keeping the other network
-    intact. The QAP is based on regression models and permutation tests
-    for valued (i.e., continuous) relational variables.
-
--   **P1 and P\* (P-Star):** Both of these models are some of the first
-    to make use of the ERGM, which provides a basis for comparing
-    whether a network's observed structural properties occur more
-    frequently than you could expect from chance alone. ERGMs can be
-    used to model ties in complete networks but do so in a manner that
-    explains the presence (or absence) of ties as a function of
-    individual-and/or network-level characteristics. While QAP and
-    MR-QAP procedures control for network structure through
-    permutations, these ERGMs attempt to explain it.
+tools to examine network change over time [@carolan2014]. These models
+are use to empirically test not just if changes in key structure
+measures are statistically significant, but also explain potential
+mechanisms driving those changes. Stochastic actor-based models, for
+example, are a family of models that have the purpose of representing
+network dynamics on the basis of observed longitudinal data. These
+stochastic actor-based models allow users to test hypotheses about these
+tendencies toward reciprocity, homophily, and transitivity over time and
+to estimate parameters expressing their strengths while controlling for
+other tendencies ("confounders").
 
 ### 👉 Your Turn ⤵
 
-Take a look at the
+Take a look at the article *The Ebb and Flow of Social Network Ties
+Between District Leaders Under High-Stakes Accountability* located in
+the lit folder of your files pane and answer the following questions:
+
+1.  What method(s) did Daly and Finnagan use in their longitudinal case
+    study to examine changes in reform-related knowledge, advice, and
+    innovation network structures?
+
+    -   
+
+2.  What findings about network changes (list 2-3) did you find most
+    interesting and why?
+
+    -   
 
 ## 5. Communicate
+
+The final step in our workflow/process is sharing the results of
+analysis with wider audience. Krumm et al. (2018) have outline the
+following 3-step process for communicating with education stakeholders
+what you have learned through analysis:
+
+1.  **Select.** Communicating what one has learned involves selecting
+    among those analyses that are most important and most useful to an
+    intended audience, as well as selecting a form for displaying that
+    information, such as a graph or table in static or interactive form,
+    i.e. a "data product."
+
+2.  **Polish**. After creating initial versions of data products,
+    research teams often spend time refining or polishing them, by
+    adding or editing titles, labels, and notations and by working with
+    colors and shapes to highlight key points.
+
+3.  **Narrate.** Writing a narrative to accompany the data products
+    involves, at a minimum, pairing a data product with its related
+    research question, describing how best to interpret the data
+    product, and explaining the ways in which the data product helps
+    answer the research question.
+
+### 👉 Your Turn ⤵
+
+For your final Your Turn, your goal is to distill our analysis from
+above into a simple "data product" designed to illustrate key findings
+about changes in the collaboration network over time.
+
+1.  **Select.** Select a several network-level measures that you think
+    would be interesting or relevant for our target audience and that
+    help answer our research questions.
+
+2.  **Polish.** Create and polish a data visualization and/or data table
+    to communicate your selected findings.
+
+3.  **Narrate.** Write a brief narrative (2-3 paragraphs) to accompany
+    your visualization and/or table that includes the following:
+
+    -   The question or questions are guiding your analysis;
+
+    -   The conclusions you've reached based on your analyses and
+        findings.
+
+    -   How your audience might use this information.
+
+    -   How you might revisit or improve upon this analysis in the
+        future.
+
+Use the code chunk below create a polished table or visualization(s) and
+write your narrative in the space that follows.
+
+#### Data Visualization or Table
+
+```{r}
+
+```
+
+#### Narrative 
