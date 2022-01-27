@@ -181,7 +181,7 @@ network matrices stored in excel files, this package will come in handy.
 Use the code chunk below to load the tidyverse, igraph, tidygraph,
 ggraph, and readxl packages that we'll be using in this case study:
 
-```{r libraries}
+```{r load_libraries}
 library(readxl)
 library(tidyverse)
 library(igraph)
@@ -246,7 +246,7 @@ column names, and assign the matrix to a variable named
 arguments section to examine the different arguments that can be used
 with this function.
 
-```{r import year }
+```{r import_year_1 }
 
 year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx", 
                             col_names = FALSE)
@@ -255,7 +255,7 @@ year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx",
 Before importing our Year 3 file, let's quickly inspect the R object we
 just imported to see what we'll be working with.
 
-```{r year_1_view}
+```{r inspect_year_1}
 
 year_1_collaboration
 
@@ -273,7 +273,7 @@ Use the code chunk below to import the Year 3 collaboration network
 located in data folder of your R project and then inspect your newly
 created object to make sure it imported as expected.
 
-```{r year_3_import}
+```{r import_year_3}
 #YOUR CODE HERE
 
 year_3_collaboration <- read_excel("data/year_3_collaboration.xlsx", 
@@ -313,7 +313,7 @@ use newer function or our code will some day stop working.
 Again, let quickly inspect our `year_1_collaboration` data table to see
 if this worked:
 
-```{r}
+```{r inspect_names}
 year_1_collaboration
 ```
 
@@ -332,7 +332,7 @@ convert our data table, or tibble, to a formal matrix class object. To
 do so is relatively simple using the `as.matrix()` function built into
 R.
 
-```{r as_matrix}
+```{r convert_to_matrix}
 
 year_1_matrix <- as.matrix(year_1_collaboration )
 
@@ -349,7 +349,7 @@ properties or methods that are common to all objects of one type.
 Let's use the `class()` function on the `year_1_collaboration` and
 `year_1_matrix` to see the types of objects we just created:
 
-```{r object_class}
+```{r get_class}
 
 class(year_1_collaboration)
 
@@ -373,7 +373,7 @@ such as matrices,
 Run the following code to convert our matrix to directed network graph
 and save as a new object called `year_1_network`:
 
-```{r}
+```{r convert_to_graph}
 
 year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
 
@@ -381,7 +381,7 @@ year_1_network <- as_tbl_graph(year_1_matrix, directed = TRUE)
 
 Again, let's inspect our new object:
 
-```{r year_1_network}
+```{r inspect_network}
 
 year_1_network
 
@@ -411,7 +411,7 @@ earlier:
 4.  Inspect the Year 3 collaboration network and answer the questions
     after the code chunk.
 
-```{r}
+```{r wrangle_year_3}
 #YOUR CODE HERE
 
 rownames(year_3_collaboration) <- 1:43
@@ -498,7 +498,7 @@ and edges in our network.
 Let's supply our `year-1-network` object as the first argument of this
 function and see what it produces:
 
-```{r plot}
+```{r plot_network}
 
 plot(year_1_network)
 
@@ -549,7 +549,7 @@ to get a quick snapshot of your network. Run the following code
 supplying our `year_1_network` object as the first argument for this
 function:
 
-```{r autograph}
+```{r autograph_network}
 
 autograph(year_1_network)
 
@@ -567,7 +567,7 @@ central actors.
 Let generate the same basic plot above but explicitly call our ggraph,
 node, and edge functions:
 
-```{r}
+```{r year_1_sociogram}
 
 ggraph(year_1_network) +
   geom_node_point() +
@@ -592,7 +592,7 @@ changes: Run the following code to:
 
 -   Add the `theme_graph()` layer to remove the gray background.
 
-```{r}
+```{r modify_sociogram}
 
 ggraph(year_1_network, layout = "fr") +
   geom_node_point(size = 3) +
@@ -677,7 +677,7 @@ Run the following code chunk to use the
 [`gsize()`](https://igraph.org/r/html/latest/gsize.html) functions
 obtain the number of vertices and edges respectively:
 
-```{r size}
+```{r compute_size}
 
 gorder(year_1_network)
 
@@ -709,7 +709,7 @@ selected, as well as the degree for each actors in the network. Let's
 first take a look at the centralization measure based on number of
 actors individuals have ties with regardless of directionality:
 
-```{r}
+```{r compute_centrality}
 centr_degree(year_1_network, mode = "all")
 ```
 
@@ -724,7 +724,7 @@ on the number of vertices.
 Let's also take a quick look at centralization scores for in-degree and
 out-degree:
 
-```{r}
+```{r compute_degrees}
 centr_degree(year_1_network, mode = "out")
 centr_degree(year_1_network, mode = "in")
 ```
@@ -752,7 +752,7 @@ Run the following code to add each actor's degree to our Year 1
 collaboration network and assign the output `year_1_network` again so
 the results are saved:
 
-```{r node_degree}
+```{r compute_node_degree}
 year_1_network <- year_1_network |>
   activate(nodes) |>
   mutate(degree = centrality_degree(mode = "all"))
@@ -765,7 +765,7 @@ Now we could adjust the size of more central actors in our sociogram
 from above like so to highlight the full range of collaboration ties in
 our network:
 
-```{r}
+```{r udpate_sociogram}
 ggraph(year_1_network) +
   geom_node_point(aes(size = degree, color = degree)) +
   geom_edge_link(aes(color = weight)) +
@@ -791,7 +791,7 @@ but both yield the exact same result. The `edge_density()` function is
 the more recent function and should be used, but let's try them both
 out:
 
-```{r}
+```{r compute_density}
 
 edge_density(year_1_network)
 
@@ -820,7 +820,7 @@ mutually linked**. Using the
 [`reciprocity()`](https://igraph.org/r/html/latest/reciprocity.html)
 function, we can directly calculate this measure:
 
-```{r reciprocity}
+```{r compute_reciprocity}
 
 reciprocity(year_1_network)
 ```
@@ -835,7 +835,7 @@ visual, we could use the
 function to create a new edge variable called `reciprocated` that
 indicates whether the tie is mutual or asymmetric.
 
-```{r}
+```{r flag_mutual_dyads}
 
 year_1_network <- year_1_network |>
   activate(edges) |>
@@ -850,7 +850,7 @@ reciprocated, but the tie between 3 and 24 is not.
 Let's now add this new variable to our sociogram to highlight
 reciprocated ties in our Year 1 network:
 
-```{r}
+```{r add_reciprocated_ties}
 ggraph(year_1_network) +
   geom_node_point(aes(size = degree)) +
   geom_edge_link(aes(color = reciprocated)) +
@@ -889,7 +889,7 @@ The
 function provides a convenient means to calculate a network-level
 transitive measures:
 
-```{r transitivity}
+```{r compute_transitivity}
 
 transitivity(year_1_network)
 ```
@@ -910,7 +910,7 @@ The two functions for computing diameter and average path length are
 `diameter()` and `mean_distance()` respectively. Let's apply both of
 these to our `year_1_network` object:
 
-```{r diameter_distance}
+```{r compute_diameter}
 
 diameter(year_1_network)
 
@@ -937,7 +937,7 @@ Year 3 collaboration newtwork, then answer the questions below:
 5.  Transitivity & Clustering
 6.  Diameter & Distance
 
-```{r 3b_turn}
+```{r analyze_year_3}
 #YOUR CODE HERE
 
 #size
@@ -1061,7 +1061,7 @@ write a brief narrative in the space that follows.
 
 #### Data Visualization or Table
 
-```{r}
+```{r create_data_product}
 # YOUR CODE HERE
 ```
 
