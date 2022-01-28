@@ -83,7 +83,7 @@ xaringanExtra::use_tile_view()
 
 
 ---
-# SHOWING YOUR CODE
+# Showing Your Code
 ```{r example-code, echo=TRUE}
 example <- sum(0:9)
 print(example)
