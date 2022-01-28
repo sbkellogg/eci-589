@@ -108,14 +108,14 @@ a:hover { border-bottom: none; }
 
 .remark-slide-content {
   background-color: var(--wolfpack-white);
-  border-top: 80px solid var(--reynolds-red);
+  border-top: 80px solid var(--wolfpack-red);
   font-size: 30px; /* change default text size here*/
   font-weight: 300;
   line-height: 1.5;
   padding: 1em 2em 1em 2em;
-  background-image: url(../img/ncstate_logo.png); /*alternatively can be ncstate-text.png */
+  background-image: url(../img/fi-logo.png); /*alternatively can be ncstate-text.png */
   background-position: 95% 95%; 
-  background-size: 15%;
+  background-size: 25%;
 }
 
 .title-slide .inverse .remark-slide-content {
@@ -146,7 +146,7 @@ a:hover { border-bottom: none; }
   float: right;
   width: 50%;
   text-align: right;
-  color: var(--reynolds-red);
+  color: var(--wolfpack-red);
 }
 
 /* Removes colored bar from top of the slide resulting in a clear slide */
@@ -156,7 +156,7 @@ a:hover { border-bottom: none; }
 
 h1 {
   font-weight: normal;
-  margin-top: -95px;
+  margin-top: -100px;
   margin-left: -00px;
   color: var(--wolfpack-white);
 }
@@ -198,7 +198,7 @@ h2, h3, h4 {
 }
 
 .title-slide h1  {
-  color: var(--reynolds-red);
+  color: var(--wolfpack-red);
   font-size: 40px;
   text-shadow: none;
   font-weight: 400;
@@ -230,8 +230,8 @@ hr, .title-slide h2::after, .mline h1::after {
   content: '';
   display: block;
   border: none;
-  background-color: var(--hunt-yellow);
-  color: var(--hunt-yellow);
+  background-color: var(--wolfpack-black);
+  color: var(--wolfpack-black);
   height: 1px;
 }
 
@@ -408,7 +408,7 @@ hr, .mline h1::after {
 
 .remark-slide-number .progress-bar {
   height: 100%;
-  background-color: var(--reynolds-red);
+  background-color: var(--wolfpack-red);
 }
 
 /*-- 3 column layout --*/
