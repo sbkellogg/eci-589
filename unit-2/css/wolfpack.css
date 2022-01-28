@@ -199,12 +199,12 @@ h2, h3, h4 {
 
 .title-slide h1  {
   color: var(--wolfpack-red);
-  font-size: 40px;
+  font-size: 50px;
   text-shadow: none;
   font-weight: 400;
   text-align: left;
   margin-left: 15px;
-  padding-top: 80px;
+  padding-top: -100px;
 }
 .title-slide h2  {
   margin-top: -25px;
@@ -236,7 +236,7 @@ hr, .title-slide h2::after, .mline h1::after {
 }
 
 hr, .mline h1::after {
-  margin: 1em 15px 0 15px;
+  margin: -1em 15px 0 15px;
 }
 
 .title-slide h2::after {
