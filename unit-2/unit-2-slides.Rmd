@@ -1,7 +1,7 @@
 ---
   title: "Unit 2: Data Management & Measurement"
   subtitle: "df"
-  author: "**Dr. Shaun Kellogg**, Author Two, Author Three"
+  author: "**Dr. Shaun Kellogg**"
   institute: "df"
   date: '`r format(Sys.time(), "%B %d, %Y")`'
   output:
@@ -65,19 +65,25 @@ xaringanExtra::use_tile_view()
 
 .pull-left[
 ## Conceptual Overview
-- One bullet.
-- Another bullet.
+- Data Collection
+- Data Management
+- Network Measurement
 ]
 
 .pull-right[
-## R Studio Demo
-- The {igraph} Package 
-- `test code` 
-
+## R Code-Along
+- The {igraph} package
+- The {tidygraph} package
+- other 
 ]
 
+
 ---
-# SHOWING YOUR CODE
+# New Slide
+
+
+---
+# Showing Your Code
 ```{r example-code, echo=TRUE}
 example <- sum(0:9)
 print(example)
@@ -108,25 +114,8 @@ This is an inverse slide example!
 Four dashes puts a horizontal line on the slide to divide content.
 
 ---
-class: inverse, clear, center
+class: clear, center
 
 ## .font130[.center[**Thank you!**]]
-
-.left-col[
-.center[<img style="border-radius: 50%;" src="img/author1.jpeg" height="120px"/><br/>**First Author**<br/><mailto:author1@email.com>]
-]
-.center-col[
-.center[<img style="border-radius: 50%;" src="img/author2.jpeg" height="120px"/><br/>**Second Author**<br/><mailto:author2@email.com>]
-]
-.right-col[
-.center[<img style="border-radius: 50%;" src="img/author3.jpeg" height="120px"/><br/>**Third Author**<br/><mailto:author3@email.com>]
-]
-<br/><br/><br/><br/><br/>
-
-.pull-left-narrow[<br/>.center[<img style="border-radius: 50%;" src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo.png" height="100px"/> ]]
-
-.pull-right-wide[
-.left[.font70[
-This work was supported by countless cups of hot tea, cookies, and the RStats Xaringan community willingness to post of plethora of tutorials. But you may wish to thank your funding agency (e.g., the National Science Foundation) and put their logo on the left as shown here.
-]]
-]
+<br/>
+.center[<img style="border-radius: 80%;" src="img/kellogg.jpeg" height="200px"/><br/>**Dr. Shaun Kellogg**<br/><mailto:sbkellog@ncsu.edu>]
