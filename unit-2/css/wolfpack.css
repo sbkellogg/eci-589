@@ -149,6 +149,14 @@ a:hover { border-bottom: none; }
   color: var(--wolfpack-red);
 }
 
+
+.footnote {
+    position: absolute;
+    bottom: 1em;
+    padding-right: 4em;
+    font-size: 60%;
+}
+
 /* Removes colored bar from top of the slide resulting in a clear slide */
 .clear{
   border-top: 0px solid var(--wolfpack-white);
