@@ -4,7 +4,7 @@
     <title>Unit 2: Data Management &amp; Measurement</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Shaun Kellogg" />
-    <meta name="date" content="2022-01-29" />
+    <meta name="date" content="2022-01-30" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
@@ -37,7 +37,7 @@ class: clear, title-slide, inverse, center, top, middle
 # Unit 2: Data Management &amp; Measurement
 ----
 ### **Dr. Shaun Kellogg**
-### January 29, 2022
+### January 30, 2022
 
 ---
 # Agenda
@@ -76,16 +76,22 @@ class: clear, inverse, middle, center
 Network Measures
 
 ---
-# Guiding Literature
+# Literature Review
 
 .panelset[
 
 .panel[.panel-name[Context]
 
-.pull-left[This longitudinal case study draws upon SNA to **examine the reform-related knowledge, advice, and innovation network structures of central office and site leaders** in a district facing sanction for underperformance and engaging a districtwide reform.]
+.pull-left[
 
-.pull-right[.center[&lt;img src="img/daly-net.jpeg" height="320px"/&gt;]]
+This longitudinal case study **examines reform-related knowledge, advice, and innovation network structures** among administrators in a districcde fg
+t sanction for under-performance and engaging a districtwide reform.
+]
 
+.pull-right[
+
+.center[&lt;img src="img/daly-net.jpeg" height="320px"/&gt;]
+]
 
 ]
 
@@ -97,7 +103,15 @@ This study involves quantifying and graphically displaying the ties and overall 
 2. How do district and school leaders perceive the evolution of the social networks and its effect on the exchange of reform-related resources within the district?
 ]
 
-.panel[.panel-name[Findings]
+.panel[.panel-name[Data]
+To answer RQ1, Daly and Finnigan administered **online survey consisting of network relations and demographic questions** asking participants to:
+- select the administrators in the La Estasis network that you go to for knowledge
+- to assess their relationships on a 5-point interaction scale ranging from 1 (no interaction) to 5 (1 to 2 times a week).
+- 
+
+]
+
+.panel[.panel-name[Key Findings]
 
 Findings indicate that over time, the networks **increased the number of superficial interactions**, but more frequent exchanges remained unchanged, resulting in a centralized network structure.
 ]
@@ -113,7 +127,7 @@ Daly, A. et al. (2011). The ebb and flow of social network ties between district
 ]
 
 ---
-# Packages
+# Load Packages
 
 .panelset[
 
@@ -134,17 +148,16 @@ library(ggraph)
 
 .panel[.panel-name[igraph 📦]
 
-The {igraph} package and its collection of network analysis tools provide:
+The {igraph} &lt;img src="img/igraph.png" height="40px"/&gt; package and its collection of network analysis tools provide:
 
-1. pain-free implementation of graph algorithms,
+1. pain-free implementation of graph algorithms, 
+1. 
 1. fast handling of large graphs, with millions of vertices and edges, and
-1. rapid prototyping via high level languages like R.
 
-Both {tidygraph} and {ggraph} depend heavily on the {igraph} package. 
-
-
+Both {tidygraph} and {ggraph} used in the previous unit and this unit depend heavily on the {igraph} package. 
 
 ]
+
 
 .panel[.panel-name[Your Turn]
 
@@ -153,9 +166,66 @@ Load the {igraph} package.
 
 
 
+```r
+# YOUR CODE HERE
+```
+
 ]
 
 ]
+
+---
+
+# Import Data   
+
+.panelset[
+
+.panel[.panel-name[Import Data]
+
+Let's import two Excel files from the Social Network Analysis and Education companion site. year_1_collaboration.xlsx 
+
+
+```r
+year_1_collaboration &lt;- read_excel("data/year_1_collaboration.xlsx", 
+                                   col_names = FALSE)
+```
+
+
+]
+
+.panel[.panel-name[Inspect Data]
+
+In the corresponding line of your R script, take a look at the data file we just imported:
+
+
+```r
+# ADD CODE BELOW
+#
+#
+```
+
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below and be prepared to share your response:              
+
+1. What type of data structure is used to store this network data? 
+1. What do you think the rows and columns represent? what about the values in each cell?  
+1. 
+
+]
+
+.panel[.panel-name[Answer]
+
+- This adjacency matrix reports on **"collaboration" ties among 43 school leaders** in year 1 of a three-year study. 
+
+- This is **a directed valued (weighted) network** measured on five-point scale ranging from 0 to 4, with higher values indicating more frequent collaborations (1–2 times/week).
+]
+]
+
+
 
 ---
 
@@ -165,15 +235,19 @@ Load the {igraph} package.
 
 .panel[.panel-name[Definition]
 
-TM has been largely used to **evaluate academic  performance** in different contexts, especially to assess essays and online assignments.
-
-- writing style
-- use of argumentation
-- plagiarism detection
-- peer interaction
+.pull-left[ In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.
 ]
 
-.panel[.panel-name[Applications]
+.pull-right[ .center[&lt;img src="img/density.jpeg" height="150px"/&gt;
+
+Which of these two networks has a higher density?
+]
+ 
+]
+
+]
+
+.panel[.panel-name[Significance]
 To help improve performance, TM is used to  **provide student feedback**, often based on both their interactions and activities 
 
 - Intelligent Tutoring Systems
@@ -206,42 +280,35 @@ Other applications of text mining in STEM Ed Research include:
 
 
 ---
-# Showing Your Code
+class: clear, wolfhead
 
-```r
-example &lt;- sum(0:9)
-print(example)
-```
-
-```
-## [1] 45
-```
-
-```r
-# adding #&lt;&lt; after a line of code highlights it like this 
-*alphabet &lt;- letters
-print(alphabet)
-```
-
-```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k"
-## [12] "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v"
-## [23] "w" "x" "y" "z"
-```
+.quote[In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.]
+.author[~ Network Density]
 
 
 ---
-class: clear, wolfhead
+# What's Next
 
-.quote[Education is the most powerful weapon which you can use to change the world.]
-.author[~ Nelson Mandela]
+.pull-left[
+## Readings &amp; Discussion
+
+- Collection
+- Management  
+- Quality  
+]
+
+.pull-right[
+## Case Study
+
+- Density
+- Centrality 
+- Reciprocity
+
+]
 
 
 
 
-----
-
-Four dashes puts a horizontal line on the slide to divide content.
 
 ---
 class: clear, center

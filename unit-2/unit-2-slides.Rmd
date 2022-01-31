@@ -97,16 +97,22 @@ class: clear, inverse, middle, center
 Network Measures
 
 ---
-# Guiding Literature
+# Literature Review
 
 .panelset[
 
 .panel[.panel-name[Context]
 
-.pull-left[This longitudinal case study draws upon SNA to **examine the reform-related knowledge, advice, and innovation network structures of central office and site leaders** in a district facing sanction for underperformance and engaging a districtwide reform.]
+.pull-left[
 
-.pull-right[.center[<img src="img/daly-net.jpeg" height="320px"/>]]
+This longitudinal case study **examines reform-related knowledge, advice, and innovation network structures** among administrators in a districcde fg
+t sanction for under-performance and engaging a districtwide reform.
+]
 
+.pull-right[
+
+.center[<img src="img/daly-net.jpeg" height="320px"/>]
+]
 
 ]
 
@@ -118,7 +124,15 @@ This study involves quantifying and graphically displaying the ties and overall 
 2. How do district and school leaders perceive the evolution of the social networks and its effect on the exchange of reform-related resources within the district?
 ]
 
-.panel[.panel-name[Findings]
+.panel[.panel-name[Data]
+To answer RQ1, Daly and Finnigan administered **online survey consisting of network relations and demographic questions** asking participants to:
+- select the administrators in the La Estasis network that you go to for knowledge
+- to assess their relationships on a 5-point interaction scale ranging from 1 (no interaction) to 5 (1 to 2 times a week).
+- 
+
+]
+
+.panel[.panel-name[Key Findings]
 
 Findings indicate that over time, the networks **increased the number of superficial interactions**, but more frequent exchanges remained unchanged, resulting in a centralized network structure.
 ]
@@ -134,7 +148,7 @@ Daly, A. et al. (2011). The ebb and flow of social network ties between district
 ]
 
 ---
-# Packages
+# Load Packages
 
 .panelset[
 
@@ -142,7 +156,7 @@ Daly, A. et al. (2011). The ebb and flow of social network ties between district
 
 Let's start by loading the following packages introduced in previous units:          
 
-```{r load-libraries, message=TRUE, echo=TRUE}
+```{r load-libraries, message=TRUE, echo=TRUE, message=FALSE}
 library(readxl)
 library(tidyverse)
 library(tidygraph)
@@ -154,17 +168,16 @@ library(ggraph)
 
 .panel[.panel-name[igraph 📦]
 
-The {igraph} package and its collection of network analysis tools provide:
+The {igraph} <img src="img/igraph.png" height="40px"/> package and its collection of network analysis tools provide:
 
-1. pain-free implementation of graph algorithms,
+1. pain-free implementation of graph algorithms, 
+1. 
 1. fast handling of large graphs, with millions of vertices and edges, and
-1. rapid prototyping via high level languages like R.
 
-Both {tidygraph} and {ggraph} depend heavily on the {igraph} package. 
-
-
+Both {tidygraph} and {ggraph} used in the previous unit and this unit depend heavily on the {igraph} package. 
 
 ]
+
 
 .panel[.panel-name[Your Turn]
 
@@ -174,10 +187,67 @@ Load the {igraph} package.
 library(igraph)
 ```
 
+```{r load-igraph, echo=TRUE}
+# YOUR CODE HERE
+
+
+```
 
 ]
 
 ]
+
+---
+
+# Import Data   
+
+.panelset[
+
+.panel[.panel-name[Import Data]
+
+Let's import two Excel files from the Social Network Analysis and Education companion site. year_1_collaboration.xlsx 
+
+```{r import-data, echo=TRUE, message=FALSE}
+year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx", 
+                                   col_names = FALSE)
+```
+
+
+]
+
+.panel[.panel-name[Inspect Data]
+
+In the corresponding line of your R script, take a look at the data file we just imported:
+
+```{r inspect-data, echo=TRUE}
+# ADD CODE BELOW
+#
+#
+
+```
+
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below and be prepared to share your response:              
+
+1. What type of data structure is used to store this network data? 
+1. What do you think the rows and columns represent? what about the values in each cell?  
+1. 
+
+]
+
+.panel[.panel-name[Answer]
+
+- This adjacency matrix reports on **"collaboration" ties among 43 school leaders** in year 1 of a three-year study. 
+
+- This is **a directed valued (weighted) network** measured on five-point scale ranging from 0 to 4, with higher values indicating more frequent collaborations (1–2 times/week).
+]
+]
+
+
 
 ---
 
@@ -187,15 +257,19 @@ library(igraph)
 
 .panel[.panel-name[Definition]
 
-TM has been largely used to **evaluate academic  performance** in different contexts, especially to assess essays and online assignments.
-
-- writing style
-- use of argumentation
-- plagiarism detection
-- peer interaction
+.pull-left[ In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.
 ]
 
-.panel[.panel-name[Applications]
+.pull-right[ .center[<img src="img/density.jpeg" height="150px"/>
+
+Which of these two networks has a higher density?
+]
+ 
+]
+
+]
+
+.panel[.panel-name[Significance]
 To help improve performance, TM is used to  **provide student feedback**, often based on both their interactions and activities 
 
 - Intelligent Tutoring Systems
@@ -228,29 +302,35 @@ Other applications of text mining in STEM Ed Research include:
 
 
 ---
-# Showing Your Code
-```{r example-code, echo=TRUE}
-example <- sum(0:9)
-print(example)
+class: clear, wolfhead
 
-# adding #<< after a line of code highlights it like this 
-alphabet <- letters #<<
-print(alphabet)
-```
+.quote[In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.]
+.author[~ Network Density]
 
 
 ---
-class: clear, wolfhead
+# What's Next
 
-.quote[Education is the most powerful weapon which you can use to change the world.]
-.author[~ Nelson Mandela]
+.pull-left[
+## Readings & Discussion
+
+- Collection
+- Management  
+- Quality  
+]
+
+.pull-right[
+## Case Study
+
+- Density
+- Centrality 
+- Reciprocity
+
+]
 
 
 
 
-----
-
-Four dashes puts a horizontal line on the slide to divide content.
 
 ---
 class: clear, center
