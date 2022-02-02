@@ -4,11 +4,7 @@
     <title>Unit 2: Data Management &amp; Measurement</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Shaun Kellogg" />
-<<<<<<< HEAD
     <meta name="date" content="2022-02-02" />
-=======
-    <meta name="date" content="2022-01-31" />
->>>>>>> 60eb5f531a261250086125f9f243d7f6e3c8216b
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
@@ -41,11 +37,7 @@ class: clear, title-slide, inverse, center, top, middle
 # Unit 2: Data Management &amp; Measurement
 ----
 ### **Dr. Shaun Kellogg**
-<<<<<<< HEAD
 ### February 02, 2022
-=======
-### January 31, 2022
->>>>>>> 60eb5f531a261250086125f9f243d7f6e3c8216b
 
 ---
 # Agenda
@@ -383,12 +375,16 @@ For better or worse, **dense networks reinforce prevailing norms** and behaviors
 ]
 
 .panel[.panel-name[Implementation]
-The {igraph} package has a simple `edge_density()` function for calculating network density. Let's apply to our `year_1_network`:
 
+.pull-left[
+The {igraph} package has a simple `edge_density()` function for calculating network density. 
+
+Let's apply to our `year_1_network`:]
+
+.pull-right[
 
 ```r
-centr_degree(year_1_network, 
-             mode = "all")
+centr_degree(year_1_network, mode = "all")
 ```
 
 ```
@@ -405,6 +401,7 @@ centr_degree(year_1_network,
 ```
 
 How would you interpret this measure?
+]
 ]
 
 .panel[.panel-name[Discuss]

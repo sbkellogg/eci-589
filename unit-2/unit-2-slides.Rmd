@@ -396,14 +396,19 @@ For better or worse, **dense networks reinforce prevailing norms** and behaviors
 ]
 
 .panel[.panel-name[Implementation]
-The {igraph} package has a simple `edge_density()` function for calculating network density. Let's apply to our `year_1_network`:
 
+.pull-left[
+The {igraph} package has a simple `edge_density()` function for calculating network density. 
+
+Let's apply to our `year_1_network`:]
+
+.pull-right[
 ```{r centrality, echo=TRUE}
-centr_degree(year_1_network, 
-             mode = "all")
+centr_degree(year_1_network, mode = "all")
 ```
 
 How would you interpret this measure?
+]
 ]
 
 .panel[.panel-name[Discuss]
