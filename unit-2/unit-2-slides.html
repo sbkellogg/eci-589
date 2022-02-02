@@ -4,7 +4,7 @@
     <title>Unit 2: Data Management &amp; Measurement</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Shaun Kellogg" />
-    <meta name="date" content="2022-01-30" />
+    <meta name="date" content="2022-02-02" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
@@ -37,7 +37,7 @@ class: clear, title-slide, inverse, center, top, middle
 # Unit 2: Data Management &amp; Measurement
 ----
 ### **Dr. Shaun Kellogg**
-### January 30, 2022
+### February 02, 2022
 
 ---
 # Agenda
@@ -225,6 +225,61 @@ Think about the questions below and be prepared to share your response:
 ]
 ]
 
+---
+# Wrangle Data  
+
+.panelset[
+
+.panel[.panel-name[Convert Matrix]
+
+Before we can begin analyzing our network data in R, we need to convert to a network class R object. Run the following code in your R script:
+
+
+```r
+year_1_matrix &lt;- as.matrix(year_1_collaboration)
+
+rownames(year_1_matrix) &lt;- 1:43
+
+colnames(year_1_matrix) &lt;- 1:43
+
+
+year_1_network &lt;- as_tbl_graph(year_1_matrix, directed = TRUE)
+```
+
+
+]
+
+.panel[.panel-name[View Network]
+
+In the corresponding line of your R script, type the name of network object we just created and run the code:
+
+
+```r
+# ADD CODE BELOW
+#
+#
+```
+
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below and be prepared to share your response:              
+
+1. What size of the Year 1 collaborationnetwork?
+1. What else do you notice about this network?
+1. What questions do have about this network?
+]
+
+.panel[.panel-name[Extra]
+
+- This adjacency matrix reports on **"collaboration" ties among 43 school leaders** in year 1 of a three-year study. 
+
+- This is **a directed valued (weighted) network** measured on five-point scale ranging from 0 to 4, with higher values indicating more frequent collaborations (1–2 times/week).
+]
+]
+
 
 
 ---
@@ -235,7 +290,7 @@ Think about the questions below and be prepared to share your response:
 
 .panel[.panel-name[Definition]
 
-.pull-left[ In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.
+.pull-left[ In its simplest form,  network density is **the ratio of existing ties in a network to all possible ties** that could potentially exist, regardless of whether they do.
 ]
 
 .pull-right[ .center[&lt;img src="img/density.jpeg" height="150px"/&gt;
@@ -248,38 +303,122 @@ Which of these two networks has a higher density?
 ]
 
 .panel[.panel-name[Significance]
-To help improve performance, TM is used to  **provide student feedback**, often based on both their interactions and activities 
+In education, dense networks have been associated with:   
+- healthy learning communities   
+- other
+- other
 
-- Intelligent Tutoring Systems
-- Question-answering applications
-- Assist teacher  feedback
-- Support formative feedback
+For better or worse, **dense networks reinforce prevailing norms** and behaviors and insulate one from outside influences (Carolan, 2011). 
 
 ]
 
 .panel[.panel-name[Implementation]
-TM has been applied to **support student engagement and collaboration**, especially in distance learning courses. 
+The {igraph} package has a simple `edge_density()` function for calculating network density. Let's apply to our `year_1_network`:
 
-- Automated writing scaffolds
-- Analysis of interactional resources
-- Student sentiment extraction
-- Dropout prevention
+
+```r
+edge_density(year_1_network)
+```
+
+```
+## [1] 0.04540421
+```
+
+How would you interpret this measure?
 ]
 
-.panel[.panel-name[Your Turn]
-Other applications of text mining in STEM Ed Research include: 
-- Automatic text summarization
-- Analytics &amp; visualization tools
-- Curriculum adaptation
-- Recommendation systems
+.panel[.panel-name[Discuss]
+
+.pull-left[We know there 82 edges in the Year 1 network (pictured right), but **how many possible edges** could there be?   
+
+**Hint**: The number of all possible edges in a directed network is V(V-1) where V is the # of vertices.
+
+&lt;!-- How many possible edges if this were an undirect network? --&gt;
+] 
+
+.pull-right[
+![](unit-2-slides_files/figure-html/examine-density-1.png)&lt;!-- --&gt;
 ]
-
-
+]
 ]
 
 
 
 ---
+
+# Network Centralization 
+
+.panelset[
+
+.panel[.panel-name[Definition]
+
+.pull-left[A key structural property of complete networks is the concept of centralization, or **the extent to which relations are focused on one or a small set of actors**. 
+]
+
+.pull-right[ .center[&lt;img src="img/density.jpeg" height="150px"/&gt;
+
+Which of these two networks is more centralized?
+]
+ 
+]
+
+]
+
+.panel[.panel-name[Significance]
+In education, dense networks have been associated with:   
+- healthy learning communities   
+- other
+- other
+
+For better or worse, **dense networks reinforce prevailing norms** and behaviors and insulate one from outside influences (Carolan, 2011). 
+
+]
+
+.panel[.panel-name[Implementation]
+The {igraph} package has a simple `edge_density()` function for calculating network density. Let's apply to our `year_1_network`:
+
+
+```r
+centr_degree(year_1_network, 
+             mode = "all")
+```
+
+```
+## $res
+##  [1] 5 0 5 3 3 3 4 8 4 7 4 1 0 4 4 3 2
+## [18] 5 4 4 5 4 3 6 4 4 4 3 8 4 4 3 3 6
+## [35] 3 3 4 3 6 2 3 4 2
+## 
+## $centralization
+## [1] 0.05102041
+## 
+## $theoretical_max
+## [1] 3528
+```
+
+How would you interpret this measure?
+]
+
+.panel[.panel-name[Discuss]
+
+.pull-left[We know there 82 edges in the Year 1 network (pictured right), but **how many possible edges** could there be?   
+
+**Hint**: The number of all possible edges in a directed network is V(V-1) where V is the # of vertices.
+
+&lt;!-- How many possible edges if this were an undirect network? --&gt;
+] 
+
+.pull-right[
+![](unit-2-slides_files/figure-html/examine-centrality-1.png)&lt;!-- --&gt;
+]
+]
+]
+
+---
+
+
+
+
 class: clear, wolfhead
 
 .quote[In its simplest form,  network density is **the proportion of existing ties in network to all possible ties** that could potentially exist, regardless of whether they do.]
