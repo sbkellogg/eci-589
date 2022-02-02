@@ -183,7 +183,7 @@ Both {tidygraph} and {ggraph} used in the previous unit and this unit depend hea
 
 Load the {igraph} package.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(igraph)
 ```
 
