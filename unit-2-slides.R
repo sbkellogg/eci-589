@@ -60,7 +60,7 @@ year_1_collaboration <- read_excel("data/year_1_collaboration.xlsx",
 
 year_1_matrix <- as.matrix(year_1_collaboration)
 
-rownames(year_1_matrix) <- 1:43
+rownames(year_1_matrix) <- 1:43 
 
 colnames(year_1_matrix) <- 1:43
 
