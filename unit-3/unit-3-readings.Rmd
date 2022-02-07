@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Overview
 
 Our primary goal in this unit is to examine the use of different
-algorithms to identify a network's groups and position of individuals
-within the network. The required and self-selected readings introduce
-both "top-down" and "bottom-up" approaches through which groups are
+algorithms to analyze a network's groups, positions and individual
+actors. The required and self-selected readings introduce both
+"top-down" and "bottom-up" approaches through which groups are
 identified, as well as ways in which properties of ego networks are
 conceptualized and measured.
 
