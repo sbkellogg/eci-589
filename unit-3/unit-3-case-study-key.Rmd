@@ -11,6 +11,7 @@ output:
 editor_options:
   markdown:
     wrap: 72
+bibliography: lit/references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -19,45 +20,47 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. PREPARE
 
-This week, our focus will be on preparing relational data for analysis,
-putting together some basic network descriptives, and plotting a network
-visualization to help illustrate key findings.
-
-Specifically, the Unit 1 Walkthrough will cover the following topics:
+The primary goal in this case study is to examine the use of different
+algorithms to analyze a network's groups and individual actors. Using an
+open educational dataset prepared by Kellogg and Edelman
+\[@kellogg2015massively\], we'll explore both "top-down" and "bottom-up"
+approaches through which groups are identified, as well as node-level
+measures of centrality to identify key actors. Specifically, the Unit 3
+case study will cover the following topics:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
-    from which our data came, formulate some research questions, and
-    load some by now familiar R packages for network analysis.
+    from which our data came, formulate some research questions to guide
+    our analysis, and load some by now familiar R packages for network
+    analysis.
 
 2.  **Wrangle**: Wrangling data entails the work of manipulating,
     cleaning, transforming, and merging data. In section 2 we focus on
-    importing network data, converting our familiar data frames into a
-    network object that can be analyzed and graphed, and learn about
-    "simple graphs."
+    importing network data, and converting edge and node lists into a
+    network object that can be analyzed and graphed.
 
 3.  **Explore**: In section 3, we calculate some basic network
     descriptives and learn how to illustrate some of these stats through
     network visualization.
 
 4.  **Model**: While we won't dig into approaches for modeling network
-    data until Unit 3, we will take a quick look at some approaches used
-    in the study guiding this walkthrough.
+    data until Unit 4, we will take a quick look at some approaches used
+    in the research article guiding this study.
 
-5.  **Communicate**: We'll learn more about communicating key findings
-    next week, but for now you will be introduced to the basic
-    components of a data product.
+5.  **Communicate**: Finally, you'll prepare a simple "data product"
+    consisting of a data visualization and/or table that highlights some
+    key findings from our analysis.
 
 ### 1a. Review the Research
 
 In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education),
-Carolyn (2013) notes that:
+Carolan (2013) notes that:
 
 > the **social network perspective** is one concerned with the structure
 > of relations and the implication this structure has on individual or
 > group behavior and attitudes
 
-More specifically, Carolyn cites the following four features used by
+More specifically, Carolan cites the following four features used by
 Freeman (2004) to define the social network perspective:
 
 1.  Social network analysis is **motivated by a relational intuition**
@@ -71,12 +74,12 @@ Freeman (2004) to define the social network perspective:
 4.  It **relies** **on** **mathematical and/or computational models** to
     succinctly represent the complexity of social life.
 
-For Unit 1, our walkthrough will be guided by previous research and
-evaluation work conducted by the Friday Institute for Educational
-Innovation as part of the Massively Open Online Courses for Educators
-(MOOC-Ed) initiative. The study introduced next and the hands-on
-analysis with R in this walkthrough will help to illustrate these four
-defining features of the social network perspective.
+For Unit 3, our case study is guided by previous research and evaluation
+work conducted by the Friday Institute for Educational Innovation as
+part of the Massively Open Online Courses for Educators (MOOC-Ed)
+initiative. The study introduced next and the hands-on analysis with R
+in this case study will help to illustrate these four defining features
+of the social network perspective.
 
 #### A Social Network Perspective in MOOC-Eds
 
@@ -152,11 +155,12 @@ Take a quick look at the *Description of the Dataset* section from the
 dataset](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/bjet_12312_Rev.pdf)
 BJET article and the accompanying data sets stored on [Harvard
 Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB)
-that we'll be using for this walkthrough.
+that we'll be using for this case study.
 
 In the space below, type a brief response to the following questions:
 
-1.  What were some of the steps necessary to construct this dataset?
+1.  What were some of the steps necessary to construct the edges in this
+    dataset?
 
     -   
 
@@ -185,30 +189,25 @@ learning:
 3.  To what extent do these networks result in the co-construction of
     new knowledge?
 
-For Unit 3, our exploratory analysis is guided RQ1 from the original
+For Unit 3, our exploratory analysis is guided by RQ1 from the original
 study with an additional emphasis on examining groups and key actors
 that emerge in the discussion forums for the first and second
 implementation of the Digital Learning Transition MOOC-Eds.
-Specifically, for our case we're interested in the following questions:
+Specifically, for our case we're interested in the following questions
+examining groups and key actors:
 
-1.  To what extent does group development differ between the first and
-    second iteration of DLT 1 and DLT 2?
-2.  What are the common attributes, if any, of central actors in the DLT
-    1 & DLT 2 networks?
+1.  How many network components and cliques are in first and second
+    iteration of DLT 1 and DLT 2?
+2.  Which actors are central to each of these networks and what
+    attributes, if any, do they share?
 
 #### **👉 Your Turn** **⤵**
 
 Based on what you know about networks and the context so far, what other
-research questions might ask we ask in this context that a social
+research question(s) might ask we ask in this context that a social
 network perspective might be able to answer?
 
-In the space below, type a brief response to the following questions:
-
-\-
-
-We'll revisit your response towards the end and provide an opportunity
-to refine your research question after you know the data a little
-better.
+-   YOUR RESPONSE HERE
 
 ## 1c. Load Libraries
 
@@ -219,15 +218,6 @@ R](https://datascienceineducation.com/c06.html#c06p) (DSIEUR):
 > functions, data, and/or documentation. Packages increase the
 > functionality of R by providing access to additional functions to suit
 > a variety of needs.
-
-#### The Packages Pane
-
-You can always check to see which packages have already been installed
-and loaded into RStudio Cloud by looking at the the Files, Plots, &
-Packages Pane in the lower right hand corner of RStudio as shown in the
-following screenshot:
-
-![](img/packages-pane.png){width="90%"}
 
 You should see installed some familiar tidytext packages from our
 [Getting Started
@@ -245,11 +235,16 @@ install.packages("tidyverse")
 install.packages("igraph") 
 ```
 
-Let's go ahead and use the `library()` function for the {tidyverse}
-package and review which packages from the [tidyverse collection of
-packages](https://www.tidyverse.org) that this package also loads.
+#### **👉 Your Turn** **⤵**
 
-Click the green arrow to run the following code and load our packages:
+Use the `library()` function and the code chunk below and load the
+following packages:
+
+-   tidyverse
+-   igraph
+-   tidygraph
+-   ggraph
+-   janitor
 
 ```{r}
 library(tidyverse)
@@ -257,17 +252,15 @@ library(igraph)
 library(tidygraph)
 library(ggraph)
 library(skimr)
+library(janitor)
 ```
 
-#### **👉 Your Turn** **⤵**
+**RStudio Tip:** You can always check to see which packages have already
+been installed and loaded into RStudio Cloud by looking at the the
+Files, Plots, & Packages Pane in the lower right hand corner of RStudio
+as shown in the following screenshot:
 
-Take a look at the messages from the output after loading the igraph
-library. What tidyverse packages share identically named functions with
-igraph?
-
-Write your response in the space below.
-
--   Bb
+![](img/packages-pane.png){width="90%"}
 
 ## 2. WRANGLE
 
@@ -287,12 +280,8 @@ a.  **Import Data**. An obvious and also important first step, we need
     and node attribute files.
 
 b.  **Create a Network Object**. Before performing network analyses,
-    we'll need to convert our data frames into special data format for
+    we'll need to convert our data frames into a graph object for
     working with relational data.
-
-c.  **Simplify Network**. Finally, we'll learn about a handy
-    `simplify()` function in the {igraph} package for collapsing
-    multiple ties between actors and removing "self-loops."
 
 ### 2a. Import Data
 
@@ -306,18 +295,17 @@ many files types.
 Take a look in the `/data` folder in your Files pane. You should see the
 following .csv files:
 
--   `dlt1-edgelist.csv`
+-   `dlt1-edges.csv`
 
 -   `dlt1-nodes.csv`
 
-As its name implies, the first file `dlt1-edgelist.csv` is an edge-list
-that contains information about each tie, or relation between two actors
-in a network. In this context, a "tie" is a reply by one participant in
-the discussion forum to the post of another participant -- or in some
-cases to their own post! These ties between a single actor are called
-"self-loops" and as we'll see later in this section, igraph has a
-special function to remove these self loops from a sociogram, or network
-visualization.
+The first file `dlt1-edges.csv` is an edge-list that contains
+information about each tie, or relation between two actors in a network.
+In this context, a "tie" is a reply by one participant in the discussion
+forum to the post of another participant -- or in some cases to their
+own post! These ties between a single actor are called "self-loops" and
+as we'll see later, {tidygraph} has a special function to remove these
+self loops from a sociogram, or network visualization.
 
 The edge-list format is slightly different than other formats you have
 likely worked with before in that the values in the first two columns
@@ -343,17 +331,18 @@ contains the following edge attributes:
 
 -   `Comment_id` = Unique identifier of a comment\\
 
-Let's use the `read_csv()` function from the {readr} package introduced
-in the Getting Started walkthrough to read in our edge-list and print
-the new `ties` data frame:
+Let's use the `read_csv()` function from the {readr} and {janitor}
+packages introduced in previous units to read in our edge-list and clean
+up the variables names:
 
 ```{r}
-dlt1_ties <- read_csv("data/dlt1-edgelist.csv", 
-                 col_types = cols(Sender = col_character(), 
-                                  Receiver = col_character(), 
-                                  `Category Text` = col_skip(), 
-                                  `Comment ID` = col_character(), 
-                                  `Discussion ID` = col_character()))
+dlt1_ties <- read_csv("data/dlt1-edges.csv", 
+                      col_types = cols(Sender = col_character(), 
+                                       Receiver = col_character(), 
+                                       `Category Text` = col_skip(), 
+                                       `Comment ID` = col_character(), 
+                                       `Discussion ID` = col_character())) |>
+  clean_names()
 
 dlt1_ties
 ```
@@ -400,7 +389,7 @@ The second file we'll be using contains all the nodes or actors (i.e.,
 participants who posted to the discussion forum) as well as some of
 their attributes such as gender and years of experience in education.
 
-Carolyn (2013) notes that most social network analyses include variables
+Carolan (2013) notes that most social network analyses include variables
 that describe attributes of actors, ones that are either categorical
 (e.g., sex, race, etc.) or continuous in nature (e.g., test scores,
 number of times absent, etc.). These attributes that can be incorporated
@@ -412,7 +401,7 @@ or dataframe, that mimics the actor-by-attribute that is the dominant
 convention in social science, i.e. rows represent cases, columns
 represent variables, and cells consist of values on those variables.
 
-As an aside, Carolyn also refers to this historical preference by
+As an aside, Carolan also refers to this historical preference by
 researchers for "actor-by-attribute" data, in the absence of relational
 data in which the actor has been removed their social context, as the
 "sociological meatgrinder" in action. Specifically, this historical
@@ -420,34 +409,29 @@ approach assumes that the actor does not interact with anyone else in
 the study and that outcomes are solely dependent of the characteristics
 of the individual.
 
-Now let's import the `dlt1-nodes.csv` attribute file and be sure to set
-the following variables as character data types: `UID`, `Facilitator`,
-`expert`, `connect`.
+#### 👉 Your Turn **⤵**
+
+Use the code chunk below to import the `dlt1-nodes.csv` attribute file
+and be sure to set the following variables as character data types:
+`UID`, `Facilitator`, `expert`, `connect`.
 
 ```{r}
+# YOUR CODE HERE
 dlt1_actors <- read_csv("data/dlt1-nodes.csv", 
                    col_types = cols(UID = col_character(), 
                                     Facilitator = col_character(), 
                                     expert = col_character(), 
-                                    connect = col_character()))
+                                    connect = col_character())) |>
+  clean_names()
 ```
 
-#### 👉 Your Turn **⤵**
-
-Use the code chunk below and a function of your choosing to import the
-node and edge lists for and complete the matching exercise that follows:
+Now use the code chunk below to inspect the data you imported and
+complete the matching exercise that follows:
 
 ```{r}
+#YOUR CODE HERE
 
-
-
-dlt2_actors <- read_csv("data/dlt2-nodes.csv", 
-                   col_types = cols(UID = col_character(), 
-                                    Facilitator = col_character(), 
-                                    expert = col_character(), 
-                                    connect = col_character()))
-
-dlt2_actors
+dlt1_actors
 ```
 
 Match up the attributes included in the node file with the following
@@ -499,14 +483,16 @@ function:
 You probably saw that this particular function takes the following three
 arguments, two of which are data frames:
 
--   **`x =`** specifies the edge list or matrix to convert. The first
-    two columns in our data frame are the IDs of the source and the
-    target node for each edge, in our case the `Sender` and `Reviever`
-    of a discussion post -- the order matters! The following columns are
-    edge attributes such as weight, type, label, or anything else.
+-   **`edges =`** A `data.frame` containing information about the edges
+    in the graph. The terminal nodes of each edge must either be encoded
+    in a `to` and `from` column, or in the two first columns, as
+    integers.
 
 -   **`nodes =`** starts with a column of node IDs and any following
     columns are interpreted as node attributes.
+
+-   **`node_key =`** The name of the column in `nodes` that character
+    represented `to` and `from` columns should be matched against.
 
 -   **`directed =`** determines whether or not to create a directed
     graph.
@@ -520,51 +506,34 @@ dlt1_network <- tbl_graph(edges = dlt1_ties,
                           nodes = dlt1_actors,
                           node_key = "UID",
                           directed = TRUE)
-
-dlt1_network |>
-  activate(edges) |>
-  as_tibble()
 ```
-
-Carolyn (2013) reminds us that one of the simplest and often ignored
-structural property of a social network is its size and explains that:
-
-> **size** is simply a measure of the number of nodes in the network.
-
-He notes that the size of a network plays an important role in
-determining what happens in the network. For example, in a classroom of
-30 students, it is not hard to imagine that the pattern of who
-communicates with whom will look much different than if the network
-consisted of hundreds or even thousands of students like in a MOOC.
-
-1.  How many nodes and edges are in our network? Is this consistent with
-    the number of observations in our data frames? **Hint:** Check the
-    Environment pane.
-
-    -   
-
-2.  The "D" and the "N" indicate that this is a **D**irected network and
-    has the **N**ame vertex attributes set. Why do the two spaces that
-    follow these letters have dashes? **Hint:** check the help files.
-
-    -   
-
-3.  Which vertex attribute did igraph interpret as numeric?
-
-    -   
 
 #### **👉 Your Turn** **⤵**
 
-Take a look at the output for our simple graph now and answer the
-following questions:
+Take a look at the output for our `dlt1_network` and answer the
+questions that follow:
 
 ```{r}
-
+#YOUR CODE HERE
+dlt1_network
 ```
 
-1.  How does the number of total edges and unique edges this compare to
-    the totals reported for the DLT 2 course in our [guiding
+1.  How does the number of node and edges in our DLT 1 network compare
+    to the totals reported for the DLT 2, the second iteration of this
+    MOOC-Ed, reported on in our [guiding
     study](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf)?
+
+    -   
+
+2.  Do the number of nodes and edges are in our network match the number
+    of observations in our node and edge list .csv files? **Hint:**
+    Check the Environment pane.
+
+    -   
+
+3.  Our output notes that our network is a directed multigraph,
+    indicating that some dyads may have multiple edges. Why might that
+    be?
 
     -   
 
@@ -573,55 +542,110 @@ following questions:
 ## 3. EXPLORE
 
 As noted in the previous units, exploratory data analysis involves the
-processes of describing your data . such as by calculating the means and
-standard deviations of numeric variables, or using algorithms) and,
-often, visualizing your data prior to modeling.
+processes of describing your network through mathematical measures
+and/or data visualization. In Section 3, we will learn some new
+functions for identifying groups and subgroups and creating node-level
+measures to identify central actors in our network. Specifically, in
+this section we'll focus on:
 
-In Section 3, we will learn some new functions for retrieving basic
-network descriptives related to our research question and create a
-network visualization to help illustrate key findings. Specifically, in
-this section we'll learn to:
+a.  **Group Analysis**. We take a look at both a top-down and bottom-up
+    approach to identifying groups within a network by examining the
+    weak and strong components in our network as well as existing
+    cliques.
 
-a.  **Group Analysis**. We focus primarily on actors and edges in this
-    walkthrough, including the edges wights we added in the previous
-    section as well as node degree, and import and fairly intuitive
-    measure of centrality.
+b.  **Egocentric Analysis**. We also examine the size of an ego's "local
+    neighborhood" as well as key centrality measures for each node such
+    as degree, closeness, and betweenness.
 
-b.  **Egocentric Analysis**. Finally, we wrap up the explore phases by
-    learning to plot a network and tweak key elements like the size,
-    shape, and position of nodes and edges to better at communicating
-    key findings.
-
-### 3a. Analyze Groups
+### 3a. Analyze Groups: Components & Cliques
 
 #### Components
 
-Top down
+As noted in Social Network Analysis and Education [@carolan2014]:
 
-```{r}
-dlt1_network
-```
+> One of the most basic ways in which network researchers first
+> characterize a network's substructure is to identify its components.
 
-\
+A component is a connected subgraph in which there is a path between all
+pairs of nodes \[@wasserman1994social\]. Recall from our output above
+that our "multigraph" had 4 components. Let's take a quick look at our
+network and see if we can spot the 4 components:
 
 ```{r}
 autograph(dlt1_network)
 ```
 
-\
+As you can see, three of our components are isolates in our network,
+meaning they have not connections, or forum replies to or from, anyone
+else in the network, meaning they posted to a discussion forum and never
+received a reply, or replied to the posts of others.
+
+Directed graphs, such as the DLT 1 network, have two different kinds of
+components: weak and strong. A weak component, like ours above, ignores
+the direction of a tie; strong components do not. Rather,
+
+> **strong components** consist of nodes that are connected to one
+> another via both directions along the path that connects them.
+
+This concept of a component is simple and very useful, especially when
+analyzing a large network with many components. Often, researchers
+extract each component and analyze it as a separate network. We won't be
+doing that here, but it would be very reasonable to remove the isolates
+from our network prior to further analysis.
+
+The {igraph} package has a simple function for identifying the number of
+components in a network, the size of each component, and which actors
+belong to each. Let's first take a quick look at the summaries for
+"weak" components in our network:
 
 ```{r}
 components(dlt1_network, mode = c("weak"))
 ```
 
-\
+While not incredibly intuitive to interpret, the output indicates that
+there are 4 components as we discovered above, 1 component has 442
+members and three (our isolates) have only 1 member. One issues with
+this output that the {tidygraph} package is great at solving is
+identifying and saving as a new variable who belongs to which network.
+We can sort of see from above that the first 400+ actors in our network
+belong to component 1, while the three isolates towards the end belong
+to components 2, 3, and 4 respectively; and the last two nodes in our
+network also belong to component 1.
+
+How do you think you might find the "strong" components in our network
+using the `component()` function? Use the following code chunk to test
+out your theory:
+
+```{r components_strong}
+# YOUR CODE HERE
+
+components(dlt1_network, mode = c("strong"))
+```
+
+Wow! If you code was correct, you'll see that we have a whopping 209
+distinct components!
+
+As demonstrated in the previous case study, the {tidygraph} package has
+a very useful `activate()` function for working with our nodes and edges
+as if they were standard "tibbles," or tidy data frames.
+
+Let's use the `activate()` function to single out the node list in our
+network and use our familiar `mutate()` function to create a new
+`strong_omponent` variable that indicates and saves the strong
+components to which they belong:
+
+```{r}
+dlt1_network <- dlt1_network |>
+  activate(nodes) |>
+  mutate(strong_component = group_components(type = "strong"))
+  
+dlt1_network
+```
 
 ```{r}
 dlt1_network |>
-  activate(nodes) |>
-  mutate(component_id = group_components(type = "strong")) |>
   as_tibble() |>
-  group_by(component_id) |>
+  group_by(strong_component) |>
   summarise(n = n())
 ```
 
@@ -705,14 +729,35 @@ dlt1_components |>
 I'm not entirely sure this was an improvement to our sociogram but it
 definitely is colorful!!
 
-### 3b. Egocentric Analysis
+### 3b. Egocentric Analysis: Size & Centrality 
 
-Many analyses of social networks are primarily descriptive. As Carolyn
+Many analyses of social networks are primarily descriptive. As Carolan
 (2013) notes that these descriptive studies aim either to represent the
 network's underlying social structure through data-reduction techniques
 or to characterize network properties through network measures.
 
-#### Size & Degree
+#### Size
+
+Carolan (2013) reminds us that one of the simplest and often ignored
+structural property of a social network is its size and explains that:
+
+> **size** is simply a measure of the number of nodes in the network.
+
+He notes that the size of a network plays an important role in
+determining what happens in the network. For example, in a classroom of
+30 students, it is not hard to imagine that the pattern of who
+communicates with whom will look much different than if the network
+consisted of hundreds or even thousands of students like in a MOOC.
+
+```{r local_size}
+dlt1_network <- dlt1_network |>
+  activate(nodes) |>
+  mutate(size = local_size())
+
+dlt1_network |> 
+  as_tibble() |>
+  arrange(desc(size))
+```
 
 A key structural property of networks is the concept of centralization.
 A network that is highly centralized is one in which relations are
@@ -828,8 +873,8 @@ The use of the `$` is actually standard across R and a very useful
 operator.
 
 Use the code chunk below to create a histogram and calculate the mean
-and median from the edge weighs created earlier in the [Add Edge
-Weights] section by using the `edge_weights` data frame, the `$`
+and median from the edge weighs created earlier in the \[Add Edge
+Weights\] section by using the `edge_weights` data frame, the `$`
 operator, and column `n` which contains the counts for each unique edge.
 
 ```{r}
