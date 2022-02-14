@@ -622,7 +622,7 @@ out your theory:
 components(dlt1_network, mode = c("strong"))
 ```
 
-Wow! If you code was correct, you'll see that we have a whopping 209
+Wow! If your code was correct, you'll see that we have a whopping 209
 distinct components!
 
 As demonstrated in the previous case study, the {tidygraph} package has
@@ -630,32 +630,48 @@ a very useful `activate()` function for working with our nodes and edges
 as if they were standard "tibbles," or tidy data frames.
 
 Let's use the `activate()` function to single out the node list in our
-network and use our familiar `mutate()` function to create a new
+network and use the familiar `mutate()` function to create a new
 `strong_omponent` variable that indicates and saves the strong
-components to which they belong:
+components to which each node belong:
 
 ```{r}
 dlt1_network <- dlt1_network |>
   activate(nodes) |>
   mutate(strong_component = group_components(type = "strong"))
-  
-dlt1_network
 ```
+
+Let's take a look now at the nodes in our new `dlt1_network`, which
+should now contain a our new variable. To do so, we'll use another handy
+function from the {tidygraph} package, `as_tibble()`, that will convert
+our node list to a standard table that will allow us to view every row
+in our node list:
+
+```{r as_tibble}
+as_tibble(dlt1_network)
+```
+
+We could even extend this if we liked to create some standard table
+summaries using the `summarise()` function. Run the code below to create
+a count of the number of nodes in each strong component:
 
 ```{r}
 dlt1_network |>
   as_tibble() |>
   group_by(strong_component) |>
-  summarise(n = n())
+  summarise(count = n()) |>
+  arrange(desc(count))
 ```
 
-```{r}
-dlt1_network |>
-  activate(nodes) |>
-  mutate(component_id = group_components(type = "strong"))
-```
+Similar to our graph of weak components, we see this network as a strong
+component with many members, and the remaining components are all
+isolated nodes.
 
-```{r}
+If we wanted to illustrate this with a sociogram, we could create a new
+edge variable using the same `activate()` and `mutate()` functions and
+`filter()` our edges so our graph only contains reciprocated ties, like
+so:
+
+```{r filter_reciprocated}
 dlt1_network |>
   activate(edges) |>
   mutate( reciprocated = edge_is_mutual()) |> 
@@ -663,22 +679,99 @@ dlt1_network |>
   autograph()
 ```
 
-```{r}
-reciprocity(dlt1_network)
+Or we could filter out all isolates in our strong component network
+entirely using the same `activate()` and `filter()` functions:
+
+```{r filter_component}
+dlt1_network |>
+  activate(nodes) |>
+  filter(strong_component == 1) |>
+  autograph()
 ```
+
+Obviously, this graph would need some polishing before sharing with
+others, but you get the point. The `activate()` function from the
+{tidygraph} package is a powerful tool that let's you leverage the
+entire suite of {tidyverse} packages to for analyzing nodes and edges in
+a network! We'll be using the activate function again in section [3b.
+Egocentric Analysis: Size &
+Centrality](#b.-egocentric-analysis-size-centrality) to calculate
+node-level measures.
 
 #### Cliques
 
-Bottom up
+Whereas top-down approaches to group analysis focus on the complete
+network and considers parts of it that distinct from the rest of the
+network, the bottom-up approach focuses is built up from simple dyads
+and triads that extend into dense clusters that give the network its
+"clumpiness." Similar to complete network measures, there are several
+important properties for which precise definitions and algorithms have
+been developed, including cliques, clans, plexes, and cores.
 
-```{r}
+Examining cliques is one bottom-up approach that reveals how groups are
+distributed in the network and which actors belong to which groups.
 
-cliques(dlt1_network, min = NULL, max = NULL)
+> A **clique** is a maximally connected subgraph of nodes (> 2) in which
+> all nodes are connected to each other.
 
-```
+Similar to our component analysis, the {igraph} function has a simple
+`clique_num()` function for identifying number of completely connected
+subgroups in a network:
 
 ```{r}
 clique_num(dlt1_network)
+```
+
+As you probably noted above, the `clique_num()` function does not take
+into account directionality of our ties. It looks like we have at least
+one dense cluster, however, of 8 nodes that all have ties to one
+another.
+
+The {igraph} function also has a simple `cliques()` function for
+identifying members who belong to the same group. In addition to
+specifying the network you want to examine, this function also allows
+you to set the minimum and maximum number of members to included in a
+clique.
+
+Let's see if there are any cliques that contain at least 8 nodes?
+
+```{r}
+cliques(dlt1_network, min = 8, max = NULL)
+```
+
+Unfortunately, the {tidygraph} package does not have a clustering
+function for cliques. It does, however, include a range popular
+clustering functions provided that use range of functions that group
+nodes and edges based on "community structure." Some of these [community
+detection
+algorithms](https://tidygraph.data-imaginist.com/reference/group_graph.html)
+are designed for directed graphs (e.g. our strong component analysis
+above), while others are for undirected graphs.
+
+One function similar to our clique analysis above is the
+`group_edge_betweenness()` function, which group densely connected nodes
+together. The betweenness centrality measures is something we will look
+at more closely in the next section.
+
+Because this function can only be used with undirected networks, we will
+need to convert our directed network to an undirected network, or
+"symmetrize" our network as discussed in Carolan @carolan2014. Prior to
+activating our nodes and creating a new variable indicating group
+membership, we will need to use the `to_undirected()` function to
+convert our network from directed to undirected.
+
+Run the following code to group our nodes based on their edge
+betweenness and print our new `dlt1_clusters` object and take a quick
+look:
+
+```{r}
+dlt1_clusters <- dlt1_network |>
+  to_undirected() |>
+  activate(nodes) |>
+  mutate(cluster = group_edge_betweenness())
+
+dlt1_clusters |>
+  as_tibble()
 ```
 
 #### Communities
@@ -717,7 +810,7 @@ factors so each group is a distinct color:
 
 ```{r}
 
-dlt1_components |> 
+dlt1_clusters |> 
   ggraph() + 
   geom_node_point() + 
   geom_edge_link() + 
@@ -729,7 +822,7 @@ dlt1_components |>
 I'm not entirely sure this was an improvement to our sociogram but it
 definitely is colorful!!
 
-### 3b. Egocentric Analysis: Size & Centrality 
+### 3b. Egocentric Analysis: Size & Centrality {#b.-egocentric-analysis-size-centrality}
 
 Many analyses of social networks are primarily descriptive. As Carolan
 (2013) notes that these descriptive studies aim either to represent the
