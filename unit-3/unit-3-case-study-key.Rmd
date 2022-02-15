@@ -168,7 +168,7 @@ In the space below, type a brief response to the following questions:
 
     -   YOUR RESPONSE HERE
 
-    -   What else do you notice/wonder about this dataset?
+3.  What else do you notice/wonder about this dataset?
 
     -   YOUR RESPONSE HERE
 
@@ -1162,11 +1162,21 @@ network.
 
 Recall that network analyses to identify groups, positions, and central
 actors are a means to an end rather than an end in itself
-[@carolan2014]. The ultimate goal of using information about a network's
-substructures is test whether there is a relationship between these
-measures and educational outcomes of interest.
+[@carolan2014]. One primary goal of gathering data about a network's
+groups, positions, and central actors -- a goal which we'll explore more
+deeply in later units -- is test whether there is a relationship between
+these measures and educational outcomes of interest. That was ultimately
+the aim of the research article guiding this study, but sadly got
+neglected.
 
-1.  
+Thinking about the node and group level analyses we've conducted so far,
+and what you know about this educational context so far, write a
+research question or hypothesis you would like to test that would
+examine whether there is a relationship between these group or
+node-level measures and educational outcomes appropriate for this
+MOOC-Ed.
+
+-   YOUR RESPONSE HERE
 
 ------------------------------------------------------------------------
 
@@ -1179,9 +1189,10 @@ of this task, imagine that your audience consists of the developers and
 facilitators of the DLT MOOC-Eds who have limited background in SNA and
 adapt the following steps accordingly:
 
-1.  **Select.** Select a group and/or node-level analysis from above
-    that you think would be interesting or relevant for the target
-    audience and that helps answer our research questions.
+1.  **Select.** Select a group and/or node-level analysis from above, or
+    a new analysis if so motivated, that you think would be interesting
+    or relevant for the target audience and that helps answer our
+    research questions.
 
 2.  **Polish.** Create and polish a data visualization and/or data table
     to communicate your selected findings.
@@ -1197,6 +1208,8 @@ adapt the following steps accordingly:
 
     -   How you might revisit or improve upon this analysis in the
         future.
+
+#### **👉 Your Turn** **⤵**
 
 Use the code chunk below create a polished table and/or visualization(s)
 and write a brief narrative in the space that follows.
@@ -1220,7 +1233,6 @@ Assuming your code contains no errors, this will create a web page in
 your Files pane that serves as a record of your work.
 
 Once your file has been knitted, you can publish this file online using
-RPubs (see screeshot below), or share the HTML file through another
-means.
+RPubs, or share the HTML file through another means.
 
 ### References
