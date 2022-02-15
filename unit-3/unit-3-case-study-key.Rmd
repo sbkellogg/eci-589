@@ -244,6 +244,7 @@ following packages:
 -   igraph
 -   tidygraph
 -   ggraph
+-   skmir
 -   janitor
 
 ```{r}
@@ -754,93 +755,124 @@ together. The betweenness centrality measures is something we will look
 at more closely in the next section.
 
 Because this function can only be used with undirected networks, we will
-need to convert our directed network to an undirected network, or
-"symmetrize" our network as discussed in Carolan @carolan2014. Prior to
-activating our nodes and creating a new variable indicating group
-membership, we will need to use the `to_undirected()` function to
-convert our network from directed to undirected.
+need to pipe our `dlt_network` through the following functions in
+sequence:
+
+1.  **`morph()`** with the `to_undirected` argument will temporarily
+    change our directed network to an undirected network, or
+    "symmetrize" our network as discussed in Carolan @carolan2014;
+2.  **`activate()`** will select just our `nodes` list ;
+3.  **`mutate()`** will created a new `subgroup` variable using the
+    `group_edgebetweenness()` function;
+4.  **`unmorph()`** will change our undirected network back to a
+    directed network.
 
 Run the following code to group our nodes based on their edge
-betweenness and print our new `dlt1_clusters` object and take a quick
-look:
+betweenness and print our updated `dlt1_network` object and take a quick
+look. Because this is a bit computationally intensive, this make take a
+minute or so to run.
 
 ```{r}
-dlt1_clusters <- dlt1_network |>
-  to_undirected() |>
+dlt1_network <- dlt1_network |>
+  morph(to_undirected) |>
   activate(nodes) |>
-  mutate(cluster = group_edge_betweenness())
+  mutate(sub_group = group_edge_betweenness()) |>
+  unmorph()
 
-dlt1_clusters |>
+dlt1_network |>
   as_tibble()
 ```
 
-#### Communities
+As you scroll through the nodes tibble produced, you should now see at
+the far end a new `subgroup`variable that includes and ID number
+indicating to which densely connected cluster each node belongs.
 
-Similar to the range of functions included for calculating node and edge
-centrality, the {tidygraph} package includes various clustering
-functions provided by the {igraph} package. Some of these algorithms are
-designed for directed graphs, while others are for undirected graphs.
-
-Also similar to calculating centrality measures, we need
-to `activate()` our nodes first before applying these community
-detection algorithms to assign our nodes to groups.
-
-For the sake of simplicity, and because there seem to be some obvious
-groups based on network components, let's group our nodes using
-the `group_components()` along with the `mutate()` function from {dplyr}
-to create a new `group` variable to our nodelist that provides a value
-based on the component to which each node belongs.
-
-Run the following code to group our nodes and print our
-new `cccss_network_groups` object and take a quick look:
+Finally, let get a count of Run the following code to group our nodes
+and print our new `cccss_network_groups` object and take a quick look:
 
 ```{r}
-dlt1_components <- dlt1_network |>
-  to_undirected() |>
+dlt1_network |>
   activate(nodes) |>
-  mutate(group = group_louvain())
-
-dlt1_components
+  as_tibble() |>
+  group_by(sub_group) |>
+  summarise(count = n()) |>
+  arrange(desc(count))
 ```
 
-Now that we've assigned our nodes to a group, let's add one final layer
-to our sociogram from above by using the `geom_node_voronoi()` function
-to color our nodes by group assignment and changing our group numbers to
-factors so each group is a distinct color:
+Note, that if we had wanted to permanently convert our network to an
+undirected network, we could use the `to_undirected` argument as a
+stand-alone function.
 
 ```{r}
+dlt1_undirected <-  to_undirected(dlt1_network)
 
-dlt1_clusters |> 
-  ggraph() + 
-  geom_node_point() + 
-  geom_edge_link() + 
-  theme_graph() + 
-  geom_node_voronoi(aes(fill = factor(group), alpha = .05), 
-                    max.radius = .5, show.legend = FALSE)
+dlt1_undirected
 ```
 
-I'm not entirely sure this was an improvement to our sociogram but it
-definitely is colorful!!
+The {tidygraph} package has a wide range of [functions to generate
+alternate representations of
+graphs](https://tidygraph.data-imaginist.com/reference/morphers.html).
+They can be used as stand alone functions to permanently alter your
+network, or as an argument with the `morph()` function to temporarily
+change your network depending on the analyses you need to perform.
+
+#### **👉 Your Turn** **⤵**
+
+We've only scratched the surface of the range of top-down and bottom-up
+group analysis functions available in the {igraph} and {tidygraph}
+packages. In the code chunk below, try out one of the other grouping
+functions available in the
+[tidygraph](https://tidygraph.data-imaginist.com/reference/group_graph.html)
+or [igraph](https://igraph.org/r/html/latest/) packages to examine
+groups withing the `dlt1_network`:
+
+```{r group_nodes}
+# YOUR CODE HERE
+```
 
 ### 3b. Egocentric Analysis: Size & Centrality {#b.-egocentric-analysis-size-centrality}
 
-Many analyses of social networks are primarily descriptive. As Carolan
-(2013) notes that these descriptive studies aim either to represent the
-network's underlying social structure through data-reduction techniques
-or to characterize network properties through network measures.
+In this section, we shift out analytical lens from groups to individual
+actors and the pattern of relations in which they are embedded. Implicit
+in egocentric analysis, and also very intuitive to understand, is that:
+
+> An individual's (**ego**) connections with others (**alters**)
+> provides access to some instrumental (e.g., advice) or expressive
+> (e.g., support) resource that may, in turn, be beneficial.
+
+As summarized by Carolan @carolan2014, the structure and content of
+these relations between an ego and a set of alters is the focus of
+egocentric network analysis. Since our research question aims to
+identify "key actors" in our network, we will look at two
+characteristics of an ego's connections that are indicative their
+importance: size and centrality.
 
 #### Size
 
-Carolan (2013) reminds us that one of the simplest and often ignored
-structural property of a social network is its size and explains that:
+Recall from our previous unit focused on complete network analysis that
+one simple and often ignored structural property of a social network is
+its size. This also applies to egocentric analysis.
 
-> **size** is simply a measure of the number of nodes in the network.
+> **Size** is simply the number of alters that are directly connected to
+> ego.
 
-He notes that the size of a network plays an important role in
-determining what happens in the network. For example, in a classroom of
-30 students, it is not hard to imagine that the pattern of who
-communicates with whom will look much different than if the network
-consisted of hundreds or even thousands of students like in a MOOC.
+This characteristic is also sometimes referred to as an ego's **local
+neighborhood**, and as Carolan points out, size matters, because it
+indicates the amount of potential resources available in one's network.
+For example, a student with a small friendship network may be at a
+disadvantage when it comes seeking support on schoolwork or advice on
+course or college enrollment.
+
+We can use the same {tidygraph} process that we used for identifying
+groups and individual membership to calculate the size for each node.
+Specifically, we will need to `activate()` the `nodes` in our network
+and create a new variable which we'll call `size` that is calculated
+using the `local_size()` function.
+
+And since it's much easier to inspect our data as a tibble than using
+the graph output, we'll also convert our node to a table and `arrange()`
+in descending order by `size` to make it easier to see the range in
+values of our network:
 
 ```{r local_size}
 dlt1_network <- dlt1_network |>
@@ -849,135 +881,208 @@ dlt1_network <- dlt1_network |>
 
 dlt1_network |> 
   as_tibble() |>
-  arrange(desc(size))
+  arrange(desc(size)) |> 
+  select(uid, facilitator, size)
 ```
 
-A key structural property of networks is the concept of centralization.
-A network that is highly centralized is one in which relations are
-focused on a small number of actors or even a single actor in a network,
-whereas ties in a decentralized network are diffuse and spread over a
-number of actors. One of the most common descriptives reported in
-network studies and a primary measure of centralization is **degree**.
+Not surprisingly, the egos with the most alters are the course
+facilitators who played a very active role in this course and therefore
+have an outsize influence on the structure of this network.
 
-> Degree is the number of ties to and from an ego. In a directed
+**Note:** In the code immediately above or earlier in this case study,
+it's important to take note when we have permanently altered our
+`dlt1_network` object and when we have only made temporary changes to
+our network. For example, when creating a new variable for local
+neighborhood size, we assigned the changes made to `dlt1_network` to an
+object of the same name using the `<-` assignment operator. This
+effectively overwrites the old object with the new object because was
+wanted to save the new variable created. However, when converting
+network to a tibble consisting of nodes and their `facilitor` and `size`
+attributes, we did not assign to `dlt1_network` because we did not want
+to permanently change to our network object to a tibble.
+
+#### Centrality
+
+As we learned in our previous case study and readings, a key structural
+property of networks is the concept of centralization. A network that is
+highly centralized is one in which relations are focused on a small
+number of actors or even a single actor in a network, whereas ties in a
+decentralized network are diffuse and spread over a number of actors. As
+we saw above, the facilitators in our network play an outsize role in
+the MOOC-Ed discussions!
+
+**Degree**
+
+One of the most common descriptives reported in network studies and a
+primary measure of centralization is degree.
+
+> **Degree** is the number of ties to and from an ego. In a directed
 > network, in-degree is the number of ties received, whereas out-degree
 > is the number of ties sent.
 
-The {igraph} package has an aptly named function `degree()` for
-retrieving degree, in-degree, and out-degree for all actors in a
-network.
+The {tidygraph} package has an aptly named function
+`centrality_degree()` for calculating degree, in-degree, and out-degree
+for all actors in a network.
 
-Run the following code to extract measures and save to `node_degree`
-which we'll examine in just a bit:
-
-**Note**. We set the `mode =` argument in this function to "all" which
-give us the total number of participants that each actor in our network
-with sent or received a reply.
-
-Let's take a look at the distribution of `node_degree` in our network by
-using R's built in `hist()` function for creating histograms. I set the
-value of `breaks =`, or bins in our histogram, to 30 since I already
-know some actors in this network have a very high degree.
-
-We can see that most actors in the network are connected to very few
-individuals while a couple actors in this network are connected to a
-very larger number, nearly 200 and 350 respectively!
-
-Now let's take a look at the mean and median for `node_degree` using
-some other {base} R functions:
+Run the following create two new variables for our nodes: `in_dgree` and
+`out_degree`. We'll set the `mode =` argument in `centrality_degree()`
+function to `"in"` and `"out"` respectively.
 
 ```{r}
 dlt1_network <- dlt1_network |>
   activate(nodes) |>
-  mutate(size = local_size(), 
-         in_degree = centrality_degree(mode = "in"),
-         out_degree = centrality_degree(mode = "out")) |>
-  arrange(desc(size))
+  mutate(in_degree = centrality_degree(mode = "in"),
+         out_degree = centrality_degree(mode = "out"))
   
-            
-            
-
 dlt1_network |> 
   as_tibble()
 ```
 
-We see that the mean suggests the participants are, on average,
-connected to about 8 other participants in the MOOC-Ed, but this is
-likely heavily skewed by the two individuals with a disproportionate
-number of connections. The median is probably a better characterization
-of the typical number of educators a participant has sent or received a
-reply.
+**A Quick Note about Multigraphs and Tie Strength**
 
-#### Closeness
+You may have noticed in this network that indegree exceeds the total
+number of nodes in our network are are wondering how that is possible.
+Recall that our network is currently treated at a "multigraph,"
+indicating that some dyads have multiple edges. Therefore, some edges
+between dyads are counted more than once. Alternatively, we could
+"[simplify](https://igraph.org/r/doc/simplify.html)" our network by
+collapsing multiple edges between the same actors and assigning a value
+to edges between actors indicating tie strength. In this case it would
+be a measure of frequency of replies between actors.
 
-Text
+Let's dust off our
+[`ggplot()`](https://ggplot2-book.org/getting-started.html#basic-use)
+skills and take a look at the distribution of `out_degree` for each
+ego's local neighborhood by using in `geom_histogram()` function for
+creating histograms.
 
 ```{r}
-dlt1_network <- dlt1_network |>
-  activate(nodes) |>
-  mutate(closeness = centrality_closeness()) |>
-  arrange(desc(size))
-  
-            
-            
-
 dlt1_network |> 
-  as_tibble()
+  as_tibble() |>
+  ggplot() +
+  geom_histogram(aes(x = out_degree))
 ```
 
-#### 
+We can see that most egos in the network sent very few replies to alters
+in the course, while a handful of actors in this network have sent 30 or
+more replies.
 
-#### Betweeness
+**Compositional and Variance Measures**
 
-Text
+Carolan @carolan2014 notes that there are two types of measures that can
+emerge from egocentric data: compositional and variance. Compositional
+measures are those created by counting or taking the average of
+egocentric network variables. Variance measures, on the other hand, are
+simply those that are derived by calculating the variance or standard
+deviation of the egocentric network variables.
 
-```{r}
-dlt1_network <- dlt1_network |>
-  activate(nodes) |>
-  mutate(betweenness = centrality_betweenness()) |>
-  arrange(desc(size))
-  
-            
-            
+While, we could calculate invdiivudally the mean and variance for each
+egocentric measure created above using the `summarise()` function
+demonstrated earlier, but of course R has a package and function for
+saving us the effort.
 
+To quickly calculate summary statistics for our nodes, including
+compositional and variance measures for our egocentric measures, we can
+use the `skim()` function from the {skimr} package to take a quick look
+at the variables in our node list:
+
+```{r skimr}
 dlt1_network |> 
-  as_tibble()
-```
-
-#### Composite Measures
-
-```{r}
-dlt1_network |>
-  activate(nodes) |>
+  as_tibble() |>
   skim()
 ```
 
+We can see, for example, that egos in our network are connected with on
+average 8.75 alters with a standards deviation of 17.5. Notice also that
+our mean for in-degree and out-degree are identical. This will always be
+the case since for every tie that go "in" there is always one going
+"out."
+
+Finally, the {skimr} package like our {tidgraph} package plays nicely
+with other {tidyverse} packages for data wrangling and analysis. For
+example, let's select only MOOC-Ed participants who are located in the
+United States and calculated compositional and variance measures for
+size by educator's role:
+
 ```{r}
-dlt1_network |>
-  activate(nodes) |> 
+dlt1_network |> 
   as_tibble() |>
-  ggplot() +
-  geom_histogram(aes(size))
+  filter(country == "US") |>
+  group_by(role1) |>
+  select(size) |>
+  skim()
 ```
+
+As illustrated by the output above, we can see that "otheredprof" (i.e.,
+other educational professionals including our facilitators) were
+connected with the most individuals on average (18.9), while educators
+in "Operations" connected with the fewest individuals on average (3).
+
+**Closeness & Betweenness**
+
+Two other centrality measures for identifying key actors in a network
+are closeness and betweenness. Whereas degree centrality is a local
+measure and can be calculated without needing information about the
+overall pattern of relations among ego and alters, closeness and
+betweenness address this shortcoming by taking into account indirect
+ties among all the alters in an ego's network.
+
+**Closeness** centrality captures the average distance an actor is from
+all other actors in the network and is a function of an actor's geodesic
+distance to others, which equals the length of shortest path connecting
+a pair of actors. It's an intuitively appealing measure in that being
+"close" to others may provide an advantage by giving you early access to
+new information or by indicating how quickly an actor can exchange
+something with others (Knoke & Yang, 2008).
+
+**Betweenness** centrality measures the degree to which other actors lie
+on the shortest geodesic path between pairs of actors in the network.
+Betweenness may be indicative of how actors control or mediate the
+relations between pairs of actors that are not directly connected.
+Therefore, this measure is an important indicator of control over
+information exchange or resource flows within a network (Knoke & Yang,
+2008). The more any given actor is located on the path between numerous
+dyads, the higher that actor's potential to control network
+interactions. This concept and its associated measure is very appealing,
+as it captures the degree to which an actor occupies a strategically
+important position.
 
 #### **👉 Your Turn** **⤵**
 
-The use of the `$` is actually standard across R and a very useful
-operator.
+Use the code chunk below to add a `closeness` and `betweenness` variable
+to the nodes in our network and answer the questions that follow. Hint:
+you may want to look at the [functions to calculate node and edge
+centrality](https://tidygraph.data-imaginist.com/reference/centrality.html)
+on the {tidygraph} package website.
 
-Use the code chunk below to create a histogram and calculate the mean
-and median from the edge weighs created earlier in the \[Add Edge
-Weights\] section by using the `edge_weights` data frame, the `$`
-operator, and column `n` which contains the counts for each unique edge.
+```{r closeness_betweenness}
+# YOUR CODE HERE
+dlt1_network <- dlt1_network |>
+  activate(nodes) |>
+  mutate(closeness = centrality_closeness(),
+         betweenness = centrality_betweenness()) |>
+  arrange(desc(betweenness))
+  
 
-```{r}
-
+dlt1_network |> 
+  as_tibble()
 ```
 
-Are these results consistent with our summary of edge weights we created
-above?
+1.  Which two actors have the highest betweenness and what is unique
+    about their role in the course?
 
-\-
+    -   YOUR RESPONSE HERE
+
+2.  Do these same two actors also have the highest closeness? How might
+    you interpret that?
+
+    -   YOUR RESPONSE HERE
+
+Again, we've only scratched the surface of the vast number of centrality
+meaures available in the {igraph} and {tidygraph} packages. Feel free to
+explore [other functions to calculate node and edge
+centrality](https://tidygraph.data-imaginist.com/reference/centrality.html)
+in these two packages.
 
 # 4. MODEL
 
@@ -1036,17 +1141,13 @@ network.
 
 ### **👉 Your Turn** **⤵**
 
-Recall from the [1a. Review the Research] that you were asked to
-identify two "node attributes" from the dataset that might be useful for
-predicting participants who may be more engaged or central to the
-network.
+Recall that network analyses to identify groups, positions, and central
+actors are a means to an end rather than an end in itself
+[@carolan2014]. The ultimate goal of using information about a network's
+substructures is test whether there is a relationship between these
+measures and educational outcomes of interest.
 
-Take look at page 276 of [A social network perspective on peer supported
-learning in MOOCs for
-educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf).
-Were your predictions correct?
-
-\-
+1.  
 
 ------------------------------------------------------------------------
 
