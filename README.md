@@ -60,7 +60,7 @@ Unit 1 is a gentle introduction to social network theory, analysis and applicati
 
 1.  **Readings & Discussion**: [What is social network analysis?](https://sbkellogg.github.io/eci-589/unit-1/unit-1-readings.html)
 
-2.  **Case Study**: [Hashtag Common Core](https://sbkellogg.github.io/eci-589/unit-1/unit-1-case-study.html)
+2.  **Case Study**: [Hashtag Common Core](https://sbkellogg.github.io/eci-589/unit-1/unit-1-case-study-key.html)
 
 3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
 
@@ -70,7 +70,7 @@ Network Methods and Measures moves beyond basic network analysis concepts and t
 
 1.  **Readings & Discussion**: [Groups, Positions, and Egocentric Analysis](https://sbkellogg.github.io/eci-589/unit-3/unit-3-readings.html)
 
-2.  **Case Study**: A Social Network Perspective on MOOC-Eds
+2.  **Case Study**: School Leader Ties over Time
 
 3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-1/unit-1-analysis.html)
 
