@@ -1149,6 +1149,8 @@ were characterized as "brodcasters" -- educators who initiated a
 discussion thread, but neither reciprocated with those who replied, nor
 posted to threads initiated by others.
 
+![](img/positions.jpeg){width="80%"}
+
 To address Question 2, this study use the exponential family of random
 graph models (ERGM; also known as p\* models), which provide a
 statistical approach to network modeling that addresses the complex

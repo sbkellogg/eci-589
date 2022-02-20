@@ -54,17 +54,35 @@ The following learning objectives are aligned with the overarching learning obje
 
 This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis.
 
-### **Unit 1: The Social Network Perspective (Non-Certificate Track Only)**
+### **Unit 1: The Social Network Perspective (Non-ECI 586 Students Only)**
 
-Unit 1 is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R. 
+Unit 1 is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R.
+
+1.  **Readings & Discussion**: [What is social network analysis?](https://sbkellogg.github.io/eci-589/unit-1/unit-1-readings.html)
+
+2.  **Case Study**: [Hashtag Common Core](https://sbkellogg.github.io/eci-589/unit-1/unit-1-case-study.html)
+
+3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
 
 ### **Unit 2: Network Methods and Measures (All Students)**
 
 Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. More specifically, these concepts and measures apply to the analysis of complete networks, i.e. networks for which you have complete relational information on each pair of individuals in the network. These measures are necessary to first figure out a network's "topography", or what the network looks like at one point in time.
 
+1.  **Readings & Discussion**: [Groups, Positions, and Egocentric Analysis](https://sbkellogg.github.io/eci-589/unit-3/unit-3-readings.html)
+
+2.  **Case Study**: A Social Network Perspective on MOOC-Eds
+
+3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-1/unit-1-analysis.html)
+
 ### **Unit 3: Groups, Positions and Egocentric Analysis (All Students)**
 
-Groups, Positions and Egocentric Analysis focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis. 
+Groups, Positions and Egocentric Analysis focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis.
+
+1.  **Readings & Discussion**: [Groups, Positions, and Egocentric Analysis](https://sbkellogg.github.io/eci-589/unit-3/unit-3-readings.html)
+
+2.  **Case Study**: A Social Network Perspective on MOOC-Eds
+
+3.  **Independent Analysis**: [Network Substructures & Nodes](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
 
 ### **Unit 4: Statistical Inference and Network Selection (All Students)**
 
