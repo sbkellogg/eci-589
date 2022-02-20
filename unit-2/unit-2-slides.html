@@ -4,7 +4,7 @@
     <title>Unit 2: Data Management &amp; Measurement</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Shaun Kellogg" />
-    <meta name="date" content="2022-02-04" />
+    <meta name="date" content="2022-02-20" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
@@ -37,7 +37,7 @@ class: clear, title-slide, inverse, center, top, middle
 # Unit 2: Data Management &amp; Measurement
 ----
 ### **Dr. Shaun Kellogg**
-### February 04, 2022
+### February 20, 2022
 
 ---
 # Agenda
@@ -389,12 +389,7 @@ centr_degree(year_1_network, mode = "all")
 
 ```
 ## $res
-<<<<<<< HEAD
 ##  [1] 5 0 5 3 3 3 4 8 4 7 4 1 0 4 4 3 2 5 4 4 5 4 3 6 4 4 4 3 8 4 4 3 3 6 3 3 4 3 6 2 3 4 2
-=======
-##  [1] 5 0 5 3 3 3 4 8 4 7 4 1 0 4 4 3 2 5 4 4 5 4 3 6 4 4 4 3 8 4 4 3 3 6 3
-## [36] 3 4 3 6 2 3 4 2
->>>>>>> 17a6a49d1234f3ec8e605c0914ff9dd3e9ae0d7d
 ## 
 ## $centralization
 ## [1] 0.05102041
@@ -424,7 +419,72 @@ How would you interpret this measure?
 
 ---
 
+# Network Reciprocity 
 
+.panelset[
+
+.panel[.panel-name[Definition]
+
+.pull-left[A key structural property of complete networks is the concept of centralization, or **the extent to which relations are focused on one or a small set of actors**
+
+]
+
+.pull-right[ .center[&lt;img src="img/density.jpeg" height="150px"/&gt;
+
+Which of these two networks is more centralized?
+]
+ 
+]
+
+]
+
+.panel[.panel-name[Significance]
+Reciprocity is an important measure because it reveals the direction through which resources in networks flow and whether or not it flows in both directions. 
+
+In education, reciprocity has been associated with:   
+- healthy learning communities   
+- other
+- other
+
+]
+
+.panel[.panel-name[Implementation]
+
+.pull-left[
+At the network-level, reciprocity is a measure of the likelihood of vertices in a directed network to be mutually linked. The {igraph} package has a simple `reciprocity()` function for calculating network density. 
+
+Let's apply to our `year_1_network`:]
+
+.pull-right[
+
+```r
+reciprocity(year_1_network)
+```
+
+```
+## [1] 0.1707317
+```
+
+How would you interpret this measure? What does it indicate abotu our network? 
+]
+]
+
+.panel[.panel-name[Discuss]
+
+.pull-left[We know there 82 edges in the Year 1 network (pictured right), but **how many possible edges** could there be?   
+
+**Hint**: The number of all possible edges in a directed network is V(V-1) where V is the # of vertices.
+
+&lt;!-- How many possible edges if this were an undirect network? --&gt;
+] 
+
+.pull-right[
+![](unit-2-slides_files/figure-html/examine-reciprocity-1.png)&lt;!-- --&gt;
+]
+]
+]
+
+---
 
 
 class: clear, wolfhead
