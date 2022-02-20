@@ -1,5 +1,5 @@
 ---
-title: 'Unit 4 Case Study: Hashtag Common Core'
+title: 'Unit 1 Case Study: Hashtag Common Core'
 subtitle: "ECI 586 Introduction to Learning Analytics"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
