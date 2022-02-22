@@ -30,7 +30,7 @@ from the course readings and case study. Grading for this week is fairly
 lenient and you'll receive 1 point (6 points total) for completing each
 of the following tasks:
 
-1.  **Identity a data source.** I've included a data folder located the
+1.  **Identify a data source.** I've included a data folder located the
     Unit 2 Analysis Project in our [RStudio Cloud ECI 589
     Workspace](https://rstudio.cloud/spaces/146919/join?access_code=VgotVV692OpRoxZvrOp9oW8a2EThPX5kHkJ7Vgf8)
     that contains datasets I've created as well as those from our SNA

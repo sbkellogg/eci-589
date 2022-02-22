@@ -3,8 +3,7 @@ title: 'Unit 3 Analysis: Network Substructures & Nodes'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
-output:
-  html_document:
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The final week of each unit is designed to provide you some space for independent analysis. For this assignment, you are demonstrate your ability to formulate a basic research question, wrangle and analyze relational data, and create a simple data product to illustrate key findings. **Your primary goal for this analysis is to examine groups and/or central actors in a network** by applying the knowledge and skills acquired from the course readings and case study. Grading for this week is fairly lenient and you'll receive 1 point (6 points total) for completing each of the following tasks:
 
-1.  **Identity a data source.** I've included a data folder located the Unit 3 Analysis Project in our [RStudio Cloud ECI 589 Workspace](https://rstudio.cloud/spaces/146919/join?access_code=VgotVV692OpRoxZvrOp9oW8a2EThPX5kHkJ7Vgf8) that contains datasets I've created, as well as those from our SNA and Education course text described [here](https://studysites.sagepub.com/carolan/study/resources.htm). You are welcome to chose from those or to identify your own data source related to an area of professional interest.
+1.  **Identify a data source.** I've included a data folder located the Unit 3 Analysis Project in our [RStudio Cloud ECI 589 Workspace](https://rstudio.cloud/spaces/146919/join?access_code=VgotVV692OpRoxZvrOp9oW8a2EThPX5kHkJ7Vgf8) that contains datasets I've created, as well as those from our SNA and Education course text described [here](https://studysites.sagepub.com/carolan/study/resources.htm). You are welcome to chose from those or to identify your own data source related to an area of professional interest.
 
 2.  **Formulate a question.** I recommend keeping this simple and limiting to no more than one or two questions. Your question(s) should be appropriate to your data set and ideally be answered by applying concepts and skills from our course readings and case study. For example, you may be interested in determining measures of centrality for a network and identifying key actors.
 
