@@ -190,12 +190,13 @@ from your posts that you've done the required reading. Readings and
 discussion for each unit are worth 6 points and judged based on quantity
 and quality of your posts.
 
-In term of **quantity** (3 points), you'll be expected to create a new
-discussion topic your self-selected study and add at least 3 new posts
-and/or replies for a total of 4 posts. So others will have an
-opportunity to read and respond to your posts, your posts should be
-spread out over the course of the week and across at least two different
-days, preferably not the last two days.  
+In term of **quantity** (3 points), you'll be expected to create at
+least 4 posts. One post should answer each of the questions for your
+self-selected study and three posts and/or replies that help us
+collectively address the questions for the required readings. So others
+will have an opportunity to read and respond to your posts, your posts
+should be spread out over the course of the week and across at least two
+different days, preferably not the last two days.
 
 In terms of **quality** (3 points), your posts over the next week should
 provide new or insightful contributions to that question or topic.

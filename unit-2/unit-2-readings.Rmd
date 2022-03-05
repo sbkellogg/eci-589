@@ -32,13 +32,6 @@ generating ideas for independent application of network analysis. As
 part of our readings, for example, you'll learn how to specify a network
 "boundary" for your study based on different approaches.
 
-Course readings, discussion guidelines, and assessment criteria are
-further described in [this
-document](https://sbkellogg.github.io/eci-589/unit-2/unit-2-readings.html).
-If you have any questions about this assignment, don't hesitate to send
-me an email or schedule a time to talk at
-[calendly.com/sbkellogg](calendly.com/sbkellogg).
-
 ## Readings
 
 For Unit 2, you will read chapters 3-5 from [Social Network Analysis and
@@ -136,7 +129,7 @@ and answer the following questions:
 4.  Is this matrix symmetric? Explain the values on the diagonal of the
     matrix.
 
-![](images/graph.jpeg)
+![](img/graph.jpeg)
 
 #### Chapter 4: Basic Concepts (Required)
 
@@ -182,12 +175,13 @@ from your posts that you've done the required reading. Readings and
 discussion for each unit are worth 6 points and judged based on quantity
 and quality of your posts.
 
-In term of **quantity** (3 points), you'll be expected to create a new
-discussion topic your self-selected study and add at least 3 new posts
-and/or replies for a total of 4 posts. So others will have an
-opportunity to read and respond to your posts, your posts should be
-spread out over the course of the week and across at least two different
-days, preferably not the last two days.  
+In term of **quantity** (3 points), you'll be expected to create at
+least 4 posts. One post should answer each of the questions for your
+self-selected study and three posts and/or replies that help us
+collectively address the questions for the required readings. So others
+will have an opportunity to read and respond to your posts, your posts
+should be spread out over the course of the week and across at least two
+different days, preferably not the last two days.
 
 In terms of **quality** (3 points), your posts over the next week should
 provide new or insightful contributions to that question or topic.

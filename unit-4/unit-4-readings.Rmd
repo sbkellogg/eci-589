@@ -21,10 +21,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Overview
 
 In Unit 4 we shift our focus from mathematical approaches for describing
-networks to statistical approaches for explanating and ultimately
-predicting network characteristics and outcomes for those embedded
-within these networks. A secondary goal of readings and discussion is to
-help you start generating ideas for independent application of network
+networks to statistical approaches for explaining and ultimately
+predicting network properties and outcomes for those embedded within
+these networks. A secondary goal of readings and discussion is to help
+you start generating ideas for independent application of network
 analysis. As part of our readings, for example, you'll you'll be
 introduced to a range of questions that statistical models for network
 data can help answer.
@@ -58,7 +58,7 @@ Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google
 Scholar](https://scholar.google.com/) or search engine to locate a
 research or practitioner-focused article, presentation, or resource that
 applies social network analysis to an educational context or topic of
-interest. More specifically, **locate an network study that make use of
+interest. More specifically, **locate an network study that makes use of
 statistical models to explain or predict an education related process or
 outcome.** You are also welcome to select one of the research papers
 listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our
@@ -70,9 +70,9 @@ identify SNA resources outside of the field of education.
 ## Discussion
 
 In lieu of the peer interaction and discussion of course materials that
-normally take place "in-class", you'll be asked to log in this
-week and engage with other members of our learning community through
-this discussion forum. **With the exception of the Self-Selected Study
+normally take place "in-class", you'll be asked to log in this week
+and engage with other members of our learning community through this
+discussion forum. **With the exception of the Self-Selected Study
 questions, you are not required to address every guiding question**,
 particularly if you feel others in the class have thoroughly addressed
 the topic or questions. Our aim for these discussions is to collectively
@@ -96,7 +96,7 @@ To help guide our discussions, we will collectively address a set of
 guiding questions provided below. You are also welcome to add your own
 topics or questions for the class to discuss.
 
-#### Self-Selected Study (Required)
+#### Self-Selected Study
 
 For your self-selected study, provide an APA citation and abstract, then
 briefly answer the following questions as appropriate:
@@ -110,8 +110,9 @@ briefly answer the following questions as appropriate:
 
 -   Did the modeling strategy measure a network's change over time?
 
--   How were simulations used to create a probability distribution
-    against which observed network parameters were compared?
+-   How, if at all, were simulations used to create a probability
+    distribution against which observed network parameters were
+    compared?
 
 -   What does it mean when the result from a statistical model using
     network data is reported as being "statistically significant"? How
@@ -119,15 +120,13 @@ briefly answer the following questions as appropriate:
 
 #### Chapter 8: Statistical Inference With Network Data
 
+Answer one or more of the following questions:
+
 -   Why are simulations necessary in order to make probabilistic
     inferences with network data?
-
-<!-- -->
-
 -   Explain in plain language how simulations are used to create a
     probability distribution that enables you to make a statistical
     inference with network data.
-
 -   Contrast the aims of the mathematical and statistical approaches to
     social network analysis. For what reasons would educational
     researchers prefer one approach versus the other?
@@ -135,7 +134,8 @@ briefly answer the following questions as appropriate:
 #### Chapter 9: Network Data and Statistical Models
 
 Using one of the studies mentioned throughout this chapter, identify the
-statistical model that was employed and answer the following questions:
+statistical model that was employed and answer one or more the following
+questions:
 
 -   Do you think the choice of statistical model(s) used was
     appropriate?
@@ -157,12 +157,13 @@ from your posts that you've done the required reading. Readings and
 discussion for each unit are worth 6 points and judged based on quantity
 and quality of your posts.
 
-In term of **quantity** (3 points), you'll be expected to create a new
-discussion topic your self-selected study and add at least 3 new posts
-and/or replies for a total of 4 posts. So others will have an
-opportunity to read and respond to your posts, your posts should be
-spread out over the course of the week and across at least two different
-days, preferably not the last two days.  
+In term of **quantity** (3 points), you'll be expected to create at
+least 4 posts. One post should answer each of the questions for your
+self-selected study and three posts and/or replies that help us
+collectively address the questions for the required readings. So others
+will have an opportunity to read and respond to your posts, your posts
+should be spread out over the course of the week and across at least two
+different days, preferably not the last two days.
 
 In terms of **quality** (3 points), your posts over the next week should
 provide new or insightful contributions to that question or topic.
