@@ -20,11 +20,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. PREPARE
 
-For the Unit 3 Walkthrough: School Leader Selection Mechanisms we once
+For the **Unit 3 Case Study: Birds of Feather Lead Together**, we once
 again visit guided by Alan Daly and colleagues as we attempt to
 replicate some of the analyses described in Chapter 9: Network Data and
 Statistical Models from Social Network Analysis and Education
-[@carolan2014]. In this walkthrough we'll revisit and then move beyond
+[@carolan2014]. In this case study we'll revisit and then move beyond
 the visual and mathematical descriptions of networks explored so far to
 uncover generative processes, or mechanisms, that attempt to explain how
 school leaders select peers for collaboration or confidential exchanges.
@@ -210,8 +210,8 @@ library(janitor)
 ![](img/statnetlogo.png){width="20%"}
 
 Similar to the collection of packages contained in the {tidyverse}
-package, the Statnet Team [\@handcock:statnet] has developed a suite of
-R packages for the management, exploration, statistical analysis,
+package, the Statnet Team \[\@handcock:statnet\] has developed a suite
+of R packages for the management, exploration, statistical analysis,
 simulation and vizualization of network data. The statistical modeling
 framework used in {statnet} relies on Exponential-family Random Graph
 Models (ERGMs).

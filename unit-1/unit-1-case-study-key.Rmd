@@ -1,6 +1,6 @@
 ---
-title: 'Unit 4 Case Study: Hashtag Common Core'
-subtitle: "ECI 586 Introduction to Learning Analytics"
+title: 'Unit 1 Case Study: Hashtag Common Core'
+subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
