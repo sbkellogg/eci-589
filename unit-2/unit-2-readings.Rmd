@@ -25,19 +25,11 @@ management and measurement in network analysis. The required and
 self-selected readings provide an introduction the collection and
 management of relational data, as well as how we can begin to describe
 what a complete network looks like, not just visually, but
-mathematically.
-
-A secondary goal of readings and discussion is to help you start
-generating ideas for independent application of network analysis. As
-part of our readings, for example, you'll learn how to specify a network
-"boundary" for your study based on different approaches.
-
-Course readings, discussion guidelines, and assessment criteria are
-further described in [this
-document](https://sbkellogg.github.io/eci-589/unit-2/unit-2-readings.html).
-If you have any questions about this assignment, don't hesitate to send
-me an email or schedule a time to talk at
-[calendly.com/sbkellogg](calendly.com/sbkellogg).
+mathematically. A secondary goal of readings and discussion is to help
+you start generating ideas for independent application of network
+analysis. As part of our readings, for example, you'll learn how to
+specify a network "boundary" for your study based on different
+approaches.
 
 ## Readings
 
@@ -46,14 +38,15 @@ Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782)
 [@carolan2014] and locate one additional research article, presentation,
 or informal study to help address our discussion questions for the week.
 
-### SNA and Education Part I: Theory and Concepts
+### SNA and Education Part II: Methods and Measures
 
-The following readings for this unit illustrate how social network
-analysis provides educational researchers with a different way of
-thinking about and measuring an learning processes and outcomes that
-explicitly account for the importance of one's relationships with
-others, as well as the larger pattern in which these relationships are
-embedded.
+The following readings for this unit focus on issues related to the
+collection and measurement of these network variables, including issues
+related to boundary specification, sampling, storage, and methodologies.
+In addition, the readings introduce important concepts and measures used
+to describe static properties of social networks. The conceptual tools
+and precise measures help us move beyond basic visualization of
+networks, to analysis of networks quantitatively.
 
 1.  [Chapter
     3](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml):
