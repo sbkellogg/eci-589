@@ -1,8 +1,8 @@
 ---
-  title: "Unit 2: Data Management & Measurement"
-  subtitle: "df"
+  title: "Unit 2: Management & Measurement"
+  subtitle: "Test"
   author: "**Dr. Shaun Kellogg**"
-  institute: "df"
+  institute: "LASER Institute"
   date: '`r format(Sys.time(), "%B %d, %Y")`'
   output:
     xaringan::moon_reader:
@@ -65,7 +65,7 @@ xaringanExtra::use_tile_view()
 
 .pull-left[
 ## Conceptual Overview
-Data Logistics
+Data Management
 - Collection
 - Management  
 - Quality  
@@ -82,8 +82,18 @@ Network Measurement
 
 
 ---
-# New Slide
+# Data Collection
 
+
+
+
+
+---
+# Data Management
+
+
+---
+# Data Quality
 
 .footnote[
 Krumm, A. et al. (2018). [Learning analytics goes to school.](https://www.taylorfrancis.com/books/mono/10.4324/9781315650722/learning-analytics-goes-school-andrew-krumm-barbara-means-marie-bienkowski).
