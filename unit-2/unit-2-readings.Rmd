@@ -24,7 +24,8 @@ Our primary goal in this unit is to examine common approaches to data
 management and measurement in network analysis. The required and
 self-selected readings provide an introduction the collection and
 management of relational data, as well as how we can begin to describe
-what a complete network looks like, not just visually, but mathematically. A secondary goal of readings and discussion is to help
+what a complete network looks like, not just visually, but
+mathematically. A secondary goal of readings and discussion is to help
 you start generating ideas for independent application of network
 analysis. As part of our readings, for example, you'll learn how to
 specify a network "boundary" for your study based on different
