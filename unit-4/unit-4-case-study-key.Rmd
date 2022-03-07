@@ -178,7 +178,7 @@ suggested that "collaboration among school leaders provides an important
 foundation for more sensitive, perhaps even deeper, relations (e.g.,
 confidential exchanges) at a later point in time."
 
-#### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 For our Unit 4 case study, we focus specifically on generative
 processes, or micro-level mechanisms, the might help explain who school
@@ -213,8 +213,8 @@ the Files, Plots, & Packages Pane in the lower right hand corner.
 ![](img/statnetlogo.png){width="20%"}
 
 Similar to the collection of packages contained in the {tidyverse}
-package, the Statnet Team \[\@handcock:statnet\] has developed a suite
-of R packages for the management, exploration, statistical analysis,
+package, the Statnet Team [@handcock] has developed a suite of R
+packages for the management, exploration, statistical analysis,
 simulation and vizualization of network data. The statistical modeling
 framework used in {statnet} relies on Exponential-family Random Graph
 Models (ERGMs).
