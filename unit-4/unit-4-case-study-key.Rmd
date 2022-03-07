@@ -8,6 +8,7 @@ output:
     toc: yes
     toc_depth: 4
     toc_float: yes
+    code_folding: show
 editor_options:
   markdown:
     wrap: 72
@@ -15,13 +16,14 @@ bibliography: lit/references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-# 1. PREPARE
+## 1. PREPARE
 
 For the **Unit 4 Case Study: Birds of Feather Lead Together**, we once
-again visit the work of Alan Daly and colleagues as we attempt to replicate some of the analyses described in Chapter 9: Network Data and
+again visit the work of Alan Daly and colleagues as we attempt to
+replicate some of the analyses described in Chapter 9: Network Data and
 Statistical Models from Social Network Analysis and Education
 [@carolan2014]. In this case study move beyond the visual and
 mathematical descriptions of networks explored so far to uncover
@@ -211,8 +213,8 @@ the Files, Plots, & Packages Pane in the lower right hand corner.
 ![](img/statnetlogo.png){width="20%"}
 
 Similar to the collection of packages contained in the {tidyverse}
-package, the Statnet Team [\@handcock:statnet] has developed a suite of
-R packages for the management, exploration, statistical analysis,
+package, the Statnet Team \[\@handcock:statnet\] has developed a suite
+of R packages for the management, exploration, statistical analysis,
 simulation and vizualization of network data. The statistical modeling
 framework used in {statnet} relies on Exponential-family Random Graph
 Models (ERGMs).
@@ -380,7 +382,7 @@ leader_matrix
 
     -   
 
-### 2a. Dichotomize Matrix
+### 2b. Dichotomize Matrix
 
 Since one of our goals is a crude replication of the analysis
 demonstrated in Chapter 9, and since working with "valued networks" is a
@@ -471,7 +473,7 @@ colnames(leader_matrix) <- leader_nodes$id
 leader_matrix
 ```
 
-## 2c. Create Network with Attributes
+### 2c. Create Network with Attributes
 
 Recall that edge-lists contain a row for each dyad consisting of at
 minimum two columns with the name of each actor, and which conveniently
@@ -482,7 +484,7 @@ demonstrated in Unit 1.
 Edge-lists also have the advantage of being easier to work with when
 using network packages in R.
 
-### Get Edges
+#### Get Edges
 
 The {igraph} package introduced in Unit 1 has a convenient
 `get.data.frame()` function for extracting an edge list from a matrix,
@@ -638,7 +640,7 @@ leader_measures <- leader_graph %>%
 leader_measures
 ```
 
-### Summarize Node Measures
+#### Summarize Node Measures
 
 We can also use the `activate()` function combined with the
 `as_tibble()` function introduced in our previous unit to extract our
@@ -736,7 +738,7 @@ How close your result to those reported by Carolyn Table 9.1?
 
 -   YOUR RESPONSE HERE
 
-## 3b. Visualize Network Properties
+### 3b. Visualize Network Properties
 
 In Chapter 9, @carolan2014 depicts a directed and dichotomous sociogram
 of the **collaboration** network for year 3 is shown in .
@@ -1155,50 +1157,56 @@ mcmc.diagnostics(ergm_4)
 
 ## 5. COMMUNICATE
 
-For your Independent Analysis assignment for Unit 3 next week, you'll
-create either a simple report or slide deck using an R Markdown document
-just like this to share out some key findings from your analysis.
-Regardless of whether you plan to talk us through your analysis and
-findings with a presentation or walk us through with a brief written
-report, your presentation or report should address the following
-questions:
+For your final Your Turn, your goal is to distill our analysis from
+above into a simple "data product" designed to illustrate key findings
+about changes in the collaboration network over time. For the purposes
+of this task, imagine that your audience consists of the developers and
+facilitators of the DLT MOOC-Eds who have limited background in SNA and
+adapt the following steps accordingly:
 
-1.  **Purpose**. What question or questions are guiding your analysis?
-    What did you hope to learn by answering these questions and why
-    should your audience care about your findings?
+1.  **Select.** Select your ERGM analysis from above, or a new analysis
+    if so motivated, that you think would be interesting or relevant for
+    the target audience and that helps answer our research questions.
 
-2.  **Methods**. What data did you selected for analysis? What steps did
-    you take took to prepare your data for analysis and what techniques
-    you used to analyze your data? These should be fairly explicit with
-    your embedded code.
+2.  **Polish.** Create and polish a data visualization and/or data table
+    to communicate your selected findings.
 
-3.  **Findings**. What did you ultimately find? How do your "data
-    products" help to illustrate these findings? What conclusions can
-    you draw from your analysis?
+3.  **Narrate.** Write a brief narrative (2-3 paragraphs) to accompany
+    your visualization and/or table that includes the following:
 
-4.  **Discussion**. What were some of the strengths and weaknesses of
-    your analysis? How might your audience use this information? How
-    might you revisit or improve upon this analysis in the future?
+    -   The question or questions guiding the analysis;
 
-### 👉 Your Turn ⤵
+    -   The conclusions you've reached based on our findings;
 
-Now that you've become more familiar with this dataset and the social
-network perspective, what other aspects of this dataset, or a dataset
-you are interested in exploring, could you investigate using the
-approaches demonstrated in Chapter 9?
+    -   How your audience might use this information;
 
--   YOUR RESPONSE HERE
+    -   How you might revisit or improve upon this analysis in the
+        future.
 
-What specific research questions might you ask that would be helpful for
-being understanding and improving learning, or the context in which the
-data is collected?
+### **👉 Your Turn** **⤵**
 
--   YOUR RESPONSE HERE
+Use the code chunk below create a polished table and/or visualization(s)
+and write a brief narrative in the space that follows.
+
+### Data Visualization or Table
+
+```{r create_data_product}
+# YOUR CODE HERE
+```
+
+### Narrative
+
+NARRATIVE GOES HERE...
 
 ### 🧶 Knit & Check ✅
 
-Congrats! You've finished the Unit 3 Guided Walkthrough and are ready
-for your independent analysis next week!
+Congratulations - you've completed the Unit 3 case study! To share your
+work, click the drop down arrow next to the ball of yarn that says
+"Knit" at the top of this markdown file, then select "Knit top HTML".
+Assuming your code contains no errors, this will create a web page in
+your Files pane that serves as a record of your work.
 
-To complete this assignment, knit your document and send me an email at
-sbkellog\@ncsu.edu letting me know you're all set.
+Once your file has been knitted, you can publish this file online using
+RPubs, or share the HTML file through another means.
+
+### References
