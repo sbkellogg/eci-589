@@ -20,16 +20,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. PREPARE
 
-For the **Unit 3 Case Study: Birds of Feather Lead Together**, we once
-again visit guided by Alan Daly and colleagues as we attempt to
+For our **Unit 4 Case Study: Birds of Feather Lead Together** we once
+again revisit the work of Alan Daly and colleagues as we attempt to
 replicate some of the analyses described in Chapter 9: Network Data and
 Statistical Models from Social Network Analysis and Education
-[@carolan2014]. In this case study we'll revisit and then move beyond
-the visual and mathematical descriptions of networks explored so far to
-uncover generative processes, or mechanisms, that attempt to explain how
-school leaders select peers for collaboration or confidential exchanges.
+[@carolan2014]. In this case study move beyond the visual and
+mathematical descriptions of networks explored so far to uncover
+generative processes, or mechanisms, that attempt to explain how school
+leaders select peers for collaboration or confidential exchanges.
 
-More specifically, this walkthrough will cover the following topics
+More specifically, this case study will cover the following topics
 pertaining to each data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
@@ -43,17 +43,18 @@ pertaining to each data-intensive workflow process:
 3.  **Explore**: In section 3, we once again use the {tidygraph} package
     and the companion {ggraph} package to calculate basic summary stats
     for our network and will try to replicate and ideally improve upon
-    the sociogram in our course text.
+    the sociogram from our course text.
 
 4.  **Model**: We wrap up our analysis in Section 4 by introducing
     exponential random graph modules used in Chapter 9 of @carolan2014,
     learn to check how well our model "fits our data" and examine
-    diagnostics that might indicate our model has issues.
+    diagnostics that might indicate issues with our model.
 
-5.  **Communicate**: We briefly reflect on our walkthrough in
-    preparation for our independent analysis next week.
+5.  **Communicate**: Finally, we'll select, polish, and narrate a key
+    finding from our analysis that helps to answer or research
+    question(s).
 
-## 1a. Review the Research
+### 1a. Review the Research
 
 In [Social Network Analysis and Education: Theory, Methods &
 Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
@@ -72,34 +73,51 @@ statistical approaches to social network analysis:
     observed pattern" with the goal of explaining and ultimately
     predicting network structures and outcomes.
 
-For Unit 3, we move beyond previous "mathematical approaches" used so
+For Unit 4, we move beyond previous "mathematical approaches" used so
 far and explore the use of ERGMs as a "statistical approach" to network
 analysis. Specifically, we will try to replicate the P\* models used in
 Chapter 9 of @carolan2014 in order to test hypotheses about individual
 and network characteristics that may explain who school leaders select
 for collaboration and confidential exchanges.
 
-### Research Questions
+#### Research Questions
 
-For this walkthrough, we will be using school leadership data were
+For this case study, we will be using school leadership data were
 collected at two school districts over 3 consecutive years that was used
-to answer the following research questions:
+to answer the following research questions below:
 
 1.  Is there a relationship between the frequency of collaboration
     between school leaders and how often they turn to each other to
     discuss issues of a confidential nature?
 2.  Do school leaders prefer to collaborate with those with whom they
     have collaborated in the past, or is there some other reason?
-3.  Does gender or some other individual attribute predicts confidential
-    exchanges between school leaders, or does some previous relation
-    have a stronger effect?
+3.  **Does gender or some other individual attribute predicts
+    confidential exchanges between school leaders, or does some previous
+    relation have a stronger effect?**
 4.  Does collaboration between leaders explain one's level of trust in
     one's administrative colleagues?
 5.  Can we distinguish among different groups of school leaders based on
     how frequently they collaborate, and if so, are these groupings
     related to the level at which they work (school versus district)?
 
-### Data Collection
+Of specific interest for our case study is research question 3
+emphasized in bold text above, which asks whether individual attributes
+predicts tie formation. For example, are males more likely to engage in
+exchange confidential exchanges with other.
+
+> The tendency for individuals to be attracted to and interact with
+> others who share similar characteristics is formally referred to as
+> **homophily or assortativity**, but more commonly known by the "birds
+> of a feather flock together" proverb.
+
+Homophily has been well documented in education research across a
+variety of relation types including student friendships, teacher-pupil
+interactions, and membership in student cohorts
+[@mcpherson1987homophily]. Studies of homophily among student
+friendships, for example, date back to the 1920's and provide strong
+evidence that students form ties based on sociodemographic similarities.
+
+#### Data Collection
 
 For each consecutive year, school district leaders were invited to
 complete a survey that collected individual:
@@ -126,7 +144,7 @@ complete a survey that collected individual:
     ranging from 1 (Strongly disagree) to 7 (Strongly agree) modified
     from Tschannen-Moran and Hoy (2003).
 
-### Analyses
+#### Analyses
 
 Two modeling techniques unique to network analysis and demonstrated in
 Chapter 9 of @carolan2014 are the quadratic assignment procedure (QAP)
@@ -150,7 +168,7 @@ and Exponential Random Graph Models (ERGM):
     MR-QAP procedures control for network structure through
     permutations, these ERGMs attempt to explain it.
 
-## 1b. Key Findings
+#### Key Findings
 
 In response to research questions 1 & 2 from above, Carolyn reported
 that "while collaboration in year 1 does not significantly predict
@@ -159,9 +177,9 @@ suggested that "collaboration among school leaders provides an important
 foundation for more sensitive, perhaps even deeper, relations (e.g.,
 confidential exchanges) at a later point in time."
 
-### **👉 Your Turn** **⤵**
+#### **👉 Your Turn** **⤵**
 
-For our Unit 3 Walkthrough, we focus specifically on generative
+For our Unit 4 case study, we focus specifically on generative
 processes, or micro-level mechanisms, the might help explain who school
 leaders select to collaborate with or engage in confidential exchanges.
 Review Chapter 9 of SNA and Education and report out on the findings
@@ -173,19 +191,15 @@ from the ERGM analysis in response to Research Question 3 below:
 
     -   YOUR RESPONSE HERE
 
-Based on what you know about networks and the context so far, what other
-specific question(s) might the data and analyses described allow you to
-address. For example, the concept of homophily, or the tendency for
-people to seek out or form ties to those who are similar to themselves,
-was introduced in our readings and hypotheses about homophily can easily
-be tested using using ERGMs:
+Based on what you know about networks and the context so far, write
+another research question or hypothesis that can be tested using ERGMs:
 
 -   YOUR RESPONSE HERE
 
-Save this question for later as you'll have a chance to empirically test
-it by the end of this walkthrough.
+Later you'll have a chance to empirically test it by the end of this
+case study.
 
-## **1c.** Load Libraries
+### **1b.** Load Libraries
 
 Recall that **packages**, or libraries, are shareable collections of R
 code that can contain functions, data, and/or documentation and extend
@@ -193,25 +207,13 @@ the functionality of R. You can always check to see which packages have
 already been installed and loaded into RStudio Cloud by looking at the
 the Files, Plots, & Packages Pane in the lower right hand corner.
 
-Let's go ahead and load the packages from Units 1 & 2 since we'll be
-using them again in this walkthrough:
-
-```{r}
-library(readxl)
-library(tidyverse)
-library(igraph)
-library(tidygraph)
-library(ggraph)
-library(janitor)
-```
-
-#### statnet 📦
+#### **statnet 📦**
 
 ![](img/statnetlogo.png){width="20%"}
 
 Similar to the collection of packages contained in the {tidyverse}
-package, the Statnet Team \[\@handcock:statnet\] has developed a suite
-of R packages for the management, exploration, statistical analysis,
+package, the Statnet Team [\@handcock:statnet] has developed a suite of
+R packages for the management, exploration, statistical analysis,
 simulation and vizualization of network data. The statistical modeling
 framework used in {statnet} relies on Exponential-family Random Graph
 Models (ERGMs).
@@ -236,23 +238,42 @@ networks. Within this framework, one can---among other tasks:
 4.  Simulate new networks from the underlying probability distribution
     implied by the fitted model.
 
+#### **👉 Your Turn** **⤵**
+
 Let's load the {statnet} package that we'll be using in the Model
-section of our walkthrough for bullets 1-3 above:
+section of our case study for bullets 1-3 above, as well as the
+following packages that will be using for our network analysis:
+
+-   tidyverse
+-   readxl
+-   igraph
+-   tidygraph
+-   ggraph
+-   skimr
+-   janitor
 
 ```{r}
+# YOUR CODE HERE
+library(readxl)
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
+library(skimr)
+library(janitor)
 library(statnet)
 ```
 
 ------------------------------------------------------------------------
 
-# 2. WRANGLE
+## 2. WRANGLE
 
 For our data wrangling this week, we'll focus on working with network
 data stored as an adjacency matrix. Our primary goals for this section
 are learning how to:
 
 a.  **Import Data**. In this section, we use the {readxl} package from
-    the tidyverse to read in a matrix and node .
+    the tidyverse to read in a matrix and node attributes.
 
 b.  **Dichotomize a Matrix**. As described in Chapter 9, we'll recode
     our edge values to 1s and 0s changing our valued matrix to a binary
@@ -262,13 +283,13 @@ c.  **Create Network Graph**. Finally, we'll convert our matrix to an
     edge-list and store both our edges and node attributes as a network
     igraph object in preparation for analysis.
 
-## 2a. Import Data
+### 2a. Import Data
 
 One of our primary goals is to replicate the ERGM analysis from Chapter
 9: Network Data and Statistical Models [@carolan2014]. Specifically,
-we'll aim to reproduce the results from **Table 9.4. Results of P1 and
+we'll aim to reproduce the results from Table 9.4. Results of P1 and
 P\*Analyses for the Dichotomized and Directed School Leaders
-Confidential Exchanges Network Year 3.**
+Confidential Exchanges Network Year 3.
 
 To do so, we'll need to import two Excel files from the [Social Network
 Analysis and Education companion
@@ -316,7 +337,7 @@ recognized each column as numeric, but the first column indicates the
 "names" for each school leader and we'll be using this column to assign
 names to our columns and rows for our adjacency matrix in just a bit.
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Recall from above that our relations, or edges, are stored as a valued
 [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) in
@@ -360,15 +381,14 @@ leader_matrix
 
     -   
 
-## 2a. Dichotomize Matrix
+### 2a. Dichotomize Matrix
 
 Since one of our goals is a crude replication of the analysis
 demonstrated in Chapter 9, and since working with "valued networks" is a
-little more complex than binary networks, which indicate just the
-presence or absence of a relationship between two actors, we will need
-to "dichotomize" our matrix. In practice this simply entails converting
-our valued matrix to a binary matrix with cells containing just 1s or
-0s.
+little more complex than binary networks that simply indicate the
+presence or absence of a tie, we will need to "dichotomize" our matrix.
+In practice this simply entails converting our valued matrix to a binary
+matrix with cells containing just 1s or 0s.
 
 In their article, [Valued Ties Tell Fewer Lies: Why Not To Dichotomize
 Network Edges With Thresholds](https://arxiv.org/abs/1101.0788), Thomas
@@ -436,7 +456,7 @@ leader_matrix[leader_matrix <= 2] <- 0
 leader_matrix[leader_matrix >= 3] <- 1
 ```
 
-### Add Row and Column Names
+#### Add Row and Column Names
 
 Before we can convert to an edge-list, we will also need to add the
 names of our nodes to the columns and rows of our matrix. These are
@@ -445,19 +465,20 @@ the `$` operator to select these names and assign to our `leader_matrix`
 using the `rownames()` and `colnames()` functions respectively:
 
 ```{r}
-rownames(leader_matrix) <- leader_nodes$ID
+rownames(leader_matrix) <- leader_nodes$id
 
-colnames(leader_matrix) <- leader_nodes$ID
+colnames(leader_matrix) <- leader_nodes$id
+
+leader_matrix
 ```
 
 ## 2c. Create Network with Attributes
 
-To date in this course, we have only worked with edge-lists as a data
-format for storing network data. Recall that edge-lists contain a row
-for each dyad consisting of at minimum two columns with the name of each
-actor, and which conveniently can also contain other information or
-attributes about the relationship such as edge weight, timestamps, or
-other contextual information as demonstrated in Unit 1.
+Recall that edge-lists contain a row for each dyad consisting of at
+minimum two columns with the name of each actor, and which conveniently
+can also contain other information or attributes about the relationship
+such as edge weight, timestamps, or other contextual information as
+demonstrated in Unit 1.
 
 Edge-lists also have the advantage of being easier to work with when
 using network packages in R.
@@ -473,6 +494,8 @@ adjacency_matrix <- graph.adjacency(leader_matrix,
                                     diag = FALSE)
 
 class(adjacency_matrix)
+
+adjacency_matrix
 ```
 
 Note that we included the `diag = FALSE` argument which converts all
@@ -483,18 +506,18 @@ but we'll need to remove these from our network for the ERGM analysis so
 this will save us a step.
 
 Now we can use the `get.data.frame()` function to covert our matrix to a
-standard edge-list, and :
+standard edge-list:
 
 ```{r}
-leader_edges <- get.data.frame(adjacency_matrix) %>% 
-  mutate(from = as.character(from)) %>%
+leader_edges <- get.data.frame(adjacency_matrix) |>
+  mutate(from = as.character(from)) |>
   mutate(to = as.character(to))
 
 
 leader_edges
 ```
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Recall from Unit 2 that we introduced the {tidygraph} package for
 preparing and summarizing our Twitter network. Tidygraph includes the
@@ -536,7 +559,7 @@ to start analysis!
 
 ------------------------------------------------------------------------
 
-# 3. EXPLORE
+## 3. EXPLORE
 
 In Section 3, we use the {tidygraph} package for retrieving network
 descriptives and the {ggraph} package to create a network visualization
@@ -552,7 +575,7 @@ b.  **Make a Sociogram**. Finally, we wrap up the explore phases by
     shape, and position of nodes and edges to better at communicating
     key findings.
 
-## 3a. Examine Descriptives
+### 3a. Examine Descriptives
 
 As noted in SNA and Education [@carolan2014], many analyses of social
 networks are primarily descriptive and aim to either represent the
@@ -564,13 +587,13 @@ mean and standard deviation for: in-degree, out-degree, trust and
 efficacy measures. The proportion of male leaders was also reported. For
 section 3a, let's see if we can reproduce these descriptives.
 
-### Calculate Node Degree
+#### Calculate Node Degree
 
-Recall that **degree** is the number of ties to and from an ego, or put
-more simply, a the number of people to whome someone is connected. In a
-directed network, **in-degree** is the number of connections or ties
-received, whereas **out-degree** is the number of connections or ties
-sent.
+Recall that **degree** is the number of ties to and from an ego, or in
+the case of a "simple graph" like ours, degree is simply the number of
+people to whom someone is connected. In a directed network,
+**in-degree** is the number of connections or ties received, whereas
+**out-degree** is the number of connections or ties sent.
 
 The `activate()` function from the {tidygraph} package allows us to
 treat the nodes in our network object as if they were a standard data
@@ -585,15 +608,15 @@ Run the following code to add in- and out-degree measures to each of our
 nodes and examine the output:
 
 ```{r}
-leader_measures <- leader_graph %>%
-  activate(nodes) %>%
-  mutate(in_degree = centrality_degree(mode = "in")) %>%
+leader_measures <- leader_graph |>
+  activate(nodes) |>
+  mutate(in_degree = centrality_degree(mode = "in")) |>
   mutate(out_degree = centrality_degree(mode = "out"))
 
 leader_measures
 ```
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 We now see that, in addition to the previously included attributes
 `trust` and `efficacy`, in-degree and out-degree measures have been
@@ -619,24 +642,34 @@ leader_measures
 ### Summarize Node Measures
 
 We can also use the `activate()` function combined with the
-`data.frame()` function to extract our new measures to a separate data
-frame so we inspect our nodes individually and view some basic summary
-statistics using the handy `summary()` function included in the R {base}
-package.
+`as_tibble()` function introduced in our previous unit to extract our
+new measures to a separate data frame we'll call `node_measures` so we
+can inspect our nodes individually and later use to calculate some
+summary stats:
 
 ```{r}
-node_measures <- leader_measures %>% 
-  activate(nodes) %>%
-  data.frame()
+node_measures <- leader_measures |> 
+  activate(nodes) |>
+  as_tibble()
 
+node_measures
+```
+
+Now let's view some basic summary statistics for each of the variables
+using the handy `summary()` function included in the R {base} package
+and the `skim()` functions from the {skimr} package.
+
+```{r}
 summary(node_measures)
+
+skim(node_measures)
 ```
 
 It looks like our summary stats for Year 3 confidential exchanges
 network and attribute data are pretty close to those reported in Table
-9.1 copied from @carolan2014. For example, our average total efficacy
-and trust scores were 6.65 and 4.78 respectively, compared to 6.64 and
-4.77 as reported in Chapter 9.
+9.1 copied from @carolan2014. For example, our mean total efficacy and
+trust scores were 6.65 and 4.78 respectively, compared to 6.64 and 4.77
+as reported in Chapter 9.
 
 ![](img/table-9-1.jpg){width="90%"}
 
@@ -657,8 +690,8 @@ calculate basic summary stats such as counts, mean, and standard
 deviation as follows:
 
 ```{r}
-node_measures %>%
-  group_by(district_site) %>%
+node_measures |>
+  group_by(district_site) |>
   summarise(n = n(),
             mean = mean(in_degree), 
             sd = sd(in_degree)
@@ -671,7 +704,7 @@ our average in-degree for district-level (coded "1") and school-level
 (coded "0") leaders is 4.66 and 2.36 respectively, but reported as 4.72
 and 2.64 by @carolan2014.
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Use the code chunk below and additional chunks if needed to try and
 replicate the school and district level findings for out-degree, trust
@@ -704,14 +737,14 @@ How close your result to those reported by Carolyn Table 9.1?
 
 -   YOUR RESPONSE HERE
 
-## 3b. Visualize Network
+## 3b. Visualize Network Properties
 
-In Chapter 9, @carolan2014 depictgs a directed and dichotomous sociogram
+In Chapter 9, @carolan2014 depicts a directed and dichotomous sociogram
 of the **collaboration** network for year 3 is shown in .
 
 ![](img/figure-9-1.jpg){width="90%"}
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Try creating a **Year 3 Confidential Exchange Network** by modifying the
 code below and tweaking the included function/arguments or adding new
@@ -724,7 +757,7 @@ it's trying to communicate.
 
 ```{r}
 #YOUR CODE HERE
-leader_measures %>%
+leader_measures |>
 ggraph(layout = "fr") + 
   geom_node_point() +
   geom_edge_link() + 
@@ -746,44 +779,58 @@ encounter any errors.
 
 ------------------------------------------------------------------------
 
-# 4. MODEL
+## 4. MODEL
 
-Recall from @carolan2014 that **Exponential Random Graph Models**
-provide a means to compare whether a network's observed structural
-properties occur more frequently than you could expect from chance
-alone. More specifically, ERGMS provide a way to determine whether
-network properties (e.g., reciprocity) occur by chance as a result of
-other network properties (e.g., density) or whether the observed
-properties are unlikely given other parameters in the network.
+Recall from @carolan2014 that network models and the questions they are
+designed to address are categorized into three different analytical
+emphases:
+
+1.  Relationship-level models that focus on the ties between actors in
+    complete networks;
+
+2.  Models that predict individual actors' attributes; and,
+
+3.  Actor-level models that emphasize the differences within and among
+    groups of actors within a complete network.
+
+**Exponential Random Graph Models** fall into category 1 and are
+relationship-level models that focus on how formation of dyadic ties
+within a complete relational network can be explained by both structural
+and attribute variables. ERGMs provide a means to compare whether a
+network's observed structural properties occur more frequently than you
+could expect from chance alone. More specifically, ERGMS provide a way
+to determine whether observed network properties like reciprocity and
+assortativity occur by chance as a result of other network properties.
 
 While the technical aspects of estimating ERGMs are complex, their
 interpretation is pretty straightforward. In this section we are
-interested exploring how these models be used make inferences about the
-social processes at work in the School Leaders data. For example, in
-this section we will explore the following questions:
+interested exploring how these models can be used to make inferences
+about the social processes at work in the School Leaders data. For
+example, in this section we will explore the following questions posed
+in Chapter 9:
 
--   If one school leader turns to another to discuss something
-    confidential, is the latter likely to reciprocate?
+1.  **Reciprocity.** If one school leader turns to another to discuss
+    something confidential, is the latter likely to reciprocate?
 
--   Are school leaders more likely to confide in someone if they both
-    confide in the same school leader?
+2.  **Transitivity.** Are school leaders more likely to confide in
+    someone if they both confide in the same school leader?
 
--   Do a leader's gender and efficacy score, predict a confidential
-    exchange between two leaders?
+3.  **Attribute Effect.** Do a leader's gender and efficacy score,
+    predict a confidential exchange between two leaders?
 
-## 4a. Loading Network Data
+### 4a. Loading Network Data
 
 As we've discovered in this course, network data can come in many
 different forms --- ties can be stored as edgelists or matrices, saved
-as .csv or excel files, and converted to a variety of network R objects;
-attributes for the nodes, ties and dyads in can also various forms and
+as .csv or excel files, and converted to a variety of network R objects.
+Attributes for the nodes, ties and dyads in can also various forms and
 added in various ways to objects in R. For the {ergm} package, however,
-data will need to be transformed into a `network` object --- the format
-that statnet uses to store and work with network data.
+data will need to be transformed into a object of the class "network"
+--- the format that statnet uses to store and work with network data.
 
 Fortunately, we have already prepared our data for quick conversion to a
 `network` object and can supply just a couple arguments to the
-`as.network()` function from the {network} package:
+`as.network()` function from the {network} package used by statnet:
 
 -   `x =` a matrix giving the network structure in adjacency, incidence,
     or edgelist form;
@@ -795,7 +842,7 @@ Fortunately, we have already prepared our data for quick conversion to a
 
 Similar to the `tbl_graph` function from {tidygraph} that we used above,
 let's add our `leader_edges` edge-list and our `leader_nodes` data frame
-as the `x =` and `vertices =` attributes in the `as.network()` function
+as the `x =` and `vertices =` arguments in the `as.network()` function
 and assign to a new object called `leader_network`:
 
 ```{r}
@@ -819,14 +866,14 @@ class(leader_network)
 
 So far so good! Let's start building our first ERGM model!
 
-## 4b. Estimate the ERGM Model
+### 4b. Estimate the ERGM Model
 
 We'll begin by running a simple model both to demonstrate the most
 commonly used functions for ERGMs and also to replicate the approach in
 Chapter 9 of @carolan2014.
 
-The syntax for specifying a model in the `ergm` package follows **R**'s
-formula convention:
+The syntax for specifying a model in the `ergm` package follows R's
+standard formula convention:
 `my_network ~ ergm_term_1 + ergm_term_2 + ergm_term_3` and so forth.
 
 This syntax is used for both the `summary` and `ergm` functions.
@@ -839,19 +886,19 @@ This syntax is used for both the `summary` and `ergm` functions.
 As noted by the [Statnet Development
 Team](http://statnet.org/Workshops/ergm_tutorial.html#The_summary_and_ergm_functions,_and_supporting_functions):
 
-> It is good practice to run a `summmary` command on any model before
-> fitting it with `ergm`. This is the ERGM equivalent of performing some
+> It is good practice to run a `summmary` command on any model before
+> fitting it with `ergm`. This is the ERGM equivalent of performing some
 > descriptive analysis on your covariates. This can help you make sure
 > you understand what the term represents, and it can help to flag
 > potential problems that will lead to poor modeling results.
 
-### Network Structure Parameters
+#### Network Structure Parameters
 
 Let's start with with a simple model similar to the P~1~ model in Table
-9.4. This model contains the ergm-term **`edges`** that represents the
-total number of edges in the network, and the ergm-term **`mutual`**
-that examines the tendency for ties to be reciprocated, i.e.
-"mutuality".
+9.4. This model contains the required ergm-term **`edges`** that
+represents the total number of edges in the network, and the ergm-term
+**`mutual`** that examines the tendency for ties to be reciprocated,
+i.e. "mutuality".
 
 ```{r}
 summary(leader_network ~ edges + mutual)
@@ -860,10 +907,10 @@ summary(leader_network ~ edges + mutual)
 We see from our summary that our `leader_network` consists of 143 edges
 and 36 reciprocated dyads.
 
-Since the `ergm()` function automatically uses a stochastic MCMC-based
-estimation algorithm, use the `set.seed()` function and set the value to
-589 (note this could be any number besides our course number) so we
-produce the same results each time.
+Since the `ergm()` function uses a stochastic MCMC-based estimation
+algorithm, use the `set.seed()` function and set the value to 589 (note
+this could be any number besides our course number) so we produce the
+same results each time.
 
 Now let's estimate our model, save the results as `ergm_mod_1`, and use
 the `summary()` function again to take a look at our estimates. Also,
@@ -881,7 +928,7 @@ indicating the importance of each to the presence of a tie, estimated
 coefficients can be explained in terms similar to logistic regression.
 That is, positive significant coefficients indicate that the
 corresponding parameters in the observed network (e.g. reciprocated ties
-between school leaders, controlling for all other parameters in the
+between school leaders), controlling for all other parameters in the
 model, occur more than would be expected by chance, thus increasing the
 likelihood that a tie will occur, and vice-versa for negative
 coefficients.
@@ -943,7 +990,7 @@ inherent to networks themselves, or "global features" of the graph
 independent of actors, and have not looked at individual attributes
 among actors that may be shaping out network.
 
-### Actor Attribute Parameters
+#### Actor Attribute Parameters
 
 As noted by @carolan2014, ERGMs have advanced to the point where actor
 attributes, or actor-level covariates, can now be incorporated into
@@ -977,7 +1024,7 @@ summary(ergm_3)
 
 Although there appears to be a very slight, though not statistically
 significant tendency towards male leaders being more likely to send or
-recieve ties, the primary drivers of network formation appear to be
+receive ties, the primary drivers of network formation appear to be
 structural features of the network including reciprocity and
 transitivity.
 
@@ -986,18 +1033,18 @@ we also did not replicate their model exactly, nor did we fine tune our
 model parameters. Regardless, this provided a practical exercise for
 demonstrating ERGMs.
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Before moving on to checking the goodness of fit for our final model,
-try testing a new model by modifying or adding your own ergm-term. For
-example, to test for homophily among gender, the `ergm()` function
-includes a `nodematch()` argument that could be used to see if school
-leaders are more likely to confide in colleagues of their own gender.
+try testing to see if shared characteristics among school leaders might
+help explain tie formation. To test for homophily among gender or
+location, the `ergm()` function includes a `nodematch()` argument
+similar to `nodefactor()` used above that could be used to answer the
+following question:
 
-You can look at a [table of common
-ergm-terms](http://statnet.org/nme/d2-ergmterms.html) or type
-"ergm-terms" into the help menu of the files pane for some suggested
-examples.
+1.  Controlling for edges, reciprocity, and transitivity, are school
+    leaders more likely to confide in colleagues of their own gender or
+    who work at the same district-site level?
 
 ```{r, message=FALSE}
 #YOUR CODE HERE
@@ -1005,7 +1052,7 @@ ergm_4 <- ergm(leader_network ~ edges +
                  mutual +
                  gwesp(0.25, fixed=T) +
                  nodematch('male') +
-                 nodecov('efficacy')
+                 nodematch('district_site')
                )
   
   
@@ -1017,9 +1064,15 @@ interpretation of the results below:
 
 -   YOUR RESPONSE HERE
 
-## 4c. Check Model Fit
+We've only scratched the surface for the number of network and node
+attributes properties that can be tested using ERGMs. Take a look at a
+[table of common ergm-terms](http://statnet.org/nme/d2-ergmterms.html)
+or type "ergm-terms" into the help menu of the files pane for some
+additional examples.
 
-One test of whether an ergm model is a "good fit" fo the data is "how
+### 4c. Check Model Fit
+
+One test of whether an ergm model is a "good fit" for the data is "how
 well it reproduces the observed global network properties *that are not
 in the model*." This can be accomplished by choosing a network statistic
 that is not in the model, and comparing the value of this statistic
@@ -1027,7 +1080,7 @@ observed in the original network to the distribution of values we get in
 simulated networks from our model, using the `gof()` function to test
 the goodness-of-fit.
 
-### The GOF Function
+#### The GOF Function
 
 The `gof()` function is a bit different than the `summary()` and
 `ergm()` functions, in that it only takes 3 ergm-terms as arguments:
@@ -1050,7 +1103,7 @@ our charts (the actual observed network measures) closely follows the
 aggregate measures generated from the simulations, or permutations of
 our network.
 
-### Check MCNC Diagnostics
+#### Check MCNC Diagnostics
 
 One final check on our model is to examine the Monte-Carlo Markov Chain
 (MCMC) diagnostics to make sure our model is not heading of in the wrong
@@ -1085,18 +1138,23 @@ roughly normally distributed on both ends. Overall, the diagnostics
 indicate there is room for improvement but nothing is wildly off and
 hence our model did not fail to converge.
 
-### **👉 Your Turn** **⤵**
+#### 👉 Your Turn ⤵
 
 Use the code chunk below to check the model fit and diagnostics for the
 model the you created in [4b. Estimate the ERGM Model]:
 
 ```{r}
 #YOUR CODE HERE
+ergm_4_gof <- gof(ergm_4)
+
+plot(ergm_4_gof)
+
+mcmc.diagnostics(ergm_4)
 ```
 
 ------------------------------------------------------------------------
 
-# 5. COMMUNICATE
+## 5. COMMUNICATE
 
 For your Independent Analysis assignment for Unit 3 next week, you'll
 create either a simple report or slide deck using an R Markdown document
@@ -1123,7 +1181,7 @@ questions:
     your analysis? How might your audience use this information? How
     might you revisit or improve upon this analysis in the future?
 
-### **👉 Your Turn** **⤵**
+### 👉 Your Turn ⤵
 
 Now that you've become more familiar with this dataset and the social
 network perspective, what other aspects of this dataset, or a dataset
