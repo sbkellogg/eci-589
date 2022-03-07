@@ -20,8 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. PREPARE
 
-For the **Unit 3 Case Study: Birds of Feather Lead Together**, we once
-again visit guided by Alan Daly and colleagues as we attempt to
+For the **Unit 4 Case Study: Birds of Feather Lead Together**, we once
+again visit the work of Alan Daly and colleagues as we attempt to
 replicate some of the analyses described in Chapter 9: Network Data and
 Statistical Models from Social Network Analysis and Education
 [@carolan2014]. In this case study we'll revisit and then move beyond

@@ -25,9 +25,9 @@ networks to statistical approaches for explaining and ultimately
 predicting network properties and outcomes for those embedded within
 these networks. A secondary goal of readings and discussion is to help
 you start generating ideas for independent application of network
-analysis. As part of our readings, for example, you'll you'll be
-introduced to a range of questions that statistical models for network
-data can help answer.
+analysis. As part of our readings, for example, you'll be introduced to
+a range of questions that statistical models for network data can help
+answer.
 
 ## Readings
 
