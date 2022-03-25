@@ -1,0 +1,202 @@
+---
+title: "Unit 5 Readings: Social Capital & Network Diffusion"
+subtitle: "ECI 589 Social Network Analysis and Education"
+author: "Dr. Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+editor_options:
+  markdown:
+    wrap: 72
+bibliography: lit/references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+In Unit 5 the primary goal is to connect the methods, measures, and
+techniques presented in the previous units to the theoretical areas of
+social capital and network diffusion. We examine how each is defined and
+measured and how they have been applied to understand and improve
+teaching and learning. A secondary goal of our readings and discussion
+is to help you start generating ideas for independent application of
+network analysis. As part of our readings, for example, you'll be
+introduced to a range of questions that statistical models for network
+data can help answer.
+
+## Readings
+
+For Unit 5, you will read chapters 10 and 11 from [Social Network
+Analysis and
+Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782)
+[@carolan2014] and locate one additional research article, presentation,
+or informal study to help address our discussion questions for the week.
+
+### SNA and Education Part III: Applications and Examples
+
+The following chapters explore social capital and diffusion, two rich
+theoretical frameworks that have been been put to the test and refined
+by network analysis. We'll learn how social capital has been on the
+study of educational outcomes like student achievement, as well as the
+importance of social influences on the diffusion of new behaviors or
+policy in educational contexts.
+
+1.  [Chapter 10: Social
+    Capital](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml)
+
+2.  [Chapter 11:
+    Diffusion](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n11.xml)
+
+### Self-Selected Study
+
+Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google
+Scholar](https://scholar.google.com/) or search engine to locate a
+research or practitioner-focused article, presentation, or resource that
+applies social network analysis to an educational context or topic of
+interest. More specifically, **locate a network study that examines
+social capital or diffusion in an educational context.** You are also
+welcome to select one of the research papers listed in the
+[syllabus](https://sbkellogg.github.io/eci-589/) or in our [course
+text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have
+peaked your interest. Your selection should address one or more of the
+discussion topics/questions (see below) and you're welcome to identify
+SNA resources outside of the field of education.
+
+## Discussion
+
+In lieu of the peer interaction and discussion of course materials that
+normally take place "in-class", you'll be asked to log in this week
+and engage with other members of our learning community through this
+discussion forum. **With the exception of the Self-Selected Study
+questions, you are not required to address every guiding question**,
+particularly if you feel others in the class have thoroughly addressed
+the topic or questions. Our aim for these discussions is to collectively
+build our understanding of these readings through back-and-forth
+dialogue and avoid a "collective monologue" in which we see 20
+variations of effectively the same post.
+
+To create a new post in response to one or more of the guiding questions
+listed below, click "Add a new discussion topic" located below the forum
+overview text and add a descriptive title for the subject line. In the
+message box, includes the question(s) your post is addressing, as well
+as your response to the selected questions. Remember, you are not
+required to address every guiding question with the exception of the
+Self-Selected Study questions for which you must create one new
+discussion topic and respond to the discussion prompt and required
+questions.
+
+### Guiding Questions
+
+To help guide our discussions, we will collectively address a set of
+guiding questions provided below. You are also welcome to add your own
+topics or questions for the class to discuss.
+
+#### Self-Selected Study
+
+For your self-selected study, provide an APA citation and abstract, then
+briefly answer the following questions as appropriate to the theoretical
+framework it examines:
+
+**Social Capital Model**
+
+-   How has social capital been defined? How has it been measured?
+-   Does this measure include information on network location and/or
+    embedded resources?
+-   Is social capital conceptualized and measured as an individual or
+    collective good?
+-   Is social capital treated as an independent or dependent variable?
+    If the former, is it used to predict an expressive or instrumental
+    return?
+-   Does the measurement of social capital emphasize structural holes or
+    network closure?
+
+**Network-Based Diffusion Model**
+
+-   In what ways does the study employ a network-based diffusion model?
+-   What makes this a network-based diffusion model?
+-   Which of the four network-based diffusion models is most evident in
+    the study's design and analysis?
+-   Is this study more concerned with micro- or macro-level processes or
+    outcomes?
+-   How does the study's diffusion model account for time? Is it
+    explicitly modeled?
+-   What is the study's time span?
+-   How many data-collection points were there within this span?
+-   In addition to social network data, were there any other
+    time-varying or time-constant data collected and included in their
+    models?
+
+#### Chapter 10: Social Capital
+
+Answer one or more of the following questions:
+
+-   Describe a personal situation in which serving as a broker led to
+    some instrumental return for you. What model of social capital does
+    this illustrate?
+-   Describe a personal situation in which being part of a network with
+    high closure led to some expressive return. What model of social
+    capital does this illustrate?
+-   You are a school superintendent who is charged with implementing a
+    district-wide reform effort that is unpopular among a small set of
+    vocal, veteran teachers, with the rest of the faculty expressing no
+    opinion on it whatsoever. How would you use your knowledge of social
+    capital in order to design a program that promotes buy-in of this
+    reform effort?
+
+#### Chapter 11: Diffusion
+
+Suppose you wanted to study how a certain system of teacher evaluation
+spread from one school district to another over a certain time period.
+
+-   What time-varying and time-constant data would you need in order to
+    test the appropriate network-based model of diffusion?
+
+-   At what analytical levels would these data need to be collected and
+    modeled?
+
+-   How would you design a network-based intervention whose goal was to
+    have teachers adopt a more student-centered instructional approach?
+
+-   How might you nominate opinion leaders to implement key components
+    of this intervention?
+
+-   How could you design a study that examined whether this
+    network-based approach was successful?
+
+## Assessment
+
+Grading for this assignment is fairly lenient, provided that it's clear
+from your posts that you've done the required reading. Readings and
+discussion for each unit are worth 6 points and judged based on quantity
+and quality of your posts.
+
+In term of **quantity** (3 points), you'll be expected to create at
+least 4 posts. One post should answer each of the questions for your
+self-selected study and three posts and/or replies that help us
+collectively address the questions for the required readings. So others
+will have an opportunity to read and respond to your posts, your posts
+should be spread out over the course of the week and across at least two
+different days, preferably not the last two days.
+
+In terms of **quality** (3 points), your posts over the next week should
+provide new or insightful contributions to that question or topic.
+There is no requisite for the length of each posting, in fact short
+conversational exchanges (1-3 paragraphs) are highly encouraged. I
+strongly recommend taking a look at Table 1 of [the productive online
+discussion
+model](https://moodle-courses2122.wolfware.ncsu.edu/pluginfile.php/287931/mod_forum/post/6203/Gao%2C%20Wang%2C%20Sun%20-%202009%20-%20A%20new%20model%20of%20productive%20online%20discussion%20and%20its%20implications%20for%20research%20and%20instruction.pdf) [@gao2009]
+for ways to contribute to the conversation. 
+
+At minimum, your collective posts should also help us interpret or
+elaborate on discussion topics, questions, or ideas others have shared
+by "making connection to the learning materials" and should reference at
+some point each of the required chapters and your self-selected reading
+or resource.
+
+## References
