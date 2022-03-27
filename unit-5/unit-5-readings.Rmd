@@ -25,10 +25,10 @@ techniques presented in the previous units to the theoretical areas of
 social capital and network diffusion. We examine how each is defined and
 measured and how they have been applied to understand and improve
 teaching and learning. A secondary goal of our readings and discussion
-is to help you start generating ideas for independent application of
-network analysis. As part of our readings, for example, you'll be
-introduced to a range of questions that statistical models for network
-data can help answer.
+is to help you generate ideas for independent application of network
+analysis. As part of our readings, for example, you'll be introduced to
+several studies that apply a social network perspective to long standing
+theories of social capital and diffusion.
 
 ## Readings
 
@@ -42,10 +42,10 @@ or informal study to help address our discussion questions for the week.
 
 The following chapters explore social capital and diffusion, two rich
 theoretical frameworks that have been been put to the test and refined
-by network analysis. We'll learn how social capital has been on the
-study of educational outcomes like student achievement, as well as the
-importance of social influences on the diffusion of new behaviors or
-policy in educational contexts.
+by network analysis. We'll learn how social capital has been linked to
+educational outcomes like student achievement, as well as the importance
+of social influences on the diffusion of new behaviors or policy in
+educational contexts.
 
 1.  [Chapter 10: Social
     Capital](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml)
