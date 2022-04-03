@@ -79,7 +79,7 @@ increased the number of superficial interactions, and more frequent
 exchanges remained unchanged, resulting in a centralized network
 structure.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Take a look at the article *The Ebb and Flow of Social Network Ties
 Between District Leaders Under High-Stakes Accountability* located in
@@ -176,7 +176,7 @@ It is designed to work with *tabular* data.
 Since one of our data wrangling steps in the next section is importing
 network matrices stored in excel files, this package will come in handy.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below to load the tidyverse, igraph, tidygraph,
 ggraph, and readxl packages that we'll be using in this case study:
@@ -267,7 +267,7 @@ collaboration ties. In Section 2, we'll learn how to restructure this
 data into a formal matrix and then convert to a network class R object
 so we can explore our data through network visualization and analyses.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below to import the Year 3 collaboration network
 located in data folder of your R project and then inspect your newly
@@ -395,7 +395,7 @@ used with other tidyverse packages and functions to create new
 actor-level network variables like degree, reciprocity, and centrality
 measures.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below to complete the following data wrangling steps
 for our Year 3 collaboration network from the Excel file you imported
@@ -524,7 +524,7 @@ in the console and see the plot in the Viewer pane or click the little
 arrow/window icon in the output of the code chunk to open the plot in a
 new window and resize.
 
-### **Sociograms with ggraph**
+### Sociograms with ggraph
 
 One thing to keep in mind when building a network viz with the {ggraph}
 package is that just like it's {ggplot} counterpart for making more
@@ -610,7 +610,7 @@ leaders based on measures of centralization to highlight more central
 actors in the network and add arrows to indicate directionality of the
 ties since this is a directed network.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below created a simple sociogram for the Year 3
 collaboration network and answer the questions that follow:
@@ -925,7 +925,7 @@ large diameter and small average path length suggests a structure in
 which there are parts of the network that some network actors may be
 unable to access.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below to calculate the following measures for the
 Year 3 collaboration newtwork, then answer the questions below:
@@ -986,7 +986,7 @@ tendencies toward reciprocity, homophily, and transitivity over time and
 to estimate parameters expressing their strengths while controlling for
 other tendencies ("confounders").
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Take a look at the article *The Ebb and Flow of Social Network Ties
 Between District Leaders Under High-Stakes Accountability* located in
@@ -1027,7 +1027,7 @@ findings from an analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 For your final Your Turn, your goal is to distill our analysis from
 above into a simple "data product" designed to illustrate key findings
