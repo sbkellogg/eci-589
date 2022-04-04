@@ -21,46 +21,48 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ## 1. PREPARE
 
-Behind the social network visualizations explored in the chapter on
-social network analysis, Chapter 12, there are also statistical models
-that can be used to further understand relationships in a network.
+In Unit 5 we explore the process of network influence, which is the flip
+side of network selection processes that we examined in our previous
+case study. Both of these processes are commonly the focus of
+statistical analyses of networks. Selection and influence do not
+interact independently and often affect each other reciprocally (Xu,
+Frank, & Penuel, 2018).
 
-One way to consider these models and methods is by considering selection
-and influence, two processes at play in our relationships. These two
-processes are commonly the focus of statistical analyses of networks.
-Selection and influence do not interact independently: they affect each
-other reciprocally (Xu, Frank, & Penuel, 2018).
-
-Let's define these two processes:
+Let's first quickly define these two processes:
 
 -   **Selection**: the process of choosing relationships
 
 -   **Influence**: the process of how our social relationships affect
     behavior
 
-While these processes are complex, it is possible to study them using
-data about people's relationships and behavior. Happily, the use of
-these methods has expanded along with R. In fact, long-standing R
-packages have become some of the best tools for studying social
-networks. Additionally, while there are many nuances to studying
-selection and influence, these are models that can be carried out with
-relatively simple modeling techniques like linear regression.
-
 ### 1a. Research Question
 
-> Question
+In Unit 5, we will briefly examine a hypothetical example of peer
+influence on attitudes towards STEM careers among a small group of
+friends. Specifically, we will try to answer the following question:
+
+> Are student' attitudes towards careers in STEM influenced by the
+> attitudes of their friends?
 
 ### 1b. Load Libraries
 
+While selection and influence processes are complex, it is possible to
+study them using data about people's relationships and behavior.
+Happily, the use of these methods has expanded along with R. In fact,
+long-standing R packages have become some of the best tools for studying
+social networks. Additionally, while there are many nuances to studying
+selection and influence, these are models that can be carried out with
+relatively simple modeling techniques like linear regression.
+
 #### 👉 Your Turn ⤵
 
-Let's load the {statnet} package that we'll be using in the Model
-section of our case study for bullets 1-3 above, as well as the
-following packages that will be using for our network analysis:
+Load the the following packages that will be using for our analysis of
+network influence:
 
 -   tidyverse
 -   tidygraph
 -   ggraph
+-   moderndive
 
 ```{r load-libraries}
 # YOUR CODE HERE
@@ -77,26 +79,24 @@ library(moderndive)
 To examine a hypothetical case of network selection, we'll create three
 different data frames. These will include:
 
--   An **edgelist** data frame that contains
-    the *nominator* and *nominee* for a relationship. For example, if
-    Stefanie says that José is her friend, then Stefanie is the
-    nominator and José the nominee. Recall that an edgelist can also
-    contain an optional variable indicating the weight, or strength, of
-    their relation
+-   One **edgelist** that contains the *nominator* and *nominee* for a
+    relationship. For example, if Stefanie says that José is her friend,
+    then Stefanie is the nominator and José the nominee. Our edgelist
+    will also contain variable indicating the weight, or strength, of
+    their relation.
 
 -   Two **nodelists** indicating the values of some behavior - an
-    outcome - at two different time points
+    outcome - at two different time points. In our case, these values
+    will represent a measure student's attitudes towards careers in
+    STEM.
 
 ### 2a. Create an Edgelist
 
 First let's create an edgelist with three variables for a nominator,
-nominee, and strength of the relation. In this hypothetical example,
-let's pretend this network consists of friendships among six students
-assigned to working together on a classroom science project.
-
-Run the following code to create [tibble](https://tibble.tidyverse.org)
--- a tidy table or data frame -- that contains information about each
-dyad in our network with a corresponding strength of "1":
+nominee, and strength of the relation. Run the following code to create
+[tibble](https://tibble.tidyverse.org) -- a tidy table or data frame --
+that contains information about each friendship dyad in our network with
+a corresponding strength of "1":
 
 ```{r, create-edgelist}
 
@@ -111,16 +111,19 @@ student_edges
 
 Next, let's create a data frame, or tibble, that contains the nominee
 and the values of a behavior at the first time point. For our
-hypothetical example, let's pretend that our `yvar1` variable at time
-point 1 represents a composite score for each students' attitude towards
-group work prior to this project on a scale of -3 (very negative) to 3
-(very positive)
+hypothetical example, our `time_1` variable represents a composite score
+for each students' attitude towards STEM careers at the beginning of the
+semester and measured on a scale of -3 (very negative) to 3 (very
+positive)
 
 ```{r}
 nominee_data <- tibble(nominee = c(1, 2, 3, 4, 5, 6), 
                 time_1 = c(2.4, 2.6, 1.1, -0.5, -3, -1)
                 )
 ```
+
+We will use this data late in our modeling section create a new measure
+called an "exposure term" that
 
 #### 👉 Your Turn ⤵
 
