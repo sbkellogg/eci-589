@@ -46,6 +46,12 @@ networks. Additionally, while there are many nuances to studying
 selection and influence, these are models that can be carried out with
 relatively simple modeling techniques like linear regression.
 
+### 1a. Research Question
+
+> Question
+
+### 1b. Load Libraries
+
 #### 👉 Your Turn ⤵
 
 Let's load the {statnet} package that we'll be using in the Model
@@ -61,163 +67,92 @@ following packages that will be using for our network analysis:
 library(tidyverse)
 library(tidygraph)
 library(ggraph)
+library(moderndive)
 ```
 
 ------------------------------------------------------------------------
 
 ## 2. WRANGLE
 
-For our data wrangling this week, we'll focus on working with network
-data stored as an adjacency matrix. Our primary goals for this section
-are learning how to:
+To examine a hypothetical case of network selection, we'll create three
+different data frames. These will include:
 
-a.  **Create Data Frames**. In this section, we use the {readxl} package
-    from the tidyverse to read in a matrix and node attributes.
+-   An **edgelist** data frame that contains
+    the *nominator* and *nominee* for a relationship. For example, if
+    Stefanie says that José is her friend, then Stefanie is the
+    nominator and José the nominee. Recall that an edgelist can also
+    contain an optional variable indicating the weight, or strength, of
+    their relation
 
-b.  **Dichotomize a Matrix**. As described in Chapter 9, we'll recode
-    our edge values to 1s and 0s changing our valued matrix to a binary
-    matrix.
+-   Two **nodelists** indicating the values of some behavior - an
+    outcome - at two different time points
 
-c.  **Create Network Graph**. Finally, we'll convert our matrix to an
-    edge-list and store both our edges and node attributes as a network
-    igraph object in preparation for analysis.
+### 2a. Create an Edgelist
 
-### 2a. Create Data Frames
+First let's create an edgelist with three variables for a nominator,
+nominee, and strength of the relation. In this hypothetical example,
+let's pretend this network consists of friendships among six students
+assigned to working together on a classroom science project.
 
-To examine a hypothetical case of network selection, first let's create
-an **edgelist** that contains the nominator and nominee for a
-relationship. For example, if Stefanie says that José is her friend,
-then Stefanie is the nominator and José the nominee. Data frames like
-this can also contain an optional variable indicating the weight, or
-strength, of their relation.
-
-#### Create Edgelist
-
-Run the following code to create a data frame with three vairables that
-contains dyads
+Run the following code to create [tibble](https://tibble.tidyverse.org)
+-- a tidy table or data frame -- that contains information about each
+dyad in our network with a corresponding strength of "1":
 
 ```{r, create-edgelist}
 
-data1 <- data.frame(nominator = c(2, 1, 3, 1, 2, 6, 3, 5, 6, 4, 3, 4), 
+student_edges <- tibble(nominator = c(2, 1, 3, 1, 2, 6, 3, 5, 6, 4, 3, 4), 
                     nominee = c(1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 6, 6), 
                     relate = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) ) 
 
-
+student_edges
 ```
 
-Next Data frames indicating the values of some behavior - an outcome -
-at two different time points. In this example, we'll create example data
-we can use to explore questions about influence.
+### 2a. Create Nodelists
 
-Let's take a look at our three datasets:
-
--   data1: an **edgelist** that contains a nominator, nominee, and
-    strength of the relation
-
--   data2: a dataset that contains the nominee and the values of some
-    behavior at the first time point
-
--   data3: a dataset that contains a nominator and the value of some
-    behavior at the second time point
-
-Note that we will find each nominators' outcome at time 2 later on.
-Here's how we can make these example datasets:
-
-{r, eval = FALSE}
+Next, let's create a data frame, or tibble, that contains the nominee
+and the values of a behavior at the first time point. For our
+hypothetical example, let's pretend that our `yvar1` variable at time
+point 1 represents a composite score for each students' attitude towards
+group work prior to this project on a scale of -3 (very negative) to 3
+(very positive)
 
 ```{r}
-
-data1 <- data.frame(nominator = c(2, 1, 3, 1, 2, 6, 3, 5, 6, 4, 3, 4), nominee = c(1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 6, 6), relate = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) ) 
-
-data2 <- data.frame(nominee = c(1, 2, 3, 4, 5, 6), yvar1 = c(2.4, 2.6, 1.1, -0.5, -3, -1)) 
-
-data3 <- data.frame(nominator = c(1, 2, 3, 4, 5, 6), yvar2 = c(2, 2, 1, -0.5, -2, -0.5))
+nominee_data <- tibble(nominee = c(1, 2, 3, 4, 5, 6), 
+                time_1 = c(2.4, 2.6, 1.1, -0.5, -3, -1)
+                )
 ```
 
 #### 👉 Your Turn ⤵
 
-### Joining the Data
+Create a third data frame called `data3` that produces the following
+output at time point 2 collected after the project for each students'
+attitude towards group work:
 
-Next, we'll join the data into one data frame. This step can be
-time-consuming for large network datasets, but it's important for the
-visualizations and analysis that follow. The more time you can invest
-into preparing the data properly, the more confidence you'll have that
-your resulting analysis is based on a deeper understanding of the data.
+| nominator | time_1 | time_2 |
+|-----------|--------|--------|
+| 1         | 2.4    | 2      |
+| 2         | 2.6    | 2      |
+| 3         | 1.1    | 1      |
+| 4         | -0.5   | -0.5   |
+| 5         | -3     | -2     |
+| 6         | -1     | -0.5   |
 
-```{r}
-data <- left_join(data1, data2, by = "nominee") |>
-  mutate(nominee = as.character(nominee))
-
-
-
-# calculate indegree in tempdata and merge with data 
-tempdata <- data.frame(table(data$nominee)) 
-
-tempdata <- tempdata %>% rename( 
-  # rename the column "Var1" to "nominee" 
-  "nominee" = "Var1", 
-  # rename the column "Freq" to "indegree" 
-  "indegree" = "Freq" ) %>% 
-  # makes nominee a character data type, instead of a factor, which can cause problems 
-  mutate(nominee = as.character(nominee))
+```{r, attitude-nodelist}
 
 
+nominator_data <- tibble(nominator = c(1, 2, 3, 4, 5, 6),
+                time_2 = c(2, 2, 1, -0.5, -2, -0.5)
+                )
 
-data <- left_join(data, tempdata, by = "nominee")
 
 ```
 
 ### 2c. Create Network with Attributes
 
-Recall that edge-lists contain a row for each dyad consisting of at
-minimum two columns with the name of each actor, and which conveniently
-can also contain other information or attributes about the relationship
-such as edge weight, timestamps, or other contextual information as
-demonstrated in Unit 1.
-
-Edge-lists also have the advantage of being easier to work with when
-using network packages in R.
-
-#### Get Edges
-
-The {igraph} package introduced in Unit 1 has a convenient
-`get.data.frame()` function for extracting an edge list from a matrix,
-but first we need to convert our matrix to an igraph network object.
-
-```{r extract-edges}
-adjacency_matrix <- graph.adjacency(leader_matrix,
-                                    diag = FALSE)
-
-class(adjacency_matrix)
-
-adjacency_matrix
-```
-
-Note that we included the `diag = FALSE` argument which converts all
-values along the diagonal to 0s, thereby removing self-loops. I believe
-they may have been included when calculating the network descriptives
-included in Table 9.1, and our own descriptives may not match exactly,
-but we'll need to remove these from our network for the ERGM analysis so
-this will save us a step.
-
-Now we can use the `get.data.frame()` function to covert our matrix to a
-standard edge-list:
-
-```{r convert-edgelist}
-leader_edges <- get.data.frame(adjacency_matrix) |>
-  mutate(from = as.character(from)) |>
-  mutate(to = as.character(to))
-
-
-leader_edges
-```
-
-#### 👉 Your Turn ⤵
-
-Recall from Unit 2 that we introduced the {tidygraph} package for
-preparing and summarizing our Twitter network. Tidygraph includes the
-full functionality of `igraph` in a tidy API giving you access to almost
-all of the `dplyr` verbs plus a few more, developed for use with
+Recall from previous units that we introduced the {tidygraph} package
+for preparing and summarizing our Twitter network. Tidygraph includes
+the full functionality of `igraph` in a tidy API giving you access to
+almost all of the `dplyr` verbs plus a few more, developed for use with
 relational data.
 
 Similar to Unit 2, use the `tbl_graph()` function to convert our
@@ -241,12 +176,12 @@ appropriate code:
 
 ```{r create-network}
 # YOUR CODE HERE
-leader_graph <- tbl_graph(edges = leader_edges,
-                          nodes = leader_nodes,
-                          directed = TRUE)
+student_network <- tbl_graph(edges = student_edges,
+                         nodes = nominee_data,
+                         directed = TRUE)
 
 
-leader_graph
+student_network
 ```
 
 Congrats! You made it to the end of data wrangling section and are ready
@@ -303,141 +238,23 @@ Run the following code to add in- and out-degree measures to each of our
 nodes and examine the output:
 
 ```{r add-indegree}
-leader_measures <- leader_graph |>
+student_network <- student_network |>
   activate(nodes) |>
-  mutate(in_degree = centrality_degree(mode = "in")) |>
-  mutate(out_degree = centrality_degree(mode = "out"))
+  mutate(in_degree = centrality_degree(mode = "in"))
 
-leader_measures
+student_network
 ```
 
-#### 👉 Your Turn ⤵
-
-We now see that, in addition to the previously included attributes
-`trust` and `efficacy`, in-degree and out-degree measures have been
-added to the nodes in our network. But what if we also want to know to
-total number of "alters" each "ego" is connected to, i.e. the total
-number of individuals each school leader are connected to?
-
-Modify the code below to calculate `degree` for each school leader in
-our network. **Hint:** `centrality_degree` is a wrapper for
-`igraph::degree()` and the `mode =` argument can be found in the
-corresponding help documentation.
-
-```{r add-degree}
-leader_measures <- leader_graph |>
-  activate(nodes) |>
-  mutate(degree = centrality_degree(mode = "all")) |>
-  mutate(in_degree = centrality_degree(mode = "in")) |>
-  mutate(out_degree = centrality_degree(mode = "out"))
-
-leader_measures
-```
-
-#### Summarize Node Measures
-
-We can also use the `activate()` function combined with the
-`as_tibble()` function introduced in our previous unit to extract our
-new measures to a separate data frame we'll call `node_measures` so we
-can inspect our nodes individually and later use to calculate some
-summary stats:
-
-```{r create-tibble}
-node_measures <- leader_measures |> 
-  activate(nodes) |>
-  as_tibble()
-
-node_measures
-```
-
-Now let's view some basic summary statistics for each of the variables
-using the handy `summary()` function included in the R {base} package
-and the `skim()` functions from the {skimr} package.
-
-```{r summarize-measures}
-summary(node_measures)
-
-skim(node_measures)
-```
-
-It looks like our summary stats for Year 3 confidential exchanges
-network and attribute data are pretty close to those reported in Table
-9.1 copied from @carolan2014. For example, our mean total efficacy and
-trust scores were 6.65 and 4.78 respectively, compared to 6.64 and 4.77
-as reported in Chapter 9.
-
-![](img/table-9-1.jpg){width="80%"}
-
-The average in/out-degree for our school leaders data is 3.26, however,
-which is a little lower than that reported by Carolyn. Again, this is
-likely a function of our removal of self-loops. To test this theory, we
-could simply change the `diag = FALSE` argument added to the
-`graph.adjacency()` function above to `TRUE` to include self-loops and
-then try rerunning all the code above.
-
-#### School/District-Level Stats
-
-Since we are now working with a standard data frame, we can also apply
-[{dyplr}](https://dplyr.tidyverse.org/index.html) functions like
-[`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) and
-[`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) to
-calculate basic summary stats such as counts, mean, and standard
-deviation as follows:
-
-```{r group-stats}
-node_measures |>
-  group_by(district_site) |>
-  summarise(n = n(),
-            mean = mean(in_degree), 
-            sd = sd(in_degree)
-            )
-```
-
-We see that our measures are pretty close, but not an exact match.
-Again, this is likely due to the self-loops we excluded. For example,
-our average in-degree for district-level (coded "1") and school-level
-(coded "0") leaders is 4.66 and 2.36 respectively, but reported as 4.72
-and 2.64 by @carolan2014.
-
-#### 👉 Your Turn ⤵
-
-Use the code chunk below and additional chunks if needed to try and
-replicate the school and district level findings for out-degree, trust
-and efficacy measures.
-
-```{r replicate-findings}
-node_measures |>
-  group_by(district_site) |>
-  summarise(n = n(),
-            mean = mean(out_degree), 
-            sd = sd(out_degree)
-            )
-
-node_measures |>
-  group_by(district_site) |>
-  summarise(n = n(),
-            mean = mean(trust), 
-            sd = sd(trust)
-            )
-
-node_measures |>
-  group_by(district_site) |>
-  summarise(n = n(),
-            mean = mean(efficacy), 
-            sd = sd(efficacy)
-            )
-```
-
-How close your result to those reported by Carolyn Table 9.1?
-
--   YOUR RESPONSE HERE
+#### 
 
 ### 3b. Visualize Network Properties
 
 In Chapter 9, @carolan2014 depicts a directed and dichotomous sociogram
 of the **collaboration** network for year 3 is shown in .
 
-![](img/figure-9-1.jpg){width="80%"}
+```{r}
+plot(student_network)
+```
 
 #### 👉 Your Turn ⤵
 
@@ -450,11 +267,16 @@ ones for
 our plot either more "aesthetically pleasing" or more purposeful in what
 it's trying to communicate.
 
+-   size is
+
 ```{r improve-sociogram}
 #YOUR CODE HERE
-leader_measures |>
-ggraph(layout = "fr") + 
-  geom_node_point() +
+student_network |>
+ggraph() + 
+ # geom_node_text(aes(label = nominator)) +
+  geom_node_point(aes(size = in_degree,
+                      color = time_1, 
+                      text = nominator)) +
   geom_edge_link() + 
   theme_graph()
 ```
@@ -476,46 +298,12 @@ encounter any errors.
 
 ## 4. MODEL
 
-Recall from @carolan2014 that network models and the questions they are
-designed to address are categorized into three different analytical
-emphases:
+Recall from @carolan2014 that
 
-1.  Relationship-level models that focus on the ties between actors in
-    complete networks;
-
-2.  Models that predict individual actors' attributes; and,
-
-3.  Actor-level models that emphasize the differences within and among
-    groups of actors within a complete network.
-
-**Exponential Random Graph Models** fall into category 1 and are
-relationship-level models that focus on how formation of dyadic ties
-within a complete relational network can be explained by both structural
-and attribute variables. ERGMs provide a means to compare whether a
-network's observed structural properties occur more frequently than you
-could expect from chance alone. More specifically, ERGMS provide a way
-to determine whether observed network properties like reciprocity and
-assortativity occur by chance as a result of other network properties.
-
-While the technical aspects of estimating ERGMs are complex, their
-interpretation is pretty straightforward. In this section we are
-interested exploring how these models can be used to make inferences
-about the social processes at work in the School Leaders data. For
-example, in this section we will explore the following questions posed
-in Chapter 9:
-
-1.  **Reciprocity.** If one school leader turns to another to discuss
-    something confidential, is the latter likely to reciprocate?
-
-2.  **Transitivity.** Are school leaders more likely to confide in
-    someone if they both confide in the same school leader?
-
-3.  **Attribute Effect.** Do a leader's gender and efficacy score,
+1.  **Attribute Effect.** Do a leader's gender and efficacy score,
     predict a confidential exchange between two leaders?
 
-### 4a. Loading Network Data
-
-Calculating an Exposure Term
+### 4a. Calculating an Exposure Term
 
 Next we'll create an exposure term. This is the key step that makes this
 linear regression model special. The idea is that the exposure term
@@ -525,11 +313,33 @@ outcome because it takes the first and second time points into
 account.{r, eval = FALSE}
 
 ```{r}
+
+student_data <- left_join(student_edges,
+                          nominee_data,
+                          by = "nominee")
+
+student_data
+```
+
+```{r}
+student_data <- left_join(student_data,
+                          nominator_data,
+                          by = "nominator")
+
+student_data
+```
+
+```{r}
 # Calculating exposure 
-data <- data %>% mutate(exposure = relate * yvar1) 
+student_exposure <- student_data |>
+  mutate(exposure = relate * time_1) 
 # Calculating mean exposure 
 
-mean_exposure <- data %>% group_by(nominator) %>% summarize(exposure_mean = mean(exposure))
+mean_exposure <- student_exposure %>% 
+  group_by(nominator) %>% 
+  summarize(exposure_mean = mean(exposure))
+
+mean_exposure
 ```
 
 The data frame mean_exposure contains the mean of the outcome (in this
@@ -537,21 +347,22 @@ case, yvar1) for all of the individuals the nominator had a relation
 with.Let's process the data more so we can add the variables
 exposure_mean, yvar1, and yvar2.
 
-{r, eval = FALSE}
-
 ```{r}
-data2 <- data2 %>% 
+nominee_data <- nominee_data %>% 
   # rename nominee as nominator to merge these 
   rename("nominator" = "nominee") 
 
-final_data <- left_join(mean_exposure, data2, by = "nominator") 
+final_data <- left_join(mean_exposure, nominee_data, by = "nominator") 
 
 final_data <- 
   # data3 already has nominator, so no need to change 
-  left_join(final_data, data3, by = "nominator") 
+  left_join(final_data, nominator_data, by = "nominator") |>
+  rename(student = nominator)
+
+final_data
 ```
 
-Regression (Linear Model)
+### Regression (Linear Model)
 
 Calculating the exposure term is the most distinctive and important step
 in carrying out influence models. Now, we can use a linear model to find
@@ -563,68 +374,19 @@ individual's exposures, impact the results.){r, eval = FALSE}
 
 ```{r}
 
-model1 <- lm(yvar2 ~ yvar1 + exposure_mean, data = final_data) 
+model1 <- lm(time_2 ~ time_1 + exposure_mean, data = final_data) 
+
 summary(model1)
+
+get_regression_table(model1)
 ```
-
-So, the influence model is used to study a key process for social
-network analysis. It's useful because it's one way you can quantify the
-network effect. This is a metric that's not always considered in
-education, but we hope to see more of it (Frank, 2009). It also helps
-that it can be done with a relatively straight forward regression model.
-
-An Example of SelectionLet's look at selection models next. Information
-from selection models can be useful to a wide audience--administrators,
-teachers, and students--because it describes how members of a network
-choose who to interact with. Here, we briefly describe a few possible
-approaches for using a selection model to learn more about a social
-network.In the last section we used a linear regression model. In this
-example we'll use a logistic regression model. Logistic regressions
-model outcomes that are either a 0 or a 1. Thus, the most
-straightforward way to use a selection model is to use a logistic
-regression where all of the relations (note the relate variable in data1
-above) are indicated with a 1.But, here is the important and challenging
-step: all of the possible relations between members of a network are
-indicated with a 0 in an edgelist. Recall that an edgelist is the
-preferred data structure for carrying out this analysis. This step
-requires that we prepare the data by lengthening and widening it.Once
-all of the relations are given a value of either a 1 or a 0, then a
-logistic regression can be used. Imagine that we are interested in
-whether individuals from the same group are more or less likely to
-interact than those from different groups. To answer this question, one
-could create a new variable called same and then fit the model using
-code (which is not run, but is included as an example of the code for
-this kind of selection model) like this:{r, eval = FALSE} m_selection
-\<- glm(relate \~ 1 + same, data = edgelist1)While this is a
-straightforward way to carry out a selection model, there are some
-limitations. First, it doesn't account for the amount of nominations an
-individual sends. Not considering this may mean other effects, like the
-one associated with being from the same group, are not accurate. Some R
-packages aim to address this by considering other variables like
-relationship weights. Here are some examples:The {amen} [\@R-amen]
-package can be used for data that is not only 1s and 0s - like a
-logistic regression - but also data that is normally distributedThe
-Exponential Random Graph Model, or {ergm} R package, makes it easy to
-use these kinds of selection models. {ergm} [\@R-ergm] is itself a part
-of a powerful and often-used collection of packages for social network
-analysis, {statnet} [\@R-statnet]These packages are examples of the
-richness R packages can bring to using social network analysis models
-and methods. As developments in social network analysis methods
-continue, more cutting-edge techniques and R packages will be available.
 
 #### 👉 Your Turn ⤵
 
 Use the code chunk below to check the model fit and diagnostics for the
 model the you created in [4b. Estimate the ERGM Model]:
 
-```{r check-ergm-4}
-#YOUR CODE HERE
-ergm_4_gof <- gof(ergm_4)
-
-plot(ergm_4_gof)
-
-mcmc.diagnostics(ergm_4)
-```
+-   
 
 ------------------------------------------------------------------------
 
