@@ -67,10 +67,7 @@ analysis of network influence:
 
 ```{r load-libraries}
 # YOUR CODE HERE
-library(tidyverse)
-library(tidygraph)
-library(ggraph)
-library(moderndive)
+
 ```
 
 ------------------------------------------------------------------------
@@ -148,9 +145,7 @@ Your output should look something like this:
 
 ```{r, nominator-attitudes}
 # YOUR CODE HERE
-nominator_data <- tibble(nominator = c(1, 2, 3, 4, 5, 6),
-                         time_2 = c(2, 2, 1, -0.5, -2, -0.5)
-                         )
+nominator_data <- 
 
 nominator_data
 ```
@@ -236,8 +231,7 @@ each student:
 ```{r add-degree}
 #YOUR CODE HERE
 student_network <- student_network |>
-  activate(nodes) |>
-  mutate(named_friends = centrality_degree(mode = "out"))
+  
 
 student_network
 ```
@@ -325,8 +319,7 @@ that summarizes the data from our `student_exposure` data frame.
 ```{r}
 #YOUR CODE HERE
 mean_exposure <- student_exposure |>
-  group_by(nominator) |>
-  summarize(mean_exposure = mean(exposure))
+  
 
 mean_exposure
 ```
@@ -353,14 +346,7 @@ Then answer the questions that follow below.
 
 ```{r create-sociogram}
 #YOUR CODE HERE
-student_network |>
-ggraph() + 
- # geom_node_text(aes(label = nominator)) +
-  geom_node_text(aes(label = nominee)) +
-  geom_node_point(aes(size = named_friends,
-                      color = time_1)) +
-  geom_edge_link() + 
-  theme_graph()
+
 ```
 
 Based on the the mean exposure calculated above, and the sociogram you
@@ -407,8 +393,7 @@ our `nominee_data` that contains our `time_1` variable for each student.
 ```{r, join-time1}
 #YOUR CODE HERE
 final_data <- nominee_data |>
-  rename(student = nominee) |>
-  left_join(final_data, by = "student") 
+  
 
 final_data
 ```
@@ -484,7 +469,7 @@ about changes in the collaboration network over time:
     -   How you might revisit or improve upon this analysis in the
         future.
 
-### 👉 Your Turn ⤵
+#### 👉 Your Turn ⤵
 
 Use the code chunk below create a polished table and/or visualization(s)
 and write a brief narrative in the space that follows.
