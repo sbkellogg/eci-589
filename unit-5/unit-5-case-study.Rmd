@@ -21,10 +21,13 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ## 1. PREPARE
 
-In Unit 5 we explore the process of network influence, which is the flip
-side of the network selection processes we examined in our previous case
-study. Both of these processes are commonly the focus of statistical
-analyses of networks. Selection and influence, however, do not interact
+Our brief case study for Unit 5 is adapted from an exercise on network
+influence included in the appendix of [Data Science in Education Using
+R](https://datascienceineducation.com/c20.html#c20c). In this case study
+we explore the process of network influence, which is the flip side of
+the network selection processes we examined in our previous case study.
+Both of these processes are commonly the focus of statistical analyses
+of networks. Selection and influence, however, do not interact
 independently and often affect each other reciprocally (Xu, Frank, &
 Penuel, 2018).
 
