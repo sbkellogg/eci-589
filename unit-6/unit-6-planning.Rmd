@@ -77,7 +77,7 @@ general, I recommend that you loosely model your write-up after one of
 the case studies from prior units, minus the literature review and Your
 Turns. While your case studies are meant to be informative rather than
 instructional, I would love to use your analyses in future sections of
-ECI 586 as models for other students.  \
+ECI 586 as models for other students.  
 
 ### Guiding Questions
 
