@@ -31,20 +31,14 @@ choosing. 
 
 ## Readings
 
-In preparation of your final project, you will read chapter 12 from
-[Social Network Analysis and
-Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), explore
-social capital and diffusion, two rich theoretical frameworks that have
-been been put to the test and refined by network analysis. We'll learn
-how social capital has been linked to educational outcomes like student
-achievement, as well as the importance of social influences on the
-diffusion of new behaviors or policy in educational contexts.
-
-1.  [Chapter 10: Social
-    Capital](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml)
-
-2.  [Chapter 11:
-    Diffusion](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n11.xml)
+In preparation of your final project, you will read [Chapter
+12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf)
+from [Social Network Analysis and
+Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which
+summarizes the theories, methods, and applications that constitute the
+interdisciplinary field of social network analysis; reiterate its
+limitations and and provides some guidance for doing your own social
+network analysis in educational research.
 
 ## Discussion
 
