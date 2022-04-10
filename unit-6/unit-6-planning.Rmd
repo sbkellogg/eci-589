@@ -1,5 +1,5 @@
 ---
-title: "Unit 5 Readings: Social Capital & Network Diffusion"
+title: "Unit 6 Planning: A Network Analysis Case Study"
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -29,7 +29,7 @@ together some of the workflow approaches we've learned this semester to
 help answer a research question you have about a dataset of your own
 choosing. 
 
-## Readings
+## Assignment
 
 In preparation of your final project, you will read [Chapter
 12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf)
@@ -40,45 +40,21 @@ interdisciplinary field of social network analysis; reiterate its
 limitations and and provides some guidance for doing your own social
 network analysis in educational research.
 
-## Discussion
-
-In lieu of the peer interaction and discussion of course materials that
-normally take place "in-class", you'll be asked to log in this week
-and engage with other members of our learning community through this
-discussion forum. **With the exception of the Self-Selected Study
-questions, you are not required to address every guiding question**,
-particularly if you feel others in the class have thoroughly addressed
-the topic or questions. Our aim for these discussions is to collectively
-build our understanding of these readings through back-and-forth
-dialogue and avoid a "collective monologue" in which we see 20
-variations of effectively the same post.
-
-To create a new post in response to one or more of the guiding questions
-listed below, click "Add a new discussion topic" located below the forum
-overview text and add a descriptive title for the subject line. In the
-message box, includes the question(s) your post is addressing, as well
-as your response to the selected questions. Remember, you are not
-required to address every guiding question with the exception of the
-Self-Selected Study questions for which you must create one new
-discussion topic and respond to the discussion prompt and required
-questions.
-
-Week 13, provides some space to plan and conceptualize your final course
-project, due Dec 9th, and accounts for half of your final project grade
-(12 pts planning, 12 pts case study). More details about the actual
-content and format of your case study are provided in Week 14, but in
+This week also provides some space to plan and conceptualize your
+**final course project, due May 4th**. More details about the actual
+content and format of your case study are provided in Part 2, but in
 general, I recommend that you loosely model your write-up after one of
 the case studies from prior units, minus the literature review and Your
 Turns. While your case studies are meant to be informative rather than
 instructional, I would love to use your analyses in future sections of
-ECI 586 as models for other students.  
+ECI 589 as models for other students.
 
 ### Guiding Questions
 
 To help plan for you final project, your assignment is to create a forum
-post that addresses the questions below and to provide some constructive
-feedback on proposed final course projects for at least two of your
-peers.
+post that briefly addresses the questions below (**4 pts**) and to
+provide some constructive feedback (**2 pts**) on proposed final course
+projects for at least two of your peers.
 
 #### Prepare
 
@@ -93,30 +69,30 @@ peers.
 
 #### Wrangle 
 
-1.  What **data cleaning** steps do you anticipate taking to prepare
-    your data for analysis and why are they necessary? 
+1.  What **data structures** will you use to store your data and will
+    your data be relational data be directed or undirected, valued or
+    binary? 
 
 2.  What other **variables/features** (e.g. student grades, schools,
     dates, tweets, chapter numbers, demographics, etc.) will you need to
     include to address your research questions? 
 
-3.  What **data transformations/structures** (are required for the types
-    of analyses you have planned? 
+3.  What **data cleaning or transformations** are required for the types
+    of analyses you have planned and why are they necessary? 
 
 #### Explore & Model (Analysis)
 
-1.  What **metrics** (e.g., counts, tf-idf values, sentiment values, phi
-    coefficient, betas, etc.) will you calculate and examine? And at
-    what stage of your analysis?   
+1.  What **metrics** (e.g., centrality, density, reciprocity, distance,
+    etc.) will you examine, at what level (e.g., network, group,
+    individual), and why?
 
-2.  What **tables or charts** (e.g. text networks, word clouds,
-    etc?) might you include to help readers understand and interpret
-    your findings?
+2.  What **tables or graphs** might you include to help readers
+    understand and interpret your findings?
 
-3.  What, if any, modeling **techniques** (e.g., logistic regression,
-    sentiment analysis, community detection, etc.) will you use to
-    analyze your data and how do you anticipate these techniques will
-    help you address your research questions?
+3.  What, if any, modeling **techniques** (e.g., linear regression, QAP,
+    ERGMs, etc.) will you use to analyze your data and how do you
+    anticipate these techniques will help you address your research
+    questions?
 
 #### Communicate
 
@@ -124,39 +100,9 @@ peers.
     analysis? Why would they be useful and what actions might they
     result in by your target audience? 
 
-2.  What are some of the anticipated **limitations** of your analysis? \
+2.  What are some of the anticipated **limitations** of your analysis? 
 
 3.  What **ethical/legal issues,** if any, need to be taken into
     consideration? 
-
-## Assessment
-
-Grading for this assignment is fairly lenient, provided that it's clear
-from your posts that you've done the required reading. Readings and
-discussion for each unit are worth 6 points and judged based on quantity
-and quality of your posts.
-
-In term of **quantity** (3 points), you'll be expected to create at
-least 4 posts. One post should answer each of the questions for your
-self-selected study and three posts and/or replies that help us
-collectively address the questions for the required readings. So others
-will have an opportunity to read and respond to your posts, your posts
-should be spread out over the course of the week and across at least two
-different days, preferably not the last two days.
-
-In terms of **quality** (3 points), your posts over the next week should
-provide new or insightful contributions to that question or topic.
-There is no requisite for the length of each posting, in fact short
-conversational exchanges (1-3 paragraphs) are highly encouraged. I
-strongly recommend taking a look at Table 1 of [the productive online
-discussion
-model](https://moodle-courses2122.wolfware.ncsu.edu/pluginfile.php/287931/mod_forum/post/6203/Gao%2C%20Wang%2C%20Sun%20-%202009%20-%20A%20new%20model%20of%20productive%20online%20discussion%20and%20its%20implications%20for%20research%20and%20instruction.pdf) [@gao2009]
-for ways to contribute to the conversation. 
-
-At minimum, your collective posts should also help us interpret or
-elaborate on discussion topics, questions, or ideas others have shared
-by "making connection to the learning materials" and should reference at
-some point each of the required chapters and your self-selected reading
-or resource.
 
 ## References
