@@ -1,5 +1,5 @@
 ---
-title: "Unit 5 Readings: Social Capital & Network Diffusion"
+title: "Unit 6 Final: A Network Analysis Case Study"
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -20,143 +20,100 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-Throughout this course, we've completed several case studies modeled
-after the Data-Intensive Research Workflow from Learning Analytics Goes
-to School [@krumm2018] and incorporating approaches from Social Network
-Analysis and Education [@carolan2014]. For your final course project,
-you'll be asked to prepare your own small scale "case study" that brings
-together some of the workflow approaches we've learned this semester to
-help answer a research question you have about a dataset of your own
-choosing. 
+For the end-of-course project, you'll be applying the knowledge and
+skills gained throughout this semester to create your "case study"
+proposed in [Unit 6 Part
+1](https://sbkellogg.github.io/eci-589/unit-6/unit-6-project-planning.html).
+Similar to the case studies provided in this course, your case study
+should demonstrate your ability to wrangle, analyze, and communicate
+findings in response to a research question of interest. Also, similar
+to our Unit 1-5 case studies, you'll be expected to use R Markdown to
+create a sharable web page (or if preferred, a PDF or Word document),
+which includes the code used during each step of your analysis so it can
+be reproduced by others.
 
-## Readings
+When you are ready to share your final case study, please click "Add a
+new discussion topic" to create a new forum post. In your post, include
+a link to your knitted html case study file (or attach your Word or PDF
+file), and if you worked in RStudio desktop, also attach or link to your
+associated R markdown file use to create you case study. If your data is
+sensitive or proprietary and not suitable for including in your post,
+please let me know. 
 
-In preparation of your final project, you will read [Chapter
-12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf)
-from [Social Network Analysis and
-Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which
-summarizes the theories, methods, and applications that constitute the
-interdisciplinary field of social network analysis; reiterate its
-limitations and and provides some guidance for doing your own social
-network analysis in educational research.
+## Grading Criteria
 
-## Discussion
+Grading criteria for your final project is guided by the Data-Intensive
+Research Workflow from Learning Analytics Goes to School [@krumm2018]
+and Social Network Analysis and Education [@carolan2014]. Your final
+project is with 24 points, or approximately one-fourth of your overall
+grade.
 
-In lieu of the peer interaction and discussion of course materials that
-normally take place "in-class", you'll be asked to log in this week
-and engage with other members of our learning community through this
-discussion forum. **With the exception of the Self-Selected Study
-questions, you are not required to address every guiding question**,
-particularly if you feel others in the class have thoroughly addressed
-the topic or questions. Our aim for these discussions is to collectively
-build our understanding of these readings through back-and-forth
-dialogue and avoid a "collective monologue" in which we see 20
-variations of effectively the same post.
+### Prepare (6 points total; 2 points each)
 
-To create a new post in response to one or more of the guiding questions
-listed below, click "Add a new discussion topic" located below the forum
-overview text and add a descriptive title for the subject line. In the
-message box, includes the question(s) your post is addressing, as well
-as your response to the selected questions. Remember, you are not
-required to address every guiding question with the exception of the
-Self-Selected Study questions for which you must create one new
-discussion topic and respond to the discussion prompt and required
-questions.
+Your case study should demonstrate your ability to formulate clear,
+actionable research questions relevant to a targeted audience.
+Specifically, your case study should include an **introduction** that:
 
-Week 13, provides some space to plan and conceptualize your final course
-project, due Dec 9th, and accounts for half of your final project grade
-(12 pts planning, 12 pts case study). More details about the actual
-content and format of your case study are provided in Week 14, but in
-general, I recommend that you loosely model your write-up after one of
-the case studies from prior units, minus the literature review and Your
-Turns. While your case studies are meant to be informative rather than
-instructional, I would love to use your analyses in future sections of
-ECI 586 as models for other students.  
+1.  Clearly describes the **purpose** of your case study, including
+    the research question(s) guiding your analyses.
 
-### Guiding Questions
+2.  Provides information about the **data sources**, including the
+    context in which the data was collected and variables used to
+    address your research questions.
 
-To help plan for you final project, your assignment is to create a forum
-post that addresses the questions below and to provide some constructive
-feedback on proposed final course projects for at least two of your
-peers.
+3.  Includes a description of the **target audience** that would most
+    benefit from your analysis and why.
 
-#### Prepare
+### Wrangle (6 points total; 2 points each)
 
-1.  What research articles, if any, inspired your case study and
-    what **data source(s)**, will you be using for your analysis? 
+Your data project should demonstrate your ability to use R to
+manipulate, clean, transform, and/or merge relational data in order to
+prepare your network analysis. Specifically, your case study should
+clearly describe: 
 
-2.  Why are you interested in this data/context and what **research
-    question(s)** are you hoping to answer with your analysis? 
+1.  **Data preprocessing** steps (e.g., renaming variables, filtering,
+    dichotomization, recoding values, etc.) taken to clean and prepare
+    your text for analysis and why are they necessary.
 
-3.  Who would most benefit from your analysis and why? How might
-    your **target audience** use this information to take action? 
+2.  Any **new variables or features** you created (e.g., degree ,
+    reciprocity, etc.) to address your research questions. 
 
-#### Wrangle 
+3.  Data **transformations** you made required for the types of analyses
+    or packages used (e.g. reshaping, merging, joining, matrix
+    conversions, etc.).  
 
-1.  What **data cleaning** steps do you anticipate taking to prepare
-    your data for analysis and why are they necessary? 
+### Analyze (6 points total; 2 points each)
 
-2.  What other **variables/features** (e.g. student grades, schools,
-    dates, tweets, chapter numbers, demographics, etc.) will you need to
-    include to address your research questions? 
+Your data project should demonstrate your ability to use R to apply
+network analysis techniques appropriate to your research questions and
+data sources. Specifically, your case study shouldclearly include:   
 
-3.  What **data transformations/structures** (are required for the types
-    of analyses you have planned? 
+1.  Clear descriptions of the exploratory **techniques and/or
+    models** (e.g., level of analysis, community detection, ERGMs, etc.)
+    you applied to analyze your data.
 
-#### Explore & Model (Analysis)
+2.  Interpretations/meanings of specific **metrics** (e.g., counts,
+    means, centrality measures, etc.) that your analysis generated. 
 
-1.  What **metrics** (e.g., counts, tf-idf values, sentiment values, phi
-    coefficient, betas, etc.) will you calculate and examine? And at
-    what stage of your analysis?   
+3.  Data **visualizations** that are attractive and easy to interpret,
+    and include text or narrative for aiding their Interpretation by
+    others.
 
-2.  What **tables or charts** (e.g. text networks, word clouds,
-    etc?) might you include to help readers understand and interpret
-    your findings?
+### Communication (6 points total; 2 points each)
 
-3.  What, if any, modeling **techniques** (e.g., logistic regression,
-    sentiment analysis, community detection, etc.) will you use to
-    analyze your data and how do you anticipate these techniques will
-    help you address your research questions?
+Your case study should demonstrate your ability to clearly and
+effectively communicate the most important and most useful findings.
+Specifically, your case study should:
 
-#### Communicate
+1.  Highlights **key finding and insights** in response to your research
+    questions. 
 
-1.  What **key insights** do you anticipate finding as a result of your
-    analysis? Why would they be useful and what actions might they
-    result in by your target audience? 
+2.  Suggests potential **action** that you and/or your target audience
+    to better understand and improve the context in which your data
+    product is intended to inform.  
 
-2.  What are some of the anticipated **limitations** of your analysis? \
-
-3.  What **ethical/legal issues,** if any, need to be taken into
-    consideration? 
-
-## Assessment
-
-Grading for this assignment is fairly lenient, provided that it's clear
-from your posts that you've done the required reading. Readings and
-discussion for each unit are worth 6 points and judged based on quantity
-and quality of your posts.
-
-In term of **quantity** (3 points), you'll be expected to create at
-least 4 posts. One post should answer each of the questions for your
-self-selected study and three posts and/or replies that help us
-collectively address the questions for the required readings. So others
-will have an opportunity to read and respond to your posts, your posts
-should be spread out over the course of the week and across at least two
-different days, preferably not the last two days.
-
-In terms of **quality** (3 points), your posts over the next week should
-provide new or insightful contributions to that question or topic.
-There is no requisite for the length of each posting, in fact short
-conversational exchanges (1-3 paragraphs) are highly encouraged. I
-strongly recommend taking a look at Table 1 of [the productive online
-discussion
-model](https://moodle-courses2122.wolfware.ncsu.edu/pluginfile.php/287931/mod_forum/post/6203/Gao%2C%20Wang%2C%20Sun%20-%202009%20-%20A%20new%20model%20of%20productive%20online%20discussion%20and%20its%20implications%20for%20research%20and%20instruction.pdf) [@gao2009]
-for ways to contribute to the conversation. 
-
-At minimum, your collective posts should also help us interpret or
-elaborate on discussion topics, questions, or ideas others have shared
-by "making connection to the learning materials" and should reference at
-some point each of the required chapters and your self-selected reading
-or resource.
+3.  Discusses the **limitations** and any ethical/legal
+    issues taken into consideration, including acknowledgments any
+    reference materials used.
 
 ## References
