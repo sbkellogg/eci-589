@@ -1,5 +1,5 @@
 ---
-title: "Unit 6 Final: A Network Analysis Case Study"
+title: "Unit 6 Final Project: A Network Analysis Case Study"
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
