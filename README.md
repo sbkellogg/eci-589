@@ -34,7 +34,7 @@ This course is part of the [Graduate Certificate in Learning Analytics Program](
 
 Course goals for ECI 589: Analyzing Learning Networks are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
 
-1.  **Think.** Students will deepen their understanding of Social Network Analysis as an emerging approach within the field of Learning Analytics and education research, including its application in a wide range of educational settings. 
+1.  **Think.** Students will deepen their understanding of Social Network Analysis as an emerging approach within the field of Learning Analytics and education research, including its application in a wide range of educational settings. 
 
 2.  **Do.** Scholars will develop proficiency with the processes, tools, and techniques necessary to efficiently, effectively, and ethically apply network analysis to understand and improve learning and the contexts in which learning occurs.
 
