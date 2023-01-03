@@ -4,7 +4,7 @@
 
 Although social network analysis and its educational antecedents date back to the early 1900s, the popularity of social networking sites like Twitter and Facebook have raised awareness of and renewed interests in networks and their influence. As the use of digital resources continues expand in education, data collected by these educational technologies has also greatly facilitated the application of network analysis to teaching and learning. This introductory course is designed to prepare education researchers and practitioners to apply network analysis in order to better understand and improve student learning and the contexts in which learning occurs. This course will provide students with an overview of social network theory, examples of network analysis in educational contexts, and applied experience with widely adopted tools and techniques. As participants gain experience in the collection, analysis, and reporting of data throughout the course, they will be better prepared help educational organizations understand and improve both online and blended learning environments.
 
-This course part of the [Graduate Certificate in Learning Analytics Program](https://ced.ncsu.edu/graduate/programs/certificate/learning-analytics/) and is open to all Masters and Doctoral students. ECI 586, Introduction to Learning Analytics, is highly recommended for students pursuing as using R and RStudio. For those new to R and programming languages, however, tutorials will be provided.
+This course is part of the [Graduate Certificate in Learning Analytics Program](https://ced.ncsu.edu/graduate/programs/certificate/learning-analytics/) and is open to all Masters and Doctoral students. ECI 586 Introduction to Learning Analytics and/or prior experience with R and RStudio is recommended for students but not required. For those new to R and RStudio, however, tutorials will be provided.
 
 **Number of Credits:** 3
 
@@ -32,11 +32,11 @@ This course part of the [Graduate Certificate in Learning Analytics Program](htt
 
 ## **Goals and Objectives**
 
-Course goals for ECI 589: Analyzing Learning Networks are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
+Course goals for ECI 589: Analyzing Learning Networks are guided by the North Carolina State University motto: *Think and Do.* Specifically, goals for this course are twofold:
 
 1.  **Think.** Students will deepen their understanding of Social Network Analysis as an emerging approach within the field of Learning Analytics and education research, including its application in a wide range of educational settings. 
 
-2.  **Do.** Scholars will develop proficiency with the processes, tools, and techniques necessary to efficiently, effectively, and ethically apply network analysis to understand and improve learning and the contexts in which learning occurs. 
+2.  **Do.** Scholars will develop proficiency with the processes, tools, and techniques necessary to efficiently, effectively, and ethically apply network analysis to understand and improve learning and the contexts in which learning occurs.
 
 The following learning objectives are aligned with the overarching learning objectives of the Graduate Certificate in Learning Analytics program and are embedded in each unit of the course: 
 
@@ -44,7 +44,7 @@ The following learning objectives are aligned with the overarching learning obje
 
 2.  **Data Sources & Measures:** Identify and appropriately use network data sources (e.g. social media, online discussion forums, etc.) and associated measures (e.g. centrality, degree, etc.);
 
-3.  **Tool Proficiency:** Efficiently and effectively apply up-to-date software and tools (i.e. R or Gephi) to implement LA workflows for preparing, analyzing, and sharing data;
+3.  **Tool Proficiency:** Efficiently and effectively apply up-to-date software and tools (i.e. R, Quarto, GitHub) to implement LA workflows for preparing, analyzing, and sharing data;
 
 4.  **Processes & Techniques**: Understand and apply analytic processes and network analysis techniques (e.g. sociograms, clustering, ERGMs) in order to understand and improve learning and the contexts in which learning occurs; and, 
 
@@ -144,7 +144,7 @@ Finally, students should feel comfortable installing new software programs and n
 
 2.  **DataQuest** (<https://www.dataquest.io>) offers interactive R, Python, Sheets, and SQL courses and tutorials on topics in data science, statistics and machine learning. An email will be sent providing free access to our DataQuest site, full catalogue of courses and resources for 6 months.
 
-3.  **LinkedIn Learning** (<https://www.linkedin.com/learning)> offers tutorials and training courses on R, R Studio, and Tableau. LinkedIn Learning is available at no charge to students.
+3.  **LinkedIn Learning** ([https://www.linkedin.com/learning)](https://www.linkedin.com/learning)){.uri} offers tutorials and training courses on R, R Studio, and Tableau. LinkedIn Learning is available at no charge to students.
 
 4.  **GitHub** is a web-based hosting service for version control using Git. You can create an account here: <https://github.com> 
 
@@ -170,25 +170,25 @@ Finally, students should feel comfortable installing new software programs and n
 
 ### **Optional Articles**
 
--   Borgatti, S., Mehra, A., Brass, D. D. J., & Labianca, G. (2009). [*Network analysis in the social sciences*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64240/Borgatti%20et%20al.%20-%202009%20-%20Network%20analysis%20in%20the%20social%20sciences.pdf). *Science*, *323*(April), 892–5. <http://doi.org/10.1126/science.1165821>
+-   Borgatti, S., Mehra, A., Brass, D. D. J., & Labianca, G. (2009). [*Network analysis in the social sciences*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64240/Borgatti%20et%20al.%20-%202009%20-%20Network%20analysis%20in%20the%20social%20sciences.pdf). *Science*, *323*(April), 892--5. <http://doi.org/10.1126/science.1165821>
 
--   Daly, A. J. (2012). [*Data, dyads , and dynamics : Exploring data use and social networks in educational improvement*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Daly%20-%202012%20-%20Data%2C%20dyads%2C%20and%20dynamics%20Exploring%20data%20use%20and%20social%20networks%20in%20educational%20improvement.pdf). *Teachers College Record*, *114*(November 2012), 1–38.
+-   Daly, A. J. (2012). [*Data, dyads , and dynamics : Exploring data use and social networks in educational improvement*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Daly%20-%202012%20-%20Data%2C%20dyads%2C%20and%20dynamics%20Exploring%20data%20use%20and%20social%20networks%20in%20educational%20improvement.pdf). *Teachers College Record*, *114*(November 2012), 1--38.
 
 -   Christakis, N. (2010). [*The hidden influence of social networks*](https://www.youtube.com/watch?v=2U-tOghblfE). Retrieved February 12, 2017, from <https://www.youtube.com/watch?v=2U-tOghblfE>
 
 -   Christakis, N. (2012). [*The sociological science behind social networks and social influence*](https://www.youtube.com/watch?v=wadBvDPeE4E). Retrieved from <https://www.youtube.com/watch?v=wadBvDPeE4E>
 
--   Coburn, C. E., & Russell, J. L. (2008). [*District policy and teachers' social networks*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Coburn%2C%20Russell%20-%202008%20-%20District%20policy%20and%20teachers%20social%20networks.pdf). *Educational Evaluation and Policy Analysis*, *30*(3), 203–235. <http://doi.org/10.3102/0162373708321829>
+-   Coburn, C. E., & Russell, J. L. (2008). [*District policy and teachers' social networks*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Coburn%2C%20Russell%20-%202008%20-%20District%20policy%20and%20teachers%20social%20networks.pdf). *Educational Evaluation and Policy Analysis*, *30*(3), 203--235. <http://doi.org/10.3102/0162373708321829>
 
--   Ennis, G., & West, D. (2013). [*Using social network analysis in community development practice and research: A case study*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Ennis%2C%20West%20-%202013%20-%20Using%20social%20network%20analysis%20in%20community%20development%20practice%20and%20research%20A%20case%20study.pdf). *Community Development Journal*, *48*, 40–57. <http://doi.org/10.1093/cdj/bss013>
+-   Ennis, G., & West, D. (2013). [*Using social network analysis in community development practice and research: A case study*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Ennis%2C%20West%20-%202013%20-%20Using%20social%20network%20analysis%20in%20community%20development%20practice%20and%20research%20A%20case%20study.pdf). *Community Development Journal*, *48*, 40--57. <http://doi.org/10.1093/cdj/bss013>
 
--   Ferguson, R., & Buckingham Shum, S. (2012). [*Social learning analytics: Five Approaches*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Ferguson%2C%20Buckingham%20Shum%20-%202012%20-%20Social%20learning%20analytics%20Five%20Approaches.pdf). In *2nd International Conference on Learning Analytics & Knowledge* (pp. 23–33). Vancouver, BC. <http://doi.org/10.1145/2330601.2330616>
+-   Ferguson, R., & Buckingham Shum, S. (2012). [*Social learning analytics: Five Approaches*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Ferguson%2C%20Buckingham%20Shum%20-%202012%20-%20Social%20learning%20analytics%20Five%20Approaches.pdf). In *2nd International Conference on Learning Analytics & Knowledge* (pp. 23--33). Vancouver, BC. <http://doi.org/10.1145/2330601.2330616>
 
 -   Foton Labs. (2014). [*Network Theory: An introduction*](https://www.youtube.com/watch?v=-ckaLBsCoxo&spfreload=10). Retrieved February 16, 2015, from <https://www.youtube.com/watch?v=-ckaLBsCoxo&spfreload=10>
 
 -   Foton Labs. (2014). [*Social network analysis: An overview*](https://www.youtube.com/watch?v=fgr_g1q2ikA&spfreload=10). Retrieved February 16, 2015, from <https://www.youtube.com/watch?v=fgr_g1q2ikA&spfreload=10>
 
--   Grunspan, D. Z., Wiggins, B. L., & Goodreau, S. M. (2014). [*Understanding classrooms through social network analysis: A primer for social network analysis in education research*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Grunspan%2C%20Wiggins%2C%20Goodreau%20-%202014%20-%20Understanding%20classrooms%20through%20social%20network%20analysis%20A%20primer%20for%20social%20network%20analysis%20in%20ed.pdf). *Cell Biology Education*, *13*, 167–178. <http://doi.org/10.1187/cbe.13-08-0162>
+-   Grunspan, D. Z., Wiggins, B. L., & Goodreau, S. M. (2014). [*Understanding classrooms through social network analysis: A primer for social network analysis in education research*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Grunspan%2C%20Wiggins%2C%20Goodreau%20-%202014%20-%20Understanding%20classrooms%20through%20social%20network%20analysis%20A%20primer%20for%20social%20network%20analysis%20in%20ed.pdf). *Cell Biology Education*, *13*, 167--178. <http://doi.org/10.1187/cbe.13-08-0162>
 
 -   Golbeck, J. (2013). [*Visual analysis of social networks*](https://www.youtube.com/watch?v=nznUgnrPvTM&spfreload=10). Retrieved from <https://www.youtube.com/watch?v=nznUgnrPvTM&spfreload=10>
 
@@ -198,17 +198,17 @@ Finally, students should feel comfortable installing new software programs and n
 
 -   Hansen, D. L., Schneiderman, B., & Smith, M., (2011). [*Analyzing social media networks with NodeXL: Insights from a connected world*](http://catalog.lib.ncsu.edu/record/NCSU3745682). Burlington, MA: Morgan Kaufmann,. Retrieved from <http://catalog.lib.ncsu.edu/record/NCSU3745682>
 
--   Kellogg, S., & Edelmann, A. (2015). [*Massively Open Online Course for Educators (MOOC-Ed) network dataset*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64271/Kellogg%2C%20Edelmann%20-%202015%20-%20Massively%20Open%20Online%20Course%20for%20Educators%20%28MOOC-Ed%29%20network%20dataset%284%29.pdf). *British Journal of Educational Technology*, *46*(5), 977–983. <http://doi.org/10.1111/bjet.12312>
+-   Kellogg, S., & Edelmann, A. (2015). [*Massively Open Online Course for Educators (MOOC-Ed) network dataset*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64271/Kellogg%2C%20Edelmann%20-%202015%20-%20Massively%20Open%20Online%20Course%20for%20Educators%20%28MOOC-Ed%29%20network%20dataset%284%29.pdf). *British Journal of Educational Technology*, *46*(5), 977--983. <http://doi.org/10.1111/bjet.12312>
 
 -   Kellogg, S. (2013). [*A SNA cheat sheet*](https://docs.google.com/a/ncsu.edu/document/d/1XHxzK1bAOj1Benw5GYKqbxfyKGf7Y-h8d8kWA6NVzwY/mobilebasic). Handout from and SNA Workshop conducted at the Friday Institute.
 
 -   Kellogg, S. (2014). [*Social learning theories and education: A review of the literature*](https://moodle1516-courses.wolfware.ncsu.edu/draftfile.php/44554/user/draft/87048915/Social%20Learning%20Theories.pdf). 
 
--   Kellogg, S. B., Booth, S., & Oliver, K. M. (2014). [*A social network perspective on peer support learning in MOOCs for educators*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Kellogg%2C%20Booth%2C%20Oliver%20-%202014%20-%20A%20social%20network%20perspective%20on%20peer%20support%20learning%20in%20MOOCs%20for%20educators%282%29.pdf). *International Review of Research in Open and Distance Learning*, *15*(5), 263–289.
+-   Kellogg, S. B., Booth, S., & Oliver, K. M. (2014). [*A social network perspective on peer support learning in MOOCs for educators*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64275/Kellogg%2C%20Booth%2C%20Oliver%20-%202014%20-%20A%20social%20network%20perspective%20on%20peer%20support%20learning%20in%20MOOCs%20for%20educators%282%29.pdf). *International Review of Research in Open and Distance Learning*, *15*(5), 263--289.
 
--   McFarland, D. A., Diehl, D., & Rawlings, C. (2011). [*Methodological transactionalism and the sociology of education*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/McFarland%2C%20Diehl%2C%20Rawlings%20-%202011%20-%20Methodological%20transactionalism%20and%20the%20sociology%20of%20education%282%29.pdf). In M. T. Hallinan (Ed.), *Frontiers in Sociology of Education* (pp. 87–109). Dordrecht: Springer Netherlands. <http://doi.org/10.1007/978-94-007-1576-9>
+-   McFarland, D. A., Diehl, D., & Rawlings, C. (2011). [*Methodological transactionalism and the sociology of education*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/McFarland%2C%20Diehl%2C%20Rawlings%20-%202011%20-%20Methodological%20transactionalism%20and%20the%20sociology%20of%20education%282%29.pdf). In M. T. Hallinan (Ed.), *Frontiers in Sociology of Education* (pp. 87--109). Dordrecht: Springer Netherlands. <http://doi.org/10.1007/978-94-007-1576-9>
 
--   Penuel, W. R., Sussex, W., Korbak, C., & Hoadley, C. (2006). [*Investigating the potential of using social network analysis in educational evaluation. American Journal of Evaluation*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Penuel%20et%20al.%20-%202006%20-%20Investigating%20the%20potential%20of%20using%20social%20network%20analysis%20in%20educational%20evaluation.pdf), *27*(4), 437–451. <http://doi.org/10.1177/1098214006294307>
+-   Penuel, W. R., Sussex, W., Korbak, C., & Hoadley, C. (2006). [*Investigating the potential of using social network analysis in educational evaluation. American Journal of Evaluation*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870151/mod_forumng/message/64280/Penuel%20et%20al.%20-%202006%20-%20Investigating%20the%20potential%20of%20using%20social%20network%20analysis%20in%20educational%20evaluation.pdf), *27*(4), 437--451. <http://doi.org/10.1177/1098214006294307>
 
 -   Smith, M., et al. (2009). [*Analyzing (social media) networks with NodeXL*](https://moodle-courses1617.wolfware.ncsu.edu/pluginfile.php/870150/mod_forumng/message/64258/Smith%20et%20al.%20-%202009%20-%20Analyzing%20%28social%20media%29%20networks%20with%20NodeXL.pdf). In *Proceedings of the fourth international conference on Communities and technologies - C&T '09* (p. 255). New York, New York, USA: ACM Press. <http://doi.org/10.1145/1556460.1556497>
 
