@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-For the Text Mining Module 1 Learning Labs, we'll be using the Twitter Application Programming Interface (API) to examine public sentiment around the Common Core and Next Generation Science Standards. The Twitter API facilitates this analysis by provides companies, developers, and researchers with programmatic access to public data.
+In Unit 3, you'll learn how the Twitter Application Programming Interface (API) was used to examine public sentiment around the Common Core and Next Generation Science Standards. The Twitter API facilitates analyses like the by providing companies, developers, and researchers with programmatic access to publicly available data.
 
 ### What is an API?
 
@@ -24,9 +24,9 @@ For those new to the concept of an API, our very own Raleigh, NC-based [Red Hat]
 
 > APIs are sometimes thought of as contracts, with documentation that represents an agreement between parties: If party 1 sends a remote request structured a particular way, this is how party 2's software will respond.
 
-As Duke University's Chris Bail notes, "APIs have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well." Compared to screen-scraping data from web pages, which explore in Module 2 later this year, APIs are considerably easier to work with than the HTML or XML data, ensure that data is collected legally, and with R packages like `rtweet`, are logistically easier to work with, as we'll see at the workshop this summer.
+As Duke University's Chris Bail notes, "APIs have become one of the most important ways to access and transfer data online--- and increasingly APIs can even analyze your data as well." Compared to screen-scraping data from web pages, APIs ensure that data is collected legally, and with R packages like `rtweet`, they are considerably easier to work with than HTML or XML data scraped from the web.
 
-For a more in-depth explanation of APIs, how they work, and a preview of some of the `rtweet` functions we'll be using this summer, we highly recommend reading through Chris Bail's [Application Programming Interfaces in R](https://sicss.io/2020/materials/day2-digital-trace-data/apis/rmarkdown/Application_Programming_interfaces.html) tutorial.
+For a more in-depth explanation of APIs, how they work, and a preview of some of the `rtweet` functions we'll be using this summer, I highly recommend reading through Chris Bail's [Application Programming Interfaces in R](https://sicss.io/2020/materials/day2-digital-trace-data/apis/rmarkdown/Application_Programming_interfaces.html) tutorial.
 
 ## Create a Developer Account
 
@@ -38,9 +38,9 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
 
 ![](img/twitter-join.png){width="80%"}
 
-### Apply for Student Account
+### Sign-Up for a Standard Developer Account
 
-2.  Apply for access to the Twitter API by going to [developers.twitter.com](https://developer.twitter.com/en/apply-for-access) and clicking on the "Apply" link.
+2.  Sign up for access to the Twitter API by going to [developers.twitter.com](https://developer.twitter.com/en/apply-for-access) and clicking on the "Sign up" link.
 
 ![](img/twitter-apply.png){width="80%"}
 
@@ -48,25 +48,41 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
 
 ![](img/twitter-developer.png){width="80%"}
 
-4.  Next, you'll be asked to select a developer account \#UseCase.
+4.  Next, you'll be asked to confirm and provide some developer information, including a developer account #UseCase.
 
-    -   For the LASER Institute, **I recommend selecting `Student` under the `Academic` use case to facilitate approval.**
-
-    -   Later, you can apply for an [Academic Research](https://developer.twitter.com/en/solutions/academic-research) account if you anticipate working with Twitter data for a future research project.
+    -   For this course, **I recommend selecting `Student` as your use case and indicating "No" to facilitate approval.**
 
 ![](img/twitter-student.png){width="80%"}
 
-5.  Click the blue `Get started` button to submit a standard application.
+-   Later in this guide, you will also apply for [Elevated Access](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api), which we will need to make use of the [rtweet package](https://github.com/ropensci/rtweet#rtweet-) for retrieving data through the Twitter API in R. And should you determine after the course that you would like to use the Twitter API for your own research, I highly recommend applying for an [Academic Research](https://developer.twitter.com/en/solutions/academic-research) account which provides an even greater level of access to data.
 
-6.  Provide the basic information requested and for `Intended use`.
+5.  Click the `Let's do this` button to submit a standard application.
 
-![](img/twitter-use.png){width="80%"}
+6.  Next, you'll be prompted to Accept the Terms and Conditions of developer agreement. Check the box and click submit.
 
-8.  Below are some suggestions below for each of the questions you'll be asked:
+![](img/twitter-agreement.png){width="80%"}
+
+7.  Verify your email.
+
+![](img/twitter-verify.png){width="80%"}
+
+8.   Congrats, you just become a become an official Twitter Developer!! Next, you be prompted to create and name your first "app." We won't actually be creating an app, but we will need the credentials twitter will provide next for using the Twitter API to request data.
+
+    -   In the prompt provide, give you app any name you like.
+
+![](img/twitter-app.png){width="80%"}
+
+9.  Finally, you will be provide with the "keys" to your app. Copy these and store them in a safe place.
+
+![](img/twitter-keys.png){width="80%"}
+
+### Sign-Up for an Elevated Developer Account
+
+1.  Below are some suggestions below for each of the questions you'll be asked:
 
     -   In English, please describe how you plan to use Twitter data and/or APIs. The more detailed the response, the easier it is to review and approve.
 
-        -   You should definitely include that you will be using twitter data as part of the Learning Analytics in STEM Education Research Institute, a professional development program for early and mid-career researchers hosted by North Carolina State University. We'll be using the Twitter API for instructional purposes and will be collecting and analyze data related to tweets containing hashtags specific to education topics such as \#CommonCore as well as tweets by educational leaders in various fields.
+        -   You should definitely include that you will be using twitter data as part of the Learning Analytics in STEM Education Research Institute, a professional development program for early and mid-career researchers hosted by North Carolina State University. We'll be using the Twitter API for instructional purposes and will be collecting and analyze data related to tweets containing hashtags specific to education topics such as #CommonCore as well as tweets by educational leaders in various fields.
 
     -   Are you planning to analyze Twitter data?
 
@@ -86,7 +102,7 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
 
         -   Select "No."
 
-9.  Read through the guidelines before submitting your applications. [Sumedh Patkar](https://dev.to/sumedhpatkar/beginners-guide-how-to-apply-for-a-twitter-developer-account-1kh7) has provide an excellent summary these guidelines which I've copied below:
+2.  Read through the guidelines before submitting your applications. [Sumedh Patkar](https://dev.to/sumedhpatkar/beginners-guide-how-to-apply-for-a-twitter-developer-account-1kh7) has provide an excellent summary these guidelines which I've copied below:
 
     -   **Reverse Engineering** - Don't try to reverse engineer the Twitter API. Do not try to sell, lease, distribute, or provide access to any licensed material to a third-party.
     -   **Security** - Never give away your account's API keys (The ones which you generate after creating an app)
@@ -95,17 +111,17 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
     -   **Use of Twitter Marks** - Don't use the Twitter Logo for this account
     -   **Automation Guidelines** - Automated liking, automated bulk following, and automated adding to lists or collections are discouraged.
 
-10. Review and submit your application. Once you have submitted you can't make changes so make sure everything is complete and correct.
+3.  Review and submit your application. Once you have submitted you can't make changes so make sure everything is complete and correct.
 
     -   You may be asked follow up questions in an email so I recommend printing to PDF or taking a screenshot of your application so you can review the responses you submitted.
 
-11. Wait for an email from Twitter that should arrive in the next few days that either:
+4.  Wait for an email from Twitter that should arrive in the next few days that either:
 
     -   Approves your developer application
     -   Rejects your application
     -   Provide additional information before approval.
 
-12. Once your application is approved you can now using the Twitter API. and proceed to the following section!
+5.  Once your application is approved you can now using the Twitter API. and proceed to the following section!
 
 ## Create a Twitter App
 
