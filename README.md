@@ -54,47 +54,23 @@ The following learning objectives are aligned with the overarching learning obje
 
 ## **Course Structure**
 
-This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis.
+This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each unit consists of course **Readings and Discussion** designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network **Case Study** and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either an **Independent Analysis** for those comfortable students who have completed ECI 586, or R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
 
 ### **Unit 1: The Social Network Perspective**
 
-Unit 1 is a gentle introduction to social network theory, analysis and applications in education. The course **Readings and Discussion** in this unit will help students gain a general understanding of key social network theory, concepts, and applications in education, as well how researchers manage and represent network data. Our **Unit 1 Case Study: Who's Friends with Who in Middle School** is guided by the work of [Pittinsky and Carolan (2008)](https://link.springer.com/article/10.1007/s11218-007-9046-7) and compares teacher perceptions and student reports of classroom middle school friendship. Finally, the **Independent Analysis** provides an opportunity to further explore our middle school datasets and create your own data product that highlights the knowledge and skills gained in Unit 1. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
-
-This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R.
-
-1.  **Readings & Discussion**: [What is social network analysis?](https://sbkellogg.github.io/eci-589/unit-1/unit-1-readings.html)
-
-2.  **Case Study**: [Hashtag Common Core](https://sbkellogg.github.io/eci-589/unit-1/unit-1-case-study-key.html)
-
-3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
+The Social Network Perspective is a gentle introduction to social network theory, analysis and applications in education. The course **Readings and Discussion** in this unit will help students gain a general understanding of key social network theory, concepts, and applications in education, as well how researchers manage and represent network data. Our unit **Case Study: Who's Friends with Who in Middle School** is guided by the work of [Pittinsky and Carolan (2008)](https://link.springer.com/article/10.1007/s11218-007-9046-7) and compares teacher perceptions and student reports of classroom middle school friendship. Finally, the **Independent Analysis** provides an opportunity to further explore our middle school datasets and create your own data product that highlights the knowledge and skills gained in Unit 1. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
 
 ### **Unit 2: Network Methods and Measures**
 
-Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. More specifically, these concepts and measures apply to the analysis of complete networks, i.e. networks for which you have complete relational information on each pair of individuals in the network. These measures are necessary to first figure out a network's "topography", or what the network looks like at one point in time.
+Network Methods and Measures moves beyond basic concepts of network analysis and takes a closer look at the collection, management, and measurement of network data. Our course **Readings and Discussion** examine the different levels at which social networks can be analyzed, as well as common network measures for describing properties of complete networks. Our unit **Case Study: A Tale of Two MOOCs** compares discussion networks from two courses using an open educational dataset prepared by [Kellogg and Edelman (2015)](https://bera-journals.onlinelibrary.wiley.com/doi/full/10.1111/bjet.12312) as part of the Friday Institute's work around Massively Open Online Courses for Educators (MOOC-Eds). Finally, the **Independent Analysis** provides an opportunity to further explore our MOOC-Ed dataset and create your own data product that highlights the knowledge and skills gained in this. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
 
-1.  **Readings & Discussion**: [Groups, Positions, and Egocentric Analysis](https://sbkellogg.github.io/eci-589/unit-3/unit-3-readings.html)
+### **Unit 3: Groups, Positions and Egocentric Analysis**
 
-2.  **Case Study**: School Leader Ties over Time
+Groups, Positions and Egocentric Analysis shifts the focus from complete network analysis and zooms in on methods and measures for analyzing groups, positions, and individual actors. Our course **Readings and Discussion** and case study explore both "top-down" and "bottom-up" approaches to identify a network's groups and extend measures introduced in the previous lab to identify individuals central to the network. Our unit **Case Study: Components, Cliques, & Key Actors** is inspired by the work of Supovitz et al. who examined groups and key actors that emerged during the intense Twitter debate surrounding the Common Core State Standards. You can learn more about their work on the expansive and interactive website for the [#COMMONCORE Project](https://www.hashtagcommoncore.com/). Finally, the **Independent Analysis** provides an opportunity to further explore our Twitter dataset and create your own data product that highlights the knowledge and skills gained in this. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
 
-3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-1/unit-1-analysis.html)
+### **Unit 4: Statistical Inference and Network Selection**
 
-### **Unit 3: Groups, Positions and Egocentric Analysis (All Students)**
-
-Groups, Positions and Egocentric Analysis focuses on how networks can be analyzed by using different algorithms to identify its groups and positions. Unlike most social science, groups and communities are identified through their relational data, not an attribute such as grade level, subject area, or years of experience. This unit also examines how network positions are also identified through relational data, and takes a brief look at how ego network data differ from complete network data, particularly in terms of data collection, management, and analysis.
-
-1.  **Readings & Discussion**: [Groups, Positions, and Egocentric Analysis](https://sbkellogg.github.io/eci-589/unit-3/unit-3-readings.html)
-
-2.  **Case Study**: A Social Network Perspective on MOOC-Eds
-
-3.  **Independent Analysis**: [Network Substructures & Nodes](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
-
-### **Unit 4: Statistical Inference and Network Selection (All Students)**
-
-Statistical Inference and Network Selection examines the different techniques that make use of simulations when statistically modeling network data. These models enable researchers to employ social network analysis in ways that move beyond description toward explanation, an important goal of social science. In Unit 4, students are also introduced to Exponential Random Graph Models, which provide a means to compare whether a network's observed structural properties occur more frequently than one could expect from chance alone. More specifically, ERGMS provide a way to determine how networks develop and factors that contribute to formation of relations between students and/or educators.
-
-### **Unit 5: Social Capital and Network Diffusion (Certificate Track Only)**
-
-Social Capital and Network Diffusion concludes this course and focuses on the concept of social capital and how it has been defined, measured, and modeled in the context of educational research. chapter will help you understand what social capital is (and isn't) and how the conceptual and methodological tools associated with social network analysis are essential to testing and refining this rich theory. Students are also introduced to diffusion theory and the major models used to understand how diffusion through networks occurs. 
+Statistical Inference and Network Selection wraps up our work with SNA and examines recent advances in inferential statistics that can be used to make predictions from social network data and test hypotheses we have about a network of interest. Through our course **Readings and Discussion**, we'll learn about different techniques that make use of simulations to model network data and how these statistical models are used to address questions that more completely reflect the complexity of educational settings. For example, our unit **Case Study: Birds of a Feather Lead Together** is inspired by the work of Daly and Finnigan (2016) makes use of Exponential Random Graph Models (ERGMs) to examine social processes (e.g. reciprocity and homophily) that might explain how school and district-level leaders select peers for collaboration or confidential exchanges. Finally, the **Independent Analysis** provides an opportunity to further explore our school leadership datasets and create your own data product that highlights the knowledge and skills gained in this. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
 
 ## **Assignments and Grading**
 
@@ -128,7 +104,7 @@ F (59 or less)
 
 Late work is accepted but may be penalized at 15% per week it is late. Assignments submitted by the due date, however, may be revised and resubmitted for a higher grade by the following week.
 
-**Course Feedback Expectations:** Please contact your instructor via email ([shaun.kellogg\@ncsu.edu](mailto:Sophia_stone@ncsu.edu)) with any questions about the course project or other assignments. Your instructor will strive to answer any emails within 24 hours (M-F) and 48 hours on the weekend, and grade submitted assignments within 5-7 days of the due date. In addition, students will be provided ongoing opportunities, and are strongly encourage, to provide course feedback for to help improve the design of current and future courses.
+**Course Feedback Expectations:** Please contact your instructor via email ([sbkellog\@ncsu.edu](mailto:Sophia_stone@ncsu.edu)) with any questions about the course project or other assignments. Your instructor will strive to answer any emails within 24 hours (M-F) and 48 hours on the weekend, and grade submitted assignments within 5-7 days of the due date. In addition, students will be provided ongoing opportunities, and are strongly encourage, to provide course feedback for to help improve the design of current and future courses.
 
 ## **Course Software**
 
