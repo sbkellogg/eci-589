@@ -12,7 +12,9 @@ This course is part of the [Graduate Certificate in Learning Analytics Program](
 
 **Name:** Dr. Shaun Kellogg
 
-**Email:** shaun.kellogg\@ncsu.edu
+**Title:** Senior Director, Program Evaluation and Education Research
+
+**Email:** sbkellog\@ncsu.edu
 
 **Website:** [https://www.fi.ncsu.edu/people/sbkellog](https://www.fi.ncsu.edu/people/sbkellog/)
 
@@ -24,11 +26,11 @@ This course is part of the [Graduate Certificate in Learning Analytics Program](
 
 ## Time and Location
 
-**Meeting Time:** This distance education course is predominantly asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
+**Meeting Time:** This distance education course is entirely asynchronous. Online tools are utilized throughout the course for communication and interaction. In addition, we may use Zoom for real-time web conferencing, virtual office hours, or whole class discussions. Occasional live sessions will be held as a time agreeable to most students and otherwise recorded for playback by anyone unable to attend.
 
 **Virtual Class Locations:** This course will be taught online through NC State's *Moodle* course management platform. Access <http://wolfware.ncsu.edu/> and log-in with your Unity ID and password. After logging-in, locate and click on ECI 589 to access the course site.
 
-**Office Hours:** Any weekday by appointment [calendly.com/sbkellogg](applewebdata://1C1ADE9B-69FF-4630-9C22-4A09159FF85B/calendly.com/sbkellogg)
+**Office Hours:** Any weekday by appointment at [calendly.com/sbkellogg/analytics](https://calendly.com/sbkellogg/analytics)
 
 ## **Goals and Objectives**
 
@@ -54,9 +56,11 @@ The following learning objectives are aligned with the overarching learning obje
 
 This course is divided into three-week units focused on common techniques associated with social network theory and analysis. Week 1 of each consists of course readings and discussion designed to introduce key terminology, core concepts, and applications of SNA in Education. The second week of each unit is guided by a network study and focuses on applying network analysis to gain insight into a network data set. During the final week of each unit, students will continue to develop technical skills through either tutorials and an independent analysis.
 
-### **Unit 1: The Social Network Perspective (Non-ECI 586 Students Only)**
+### **Unit 1: The Social Network Perspective**
 
-Unit 1 is a gentle introduction to social network theory, analysis and applications in education. This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R.
+Unit 1 is a gentle introduction to social network theory, analysis and applications in education. The course **Readings and Discussion** in this unit will help students gain a general understanding of key social network theory, concepts, and applications in education, as well how researchers manage and represent network data. Our **Unit 1 Case Study: Who's Friends with Who in Middle School** is guided by the work of [Pittinsky and Carolan (2008)](https://link.springer.com/article/10.1007/s11218-007-9046-7) and compares teacher perceptions and student reports of classroom middle school friendship. Finally, the **Independent Analysis** provides an opportunity to further explore our middle school datasets and create your own data product that highlights the knowledge and skills gained in Unit 1. Students new to R are required to complete an alternative assignment consisting of R tutorials available through [Posit Cloud](https://posit.cloud/learn/primers).
+
+This unit is focused on gaining a general understanding of basic concepts and basic comfort level with importing network data and representing networks visually. To begin, students will learn about social network analysis as a both a theory and a method and take look at more specific examples of its use in educational contexts. We'll gain some experience with foundational network analysis workflows using popular packages in R.
 
 1.  **Readings & Discussion**: [What is social network analysis?](https://sbkellogg.github.io/eci-589/unit-1/unit-1-readings.html)
 
@@ -64,7 +68,7 @@ Unit 1 is a gentle introduction to social network theory, analysis and applicati
 
 3.  **Independent Analysis**: [Make a Sociogram](https://sbkellogg.github.io/eci-589/unit-3/unit-3-analysis.html)
 
-### **Unit 2: Network Methods and Measures (All Students)**
+### **Unit 2: Network Methods and Measures**
 
 Network Methods and Measures moves beyond basic network analysis concepts and takes a closer look at the collection, management, and measurement of network data. At the complete network level, students will dig into measures used to describe static properties of social networks such as size, density and reciprocity. More specifically, these concepts and measures apply to the analysis of complete networks, i.e. networks for which you have complete relational information on each pair of individuals in the network. These measures are necessary to first figure out a network's "topography", or what the network looks like at one point in time.
 
