@@ -54,7 +54,7 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
 
 ![](img/twitter-student.png){width="80%"}
 
--   Later in this guide, you will also apply for [Elevated Access](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api), which we will need to make use of the [rtweet package](https://github.com/ropensci/rtweet#rtweet-) for retrieving data through the Twitter API in R. And should you determine after the course that you would like to use the Twitter API for your own research, I highly recommend applying for an [Academic Research](https://developer.twitter.com/en/solutions/academic-research) account which provides an even greater level of access to data.
+-   Later in this guide, you will also apply for [Elevated Access](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api), which we will need to make use of the [`rtweet` package](https://github.com/ropensci/rtweet#rtweet-) for retrieving data through the Twitter API in R. And should you determine after the course that you would like to use the Twitter API for your own research, I highly recommend applying for an [Academic Research](https://developer.twitter.com/en/solutions/academic-research) account which provides an even greater level of access to data.
 
 5.  Click the `Let's do this` button to submit a standard application.
 
@@ -66,62 +66,79 @@ In order to use Twitter's API, you will need to set up a Twitter developer accou
 
 ![](img/twitter-verify.png){width="80%"}
 
-8.   Congrats, you just become a become an official Twitter Developer!! Next, you be prompted to create and name your first "app." We won't actually be creating an app, but we will need the credentials twitter will provide next for using the Twitter API to request data.
+8.  Congrats, you just become a become an official Twitter Developer!! Next, you be prompted to create and name your first "app." We won't actually be creating an app, but we will need the credentials twitter will provide next for using the Twitter API to request data.
+
+<!-- -->
 
     -   In the prompt provide, give you app any name you like.
 
 ![](img/twitter-app.png){width="80%"}
 
-9.  Finally, you will be provide with the "keys" to your app. Copy these and store them in a safe place.
+9.  Next you will be provided with the "keys" to your app. Copy these and store them in a safe place. Your keys are what you use to authenticate yourself when making data requests using the Twitter API.
 
 ![](img/twitter-keys.png){width="80%"}
 
-### Sign-Up for an Elevated Developer Account
+10. Finally, you be prompted one more time save you keys.
 
-1.  Below are some suggestions below for each of the questions you'll be asked:
+![](img/twitter-keys2.png){width="80%"}
 
-    -   In English, please describe how you plan to use Twitter data and/or APIs. The more detailed the response, the easier it is to review and approve.
+### Apply for an Elevated Developer Account
 
-        -   You should definitely include that you will be using twitter data as part of the Learning Analytics in STEM Education Research Institute, a professional development program for early and mid-career researchers hosted by North Carolina State University. We'll be using the Twitter API for instructional purposes and will be collecting and analyze data related to tweets containing hashtags specific to education topics such as #CommonCore as well as tweets by educational leaders in various fields.
+R packages such as [`rtweet`](https://github.com/ropensci/rtweet#rtweet-) and [`academictwitteR`](https://github.com/cjbarrie/academictwitteR#academictwitter-) that make use the Twitter API v2, which requires an [Elevated Access](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api) or [Academic Research](https://developer.twitter.com/en/solutions/academic-research) account. For this course, an Elevated account will be sufficient. Complete the following steps to apply:
 
-    -   Are you planning to analyze Twitter data?
+1.  On left navigation bar in the developer portal, click the Products menu dropdown, select Twitter API v2, then navigate to the Elevated account tab and click "Apply."
 
-        -   Select "Yes."
-        -   Analyses we'll perform will be primarily focus word counts and sentiment analysis in order to understand and compare key topics and terms surrounding specific hashtags and tweets by education leaders.
+![](img/twitter-elevated.png){width="80%"}
 
-    -   Will your app use Tweet, Retweet, Like, Follow, or Direct Message functionality? Please describe your planned use of these features.
+2.  Next you'll be prompted to provide some basic information about yourself. Provide it and click "Next."
 
-        -   Select "No."
+![](img/twitter-basic.png){width="80%"}
 
-    -   Do you plan to display Tweets or aggregate data about Twitter content outside Twitter? Please describe how and where Tweets and/or data about Twitter content will be displayed outside of Twitter.
+2.  Next, you'll be asked to describe you plan to use the Twitter API. Guidance is provided below and after completing, click "Next."
 
-        -   Select "Yes."
-        -   Analysis of Twitter data described above will be incorporated into informal data reports and shared with other students and the workshop instructors through the LASER Institute's private RStudio workspace. 
+![](img/twitter-use.png){width="80%"}
 
-    -   Will your product, service, or analysis make Twitter content or derived information available to a government entity?
+Below are some suggestions for answering each of the questions you'll be asked:
 
-        -   Select "No."
+-   In English, please describe how you plan to use Twitter data and/or APIs. The more detailed the response, the easier it is to review and approve.
 
-2.  Read through the guidelines before submitting your applications. [Sumedh Patkar](https://dev.to/sumedhpatkar/beginners-guide-how-to-apply-for-a-twitter-developer-account-1kh7) has provide an excellent summary these guidelines which I've copied below:
+    -   I will be using twitter data as part of the ECI 589 Social Network Analysis and Education course, part of the Graduate Certificate in Learning Analytics program at North Carolina State University. I will be using the Twitter API for instructional purposes and will be collecting and analyze data related to tweets containing hashtags specific to education topics such as #CommonCore, as well as tweets by educational leaders in various fields.
 
-    -   **Reverse Engineering** - Don't try to reverse engineer the Twitter API. Do not try to sell, lease, distribute, or provide access to any licensed material to a third-party.
-    -   **Security** - Never give away your account's API keys (The ones which you generate after creating an app)
-    -   **Rate limits** - Don't call the Twitter API endpoints beyond the specified rate limits. In short, *don't spam*. The rate limits of individual endpoints can be found in [Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index).
-    -   **Location Data** - This data can only be used to identify the tagged location of Twitter content like tweets, retweets, DMs, and more.
-    -   **Use of Twitter Marks** - Don't use the Twitter Logo for this account
-    -   **Automation Guidelines** - Automated liking, automated bulk following, and automated adding to lists or collections are discouraged.
+-   Are you planning to analyze Twitter data?
 
-3.  Review and submit your application. Once you have submitted you can't make changes so make sure everything is complete and correct.
+    -   Select "Yes."
+    -   Analyses will focus on the social networks of users and surrounding specific hashtags and include interactions such as mentions and replies. Analysis will consists of creating sociograms to highligh key network measures such as desnity, degress, and reciprocity.
+
+-   Will your app use Tweet, Retweet, Like, Follow, or Direct Message functionality? Please describe your planned use of these features.
+
+    -   Select "No."
+
+-   Do you plan to display Tweets or aggregate data about Twitter content outside Twitter? Please describe how and where Tweets and/or data about Twitter content will be displayed outside of Twitter.
+
+    -   Select "Yes."
+    -   Analysis of Twitter data described above will be incorporated into informal data reports and assignments and shared with other students and the instructor through the course's private Learning Management System.
+
+-   Will your product, service, or analysis make Twitter content or derived information available to a government entity?
+
+    -   Select "No."
+
+4.  Next, review your application and make sure the information is correct.
+
+![](img/twitter-review.png){width="80%"}
+
+4.  Finally, read through the Developer Agreement, accept the terms, and submit.
 
     -   You may be asked follow up questions in an email so I recommend printing to PDF or taking a screenshot of your application so you can review the responses you submitted.
 
-4.  Wait for an email from Twitter that should arrive in the next few days that either:
+    ![](img/twitter-terms.png){width="80%"}
+
+5.  Wait for an email from Twitter that should arrive in the next few days that either:
 
     -   Approves your developer application
     -   Rejects your application
     -   Provide additional information before approval.
 
-5.  Once your application is approved you can now using the Twitter API. and proceed to the following section!
+6.  Once your application is approved you can now using the Twitter API. and proceed to the following section!
 
 ## Create a Twitter App
 
@@ -129,32 +146,34 @@ Before you can begin pulling tweets into R, you'll first need to create a Twitte
 
 Follow the steps below to set up your app:
 
-1.  Navigate to [developer.twitter.com/en/apps](https://developer.twitter.com/en/apps/), click the blue button that says, `Create a New App`, and then complete the form with the following fields:
+1.  Navigate to [developer.twitter.com/en/apps](https://developer.twitter.com/en/apps/), click the blue button that says, "+ Add App."
 
-    -   `App Name`: What your app will be called
+![](img/twitter-add.png){width="80%"}
 
-    -   `Application Description`: How your app will be described to its users
+2.  Then click "Create a new App."
 
-![](files/create-app-1.png){width="80%"}
+![](img/twitter-create.png){width="80%"}
 
--   `Website URLs`: Website associated with app
+3.   Indicated that your app will be used for "Production."
 
-    -   I recommend using the URL to your Twitter profile
+![](img/twitter-environment.png){width="80%"}
 
--   `Callback URLs`: *IMPORTANT* enter exactly the following: \`[http://127.0.0.1:1410\`](http://127.0.0.1:1410%60)
+3.   Give your app a name.
 
-<img src="files/create-app-2.png" alt="create-app-2" width="80%"/>
+![](img/twitter-name.png){width="80%"}
 
--   `Tell us how this app will be used`: Be clear and honest
+3.  
 
-<img src="files/create-app-3.png" alt="create-app-3" width="80%"/>
+![](img/twitter-tokens.png){width="80%"}
 
-2.  When you've completed the required form fields, click the blue `Create` button at the bottom
+3.  
 
-3.  Read through and indicate whether you accept the developer terms
+![](img/twitter-settings.png){width="80%"}
 
-<img src="files/create-app-4.png" alt="create-app-4" width="80%"/>
+3.  
 
-4.  And you're done!
+![](img/twitter-generate.png){width="80%"}
 
-<img src="files/create-app-5.png" alt="create-app-5" width="80%"/>
+3.  
+
+![](img/twitter-copy.png){width="80%"}
