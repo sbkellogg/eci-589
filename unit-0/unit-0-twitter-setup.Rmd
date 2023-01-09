@@ -1,6 +1,6 @@
 ---
 title: "Twitter API Setup" 
-subtitle: "Pre-Institute Preparation"
+subtitle: "Graduate Certificate in Learning Analytics"
 author: "LASER Institute"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
@@ -154,26 +154,28 @@ Follow the steps below to set up your app:
 
 ![](img/twitter-create.png){width="80%"}
 
-3.   Indicated that your app will be used for "Production."
+3.  Indicated that your app will be used for "Production."
 
 ![](img/twitter-environment.png){width="80%"}
 
-3.   Give your app a name.
+4.  Give your app a name.
 
 ![](img/twitter-name.png){width="80%"}
 
-3.  
+5.  Copy and save your keys and token and then click on "App Settings."
 
 ![](img/twitter-tokens.png){width="80%"}
 
-3.  
+6.  Under you app settings, you can view the details of your app. Click on the "Keys and tokens" tab.
 
 ![](img/twitter-settings.png){width="80%"}
 
-3.  
+7.  Next, click "Generate" to get you Access Token and Secret, which you will also need for pulling data from R.
 
 ![](img/twitter-generate.png){width="80%"}
 
-3.  
+8.  Finally, copy and save your Access Token and Secret to the same place you save your other keys and bearer token.
 
 ![](img/twitter-copy.png){width="80%"}
+
+Congratulations!! You've completed your Twitter Developer set up and are ready to explore pulling data using the Twitter API in Unit 3!
