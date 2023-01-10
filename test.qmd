@@ -1,0 +1,58 @@
+---
+title: "Intro Reading and Introductions" 
+subtitle: "ECI 589: SNA and Education"
+author: "Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+theme: 
+  light: cosmo
+  dark: cyborg
+editor: visual
+---
+
+Your next assignment this week is to introduce yourself to the class. To assist us with our introductions, please read [Chapter 1: The Social Network Perspective and Educational Research Introduction](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml)from our course text [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) prior to writing your introduction. 
+
+**Your Network**
+
+For the first part of your introduction, consider a personal or professional network of which you are a part. For example, this might be a network of coworkers, members of an organization or club to which you belong, a program or group here at NC State, or even a virtual group of individuals you have never met in-person. In your introduction, write a short response that addresses the following questions about your network:
+
+-   Who are the network's **actors**?
+
+-   What **ties** might connect these actors?
+
+-   Are there any **groups** within this network?
+
+-   What makes this collection of actors a **social network**?
+
+**Your Attributes**
+
+As you read in Chapter 1, it's estimated that individual-level **attributes** (e.g., gender, age, social status-economic status, etc.) are responsible for 70 to 90% of the variation in relevant educational outcomes for students. In the second part of your introduction, include some important "attributes" about yourself that you think might be of interest to your peers. For example, these may include:
+
+-   Your educational program and research area(s) of interest;
+
+-   What experience, if any, that you've had with SNA and/or R;
+
+-   Any personal learning goals and/or any social network data sources you may be interested in exploring this semester;
+
+-   Any hobbies, relationships, or personal interests that define you as an individual. 
+
+**Your Ties**
+
+As you also read in Chapter 1, the roles that one's  "ties," or relationships with others, play in shaping opportunities and outcomes for individuals is often under appreciated and unaccounted for in education research. After completing your introduction, **please "connect" with at least three other peers by welcoming them to the course**. In your reply, try to include at one tie you might have with your classmate if possible. For example, these might be: 
+
+-   A behavioral interaction you've had such as meeting them at an event;
+
+-   A physical connection such as living in the same city; 
+
+-   An association such as taking a class together; 
+
+-   A formal relation such as being coworkers; 
+
+-   A social relation such as being friends. 
+
+-   Another connection not listed above.
+
+Finally, if you haven't done so already, please update your Moodle profile with a picture and short bio.
