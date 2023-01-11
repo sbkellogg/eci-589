@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shaun Kellogg">
-<meta name="dcterms.date" content="2023-01-10">
+<meta name="dcterms.date" content="2023-01-11">
 
-<title>Twitter API Setup</title>
+<title>Intro Reading &amp; Introductions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,17 +49,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#what-is-an-api" id="toc-what-is-an-api" class="nav-link" data-scroll-target="#what-is-an-api">What is an API?</a></li>
-  </ul></li>
-  <li><a href="#create-a-developer-account" id="toc-create-a-developer-account" class="nav-link" data-scroll-target="#create-a-developer-account">Create a Developer Account</a>
-  <ul class="collapse">
-  <li><a href="#log-in-or-sign-up-for-twitter" id="toc-log-in-or-sign-up-for-twitter" class="nav-link" data-scroll-target="#log-in-or-sign-up-for-twitter">Log in or Sign Up for Twitter</a></li>
-  <li><a href="#sign-up-for-a-standard-developer-account" id="toc-sign-up-for-a-standard-developer-account" class="nav-link" data-scroll-target="#sign-up-for-a-standard-developer-account">Sign-Up for a Standard Developer Account</a></li>
-  <li><a href="#apply-for-an-elevated-developer-account" id="toc-apply-for-an-elevated-developer-account" class="nav-link" data-scroll-target="#apply-for-an-elevated-developer-account">Apply for an Elevated Developer Account</a></li>
-  </ul></li>
-  <li><a href="#create-a-twitter-app" id="toc-create-a-twitter-app" class="nav-link" data-scroll-target="#create-a-twitter-app">Create a Twitter App</a></li>
+  <li><a href="#your-network" id="toc-your-network" class="nav-link active" data-scroll-target="#your-network"><strong>Your Network</strong></a></li>
+  <li><a href="#your-attributes" id="toc-your-attributes" class="nav-link" data-scroll-target="#your-attributes"><strong>Your Attributes</strong></a></li>
+  <li><a href="#your-ties" id="toc-your-ties" class="nav-link" data-scroll-target="#your-ties"><strong>Your Ties</strong></a></li>
   </ul>
 </nav>
 </div>
@@ -67,7 +59,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Twitter API Setup</h1>
+<h1 class="title">Intro Reading &amp; Introductions</h1>
 <p class="subtitle lead">Graduate Certificate in Learning Analytics</p>
 </div>
 
@@ -85,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2023</p>
+      <p class="date">January 11, 2023</p>
     </div>
   </div>
   
@@ -95,170 +87,39 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In Unit 3, you’ll learn how the Twitter Application Programming Interface (API) was used to examine public sentiment around the Common Core and Next Generation Science Standards. The Twitter API facilitates analyses like the by providing companies, developers, and researchers with programmatic access to publicly available data.</p>
-<section id="what-is-an-api" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-an-api">What is an API?</h3>
-<p>For those new to the concept of an API, our very own Raleigh, NC-based <a href="https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces">Red Hat</a> describes an API as a means for one product or service communicate with other products and services:</p>
-<blockquote class="blockquote">
-<p>APIs are sometimes thought of as contracts, with documentation that represents an agreement between parties: If party 1 sends a remote request structured a particular way, this is how party 2’s software will respond.</p>
-</blockquote>
-<p>As Duke University’s Chris Bail notes, “APIs have become one of the most important ways to access and transfer data online— and increasingly APIs can even analyze your data as well.” Compared to screen-scraping data from web pages, APIs ensure that data is collected legally, and with R packages like <code>rtweet</code>, they are considerably easier to work with than HTML or XML data scraped from the web.</p>
-<p>For a more in-depth explanation of APIs, how they work, and a preview of some of the <code>rtweet</code> functions we’ll be using this summer, I highly recommend reading through Chris Bail’s <a href="https://sicss.io/2020/materials/day2-digital-trace-data/apis/rmarkdown/Application_Programming_interfaces.html">Application Programming Interfaces in R</a> tutorial.</p>
-</section>
-</section>
-<section id="create-a-developer-account" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-developer-account">Create a Developer Account</h2>
-<section id="log-in-or-sign-up-for-twitter" class="level3">
-<h3 class="anchored" data-anchor-id="log-in-or-sign-up-for-twitter">Log in or Sign Up for Twitter</h3>
-<p>In order to use Twitter’s API, you will need to set up a Twitter developer account, which requires a have a regular twitter account. :</p>
-<ol type="1">
-<li>Go to <a href="https://twitter.com/">twitter.com</a> and log in or sign up for an account that you you would use for development.</li>
-</ol>
-<p><img src="img/twitter-join.png" class="img-fluid" style="width:80.0%"></p>
-</section>
-<section id="sign-up-for-a-standard-developer-account" class="level3">
-<h3 class="anchored" data-anchor-id="sign-up-for-a-standard-developer-account">Sign-Up for a Standard Developer Account</h3>
-<ol start="2" type="1">
-<li>Sign up for access to the Twitter API by going to <a href="https://developer.twitter.com/en/apply-for-access">developers.twitter.com</a> and clicking on the “Sign up” link.</li>
-</ol>
-<p><img src="img/twitter-apply.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="3" type="1">
-<li>On the next page, click the <code>Apply for a developer account</code> button.</li>
-</ol>
-<p><img src="img/twitter-developer.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="4" type="1">
-<li><p>Next, you’ll be asked to confirm and provide some developer information, including a developer account #UseCase.</p>
+<p>Your next assignment this week is to introduce yourself to the class. To assist us with our introductions, please read&nbsp;<a href="https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml">Chapter 1: The Social Network Perspective and Educational Research Introduction</a> from our course text&nbsp;<a href="https://catalog.lib.ncsu.edu/catalog/NCSU2803782">Social Network Analysis and Education</a>&nbsp;prior to writing your introduction.&nbsp;</p>
+<section id="your-network" class="level3">
+<h3 class="anchored" data-anchor-id="your-network"><strong>Your Network</strong></h3>
+<p>For the first part of your introduction,&nbsp;consider a personal or professional network of which you are a part. For example, this might be a network of coworkers, members of an organization or club to which you belong, a program or group here at NC State, or even a virtual group of individuals you have never met in-person. In your introduction,&nbsp;write a short response that addresses the following questions about your network:</p>
 <ul>
-<li>For this course, <strong>I recommend selecting <code>Student</code> as your use case and indicating “No” to facilitate approval.</strong></li>
-</ul></li>
-</ol>
-<p><img src="img/twitter-student.png" class="img-fluid" style="width:80.0%"></p>
-<ul>
-<li>Later in this guide, you will also apply for <a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">Elevated Access</a>, which we will need to make use of the <a href="https://github.com/ropensci/rtweet#rtweet-"><code>rtweet</code> package</a> for retrieving data through the Twitter API in R. And should you determine after the course that you would like to use the Twitter API for your own research, I highly recommend applying for an <a href="https://developer.twitter.com/en/solutions/academic-research">Academic Research</a> account which provides an even greater level of access to data.</li>
+<li><p>Who are the network’s&nbsp;<strong>actors</strong>?</p></li>
+<li><p>What&nbsp;<strong>ties</strong>&nbsp;might connect these actors?</p></li>
+<li><p>Are there any&nbsp;<strong>groups</strong>&nbsp;within this network?</p></li>
+<li><p>What makes this collection of actors a&nbsp;<strong>social network</strong>?</p></li>
 </ul>
-<ol start="5" type="1">
-<li><p>Click the <code>Let's do this</code> button to submit a standard application.</p></li>
-<li><p>Next, you’ll be prompted to Accept the Terms and Conditions of developer agreement. Check the box and click submit.</p></li>
-</ol>
-<p><img src="img/twitter-agreement.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="7" type="1">
-<li>Verify your email.</li>
-</ol>
-<p><img src="img/twitter-verify.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="8" type="1">
-<li>Congrats, you just become a become an official Twitter Developer!! Next, you be prompted to create and name your first “app.” We won’t actually be creating an app, but we will need the credentials twitter will provide next for using the Twitter API to request data.</li>
-</ol>
-<!-- -->
-<pre><code>-   In the prompt provide, give you app any name you like.</code></pre>
-<p><img src="img/twitter-app.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="9" type="1">
-<li>Next you will be provided with the “keys” to your app. Copy these and store them in a safe place. Your keys are what you use to authenticate yourself when making data requests using the Twitter API.</li>
-</ol>
-<p><img src="img/twitter-keys.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="10" type="1">
-<li>Finally, you be prompted one more time save you keys.</li>
-</ol>
-<p><img src="img/twitter-keys2.png" class="img-fluid" style="width:80.0%"></p>
 </section>
-<section id="apply-for-an-elevated-developer-account" class="level3">
-<h3 class="anchored" data-anchor-id="apply-for-an-elevated-developer-account">Apply for an Elevated Developer Account</h3>
-<p>R packages such as <a href="https://github.com/ropensci/rtweet#rtweet-"><code>rtweet</code></a> and <a href="https://github.com/cjbarrie/academictwitteR#academictwitter-"><code>academictwitteR</code></a> that make use the Twitter API v2, which requires an <a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">Elevated Access</a> or <a href="https://developer.twitter.com/en/solutions/academic-research">Academic Research</a> account. For this course, an Elevated account will be sufficient. Complete the following steps to apply:</p>
-<ol type="1">
-<li>On left navigation bar in the developer portal, click the Products menu dropdown, select Twitter API v2, then navigate to the Elevated account tab and click “Apply.”</li>
-</ol>
-<p><img src="img/twitter-elevated.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="2" type="1">
-<li>Next you’ll be prompted to provide some basic information about yourself. Provide it and click “Next.”</li>
-</ol>
-<p><img src="img/twitter-basic.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="2" type="1">
-<li>Next, you’ll be asked to describe you plan to use the Twitter API. Guidance is provided below and after completing, click “Next.”</li>
-</ol>
-<p><img src="img/twitter-use.png" class="img-fluid" style="width:80.0%"></p>
-<p>Below are some suggestions for answering each of the questions you’ll be asked:</p>
+<section id="your-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="your-attributes"><strong>Your Attributes</strong></h3>
+<p>As you read in Chapter 1, it’s estimated that individual-level&nbsp;<strong>attributes</strong>&nbsp;(e.g., gender, age, social status-economic status, etc.) are responsible for 70 to 90% of the variation in relevant educational outcomes for students. In the second part of your introduction, include some important “attributes” about yourself that you think might be of interest to your peers. For example, these may include:&nbsp;</p>
 <ul>
-<li><p>In English, please describe how you plan to use Twitter data and/or APIs. The more detailed the response, the easier it is to review and approve.</p>
-<ul>
-<li>I will be using twitter data as part of the ECI 589 Social Network Analysis and Education course, part of the Graduate Certificate in Learning Analytics program at North Carolina State University. I will be using the Twitter API for instructional purposes and will be collecting and analyze data related to tweets containing hashtags specific to education topics such as #CommonCore, as well as tweets by educational leaders in various fields.</li>
-</ul></li>
-<li><p>Are you planning to analyze Twitter data?</p>
-<ul>
-<li>Select “Yes.”</li>
-<li>Analyses will focus on the social networks of users and surrounding specific hashtags and include interactions such as mentions and replies. Analysis will consists of creating sociograms to highligh key network measures such as desnity, degress, and reciprocity.</li>
-</ul></li>
-<li><p>Will your app use Tweet, Retweet, Like, Follow, or Direct Message functionality? Please describe your planned use of these features.</p>
-<ul>
-<li>Select “No.”</li>
-</ul></li>
-<li><p>Do you plan to display Tweets or aggregate data about Twitter content outside Twitter? Please describe how and where Tweets and/or data about Twitter content will be displayed outside of Twitter.</p>
-<ul>
-<li>Select “Yes.”</li>
-<li>Analysis of Twitter data described above will be incorporated into informal data reports and assignments and shared with other students and the instructor through the course’s private Learning Management System.</li>
-</ul></li>
-<li><p>Will your product, service, or analysis make Twitter content or derived information available to a government entity?</p>
-<ul>
-<li>Select “No.”</li>
-</ul></li>
+<li><p>Your educational program and research area(s) of interest;</p></li>
+<li><p>What experience, if any, that you’ve had with SNA and/or R;</p></li>
+<li><p>Any personal learning goals and/or any social network data sources you may be interested in exploring this semester;</p></li>
+<li><p>Any hobbies, relationships, or personal interests that define you as an individual.&nbsp;</p></li>
 </ul>
-<ol start="4" type="1">
-<li>Next, review your application and make sure the information is correct.</li>
-</ol>
-<p><img src="img/twitter-review.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="4" type="1">
-<li><p>Finally, read through the Developer Agreement, accept the terms, and submit.</p>
+</section>
+<section id="your-ties" class="level3">
+<h3 class="anchored" data-anchor-id="your-ties"><strong>Your Ties</strong></h3>
+<p>As you also read in Chapter 1, the roles that one’s &nbsp;“ties,” or relationships with others, play in shaping opportunities and outcomes for individuals is often under appreciated and unaccounted for in education research. After completing your introduction,&nbsp;<strong>please “connect” with at least three other peers by welcoming them to the course</strong>. In your reply, try to include at one tie you might have with your classmate if possible. For example, these might be:&nbsp;</p>
 <ul>
-<li>You may be asked follow up questions in an email so I recommend printing to PDF or taking a screenshot of your application so you can review the responses you submitted.</li>
+<li><p>A behavioral interaction you’ve had such as meeting them at an event;</p></li>
+<li><p>A physical connection such as living in the same city;&nbsp;</p></li>
+<li><p>An association such as taking a class together;&nbsp;</p></li>
+<li><p>A formal relation such as being coworkers;&nbsp;</p></li>
+<li><p>A social relation such as being friends.&nbsp;</p></li>
+<li><p>Another connection not listed above.&nbsp;</p></li>
 </ul>
-<p><img src="img/twitter-terms.png" class="img-fluid" style="width:80.0%"></p></li>
-<li><p>Wait for an email from Twitter that should arrive in the next few days that either:</p>
-<ul>
-<li>Approves your developer application</li>
-<li>Rejects your application</li>
-<li>Provide additional information before approval.</li>
-</ul></li>
-<li><p>Once your application is approved you can now using the Twitter API. and proceed to the following section!</p></li>
-</ol>
-</section>
-</section>
-<section id="create-a-twitter-app" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-twitter-app">Create a Twitter App</h2>
-<p>Before you can begin pulling tweets into R, you’ll first need to create a Twitter App in your developer account. This section is borrowed largely from the <code>rtweet</code> package by Michael Kearney, and requires that you have set up a Twitter developer account.</p>
-<p>Follow the steps below to set up your app:</p>
-<ol type="1">
-<li>Navigate to <a href="https://developer.twitter.com/en/apps/">developer.twitter.com/en/apps</a>, click the blue button that says, “+ Add App.”</li>
-</ol>
-<p><img src="img/twitter-add.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="2" type="1">
-<li>Then click “Create a new App.”</li>
-</ol>
-<p><img src="img/twitter-create.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="3" type="1">
-<li>Indicated that your app will be used for “Production.”</li>
-</ol>
-<p><img src="img/twitter-environment.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="4" type="1">
-<li>Give your app a name.</li>
-</ol>
-<p><img src="img/twitter-name.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="5" type="1">
-<li>Copy and save your keys and token and then click on “App Settings.”</li>
-</ol>
-<p><img src="img/twitter-tokens.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="6" type="1">
-<li>Under you app settings, you can view the details of your app. Click on the “Keys and tokens” tab.</li>
-</ol>
-<p><img src="img/twitter-settings.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="7" type="1">
-<li>Next, click “Generate” to get you Access Token and Secret, which you will also need for pulling data from R.</li>
-</ol>
-<p><img src="img/twitter-generate.png" class="img-fluid" style="width:80.0%"></p>
-<ol start="8" type="1">
-<li>Finally, copy and save your Access Token and Secret to the same place you save your other keys and bearer token.</li>
-</ol>
-<p><img src="img/twitter-copy.png" class="img-fluid" style="width:80.0%"></p>
-<p>Congratulations!! You’ve completed your Twitter Developer set up and are ready to explore pulling data using the Twitter API in Unit 3!</p>
+<p>Finally, if you haven’t done so already, please update your Moodle profile with a picture and short bio.</p>
 </section>
 
 </main>
