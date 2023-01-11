@@ -12,10 +12,6 @@ theme:
   dark: cyborg
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 Your next assignment this week is to introduce yourself to the class. To assist us with our introductions, please read [Chapter 1: The Social Network Perspective and Educational Research Introduction](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml) from our course text [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) prior to writing your introduction. 
 
 ### **Your Network**

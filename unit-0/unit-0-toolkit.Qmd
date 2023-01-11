@@ -1,0 +1,91 @@
+---
+title: "Network Analysis Toolkit" 
+subtitle: "Graduate Certificate in Learning Analytics"
+author: "Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+theme: 
+  light: cosmo
+  dark: cyborg
+---
+
+Your final task this week is to prepare your Learning Analytics & Text Mining Toolkit by setting up and getting familiar with the texts, software, and supplementary learning resources for this course. Depending on prior experience with R, this may take you as little as an hour or as long as several days over the next few weeks. 
+
+## **Course Texts**
+
+Our required course text is freely available online. Throughout this course, you will also be asked to locate self-selected readings related to SNA topics covered throughout the semester. I recommend that you [configure Google Scholar](https://www.lib.ncsu.edu/articles/google-scholar) to allow automatic access to the NC State Library's journals and databases. 
+
+### **Required**
+
+Course readings will draw primarily from Carolyn\'s excellent SNA and Education book and will be supplemented by self-selected articles:  
+
+1.  [Social network analysis and education: Theory, methods & applications](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). A digital copy is freely available through [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
+
+### **Optional**
+
+1.  [Social Network Theory and Educational Change](https://catalog.lib.ncsu.edu/catalog/NCSU2505433 "https://catalog.lib.ncsu.edu/catalog/NCSU2505433"). A physical copy is available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2505433).\
+
+2.  [Mixed methods social network analysis: Theories and methodologies in learning and education](https://catalog.lib.ncsu.edu/catalog/NCSU4843392). A digital copy is available through the [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU4843392). 
+
+3.  [Static and Dynamic Network Visualization](http://kateto.net/network-visualization) with R is available free online at http://kateto.net/network-visualization.
+
+4.  [R for Data Science](https://r4ds.had.co.nz/) is available free online at https://r4ds.had.co.nz
+
+5.  [Data Science in a Box](https://datasciencebox.org/index.html) by Mine Çetinkaya-Rundel at Duke University at https://datasciencebox.org
+
+6.  [Learning analytics goes to school: A collaborative approach to improving education](https://www.routledge.com/Learning-Analytics-Goes-to-School-A-Collaborative-Approach-to-Improving/Krumm-Means-Bienkowski/p/book/9781138121836) is available to purchase on Amazon and other outlets.
+
+7.  [Learning analytics explained](https://proxying.lib.ncsu.edu/index.php?url=https://www.taylorfrancis.com/books/9781315679563) is available free through the NCSU Library.
+
+## **Course Software & Resources**
+
+### **Required**
+
+This course will require **R** ([https://www.r-project.org](https://www.r-project.org/)), an open-source language and computing environment for data manipulation, analysis, and visualization; and **R Studio** ([https://www.rstudio.com](https://www.rstudio.com/)), an integrated development environment (IDE) for R which includes an R console, syntax-highlighting editor, and tools for plotting, packages, and workspace management. 
+
+R and RStudio can now also be accessed directly in the cloud with Posit Cloud ([https://posit.cloud](https://posit.cloud/)), a lightweight, browser-based solution that requires no hardware installation or configuration. If you\'re new to R, I highly recommend using Posit Cloud for this course. Visit the [Sign Up page](https://login.posit.cloud/register?redirect=https%3A%2F%2Fclient.login.posit.cloud%2Foauth%2Flogin%3Fshow_auth%3D0%26show_login%3D0) to create a new account that you will use throughout the course. After signing up, simply click this link to access our [ECI 589 Posit Cloud workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog). 
+
+For those new to R and RStudio, I've recorded an[ onboarding video](https://youtu.be/ElFkRzfaw5g "https://youtu.be/ElFkRzfaw5g") with a Getting Started walkthrough from ECI 586 designed to orient you to our data analysis assignments and to R, RStudio, and/or RMarkdown, which we'll be using to complete those assignments.
+
+To access and complete the Getting Started walkthrough, follow this link to our [ECI 589 Posit Cloud workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog) and you should see the following if you are logged in.
+
+![](img/getting-started.png){width="100%"}
+
+**If you have not completed ECI 586 and are relatively new to R and R Studio, you are also required work though independently the following chapters** from [Data Science in Education Using R](https://datascienceineducation.com/): 
+
+1.  [Getting Started with R and RStudio](https://datascienceineducation.com/c05.html) covers downloading R and RStudio, RStudio layout and customization, and writing and running code in RStudio.
+
+2.  [Foundational Skills](https://datascienceineducation.com/c06.html) introduces RStudio Projects and key building blocks of the R language including packages, functions, data, objects, and operators. 
+
+Finally, Katherine Ognyanova, <http://www.kateto.net/>, also has a nice introduction to R from her [Introduction to R and network analysis](https://kateto.net/wp-content/uploads/2018/03/R%20for%20Networks%20Workshop%20-%20Ognyanova%20-%202018.pdf) workshop that I recommend and that we\'ll also be drawing from for the course.
+
+### **Optional**
+
+1.  [**Posit Primers**](https://posit.cloud/learn/primers) are an excellent resource and for those new to R, you'll be using these tutorials as an alternative to the Independent Analysis unit assignments for those who completed ECI 586 or have prior experience with R. 
+
+2.  **Git and GitHub** are popular tools for version control, file hosting, and collaboration. Like R, there is a bit of a learning curve but Jenny Bryan's [Happy Git and GitHub for the useR](http://happygitwithr.com/) will get you up and running in no time.
+
+3.  We'll be using data pulled from the **Twitter Developer Platform**. See complete details in the final task for this week.  
+
+4.  While I will be R for data visualization throughout this course, in practice I sometimes use tools like NodeXL or [**Gephi**](https://gephi.github.io/)**,** the leading visualization and exploration software for all kinds of graphs and networks. Gephi is open-source and free. Gephi runs on Windows, Mac OS X and Linux.
+
+5.  [**LinkedIn Learning**](https://www.linkedin.com/learning) offers tutorials and training courses for [Learning R](https://www.linkedin.com/learning/learning-r-2/r-for-data-science?u=53565897), [Learning the R Tidyverse](https://www.linkedin.com/learning/learning-the-r-tidyverse), [Social Network Analysis in R](https://www.linkedin.com/learning/social-network-analysis-using-r), and Data [Visualization in R](https://www.linkedin.com/learning/data-visualization-in-r-with-ggplot2). The full catalogue of LinkedIn Learning course and resources is available at no charge to NC State students. 
+
+## **Troubleshooting**
+
+Learning a programming language like R (or any foreign language for that matter) will inevitably be a little frustrating at first. Even experienced R developers like Hadley Wickham [get frustrated](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
+
+> "It\'s easy when you start out programming to get really frustrated and think, 'Oh it\'s me, I\'m really stupid,' or, 'I\'m not made out to program.' But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It\'s just a natural part of programming. So, it happens to everyone and gets less and less over time. Don\'t blame yourself. Just take a break, do something fun, and then come back and try again later."
+
+When feeling stuck or like banging your head against your desk, there are several options for seeking out help within and beyond this course:
+
+1.  **Course Forums & Email**: Including this general software troubleshooting forum, we will have forums for each assignment. You\'ll likely have similar questions as your peers, and you\'ll likely be able to answer other peoples\' questions too so I encourage you to use these forums. Unlike most of my apps and social media accounts, I actually have notifications enabled. Also, do not hesitate to email me directly as well. 
+
+2.  **NCSU Library Services**: The [Data & Visualization](https://www.lib.ncsu.edu/services/data-visualization) group is an incredible asset for NC State students. Though the library's website, you can access and enroll in workshops, find resources, and chat or schedule a Zoom appointment to get R help. 
+
+3.  **Social Media**: If you use Twitter, you can also post R-related questions and content with the [#rstats](https://twitter.com/search?q=%23rstats&src=typed_query) hashtag. One of the things I most value about the R in general is that the R community is exceptionally helpful.
+
+4.  **The Interwebs**: Aside from Google of course, [StackOverflow](https://stackoverflow.com/) and the [RStudio Community](https://community.rstudio.com/) will likely become tried and true tools in your text mining toolkit. In fact, I'd wager that the majority of Google searcher will likely direct you to one of these two sites. Note that when search Google, it sometimes helps to include "rstats" in your query.
