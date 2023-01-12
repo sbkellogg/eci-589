@@ -89,3 +89,5 @@ When feeling stuck or like banging your head against your desk, there are severa
 3.  **Social Media**: If you use Twitter, you can also post R-related questions and content with the [#rstats](https://twitter.com/search?q=%23rstats&src=typed_query) hashtag. One of the things I most value about the R in general is that the R community is exceptionally helpful.
 
 4.  **The Interwebs**: Aside from Google of course, [StackOverflow](https://stackoverflow.com/) and the [RStudio Community](https://community.rstudio.com/) will likely become tried and true tools in your text mining toolkit. In fact, I'd wager that the majority of Google searcher will likely direct you to one of these two sites. Note that when search Google, it sometimes helps to include "rstats" in your query.
+
+If you have any questions about this assignment, or run into any difficulties setting up your toolkit, please post them to our Network Analysis Toolkit forum. You can also contact me privately by email at [sbkellog\@ncsu.edu](http://sbkellog@ncsu.edu/) or setting up a meeting using this link: [calendly.com/sbkellogg](http://calendly.com/sbkellogg).
