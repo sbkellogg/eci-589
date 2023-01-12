@@ -52,7 +52,7 @@ For those new to R and RStudio, I've recorded an[ onboarding video](https://you
 
 To access and complete the Getting Started walkthrough, follow this link to our [ECI 589 Posit Cloud workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog) and you should see the following if you are logged in.
 
-![](img/getting-started.png){width="100%"}
+![](img/getting-started.png){width="80%"}
 
 **If you have not completed ECI 586 and are relatively new to R and R Studio, you are also required work though independently the following chapters** from [Data Science in Education Using R](https://datascienceineducation.com/): 
 
