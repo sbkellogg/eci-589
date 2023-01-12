@@ -1,6 +1,6 @@
 ---
 title: "Network Analysis Toolkit" 
-subtitle: "Graduate Certificate in Learning Analytics"
+subtitle: "ECI 589: SNA and Education"
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:
@@ -20,7 +20,7 @@ Our required course text is freely available online. Throughout this course, you
 
 ### **Required**
 
-Course readings will draw primarily from Carolyn\'s excellent SNA and Education book and will be supplemented by self-selected articles:  
+Course readings will draw primarily from Carolyn's excellent SNA and Education book and will be supplemented by self-selected articles:  
 
 1.  [Social network analysis and education: Theory, methods & applications](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). A digital copy is freely available through [NCSU Library](https://catalog.lib.ncsu.edu/catalog/NCSU2803782). 
 
@@ -46,7 +46,7 @@ Course readings will draw primarily from Carolyn\'s excellent SNA and Education 
 
 This course will require **R** ([https://www.r-project.org](https://www.r-project.org/)), an open-source language and computing environment for data manipulation, analysis, and visualization; and **R Studio** ([https://www.rstudio.com](https://www.rstudio.com/)), an integrated development environment (IDE) for R which includes an R console, syntax-highlighting editor, and tools for plotting, packages, and workspace management. 
 
-R and RStudio can now also be accessed directly in the cloud with Posit Cloud ([https://posit.cloud](https://posit.cloud/)), a lightweight, browser-based solution that requires no hardware installation or configuration. If you\'re new to R, I highly recommend using Posit Cloud for this course. Visit the [Sign Up page](https://login.posit.cloud/register?redirect=https%3A%2F%2Fclient.login.posit.cloud%2Foauth%2Flogin%3Fshow_auth%3D0%26show_login%3D0) to create a new account that you will use throughout the course. After signing up, simply click this link to access our [ECI 589 Posit Cloud workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog). 
+R and RStudio can now also be accessed directly in the cloud with Posit Cloud ([https://posit.cloud](https://posit.cloud/)), a lightweight, browser-based solution that requires no hardware installation or configuration. If you're new to R, I highly recommend using Posit Cloud for this course. Visit the [Sign Up page](https://login.posit.cloud/register?redirect=https%3A%2F%2Fclient.login.posit.cloud%2Foauth%2Flogin%3Fshow_auth%3D0%26show_login%3D0) to create a new account that you will use throughout the course. After signing up, simply click this link to access our [ECI 589 Posit Cloud workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog). 
 
 For those new to R and RStudio, I've recorded an[ onboarding video](https://youtu.be/ElFkRzfaw5g "https://youtu.be/ElFkRzfaw5g") with a Getting Started walkthrough from ECI 586 designed to orient you to our data analysis assignments and to R, RStudio, and/or RMarkdown, which we'll be using to complete those assignments.
 
@@ -60,7 +60,7 @@ To access and complete the Getting Started walkthrough, follow this link to our�
 
 2.  [Foundational Skills](https://datascienceineducation.com/c06.html) introduces RStudio Projects and key building blocks of the R language including packages, functions, data, objects, and operators. 
 
-Finally, Katherine Ognyanova, <http://www.kateto.net/>, also has a nice introduction to R from her [Introduction to R and network analysis](https://kateto.net/wp-content/uploads/2018/03/R%20for%20Networks%20Workshop%20-%20Ognyanova%20-%202018.pdf) workshop that I recommend and that we\'ll also be drawing from for the course.
+Finally, Katherine Ognyanova, <http://www.kateto.net/>, also has a nice introduction to R from her [Introduction to R and network analysis](https://kateto.net/wp-content/uploads/2018/03/R%20for%20Networks%20Workshop%20-%20Ognyanova%20-%202018.pdf) workshop that I recommend and that we'll also be drawing from for the course.
 
 ### **Optional**
 
@@ -78,11 +78,11 @@ Finally, Katherine Ognyanova, <http://www.kateto.net/>, also has a nice introdu
 
 Learning a programming language like R (or any foreign language for that matter) will inevitably be a little frustrating at first. Even experienced R developers like Hadley Wickham [get frustrated](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
 
-> "It\'s easy when you start out programming to get really frustrated and think, 'Oh it\'s me, I\'m really stupid,' or, 'I\'m not made out to program.' But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It\'s just a natural part of programming. So, it happens to everyone and gets less and less over time. Don\'t blame yourself. Just take a break, do something fun, and then come back and try again later."
+> "It's easy when you start out programming to get really frustrated and think, 'Oh it's me, I'm really stupid,' or, 'I'm not made out to program.' But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It's just a natural part of programming. So, it happens to everyone and gets less and less over time. Don't blame yourself. Just take a break, do something fun, and then come back and try again later."
 
 When feeling stuck or like banging your head against your desk, there are several options for seeking out help within and beyond this course:
 
-1.  **Course Forums & Email**: Including this general software troubleshooting forum, we will have forums for each assignment. You\'ll likely have similar questions as your peers, and you\'ll likely be able to answer other peoples\' questions too so I encourage you to use these forums. Unlike most of my apps and social media accounts, I actually have notifications enabled. Also, do not hesitate to email me directly as well. 
+1.  **Course Forums & Email**: Including this general software troubleshooting forum, we will have forums for each assignment. You'll likely have similar questions as your peers, and you'll likely be able to answer other peoples' questions too so I encourage you to use these forums. Unlike most of my apps and social media accounts, I actually have notifications enabled. Also, do not hesitate to email me directly as well. 
 
 2.  **NCSU Library Services**: The [Data & Visualization](https://www.lib.ncsu.edu/services/data-visualization) group is an incredible asset for NC State students. Though the library's website, you can access and enroll in workshops, find resources, and chat or schedule a Zoom appointment to get R help. 
 

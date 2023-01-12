@@ -284,9 +284,9 @@ d %>%
 
 #### [**Your Turn**]{style="color: green;"} **⤵**
 
-In the next code chunk, change the cut-off from 70% to some other value
-- larger or smaller (maybe much larger or smaller - feel free to play
-around with the code a bit!).
+In the next code chunk, change the cut-off from 70% to some other
+value - larger or smaller (maybe much larger or smaller - feel free to
+play around with the code a bit!).
 
 ```{r}
 d %>% 
@@ -469,5 +469,5 @@ when you share it with others.
 When everything looks good, click "Knit to HTML" at the top to render a
 report that you can be viewed using a web browser and shared online.
 
-Congratulations on getting started, you're ready for our Unit 1 guided
-walkthrough next week!
+Congratulations on getting started, you're ready for our Unit 1 case
+study next week!
