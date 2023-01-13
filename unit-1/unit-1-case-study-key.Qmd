@@ -1,18 +1,18 @@
 ---
 title: "Who's Friends with Who in Middle School"
-subtitle: "LASER Institute Learning Lab 1 Case Study"
+subtitle: "ECI 589 Case Study"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
-output:
-  html_document:
-    toc: yes
-    toc_depth: 4
-    toc_float: yes
-    code_folding: show
-    code_download: TRUE
+format:
+  html:
+    toc: true
+    toc-depth: 3
 editor_options:
   markdown:
     wrap: 72
+theme: 
+  light: cosmo
+  dark: cyborg
 bibliography: lit/references.bib
 ---
 
@@ -1029,7 +1029,7 @@ explore the use of models for SNA until Lab 4, but recall from the
 PREPARE section that to assess agreement between perceived friendships
 by the teacher and students, [@pittinsky2008behavioral] note that:
 
-> **The QAP (quadratic assignment procedure)** [is] used to calculate
+> **The QAP (quadratic assignment procedure)** \[is\] used to calculate
 > the degree of association between two sets of relations and tests
 > whether the probability of dyad overlap in the teacher matrix is
 > correlated with the probability of dyad overlap in the student matrix.
