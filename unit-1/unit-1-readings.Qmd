@@ -1,5 +1,5 @@
 ---
-title: 'Unit 1 Readings: What is SNA?'
+title: 'Unit 1 Readings: Theory & Basic Concepts'
 subtitle: "ECI 589: SNA and Education"
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
@@ -10,43 +10,36 @@ format:
 theme: 
   light: cosmo
   dark: cyborg
+bibliography: lit/references.bib
 ---
 
-Our primary goal in this unit is to build a basic understanding of social network analysis (SNA) as an approach to understand and improve learning processes and outcomes. The required and self-selected readings provide an introduction to SNA in the field of education, including the historical, theoretical, and analytical foundations of a social network perspective. A secondary goal of readings and discussion is to help you start generating ideas for independent application of network analysis. As part of our discussion, you'll be asked to generate a basic research question about a population of interest and that could be answered using relational data.
+Our primary goal in this week is to build a basic understanding of social network analysis (SNA) as an approach to understand and improve learning processes and outcomes. The required and self-selected readings provide an overview of the historical, theoretical, and analytical foundations of a social network perspective. A secondary goal of the readings and discussion is to help you generate ideas for how SNA might be applied to your own research an to prepare you for an independent analysis at the end of this unit.
 
 ## Readings
 
-For Unit read chapters 1 and 2 from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) [@carolan2014] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.
+For Unit read chapters 2 and 3 from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) [@carolan2014] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.
 
 ### SNA and Education Part I: Theory and Concepts
 
-The following readings for this unit illustrate how social network analysis provides educational researchers with a different way of thinking about and measuring an learning processes and outcomes by that explicitly account for the importance of one's relationships with others, as well as the larger pattern in which these relationships are embedded.
+The following readings for this unit illustrate how social network analysis provides educational researchers with a different way of thinking about and measuring a learning processes and outcomes that explicitly account for the importance of one's relationships with others, as well as the larger pattern in which these relationships are embedded.
 
-1.  [Chapter 1: The Social Network Perspective and Educational Research Introduction](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n1.xml)
+-   [Chapter 2: Historical, Theoretical, and Analytical Foundations](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n2.xml)
 
-2.  [Chapter 2: Historical, Theoretical, and Analytical Foundations](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n2.xml)
-
-3.  [Chapter 3](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml): [Basic Concepts](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)
+-   [Chapter 3](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml): [Basic Concepts](https://methods.sagepub.com/book/social-network-analysis-and-education/n3.xml)
 
 ### Self-Selected Study
 
-Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google Scholar](https://scholar.google.com/) or search engine to locate a research or practitioner-focused article, presentation, or resource that demonstrates the application of social network analysis to study a context or topic of interest. You are also welcome to select one of the research papers listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
+Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google Scholar](https://scholar.google.com/) or search engine to locate one research or practitioner-focused article, presentation, or resource that demonstrates the application of social network analysis to better understand an educational context of interest to you. You are also welcome to select one of the research papers listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
 
 ## Discussion
 
-In lieu of the peer interaction and discussion of course materials that normally take place "in-class", you'll be asked to log in this week and engage with other members of our learning community through this discussion forum. **With the exception of the Self-Selected Study questions, you are not required to address every guiding question**, particularly if you feel others in the class have thoroughly addressed the topic or questions. Our aim for these discussions is to collectively build our understanding of these readings through back-and-forth dialogue and avoid a "collective monologue" in which we see 20 variations of effectively the same post.
+In lieu of the peer interaction and discussion of course materials that normally take place "in-class", you'll be asked to engage with other members of our learning community through discussion. **With the exception of the Self-Selected Study questions, you are not required to address every guiding question**, particularly if you feel others in the class have thoroughly addressed the topic or questions. Our aim for these discussions is to collectively build our understanding of SNA through back-and-forth dialogue and avoid a "collective monologue" in which we see 20 variations of effectively the same post.
 
-To create a new post in response to one or more of the guiding questions listed below, click "Add a new discussion topic" located below the forum overview text and add a descriptive title for the subject line. In the message box, includes the question(s) your post is addressing, as well as your response to the selected questions. Remember, you are not required to address every guiding question with the exception of the Self-Selected Study questions for which you must create one new discussion topic and respond to the discussion prompt and required questions.
+To create a new post in response to one or more of the guiding questions listed below, click "Add discussion topic" in our course forum and add a descriptive title for the subject line. In the message box, includes the question(s) your post is addressing, as well as your response to the selected questions. Remember, you are not required to address every guiding question with the exception of the Self-Selected Study questions for which you must create one new discussion topic and respond to the discussion prompt and required questions.
 
 ### Guiding Questions
 
-To help guide our discussions, we will collectively address a set of guiding questions provided below. You are also welcome to add your own topics or questions for the class to discuss.
-
-#### Chapter 1: The Social Network Perspective and Educational Research Introduction
-
-1.  Consider a network of which you are a part. Who are the network's actors? What ties connect these actors? Are there any groups within this network? What relations within this network might be of interest to a researcher? Finally, what makes this collection of actors a social network?
-
-2.  Using the same question from the previous response, explain the analytical level at which these data would need to be collected and analyzed.
+To help facilitate discussion, we will collectively address the guiding questions provided below. You are also welcome to add your own topics or questions for the class to discuss.
 
 #### Chapter 2: Historical, Theoretical, and Analytical Foundations
 
@@ -122,10 +115,44 @@ Bonus Questions:
 
 Grading for this assignment is fairly lenient, provided that it's clear from your posts that you've done the required reading. Readings and discussion for each unit are worth 6 points and judged based on quantity and quality of your posts.
 
-In term of **quantity** (3 points), you'll be expected to create a new discussion topic your self-selected study and add at least 3 new posts and/or replies for a total of 4 posts. So others will have an opportunity to read and respond to your posts, your posts should be spread out over the course of the week and across at least two different days, preferably not the last two days.
+In term of **quantity** (3 points), you'll be expected to create a new discussion topic your self-selected study and add at least 3 new posts and/or replies for a total of 4 posts. So others will have an opportunity to read and respond to your posts, your posts should be spread out over the course of the week and across at least two different days, preferably not the last two days.
 
-In terms of **quality** (3 points), your posts over the next week should provide new or insightful contributions to that question or topic. There is no requisite for the length of each posting, in fact short conversational exchanges (1-3 paragraphs) are highly encouraged. I strongly recommend taking a look at Table 1 of [the productive online discussion model](https://moodle-courses2122.wolfware.ncsu.edu/pluginfile.php/287931/mod_forum/post/6203/Gao%2C%20Wang%2C%20Sun%20-%202009%20-%20A%20new%20model%20of%20productive%20online%20discussion%20and%20its%20implications%20for%20research%20and%20instruction.pdf) [@gao2009] for ways to contribute to the conversation. 
+In terms of **quality** (3 points), your posts over the next week should provide new or insightful contributions to that question or topic. There is no requisite for the length of each posting, in fact short conversational exchanges (1-3 paragraphs) are highly encouraged. I strongly recommend taking a look at the **Productive Online Discussion Model** copied below from @gao2009 for ways to contribute to the conversation. 
 
 At minimum, your collective posts should also help us interpret or elaborate on discussion topics, questions, or ideas others have shared by "making connection to the learning materials" and should reference at some point each of the required chapters and your self-selected reading or resource.
+
+### Productive Online Discussion Model
+
+#### Disposition 1: Discuss to Comprehend
+
+Actively engage in such cognitive processes as interpretation, elaboration, **making connections to** prior knowledge.
+
+-   Interpreting or elaborating the ideas by making connection to the **learning materials**
+-   Interpreting or elaborating the ideas by making connection to **personal experience**
+-   Interpreting or elaborating the ideas by making connection to other **ideas, sources, or references**
+
+#### Disposition 2: Discuss to Critique
+
+Carefully **examine other people's views**, and be sensitive and analytical to conflicting views.
+
+-   Building or **adding new insights or ideas** to others' posts
+-   **Challenging ideas** in the texts
+-   Challenging ideas in others' posts
+
+#### Disposition 3: Discuss to Construct Knowledge
+
+Actively **negotiate meanings**, and be ready to reconsider, refine and sometimes revise their thinking.
+
+-   **Comparing views** from the texts or others' posts
+-   Facilitating thinking and discussions by **raising questions**
+-   Refining and **revising one's own view** based on the texts or others' posts
+
+#### Disposition 4: Discuss to Share Improved Understanding
+
+Actively **synthesize knowledge** and explicitly express improved understanding based on a review of previous discussions.
+
+-   **Summarizing personal learning** experiences of online discussions
+-   **Synthesizing content** of discussion
+-   **Generating new topics** based on a review of previous discussions
 
 ## References
