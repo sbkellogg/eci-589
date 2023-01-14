@@ -1,6 +1,6 @@
 ---
-title: 'Unit 1 Readings: Theory & Basic Concepts'
-subtitle: "ECI 589: SNA and Education"
+title: 'Social Network Theory & Basic Concepts'
+subtitle: "ECI 589 SNA and Education: Unit 1 Readings"
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:
