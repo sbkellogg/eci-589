@@ -1,0 +1,36 @@
+---
+title: 'Unit 1 Readings: Theory & Basic Concepts'
+subtitle: "ECI 589: SNA and Education"
+author: "Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+theme: 
+  light: cosmo
+  dark: cyborg
+bibliography: lit/references.bib
+---
+
+Our primary goal in this week is to build a basic understanding of social network analysis (SNA) as an approach to understand and improve learning processes and outcomes. The required and self-selected readings provide an overview of the historical, theoretical, and analytical foundations of a social network perspective. A secondary goal of the readings and discussion is to help you generate ideas for how SNA might be applied to your own research an to prepare you for an independent analysis at the end of this unit.
+
+## Readings
+
+For your next assignment, Independent Analysis, you will have an opportunity to create a simple "data product" designed to illustrate key finding about changes in the collaboration network over time. For the purposes of this task, imagine that your audience consists of teachers and school leaders who have limited background in SNA and adapt the following steps accordingly:
+
+1.  **Select.** Select our teacher and student sociograms from above, or create a entirely new sociogram if so motivated, to share with our target audience and that helps answer our research question.
+
+2.  **Polish.** Refine this sociogram and make them visually appealing to help illustrate similarities and differences in classroom friendships reported by teachers and students.
+
+3.  **Narrate.** Write a brief narrative to accompany your visualization and/or table that includes the following:
+
+    -   The question or questions guiding the analysis;
+
+    -   The conclusions you've reached based on our findings;
+
+    -   How your audience might use this information;
+
+    -   How you might revisit or improve upon this analysis in the future.
+
+## References

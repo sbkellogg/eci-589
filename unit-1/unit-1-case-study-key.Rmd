@@ -1,6 +1,6 @@
 ---
 title: "Who's Friends with Who in Middle School"
-subtitle: "LASER Institute Learning Lab 1 Case Study"
+subtitle: "ECI 589: Unit 1 Case Study"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
@@ -151,7 +151,7 @@ Based on what you know about networks and the context so far, what other
 research question(s) might ask we ask in this context that a social
 network perspective might be able to answer?
 
-In the space below, type a brief response to the following questions:
+In the space below, write your research question:
 
 -   YOUR RESPONSE HERE
 
@@ -205,9 +205,9 @@ loaded package unless
 Next, we will introduce two new packages extend the tidyverse suite of
 packages and that we will use throughout SNA Learning Labs 1-4.
 
-### New Packages
+#### New Packages
 
-#### tidygraph 📦
+**tidygraph 📦**
 
 ![](img/tidygraph.png){width="20%"}
 
@@ -223,7 +223,7 @@ and uses `dplyr` verbs to manipulate them. Furthermore, it provides
 access to a lot of graph algorithms with return values that facilitate
 their use in a tidy workflow.
 
-#### ggraph 📦
+**ggraph 📦**
 
 ![](img/ggraph.png){width="20%"}
 
@@ -279,9 +279,9 @@ highlighted in @estrellado2020e, wrangling network data can be even more
 challenging than other data sources since network data often includes
 variables about both individuals and their relationships.
 
-For our data wrangling in lab 1, we're keeping it relatively simple
+For our data wrangling in unit 1, we're keeping it relatively simple
 since working with relational data is a bit of a departure from our
-working with rectangular data frames. Our primary goals for Lab 1 is
+working with rectangular data frames. Our primary goals for unit 1 is
 learning how to:
 
 a.  **Import Data from Excel**. In this section, we learn about the
@@ -301,22 +301,23 @@ from the perspective of both students and their teacher. To do so, we'll
 need to import two Excel files originally obtained from the [Social
 Network Analysis and Education companion
 site](https://studysites.sagepub.com/carolan/study/resources.htm). Both
-files contain edges stored as a matrix and are included in the lab-1
+files contain edges stored as a matrix and are included in the unit-1
 data folder of your R Studio project. A description of each file from
 the companion website is copied below along with a link to the original
 file:
 
-1.  [**99472_ds3.xlsx**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds3.xlsx)This
-    adjacency matrix consists of **student-reported** friendship
+1.  [**99472_ds3.xlsx**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds3.xlsx).
+    This adjacency matrix consists of **student-reported** friendship
     relations among 27 students in one class in the fall semester. These
     data are directed and unweighted; a friendship tie is present if the
     student reported that another was either a best friend or friend.
 
-2.  [**99472_ds5.xlsx**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds5.xlsx)This
-    adjacency matrix consists of the **teacher-reported** friendship
-    relations among 27 students in one class in the fall semester. These
-    data are directed and unweighted; a friendship tie is present if the
-    teacher reported that students were either a best friend or friend.
+2.  [**99472_ds5.xlsx**](https://studysites.sagepub.com/carolan/study/materials/datasets/99472_ds5.xlsx).
+    This adjacency matrix consists of the **teacher-reported**
+    friendship relations among 27 students in one class in the fall
+    semester. These data are directed and unweighted; a friendship tie
+    is present if the teacher reported that students were either a best
+    friend or friend.
 
 Relational data (i.e., information about the relationships among
 individuals in a network) are sometimes stored as an [adjacency
@@ -333,13 +334,13 @@ tie, or edge, is considered **reciprocal** or **mutal**.
 #### Import Student-Reported Friendships
 
 Let's use the `read_excel()` function to import
-the `student-reported-friends.xlsx` file, In our function, we'll include
+the `student-reported-friends.xlsx` file. In our function, we'll include
 an important "argument" called `col_names =` and set it to `FALSE`. This
 tells R that our file does not include column names and is important to
-include since our file is a simple matrix with no header or column names
-and by default this argument is set to true and would assign the first
-row which contains data about student friendships as names for each
-column.
+include since our file is a simple matrix with no header or column
+names. By default this argument is set to true and would assign the
+first row which contains data about student friendships as names for
+each column.
 
 Finally, we need to make sure we can reference the matrix we import and
 use it later in our analysis. To do so, will save it to our
@@ -369,8 +370,9 @@ network.
 #### Add Names
 
 R has packages for creating random names to help anonymize data, but to
-keep things simple, we'll just assign the numbers 1 through 27 as names
-for our rows and columns.
+keep things simple, we'll just assign the numbers 1 through 27 as
+`rownames` and column names, or `colnames`, to our `student_friends`
+matrix.
 
 ```{r assign-names}
 rownames(student_friends) <- 1:27
@@ -378,10 +380,10 @@ rownames(student_friends) <- 1:27
 colnames(student_friends) <- 1:27
 ```
 
-You may have seen a warning
-stating: `Setting row names on a tibble is deprecated.` You can ignore
-that for now but it's basically telling us these functions are old we we
-need to use newer function or our code will some day stop working.
+You may have seen a warning stating:
+`Setting row names on a tibble is deprecated.` You can ignore that for
+now but it's basically telling us these functions are old and we need to
+use newer functions or our code will some day stop working.
 
 Again, let quickly inspect our `student_friends` data table to see if
 this worked:
@@ -393,7 +395,7 @@ student_friends
 Much better! Now we can see that student 1 indicated that student 2 is
 their friend, and student 2 indicated that student 1 is their friend, so
 we can say that this friendship is "reciprocated" or "mutual." As we'll
-see in Lab 2, reciprocity is an import network-level measure in SNA.
+see in Unit 2, reciprocity is an import network-level measure in SNA.
 
 #### Import Student Attributes
 
@@ -431,7 +433,7 @@ be the same.
 #### **👉 Your Turn** **⤵**
 
 Complete the code chunk below to import the
-`student-reported-friends.xlsx` file, add row and column names, and
+`teacher-reported-friends.xlsx` file, add row and column names, and
 inspect your `teacher_friends` object.
 
 ```{r import-teacher}
@@ -463,7 +465,7 @@ file.
 
 Before we can begin exploring our data through through network
 visualization, we must first restructure our "tibble" into a formal
-matrix object recognized by r, and then convert our matrix to a network
+matrix object recognized by R, and then convert our matrix to a network
 class R object required by the {tidygraph} and {ggraph} packages.
 
 #### Convert to Matrix
@@ -551,15 +553,17 @@ the strength, duration, or frequency of the relationship, sometime
 called **weight**, in addition to other "edge attributes."
 
 In directed networks like ours, the first column indicates that student
-1 reported students 2, 4, and 5 are friends. Since our network is
+1 reported students 2, 4, and 5 as friends. Since our network is
 unweighted, the 1 for "weight" just indicates that a friendship was
 present. Our data folder also contains a valued adjacency matrix which
 indicates the "strength" of the relationship or friendship, but we'll
 stick with the simpler of the two matrices for now.
 
+#### Extract Edge List
+
 Let's take a closer look at those edges. The {tidygraph} package has a
 useful `activate()` function that we will be using extensively
-throughout the SNA learning labs. This function allows us to work with
+throughout the SNA case studies. This function allows us to work with
 the nodes and edges in our network object as if they were typical data
 frames and apply to them the entire suite of {tidyverse} functions for
 wrangling and summarizing data.
@@ -589,6 +593,27 @@ student_edges
 
 Great! Now we can see the full list of edges in our network ordered by
 student ids.
+
+Before moving on, let's save our `student_edges` data frame to our data
+folder as a .csv file named `student-edges.csv`. To do so, we'll use the
+`write_csv()` function from the {readr} package that was loaded along
+with other tidyverse packages in the beginning of our case study.
+
+```{r}
+write_csv(student_edges, "data/student-edges.csv")
+```
+
+Check your data folder to see that it is indeed saved there. You should
+now see a new .csv file in addition to the Excel files.
+
+CSV files have many advantages over Excel files. Since CSVs are
+plain-text files, they're easier to import into a spreadsheet or another
+storage database, regardless of the specific software you're using. They
+are also a better way to organize large amounts of data in that they
+consume less space, are faster to import, and behave more predictably
+than Excel files.
+
+#### Combine Edges and Attributes
 
 More importantly, however, is now that we have our edges stored in a
 standard format, we can combine our `student_edges` and
@@ -792,9 +817,10 @@ and student reported peer networks are very different!
 ### 3b. Sophisticated Sociograms
 
 One thing to keep in mind when building a network viz with {ggraph}, is
-that just like it's `ggplot()` counterpart introduced in Foundation
-Labs, there is a minimal code template for producing a basic plot.
-Specifically, ggraph requires 3 main functions
+that just like it's `ggplot()` counterpart introduced in the [Data
+Visualization Basics](https://posit.cloud/learn/primers/1.1) primer,
+there is a minimal code template for producing a basic plot.
+Specifically, ggraph requires 3 main functions:
 
 -   [`ggraph()`](https://ggraph.data-imaginist.com/articles/Layouts.html)
     takes care of setting up the plot object along with creating the
@@ -805,7 +831,7 @@ Specifically, ggraph requires 3 main functions
     the network plot.
 
 -   [`geom_edge_*()`](https://ggraph.data-imaginist.com/articles/Edges.html)
-    functions and their associated arguments add and modify the edgez of
+    functions and their associated arguments add and modify the edges of
     the network plot.
 
 Let's first pass our `student_network` object to `ggraph()` and see what
@@ -860,8 +886,8 @@ networks and try to layout graphs in "an aesthetically-pleasing way" by
 making edges roughly equal in length and minimizing overlap.
 
 Let's go ahead and include the layout argument, which in addition to
-including its own unique layouts, can incorporate layouts form {igraph}
-package like `fr` for the Fruchterman-Reingold (FR) layout:
+including its own unique layouts, can incorporate layouts from the
+{igraph} package like `fr` for the Fruchterman-Reingold (FR) layout:
 
 ```{r add-layout}
 ggraph(student_network, layout = "fr") +
@@ -871,7 +897,7 @@ ggraph(student_network, layout = "fr") +
 That's not much better so let's stick with the "stress" layout for now.
 Feel free to try out some other [ggraph layout
 methods](https://ggraph.data-imaginist.com/articles/Layouts.html) if you
-like, however. There are also
+like, however.
 
 #### Tweak Nodes
 
@@ -926,8 +952,12 @@ ggraph(student_network, layout = "stress") +
 ```
 
 Ack! Without some adjustment, the edges make it really difficult to see
-the nodes. Fortunately, you can also adjust the edges just like we did
-to the nodes above: Let's now include the following arguments:
+the nodes. Recall that {ggraph} like its {ggplot} counter part builds
+graphs by successively "adding" layers. We can make the nodes more
+visible by adding that "layer" last and ensuring the nodes are on top.
+
+We can also adjust the edges just like we did to the nodes above: Let's
+shift now include the following arguments:
 
 -   `arrow =` to include some arrows 1mm in length
 
@@ -935,18 +965,19 @@ to the nodes above: Let's now include the following arguments:
     nodes, and to
 
 -   `alpha = .2` set the transparency of our edges so our edges fade
-    more into the background and help keep the focus on our nodes:
+    more into the background and help keep the focus on our nodes.
 
 ```{r tweak-edges}
 ggraph(student_network, layout = "stress") + 
-  geom_node_point(aes(size = local_size(),
-                      color = gender)) +
-  geom_node_text(aes(label = id),
-                 repel=TRUE) +
   geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
                  end_cap = circle(3, 'mm'),
                  start_cap = circle(3, 'mm'),
-                 alpha = .2)
+                 alpha = .2) +
+  geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  geom_node_point(aes(size = local_size(),
+                      color = gender))
+  
 ```
 
 Note: There are many [different ways we can represent edges in a
@@ -958,13 +989,12 @@ and see what happens!
 
 Finally, let's add a **theme,** which controls the finer points of
 display, like the font size and background color. The `theme_graph()`
-function add a theme specially tuned for graph visualizations. This
+function adds a theme specially tuned for graph visualizations. This
 function removes redundant elements in order to put focus on the data
 and if you type `?theme_graph` in the console you will get a sense of
 the level of fine tuning you can do if desired.
 
-Let's add `theme_graph()` to our sociogram, remove the legends since
-they are not especially useful, and call it good for now:
+Let's add `theme_graph()` to our sociogram and call it good for now:
 
 ```{r add-theme}
 ggraph(student_network, layout = "stress") + 
@@ -979,9 +1009,9 @@ ggraph(student_network, layout = "stress") +
   theme_graph()
 ```
 
-Much better! Notice also how we shifted the `geom_node_point()` layer of
-our graph to after the `geom_edge_link()` so the parts of nodes would
-not be hidden under the edges.
+Much better! And notice again how we shifted the `geom_node_point()`
+layer of our graph to after the `geom_edge_link()` so the parts of nodes
+would not be hidden under the edges.
 
 **Note:** If you're having difficulty seeing the sociogram in the small
 R Markdown code chunk, you can copy and paste the code in the console
@@ -1025,7 +1055,7 @@ As highlighted in [Chapter 3 of Data Science in Education Using
 R](https://datascienceineducation.com/c03.html), the **Model** step of
 the data science process entails "using statistical models, from simple
 to complex, to understand trends and patterns in the data." We will not
-explore the use of models for SNA until Lab 4, but recall from the
+explore the use of models for SNA until Unit4, but recall from the
 PREPARE section that to assess agreement between perceived friendships
 by the teacher and students, [@pittinsky2008behavioral] note that:
 
@@ -1038,7 +1068,7 @@ by the teacher and students, [@pittinsky2008behavioral] note that:
 > the original two matrices being tested.
 
 We will learn more about the QAP and other models for statistical
-inference when working with relational data in Learning Lab 4.
+inference when working with relational data in Learning Unit4.
 
 ------------------------------------------------------------------------
 
@@ -1066,63 +1096,25 @@ have learned through analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-Our goal for this section is to distill the analysis from above into a
-simple "data product" designed to illustrate key findings about changes
-in the collaboration network over time. For the purposes of this task,
-imagine that your audience consists of teachers and school leaders who
-have limited background in SNA and adapt the following steps
-accordingly:
+For your Independent Analysis assignment next week, you will have an
+opportunity to create a simple "data product" designed to illustrate key
+insights about about the student and/or teacher reported middle school
+friendship networks.
 
-1.  **Select.** Select our teacher and student sociograms from above, or
-    create a entirely new sociogram if so motivated, to share with our
-    target audience and that helps answer our research question.
+For now, we will wrap up this assignment by converting our work into an
+webpage that can be used to communicate your learning and demonstrate
+some of your new R skills To do so, you will need to "Knit" your
+document by clicking the drop down arrow next to the ball of yarn in the
+menu bar at that the top of this markdown file, and then selecting "Knit
+top HTML" or another preferred output format. This will do two things:
 
-2.  **Polish.** Refine this sociogram and make them visually appealing
-    to help illustrate similarities and differences in classroom
-    friendships reported by teachers and students.
-
-3.  **Narrate.** Write a brief narrative to accompany your visualization
-    and/or table that includes the following:
-
-    -   The question or questions guiding the analysis;
-
-    -   The conclusions you've reached based on our findings;
-
-    -   How your audience might use this information;
-
-    -   How you might revisit or improve upon this analysis in the
-        future.
-
-### 👉 Your Turn ⤵
-
-Use the code chunk below create a polished table and/or visualization(s)
-and write a brief narrative in the space that follows.
-
-### Data Visualization or Table
-
-```{r create_data_product}
-# YOUR CODE HERE
-
-
-```
-
-### Narrative
-
-NARRATIVE GOES HERE...
-
-### 🧶 Knit & Check ✅
-
-Congratulations - you've completed your first SNA case study! One final
-step is to "Knit" your document by clicking the drop down arrow next to
-the ball of yarn in the menu bar at that the top of this markdown file,
-and then selecting "Knit top HTML" or another preferred output format.
-This will do two things:
-
-1.  it will check through all your code for any errors
+1.  it will check through all your code for any errors; and,
 
 2.  it will created a file in your directory that you can use to share
     you work through [GitHub Pages](https://pages.github.com),
     [RPubs](https://rpubs.com/about/getting-started), or any other
     preferred means.
 
-### References
+Congratulations - you've completed the Unit 1 SNA case study!
+
+## References
