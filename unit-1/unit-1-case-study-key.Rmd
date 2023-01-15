@@ -23,11 +23,11 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ## 1. PREPARE
 
 Our first SNA case study is guided by the work of Matthew Pittinsky and
-Brian V. Carolan (2008), which employed a social network perspective to
-examine teachers' perceptions of student friendships agreed with their
-own. Sadly, this excellent study did not include any visual depictions
-comparing student and teacher perceived friendship networks, but we are
-going to fix that!
+Brian V. Carolan @pittinsky2008behavioral, which employed a social
+network perspective to examine teachers' perceptions of student
+friendships agreed with their own. Sadly, this excellent study did not
+include any visual depictions comparing student and teacher perceived
+friendship networks, but we are going to fix that!
 
 Our primary aim for this case study is to gain some hands-on experience
 with essential R packages and functions for SNA. We learn how to
