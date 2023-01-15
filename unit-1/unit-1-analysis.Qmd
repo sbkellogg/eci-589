@@ -17,22 +17,24 @@ The final week of each unit is designed to provide you some space for gaining pr
 
 ## Posit Primers (R Beginners)
 
-For students new to R, the third week of each unit consists of tutorials for working with R packages used import, wrangle, explore, and model data. The primary goal of these tutorials is to support familiarity and fluency with R syntax and key functions for data analysis. In addition to completing the assigned tutorials, you\'ll be asked to demonstrate these essential skills on an educational data set provided by your instructor.
+For students new to R, the third week of each unit consists of tutorials for working with R packages used import, wrangle, explore, and model data. The primary goal of these tutorials is to support familiarity and fluency with R syntax and key functions for data analysis.
 
-### **Assignment**
+### Assignment
 
-Your assignment this week is to complete the following primers and exercises:
+Your assignment this week is to complete the following primers located on [Posit Cloud](https://posit.cloud/learn/primers):
 
 1.  [Visualization Basics](https://posit.cloud/learn/primers/1.1). This tutorial focuses on making plots with R. Plots are one of the most important tools for data science; they are also one of the most fun.
 2.  [Programming Basics](https://posit.cloud/learn/primers/1.2). This tutorial demystifies programming with R. Here, you\'ll learn how to run functions and build objects.
 
-### **Assessment**
+### Assessment
 
-Towards the end of this week, I will post a brief online quiz worth 6 points. This is an "open book" quiz and you are welcome to refer to our course readings, primers, exercises, and case study to complete. You will be able to attempt this quiz more than once, though penalties may be assigned for incorrect responses.
+To assess your knowledge and skills, you will complete a brief online quiz worth 6 points. This is an "open book" quiz and you are welcome to refer to the course readings, primers and case study to complete. You will be able to attempt this quiz more than once, though penalties may be assigned for incorrect responses.
 
 ## Independent Analysis (ECI 586 Students)
 
-For your next assignment, Independent Analysis, you will have an opportunity to create a simple "data product" designed to illustrate key finding about changes in the collaboration network over time. For the purposes of this task, imagine that your audience consists of teachers and school leaders who have limited background in SNA and adapt the following steps accordingly:
+For those who completed ECI 586 or are already comfortable with R, you will be required to conducted an independent analysis and create a simple "data product" designed to illustrate key insights about changes in the collaboration network over time. For the purposes of this assignment, imagine that your audience consists of teachers and school leaders who have limited background in SNA and adapt the following steps accordingly:
+
+### Assignment
 
 1.  **Select.** Select our teacher and student sociograms from above, or create a entirely new sociogram if so motivated, to share with our target audience and that helps answer our research question.
 
@@ -48,6 +50,8 @@ For your next assignment, Independent Analysis, you will have an opportunity to 
 
     -   How you might revisit or improve upon this analysis in the future.
 
+### Assessment
+
 this assignment, you will demonstrate your ability to formulate a basic research question, wrangle and analyze relational data, and create a simple data product to illustrate key findings. **Your primary goal is to describe a social network both visually and numerically** byapplying the knowledge and skills acquired from the course readings and case study. Grading for this week is fairly lenient and you'll receive 1 point for completing each of the following tasks (6 points  total):
 
 1.  **Identity a data source.** I've included a data folder located the Unit 2 Analysis Project in our [RStudio Cloud ECI 589 Workspace](https://rstudio.cloud/spaces/146919/join?access_code=VgotVV692OpRoxZvrOp9oW8a2EThPX5kHkJ7Vgf8){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"} that contains datasets I've created as well as those from our SNA and Education course text described [here](https://studysites.sagepub.com/carolan/study/resources.htm){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}. You are welcome to chose from those or to identify your own data source related to an area of professional interest.
@@ -61,6 +65,8 @@ this assignment, you will demonstrate your ability to formulate a basic research
 5.  **Share your findings.** Knit your data product to a desired output format. This may be a simple [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}, [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}, or [MS Word](https://bookdown.org/yihui/rmarkdown/word-document.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"} file; or something more complex like [HTML5 slides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}, a [Tufte-style handout](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}, [dashboard](https://rmarkdown.rstudio.com/flexdashboard/){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}, or [website](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}. Then create a new forum post below to share your analysis. Include in the post your published web link (e.g., via [RPubs](https://rpubs.com/about/getting-started){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}or [GitHub](https://towardsdatascience.com/how-to-create-a-free-github-pages-website-53743d7524e1){style="box-sizing: border-box; border-radius: 0px !important; color: rgb(153, 0, 0); text-decoration: none; background-color: transparent;"}) or attached file (e.g. HTML or PDF) and add a short reflection including one thing you learned and one thing you'd like to explore further.
 
 6.  **Provide some feedback.** Finally, take look at the posted data products and provide some brief (1 paragraph) but constructive feedback to at least two of your peers. Your feedback should include one thing you liked about their data product and why and one suggestion for improvement or extension of the analysis.
+
+### Troubleshooting
 
 If you have any questions about the assignment or run into any technical issues, don't hesitate to email me at [sbkellog\@ncsu.edu(opens in new window)](http://sbkellog@ncsu.edu/) or set up a Zoom meeting at [calendly.com/sbkellogg(opens in new window)](http://calendly.com/sbkellogg).
 

@@ -1,0 +1,807 @@
+---
+title: "The Social Network Perspective"
+subtitle: "ECI 589 SNA and Education: Unit 1 Overview"
+author: "Dr. Shaun Kellogg"
+institute: "The LASER Institute"
+date: "2022/07/11 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css:
+     - default
+     - css/wolfpack.css
+     - css/wolfpack-fonts.css
+    lib_dir: libs                        # creates directory for libraries
+    seal: false                          # false: custom title slide
+    nature:
+      highlightStyle: default         # highlighting syntax for code
+      highlightLines: true               # true: enables code line highlighting 
+      highlightLanguage: ["r"]           # languages to highlight
+      countIncrementalSlides: false      # false: disables counting of incremental slides
+      ratio: "16:9"                      # 4:3 for standard size,16:9
+      slideNumberFormat: |
+       <div class="progress-bar-container">
+        <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+        </div>
+       </div>
+       </div>
+---
+class: clear, title-slide, inverse, center, top, middle
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# then load all the relevant packages
+pacman::p_load(pacman, knitr, tidyverse, readxl, tidygraph, ggraph)
+
+teacher_friends <- read_excel("data/teacher-reported-friends.xlsx", 
+                              col_names = FALSE)
+
+student_attributes <- read_excel("data/student-attributes.xlsx")
+
+rownames(teacher_friends) <- 1:27
+
+colnames(teacher_friends) <- 1:27
+
+teacher_matrix <- as.matrix(teacher_friends)
+
+teacher_network <- as_tbl_graph(teacher_matrix,
+                                directed = TRUE)
+
+teacher_edges <- teacher_network |>
+  activate(edges) |>
+  as_tibble()
+
+teacher_network <- tbl_graph(edges = teacher_edges, 
+                             nodes = student_attributes, 
+                             directed = TRUE)
+
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+# these allow any code snippets to be copied to the clipboard so they 
+# can be pasted easily
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+```{r xaringan-extras, echo=FALSE}
+xaringanExtra::use_tile_view()
+
+```
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$subtitle`
+### `r rmarkdown::metadata$author`
+### `r format(Sys.time(), "%B %d, %Y")`
+
+---
+# Agenda
+
+.pull-left[
+## Part 1: Core Concepts
+### Network Data
+- Basic Types of Data
+- Network Data Structures 
+- Guiding Study
+
+]
+
+.pull-right[
+
+## Part 2: R Code-Along
+#### Network Visualization
+- tidygraph & ggraph Packages
+- graph manipulation in R
+- Simple Sociograms
+]
+
+
+???
+ 
+
+---
+# A Quick Refresher
+### The four hallmarks of social network analysis: 
+1. an emphasis on **structuralism** based on ties among actors;
+
+2. firmly grounded in **empirical data**; 
+
+3. the use of **graphical imagery**; 
+
+4. is **mathematically based**.
+
+
+???
+
+---
+class: clear, wolfhead
+
+.quote[The **visualization of social networks** has been a core practice since its foundation more than 100 years ago and remains a hallmark of contemporary social network analysis.]
+
+.author[~ Brian Carolan]
+
+
+---
+class: clear, middle, center, inverse
+
+# Part 1: Core Concepts
+
+Data Types, Data Structures, and Guiding Study
+
+
+---
+# Network Data Types
+
+.panelset[
+
+.panel[.panel-name[Actors]
+
+
+.pull-left[
+***Actors***, also called nodes or vertices, can be a range of social entities, like: 
+- students in a classroom
+- teachers in a school district
+- school districts in a state 
+- departments within a college
+- parents in a community
+]
+
+
+.center[
+.pull.right[
+```{r, echo=FALSE, out.width ='35%'}
+ggraph(teacher_network, layout = 'fr', circular = FALSE) + 
+  geom_node_point() +
+  geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  theme_graph()
+```
+
+
+]
+]
+
+]
+
+
+.panel[.panel-name[Ties]
+
+.pull-left[
+***Ties***, also called relations or edges, connect actors to one another, like: 
+- behavioral interaction
+- physical connection
+- association or affiliation
+- evaluation of one person by another
+- formal relations
+- moving between places or status 
+]
+
+.pull-right[
+.center[
+```{r, echo=FALSE, out.width ='70%', warning=FALSE}
+ggraph(teacher_network, layout = 'fr') + 
+   geom_edge_link() +
+  geom_node_point() +
+   geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  theme_graph()
+```
+]
+
+
+]
+
+
+.panel[.panel-name[Variables]
+
+.pull-left[ 
+1. ***Structural*** data based on the entire network of connections actors ties with others (e.g., centrality)
+1. ***Relational*** data based on an actor's direct ties with others (e.g., degree or connectedness)
+1. ***Attribute*** data based on properties of individual actors (e.g., gender, achievement)
+
+]
+
+
+.pull-right[
+.center[
+```{r, echo=FALSE, out.width ='70%'}
+ggraph(teacher_network, layout = 'fr') + 
+   geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 start_cap = circle(3, 'mm'),
+                 alpha = .1) +
+  geom_node_point(aes(size = local_size(),
+                      color = gender)) +
+   geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  theme_graph()
+```
+]
+
+]
+
+]
+
+]
+
+.panel[.panel-name[Discuss]
+Consider a network you are interested in studying and think about the following questions: 
+
+- Who are the network's actors? 
+
+- What ties connect these actors? 
+
+- Are there any groups within this network? 
+
+- What research questions are you interested in investigating?
+
+]
+
+
+]
+
+???
+
+---
+# Network Data Structures
+
+.panelset[
+
+
+.panel[.panel-name[Node-List]
+
+.pull-left[
+
+Consistent with typical data storage, node-lists often include:
+- identifiers lik name or **ID**
+- demographic info (**gender**, age) 
+- socio-economic info (job, income)
+- substantive info (**grades**, attendance)
+
+]
+
+
+.pull-right[
+
+```{r node-list, echo=FALSE, message=FALSE, warning=FALSE}
+student_attributes <- read_excel("data/student-attributes.xlsx")
+
+student_attributes |>
+  head() |>
+  select(id, gender, achievement) |>
+  kable()
+```
+
+]
+
+
+]
+
+.panel[.panel-name[Edge-List]
+
+.pull-left[
+
+Radically different than typical data storage, edge-lists include:
+- **ego and an alter**
+- tie strength or frequency
+- edge attributes (time, event, text)
+
+]
+
+
+.pull-right[
+
+```{r edge-list, echo=FALSE, message=FALSE, warning=FALSE}
+
+student_edges <- read_excel("data/student-edgelist.xlsx")
+
+student_edges |>
+  head() |>
+  kable()
+```
+
+]
+
+
+]
+
+
+.panel[.panel-name[Adjacency Matrix]
+
+.pull-left[
+
+Also radically different, an adjacency matrix includes:
+- column for each actor
+- row for each actor
+- a value indicating the presence/strength of a relation 
+
+]
+
+
+.pull-right[
+
+```{r adjaency-matrix, echo=FALSE, message=FALSE, warning=FALSE}
+
+teacher_matrix[1:9, 1:9]
+```
+
+]
+
+]
+
+.panel[.panel-name[Discuss]
+
+Take a look at one of the network datasets [here](https://github.com/laser-institute/network-analysis/tree/main/lab-1/data) and consider the following:
+
+- What format is this data set stored as? 
+
+- If edge data, is it directed or undirected? Valued?
+
+- If node data, does the file contain attribute data? 
+
+- What are some things you notice about this dataset? 
+
+- What questions do you have about this dataset? 
+
+]
+
+]
+
+???
+
+
+
+---
+# Guiding Study
+
+.panelset[
+
+.panel[.panel-name[Context]
+
+.pull-left-narrow[<img src="img/pittinsky-carolan.png" height="350px"/>]
+
+.pull-right-wide[Revisiting early work in the field of sociometry, this study ***assesses the level of agreement between teacher perceptions and student reports of classroom friendships*** among middle school students.]
+
+
+]
+
+.panel[.panel-name[Questions]
+
+The central question guiding this investigation was:
+
+>***Do student reports agree with teacher perceptions*** when it comes to classroom friendship ties and with what consequences for commonly used social network measures?
+]
+
+.panel[.panel-name[Data]
+- 1 teacher, 1 middle school, four classrooms
+- Students  given roster and asked to evaluate relationships with peers
+- Choices included best friend, friend, know-like, know, know-dislike, strongly dislike, and do not know.
+- Relations are ***valued*** (degrees of friendship, not just yes or no)
+- Data are ***directed*** (friendship nominations were not presumed to be reciprocal). 
+
+]
+
+.panel[.panel-name[Key Findings]
+
+- Teacher’s perceptions and students’ reports were statistically similar, 11–29% of possible ties did not match.
+- Students reported significantly more reciprocated friendship ties than the teacher perceived.
+- Observed level of agreement varied across classes and generally increased over time. 
+]
+
+]
+
+
+.footnote[
+Pittinsky, M., & Carolan, B. (2008). [Behavioral versus cognitive classroom friendship networks.](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/pittinsky-class-friendships.pdf)
+]
+
+???
+
+
+---
+class: clear, middle, center, inverse
+
+# part_2(R, code_along)
+
+Network Packages, Objects, and Sociograms
+
+
+---
+# Load Packages
+
+.panelset[
+
+.panel[.panel-name[Load Libraries]
+
+Let's start by creating a new R script and loading the {readxl} package which we'll use to import our network data files:          
+
+```{r load-libraries, message=TRUE, echo=TRUE, message=FALSE}
+# install.packages(readxl)
+library(readxl)
+```
+
+**Note:** You may have to install this package using the `install.packages()` function if it is not listed in your packages pane.  
+]
+
+.panel[.panel-name[network packages 📦]
+
+.pull-left[
+.center[Network Management
+<br>
+<br>
+<img src="img/tidygraph.png" height="200px"/> 
+<br>
+[tidygraph](https://tidygraph.data-imaginist.com/)
+]]
+
+.pull-right[
+.center[Network Visualization
+<br>
+<br>
+<img src="img/ggraph.png" height="200px"/> 
+<br>
+[ggraph](https://ggraph.data-imaginist.com/index.html)
+]
+]
+
+
+]
+
+
+.panel[.panel-name[Your Turn]
+
+Load the {tidygraph} and {ggraph} packages.
+
+```{r, echo=FALSE, message=FALSE}
+library(igraph)
+```
+
+```{r load-igraph, echo=TRUE}
+# YOUR CODE HERE
+#
+#
+```
+
+]
+
+]
+
+---
+
+# Import Data   
+
+.panelset[
+
+.panel[.panel-name[Import Data]
+
+Let's start by importing two Excel files that contain data about the nodes and the edges in our student friendship network:
+
+```{r import-data, echo=TRUE, message=FALSE, eval=FALSE}
+student_nodes <- read_excel("lab-1/data/student-attributes.xlsx")
+
+student_edges <- read_excel("lab-1/data/student-edgelist.xlsx")
+```
+
+
+```{r real-data, echo=FALSE, message=FALSE, eval=TRUE}
+student_edges <- read_excel("data/student-edgelist.xlsx")
+
+student_nodes <- read_excel("data/student-attributes.xlsx")
+```
+
+
+]
+
+.panel[.panel-name[Inspect Data]
+
+Now let's take a look at the data file we just imported using the `View()` function or another function of choice you may have learned in the Foundations Labs:
+
+```{r inspect-data, echo=TRUE, eval=FALSE}
+View(student_edges)
+
+View(student_nodes)
+```
+
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below and be prepared to share your response:              
+1. What do you think the rows and columns in each file represent? 
+
+1. What about the values in each cell represent?
+
+1. What else do you notice about the data? 
+
+1. What questions do you have? 
+
+]
+
+]
+
+---
+# Tidy Graph  
+
+.panelset[
+
+.panel[.panel-name[tbl_graph( ) function]
+
+The [`tbl_graph()`](https://tidygraph.data-imaginist.com/reference/tbl_graph.html) function creates a special network data structure called a "tidy graph" that combines our nodes and edges into a single R object. Run the following code in your R script:
+
+```{r wrangle-data, echo=TRUE, message=FALSE, warning=FALSE}
+student_network <- tbl_graph(edges = student_edges,
+                             nodes = student_nodes, 
+                             directed = TRUE) 
+```
+The benefits of a "tidy graph" is that opens up the entire suite of tidyverse tools for manipulating and constructing network data and variables noted earlier. 
+
+]
+
+.panel[.panel-name[View Network]
+
+
+Using your R script, type the name of network object we just created and run the code to produce the output on the next tab:
+
+```{r view-netwok, echo=TRUE}
+# ADD CODE BELOW
+#
+#
+
+```
+]
+
+.panel[.panel-name[Output]
+
+
+```{r, echo=FALSE}
+student_network
+```
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below:              
+
+1. What is size of the student-reported friendship network?
+
+1. What else do you notice about this network?
+
+1. What questions do have about this network summary?
+
+]
+
+
+]
+
+---
+
+# A Simple Sociogram
+
+.panelset[
+
+.panel[.panel-name[plot( )]
+
+.pull-left[ 
+The `plot()` function is base R's simple but limited solution for plotting graphs.
+
+```{r, echo=TRUE, fig.show='hide'}
+plot(student_network)
+```
+
+]
+
+.center[
+.pull-right[ 
+```{r, echo=FALSE, out.width = '70%'}
+plot(student_network)
+```
+]
+]
+ 
+]
+
+
+.panel[.panel-name[autograph( )]
+.pull-left[ 
+The `autograph()` function is ggraph's simple but limited solution for plotting sociograms.
+
+```{r, echo=TRUE, fig.show='hide'}
+autograph(student_network)
+```
+
+]
+
+.center[
+.pull-right[ 
+```{r, echo=FALSE, out.width = '70%'}
+autograph(student_network)
+```
+]
+]
+]
+
+.panel[.panel-name[Arguments]
+.pull-left[ 
+Both functions allow a small degree of customization, but are still limited.
+
+```{r, echo=TRUE, fig.show='hide'}
+autograph(student_network,
+          node_label = id,
+          node_colour = gender)
+```
+
+]
+
+.center[
+.pull-right[ 
+```{r, echo=FALSE, out.width = '100%'}
+autograph(student_network,
+          node_label = id,
+          node_colour = gender)
+```
+]
+]
+]
+
+.panel[.panel-name[Discuss]
+1. In what situations might these limited functions be useful? 
+
+2. When might they inapropriate to use?
+
+]
+]
+
+
+
+---
+
+# Sophisticated Sociograms
+
+.panelset[
+
+.panel[.panel-name[Set Graph]
+
+The `ggraph()` function is the first function required to build a sociogram. Try running this function on out `student_network` and see what happens:
+```{r set-graph, echo=TRUE, fig.show='hide'}
+ggraph(student_network)
+```
+This function serves two critical roles: 
+1. It takes care of setting up the plot object for the network specified.  
+1. It creates the layout based on algorithm provided.
+
+]
+ 
+
+.panel[.panel-name["Add" Nodes]
+
+.pull-left[
+Let's “add” nodes to our sociogram using the `+` operator and the `geom_node_point()` function:
+```{r , echo=TRUE, fig.show='hide'}
+ggraph(student_network) + 
+  geom_node_point() 
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width = '85%'}
+ggraph(student_network) + 
+  geom_node_point() 
+```
+
+How would you interpret this measure?
+]
+]
+
+
+.panel[.panel-name[Add Edges]
+
+.pull-left[
+Now let's “add” edges to our sociogram using the `+` operator and the `geom_node_point()` function:
+```{r , echo=TRUE, fig.show='hide'}
+ggraph(student_network) + 
+  geom_node_point() + 
+  geom_edge_link()
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width = '85%'}
+ggraph(student_network) + 
+  geom_node_point() + 
+  geom_edge_link()
+```
+
+How would you interpret this measure?
+]
+]
+
+.panel[.panel-name[Polish]
+
+.pull-left[
+<br>
+<br>
+The {ggraph} packages allows for some very fairly sophisticated sociograms...
+]
+
+.pull-right[
+.center[
+```{r, echo=FALSE, out.width ='88%'}
+ggraph(student_network, layout = "stress") + 
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 start_cap = circle(3, 'mm'),
+                 alpha = .1) +
+  geom_node_point(aes(size = local_size(),
+                      color = gender)) +
+  geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  theme_graph()
+```
+]
+]
+]
+
+.panel[.panel-name[Code]
+With a fair bit of coding: 
+```{r , echo=TRUE, fig.show='hide'}
+ggraph(student_network, layout = "stress") + 
+  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
+                 end_cap = circle(3, 'mm'),
+                 start_cap = circle(3, 'mm'),
+                 alpha = .1) +
+  geom_node_point(aes(size = local_size(),
+                      color = gender)) +
+  geom_node_text(aes(label = id),
+                 repel=TRUE) +
+  theme_graph()
+```
+]
+
+]
+
+
+---
+# What's Next
+
+.pull-left[
+## Essential Readings
+
+- Reading 1: [The Social Network Perspective](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/carolan-network-perspective.pdf)
+
+- Reading 2: [Historical, Theoretical, and Analytical Foundations](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/carolan-history-theory.pdf)  
+
+- Reading 3: [Basic Concepts](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/carolan-basic-concepts.pdf)  
+
+] 
+
+.pull-right[
+## Case Study
+
+- SNA Case Study: [Who's Friends with Who in Middle School?](https://laser-institute.github.io/network-analysis/lab-1/sna-lab-1-case-key.html)
+
+- Guiding Study: [Behavioral versus cognitive classroom friendship networks.](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-1/pittinsky-class-friendships.pdf)
+
+]
+
+---
+class: clear, center
+
+## .font130[.center[**Thank you!**]]
+
+
+.center[<img style="border-radius:50%;" src="img/kellogg.jpeg" height="300px"/><br/>**Shaun Kellogg**<br/><mailto:sbkellog@ncsu.edu>]
+
