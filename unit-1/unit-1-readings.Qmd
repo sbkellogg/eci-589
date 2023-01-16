@@ -13,7 +13,7 @@ theme:
 bibliography: lit/references.bib
 ---
 
-Our primary goal in this week is to build a basic understanding of social network analysis (SNA) as an approach to understand and improve learning processes and outcomes. The required and self-selected readings provide an overview of the historical, theoretical, and analytical foundations of a social network perspective. A secondary goal of the readings and discussion is to help you generate ideas for how SNA might be applied to your own research an to prepare you for an independent analysis at the end of this unit.
+Our primary goal in this week is to build a basic understanding of social network analysis (SNA) as both a theory and a methodology for understanding and improving learning processes and outcomes. The required and self-selected readings provide an overview of the historical, theoretical, and analytical foundations of a social network perspective. A secondary goal of the readings and discussion is to help you generate ideas for how SNA might be applied to your own research an to prepare you for an independent analysis at the end of this unit.
 
 ## Readings
 
