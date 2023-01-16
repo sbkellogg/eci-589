@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Shaun Kellogg">
-<meta name="dcterms.date" content="2023-01-15">
+<meta name="dcterms.date" content="2023-01-16">
 
 <title>Data Visualization &amp; Network Graphs</title>
 <style>
@@ -21,6 +21,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -86,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 15, 2023</p>
+      <p class="date">January 16, 2023</p>
     </div>
   </div>
   
@@ -115,45 +134,55 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="independent-analysis-eci-586-students" class="level2">
 <h2 class="anchored" data-anchor-id="independent-analysis-eci-586-students">Independent Analysis (ECI 586 Students)</h2>
-<p>For those who completed ECI 586 or are already comfortable with R, you will be required to conducted an independent analysis and create a simple “data product” designed to illustrate key insights about changes in the collaboration network over time. For the purposes of this assignment, imagine that your audience consists of teachers and school leaders who have limited background in SNA and adapt the following steps accordingly:</p>
+<p>For those who completed ECI 586 or are already comfortable with R, you will be required to conducted an independent analysis and create a simple “data product” designed to illustrate key insights about the student and/or teacher reported middle school friendship networks.</p>
 <section id="assignment-1" class="level3">
 <h3 class="anchored" data-anchor-id="assignment-1">Assignment</h3>
+<p>For your independent analysis, you will demonstrate your ability to formulate a basic network research question, wrangle and analyze relational data, and create a simple data product to illustrate key findings. <strong>Your primary goal is to describe a social network both visually and through a brief narrative</strong> by applying the knowledge and skills acquired from the course readings and case study. Specifically, your assignment this week is to:</p>
 <ol type="1">
-<li><p><strong>Select.</strong> Select our teacher and student sociograms from above, or create a entirely new sociogram if so motivated, to share with our target audience and that helps answer our research question.</p></li>
-<li><p><strong>Polish.</strong> Refine this sociogram and make them visually appealing to help illustrate similarities and differences in classroom friendships reported by teachers and students.</p></li>
-<li><p><strong>Narrate.</strong> Write a brief narrative to accompany your visualization and/or table that includes the following:</p>
-<ul>
-<li><p>The question or questions guiding the analysis;</p></li>
-<li><p>The conclusions you’ve reached based on our findings;</p></li>
-<li><p>How your audience might use this information;</p></li>
-<li><p>How you might revisit or improve upon this analysis in the future.</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="assessment-1" class="level3">
-<h3 class="anchored" data-anchor-id="assessment-1">Assessment</h3>
-<p>this assignment, you will demonstrate your ability to formulate a basic research question, wrangle and analyze relational data, and create a simple data product to illustrate key findings.&nbsp;<strong>Your primary goal is to describe a social network both visually and numerically</strong> byapplying the knowledge and skills acquired from the course readings and case study. Grading for this week is fairly lenient and you’ll receive 1 point for completing each of the following tasks (6 points &nbsp;total):</p>
-<ol type="1">
-<li><p><strong>Identity a data source.</strong>&nbsp;I’ve included a data folder located the Unit 2 Analysis Project in our&nbsp;<a href="https://rstudio.cloud/spaces/146919/join?access_code=VgotVV692OpRoxZvrOp9oW8a2EThPX5kHkJ7Vgf8">RStudio Cloud ECI 589 Workspace</a>&nbsp;that contains datasets I’ve created as well as those from our SNA and Education course text described&nbsp;<a href="https://studysites.sagepub.com/carolan/study/resources.htm">here</a>. You are welcome to chose from those or to identify your own data source related to an area of professional interest.</p></li>
+<li><p><strong>Identity a data source.</strong>&nbsp;I’ve included a data folder located the Unit 1 Analysis Project in our&nbsp;<a href="https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog">RStudio Cloud ECI 589 Workspace</a> that contains student and teacher reported friendship datasets from our SNA and Education course text described <a href="https://studysites.sagepub.com/carolan/study/resources.htm">here</a>. You are also welcome to identify your own network data source related to an area of professional interest. However, if you choose to use an alternative data source, you will need to specify the context in which it was collected and the audience for whom your analysis intended.</p></li>
 <li><p><strong>Formulate a question.</strong>&nbsp;I recommend keeping this simple and limiting to no more than one or two questions. Your question(s) should be appropriate to your data set and ideally be answered by applying concepts and skills from our course readings and case study. For example, you may be interested in determining measures of centrality for a network and identifying key actors.</p></li>
 <li><p><strong>Analyze the data.</strong>&nbsp;I highly recommend creating a new R script in the Unit 2 Analysis project space to use as you work through data wrangling and analysis. Your R script will likely contain code that doesn’t make it into your R Markdown presentation or report since you will likely experiment with different approaches and figure out code that works and code that does not.</p></li>
 <li><p><strong>Create a data product.</strong>&nbsp;When you feel you’ve wrangled and analyzed the data to your satisfaction, create an R Markdown file that includes a polished sociogram and/or data table and a narrative highlighting your research question, data source, and key findings and potential implications. Your R Markdown file should include a polished sociogram and/or table, a title and narrative, and all code necessary to read, wrangle, and explore your data.</p></li>
 <li><p><strong>Share your findings.</strong>&nbsp;Knit your data product to a desired output format. This may be a simple&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/html-document.html">HTML</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">PDF</a>, or&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/word-document.html">MS Word</a>&nbsp;file; or something more complex like&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html">HTML5 slides</a>, a&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html">Tufte-style handout</a>,&nbsp;<a href="https://rmarkdown.rstudio.com/flexdashboard/">dashboard</a>, or&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">website</a>. Then create a new forum post below to share your analysis. Include in the post your published web link (e.g., via&nbsp;<a href="https://rpubs.com/about/getting-started">RPubs</a> or&nbsp;<a href="https://towardsdatascience.com/how-to-create-a-free-github-pages-website-53743d7524e1">GitHub</a>) or attached file (e.g.&nbsp;HTML or PDF) and add a short reflection including one thing you learned and one thing you’d like to explore further.</p></li>
-<li><p><strong>Provide some feedback.</strong>&nbsp;Finally, take look at the posted data products and provide some brief (1 paragraph) but constructive feedback to at least two of your peers. Your feedback should include one thing you liked about their data product and why and one suggestion for improvement or extension of the analysis.</p></li>
+</ol>
+</section>
+<section id="assessment-1" class="level3">
+<h3 class="anchored" data-anchor-id="assessment-1">Assessment</h3>
+<p>As noted in our Unit 1 Case Study, the final step in our workflow/process is sharing the results of analysis with wider audience. <span class="citation" data-cites="krumm2018">Krumm, Means, and Bienkowski (<a href="#ref-krumm2018" role="doc-biblioref">2018</a>)</span> outlined the following 3-step process for communicating with education stakeholders what you have learned through analysis:</p>
+<ol type="1">
+<li><p><strong>Select</strong>. Communicating what one has learned involves selecting among those analyses that are most important and most useful to an intended audience, as well as selecting a form for displaying that information, such as a graph or table in static or interactive form, i.e.&nbsp;a “data product.”</p></li>
+<li><p><strong>Polish</strong>. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.</p></li>
+<li><p><strong>Narrate</strong>. Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.</p></li>
+</ol>
+<p>For the purpose of this assignment, imagine that you have been asked to share your research with teachers and administrators at the middle school in which this data was collected. Remember, your audience will have limited background in SNA and so adapt the process accordingly. This assignment is worth a total of 6 points and will be assessed based on the following criteria.</p>
+<ol type="1">
+<li><p><strong>Polished Sociogram (2 points).</strong> The sociogram you selected to share should be visually appealing and help illustrate for your audience similarities and differences in classroom friendships reported by teachers and/or students.</p></li>
+<li><p><strong>Clear Narrative (2 points).</strong> Include a brief narrative to accompany your visualization and/or table that includes the following:</p>
+<ul>
+<li>The question or questions guiding the analysis;</li>
+<li>The conclusions you’ve reached based on our findings;</li>
+<li>How your audience might use this information;</li>
+<li>How you might revisit or improve upon this analysis in the future.</li>
+</ul></li>
+<li><p><strong>Peer Feedback (2 points).</strong> Finally, take look at the posted data products of your peers and provide some brief (1 paragraph) but constructive feedback to at least two of your peers. Your feedback should include one thing you liked about their data product and why and one suggestion for improvement or extension of the analysis.</p></li>
 </ol>
 </section>
 <section id="troubleshooting" class="level3">
 <h3 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h3>
-<p>If you have any questions about the assignment or run into any technical issues, don’t hesitate to email me at&nbsp;<a href="http://sbkellog@ncsu.edu/">sbkellog@ncsu.edu(opens in new window)</a>&nbsp;or set up a Zoom meeting at&nbsp;<a href="http://calendly.com/sbkellogg">calendly.com/sbkellogg(opens in new window)</a>.</p>
-<p><strong>If you have questions about the tutorials or exercises, I encourage you to post to the forum below</strong>, especially if others might benefit from the response to question. You are also more than welcome to respond to the questions posted by your peers. However, I do ask that you try work through the exercises independently before reaching out for support.</p>
-<p>Finally, you are always welcome to email me directly at&nbsp;<a href="http://sbkellog@ncsu.edu/">sbkellog@ncsu.edu(opens in new window)</a>&nbsp;or&nbsp;<a href="https://calendly.com/sbkellogg/analytics">set up a meeting(opens in new window)</a>&nbsp;with me if you need help.&nbsp;</p>
+<p>If you have any questions about the assignment or run into any technical issues, don’t hesitate to email me at&nbsp;<a href="http://sbkellog@ncsu.edu/">sbkellog@ncsu.edu</a> or set up a Zoom meeting at&nbsp;<a href="http://calendly.com/sbkellogg">calendly.com/sbkellogg</a>.</p>
+<p>I also encourage you to post to the <strong>Questions &amp; Troubleshooting</strong> thread, especially if others might benefit from the response to your question or issue. You are also more than welcome to respond to the questions posted by your peers.</p>
 </section>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="references" class="level2 unnumbered">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-krumm2018" class="csl-entry" role="doc-biblioentry">
+Krumm, Andrew, Barbara Means, and Marie Bienkowski. 2018. <em>Learning Analytics Goes to School</em>. Routledge. <a href="https://doi.org/10.4324/9781315650722">https://doi.org/10.4324/9781315650722</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
