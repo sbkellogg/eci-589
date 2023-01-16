@@ -1,6 +1,6 @@
 ---
 title: "Who's Friends with Who in Middle School"
-subtitle: "LASER Institute Learning Lab 1 Case Study"
+subtitle: "ECI 589 SNA and Education: Unit 1 Case Study"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 output:
