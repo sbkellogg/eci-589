@@ -1,6 +1,6 @@
 ---
 title: 'Data Visualization & Network Graphs'
-subtitle: "ECI 589 SNA and Education: Unit 1 Tutorials & Analysis"
+subtitle: "ECI 589 SNA and Education: Unit 1 Independent Analysis"
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:
