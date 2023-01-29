@@ -203,7 +203,7 @@ packages and that we will use throughout SNA Learning Labs 1-4.
 
 #### New Packages
 
-**tidygraph 📦**
+#### **tidygraph 📦**
 
 ![](img/tidygraph.png){width="20%"}
 
@@ -219,7 +219,7 @@ and uses `dplyr` verbs to manipulate them. Furthermore, it provides
 access to a lot of graph algorithms with return values that facilitate
 their use in a tidy workflow.
 
-**ggraph 📦**
+#### **ggraph 📦**
 
 ![](img/ggraph.png){width="20%"}
 

@@ -30,6 +30,8 @@ Your assignment this week is to complete the following primers located on [Posit
 
 To assess your knowledge and skills, you will complete a brief online quiz worth 6 points. This is an "open book" quiz and you are welcome to refer to the course readings, primers and case study to complete. You will be able to attempt this quiz more than once, though penalties may be assigned for incorrect responses.
 
+It is recommend that you navigate to the [ECI 589 SNA and Education workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog), access the Unit 1 - Independent Study R Studio project assignment, and create an .R script as you\'re working through this quiz. This will allow you to type all of your code, add comments, and then save your .R script for reference as needed. In addition, some quiz items may ask you to open and manipulate a data file saved in the data folder. 
+
 ## Independent Analysis (ECI 586 Students)
 
 For those who completed ECI 586 or are already comfortable with R, you will be required to conducted an independent analysis and create a simple "data product" designed to illustrate key insights about the student and/or teacher reported middle school friendship networks.
@@ -71,7 +73,7 @@ For the purpose of this assignment, imagine that you have been asked to share yo
 
 3.  **Peer Feedback (2 points).** Finally, take look at the posted data products of your peers and provide some brief (1 paragraph) but constructive feedback to at least two of your peers. Your feedback should include one thing you liked about their data product and why and one suggestion for improvement or extension of the analysis.
 
-### Troubleshooting
+## Troubleshooting
 
 If you have any questions about the assignment or run into any technical issues, don't hesitate to email me at [sbkellog\@ncsu.edu](http://sbkellog@ncsu.edu/) or set up a Zoom meeting at [calendly.com/sbkellogg](http://calendly.com/sbkellogg).
 
