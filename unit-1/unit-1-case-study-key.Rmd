@@ -502,7 +502,7 @@ class(student_matrix)
 Great! We can now see that our `student_matrix` is formally an object of
 the "matrix" class.
 
-#### **Convert to Graph Object**
+#### Convert to Graph Object
 
 Our final step before we're able to begin exploring our data is to
 convert our matrix to a network object recognized by the {tidygraph} and

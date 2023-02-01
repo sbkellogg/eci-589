@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-01-21">
+<meta name="dcterms.date" content="2023-01-29">
 
 <title>Who’s Friends with Who in Middle School</title>
 <style>
@@ -146,6 +146,8 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse">tidyverse 📦</a></li>
   <li><a href="#new-packages" id="toc-new-packages" class="nav-link" data-scroll-target="#new-packages">New Packages</a></li>
+  <li><a href="#tidygraph" id="toc-tidygraph" class="nav-link" data-scroll-target="#tidygraph"><strong>tidygraph 📦</strong></a></li>
+  <li><a href="#ggraph" id="toc-ggraph" class="nav-link" data-scroll-target="#ggraph"><strong>ggraph 📦</strong></a></li>
   <li><a href="#readxl" id="toc-readxl" class="nav-link" data-scroll-target="#readxl">readxl 📦</a></li>
   <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><strong>👉 Your Turn</strong> <strong>⤵</strong></a></li>
   </ul></li>
@@ -214,7 +216,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 21, 2023</p>
+      <p class="date">January 29, 2023</p>
     </div>
   </div>
   
@@ -306,11 +308,15 @@ div.csl-indent {
 </section>
 <section id="new-packages" class="level4">
 <h4 class="anchored" data-anchor-id="new-packages">New Packages</h4>
-<p><strong>tidygraph 📦</strong></p>
+</section>
+<section id="tidygraph" class="level4">
+<h4 class="anchored" data-anchor-id="tidygraph"><strong>tidygraph 📦</strong></h4>
 <p><img src="img/tidygraph.png" class="img-fluid" style="width:20.0%"></p>
 <p>The {<a href="https://tidygraph.data-imaginist.com">tidygraph</a>} package is a huge package that exports 280 different functions and methods, including access to almost all of the&nbsp;<code>dplyr</code>&nbsp;verbs plus a few more, developed for use with relational data. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data.</p>
 <p>The {tidygraph} package provides a way to switch between the two tables and uses <code>dplyr</code> verbs to manipulate them. Furthermore, it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
-<p><strong>ggraph 📦</strong></p>
+</section>
+<section id="ggraph" class="level4">
+<h4 class="anchored" data-anchor-id="ggraph"><strong>ggraph 📦</strong></h4>
 <p><img src="img/ggraph.png" class="img-fluid" style="width:20.0%"></p>
 <p>Created by the same developer as {tidygraph}, {<a href="https://ggraph.data-imaginist.com/index.html">ggraph</a>} – pronounced gg-raph or g-giraffe hence the logo – is an extension of {<a href="https://ggplot2.tidyverse.org">ggplot</a>} aimed at supporting relational data structures such as networks, graphs, and trees. Both packages are more modern and widely adopted approaches data visualization in R.</p>
 <p>While ggraph builds upon the foundation of ggplot and its API, it comes with its own self-contained set of geoms, facets, etc., as well as adding the concept of&nbsp;<em>layouts</em>&nbsp;to the <a href="https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics">grammar of graphics</a>, i.e.&nbsp;the “gg” in ggplot and ggraph.</p>
