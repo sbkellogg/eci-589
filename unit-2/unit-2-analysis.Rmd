@@ -25,7 +25,7 @@ independent analysis. For this assignment, you are demonstrate your
 ability to formulate a basic research question, wrangle and analyze
 relational data, and create a simple data product to illustrate key
 findings. **Your primary goal is to describe a social network both
-visually and numerically** byapplying the knowledge and skills acquired
+visually and numerically** by applying the knowledge and skills acquired
 from the course readings and case study. Grading for this week is fairly
 lenient and you'll receive 1 point (6 points total) for completing each
 of the following tasks:

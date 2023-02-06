@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ## 1. Prepare
 
-Our *Unit 2 Case Study: Collaboration Ties over Time* revisits the
+Our *Unit 2 Case Study: Collaboration Ties over Time* introduces the
 research of Dr. Alan Daly and centers around the impact No Child Left
 Behind reform efforts on school and district leadership networks. In
 this unit we move beyond visual depictions of networks from our previous

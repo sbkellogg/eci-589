@@ -17,7 +17,7 @@ Our primary goal in this week is to build a basic understanding of social networ
 
 ## Readings
 
-For Unit read chapters 2 and 3 from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) [@carolan2014] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.
+For Unit 1, read chapters 2 and 3 from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) [@carolan2014] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.
 
 ### SNA and Education Part I: Theory and Concepts
 
@@ -29,7 +29,7 @@ The following readings for this unit illustrate how social network analysis prov
 
 ### Self-Selected Study
 
-Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google Scholar](https://scholar.google.com/) or search engine to locate one research or practitioner-focused article, presentation, or resource that demonstrates the application of social network analysis to better understand an educational context of interest to you. You are also welcome to select one of the research papers listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
+Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google Scholar](https://scholar.google.com/) or search engine to locate one research or practitioner-focused article, presentation, or resource **that demonstrates the application of social network analysis to better understand an educational context** of interest to you. You are also welcome to select one of the research papers listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
 
 ## Discussion
 

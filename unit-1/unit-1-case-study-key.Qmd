@@ -1088,7 +1088,7 @@ opportunity to create a simple "data product" designed to illustrate key
 insights about about the student and/or teacher reported middle school
 friendship networks.
 
-For now, we will wrap up this assignment by converting our work into an
+For now, we will wrap up this assignment by converting our work into a
 webpage that can be used to communicate your learning and demonstrate
 some of your new R skills To do so, you will need to "Knit" your
 document by clicking the drop down arrow next to the ball of yarn in the
