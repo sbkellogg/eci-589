@@ -25,7 +25,7 @@ depictions of networks from our previous SNA case study and learn to
 describe networks using common network-level measures. Our analyses are
 based on *A social network perspective on peer supported learning in
 MOOCs for educators* [@kellogg2014social], and use an open educational
-dataset prepared by Kellogg and Edelman [@kellogg2015massively]. As we
+dataset prepared by Kellogg and Edelman @kellogg2015massively. As we
 work through each step of the data-intensive workflow (Krumm, Means, and
 Bienkowski 2018), we will focus on the following topics:
 
@@ -250,9 +250,11 @@ the {janitor} package that we'll be using to quickly clean up our
 variable names:
 
 ```{r load_libraries}
-# YOUR CODE HERE
-
-
+library(janitor)
+library(tidyverse)
+library(igraph)
+library(tidygraph)
+library(ggraph)
 ```
 
 ## 2. Wrangle
@@ -427,6 +429,7 @@ complete the matching exercise that follows:
 ```{r}
 #YOUR CODE HERE
 
+dlt1_actors
 ```
 
 Match up the attributes included in the node file with the following
@@ -509,7 +512,7 @@ questions that follow:
 
 ```{r inspect_network}
 #YOUR CODE HERE
-
+dlt1_network
 ```
 
 1.  How does the number of node and edges in our DLT 1 network compare
@@ -533,8 +536,8 @@ questions that follow:
 
 ## 3. Explore
 
-Relevant to our case study of the DLT 1 & 2 MOOC-Eds, Carolyn notes in
-SNA and Education @carolan2014 that:
+Relevant to our case study of DLT 1 & 2 MOOC-Eds, Carolyn notes in SNA
+and Education @carolan2014 that:
 
 > ... to address questions that probe a network's dynamics (i.e., its
 > change over time), it is necessary to first figure out what the
@@ -576,8 +579,8 @@ function built into R, as well as the \`autograph()\` function from the
 {ggraph} package to quickly generate a sociogram showing the nodes and
 edges in our network.
 
-Let's supply our `dlt1-network` object as the first argument to each of
-these functions and see what they produce:
+Let's supply our `year-1-network` object as the first argument to each
+of these functions and see what they produce:
 
 ```{r plot_network}
 
@@ -688,9 +691,34 @@ save as an image file.
 Use the code chunk below created a sociogram for the DLT 2 MOOC network
 and answer the questions that follow:
 
-```{r dlt2_sociogram}
+```{r year_3_sociogram}
 #YOUR CODE HERE
 
+dlt2_ties <- read_csv("data/dlt2-edges.csv", 
+                      col_types = cols(Sender = col_character(), 
+                                       Receiver = col_character(), 
+                                       `Category Text` = col_skip(), 
+                                       `Comment ID` = col_character(), 
+                                       `Discussion ID` = col_character())) |>
+  clean_names()
+
+dlt2_actors <- read_csv("data/dlt2-nodes.csv", 
+                   col_types = cols(UID = col_character(), 
+                                    Facilitator = col_character(), 
+                                    expert = col_character(), 
+                                    connect = col_character())) |>
+  clean_names()
+
+dlt2_network <- tbl_graph(edges = dlt2_ties,
+                          nodes = dlt2_actors,
+                          node_key = "uid",
+                          directed = TRUE)
+
+ggraph(dlt2_network, layout = "fr") +
+  geom_edge_link(alpha = .2) +
+  geom_node_point(aes(color = role,
+                      size = local_size())) +
+  theme_graph()
 
 
 ```
@@ -1021,24 +1049,30 @@ Use the code chunk below to calculate the following measures for the DLT
 #YOUR CODE HERE
 
 #size
-g
+gorder(dlt2_network)
+gsize(dlt2_network)
 
 #cetnralization 
+centr_degree(dlt2_network, mode = "all")
 
 #density
+edge_density(dlt2_network)
 
 #reciprocity
+reciprocity(dlt2_network)
 
 #transitivity
+transitivity(dlt2_network)
 
 #diameter & distance 
-
+diameter(dlt2_network)
+mean_distance(dlt2_network)
 ```
 
-1.  How do network-level measures for DLT 1 and DLT 3 collaboration
+1.  How do network-level measures for DLT 1 and DLT 2 collaboration
     compare? What are some similarities and differences?
 
-    -   YOUR RESPONSE HERE
+    -   
 
 ## 4. Model
 
@@ -1135,28 +1169,60 @@ findings from an analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-For your Independent Analysis assignment next week, you will have an
-opportunity to create a simple "data product" designed to illustrate
-additional insights about the MOOC datasets or another dataset of your
-choosing.
+### 👉 Your Turn ⤵
 
-For now, we will wrap up this assignment by converting our work into a
-webpage that can be used to communicate your learning and demonstrate
-some of your new R skills. To do so, you will need to "Knit" your
-document by clicking the drop down arrow next to the ball of yarn in the
-menu bar at that the top of this markdown file, and then selecting "Knit
-top HTML" or another preferred output format. This will do two things;
-it will:
+For your final Your Turn, your goal is to distill our analysis from
+above into a simple "data product" designed to illustrate key findings
+about changes in the collaboration network over time. For the purposes
+of this task, imagine that your audience consists of MOOC-Ed instructors
+and adapt the following steps accordingly:
 
-1.  check through all your code for any errors; and,
+1.  **Select.** Select a few network-level measures that you think would
+    be interesting or relevant for your target audience and that help
+    answer our research questions.
 
-2.  create a file in your directory that you can use to share you work
-    through [GitHub Pages](https://pages.github.com),
-    [RPubs](https://rpubs.com/about/getting-started) (see screeshot
-    below to publish), or any other preferred means.
+2.  **Polish.** Create and polish a data visualization and/or data table
+    to communicate your selected findings.
 
-![](img/publish.png){width="70%"}
+3.  **Narrate.** Write a brief narrative (2-3 paragraphs) to accompany
+    your visualization and/or table that includes the following:
 
-Congratulations - you've completed the Unit 2 case study!
+    -   The question or questions are guiding your analysis;
+
+    -   The conclusions you've reached based on your analyses and
+        findings;
+
+    -   How your audience might use this information;
+
+    -   How you might revisit or improve upon this analysis in the
+        future.
+
+Use the code chunk below create a polished table or visualization(s) and
+write a brief narrative in the space that follows.
+
+#### Data Visualization or Table
+
+```{r create_data_product}
+# YOUR CODE HERE
+```
+
+#### Narrative
+
+NARRATIVE GOES HERE...
+
+### 🧶 Knit & Check ✅
+
+Congratulations - you've completed your first SNA case study! One final
+step is to "Knit" your document by clicking the drop down arrow next to
+the ball of yarn in the menu bar at that the top of this markdown file,
+and then selecting "Knit top HTML" or another preferred output format.
+This will do two things:
+
+1.  it will check through all your code for any errors;
+
+2.  it will created a file in your directory that you can use to share
+    you work through [GitHub Pages](https://pages.github.com),
+    [RPubs](https://rpubs.com/about/getting-started), or any other
+    preferred means.
 
 ### References

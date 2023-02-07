@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Shaun Kellogg">
+<meta name="dcterms.date" content="2023-02-04">
+
+<title>Collaboration Ties over Time</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="unit-2-case-study-key_files/libs/clipboard/clipboard.min.js"></script>
+<script src="unit-2-case-study-key_files/libs/quarto-html/quarto.js"></script>
+<script src="unit-2-case-study-key_files/libs/quarto-html/popper.min.js"></script>
+<script src="unit-2-case-study-key_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="unit-2-case-study-key_files/libs/quarto-html/anchor.min.js"></script>
+<link href="unit-2-case-study-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="unit-2-case-study-key_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="unit-2-case-study-key_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="unit-2-case-study-key_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="unit-2-case-study-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="unit-2-case-study-key_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="unit-2-case-study-key_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#prepare" id="toc-prepare" class="nav-link active" data-scroll-target="#prepare">1. Prepare</a>
+  <ul>
+  <li><a href="#a.-review-the-research" id="toc-a.-review-the-research" class="nav-link" data-scroll-target="#a.-review-the-research">1a. Review the Research</a>
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn">👉 Your Turn&nbsp;⤵</a></li>
+  </ul></li>
+  <li><a href="#b.-load-libraries" id="toc-b.-load-libraries" class="nav-link" data-scroll-target="#b.-load-libraries">1b. Load Libraries</a>
+  <ul class="collapse">
+  <li><a href="#core-sna-packages" id="toc-core-sna-packages" class="nav-link" data-scroll-target="#core-sna-packages">Core SNA Packages</a></li>
+  <li><a href="#new-packages" id="toc-new-packages" class="nav-link" data-scroll-target="#new-packages">New Packages</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#wrangle" id="toc-wrangle" class="nav-link" data-scroll-target="#wrangle">2. Wrangle</a>
+  <ul>
+  <li><a href="#a.-import-data" id="toc-a.-import-data" class="nav-link" data-scroll-target="#a.-import-data">2a. Import Data</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-2" id="toc-your-turn-2" class="nav-link" data-scroll-target="#your-turn-2">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  <li><a href="#b.-create-a-tidy-graph" id="toc-b.-create-a-tidy-graph" class="nav-link" data-scroll-target="#b.-create-a-tidy-graph">2b. Create a Tidy Graph</a>
+  <ul class="collapse">
+  <li><a href="#convert-to-matrix-object" id="toc-convert-to-matrix-object" class="nav-link" data-scroll-target="#convert-to-matrix-object">Convert to Matrix Object</a></li>
+  <li><a href="#convert-to-graph-object" id="toc-convert-to-graph-object" class="nav-link" data-scroll-target="#convert-to-graph-object">Convert to Graph Object</a></li>
+  <li><a href="#your-turn-3" id="toc-your-turn-3" class="nav-link" data-scroll-target="#your-turn-3">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#explore" id="toc-explore" class="nav-link" data-scroll-target="#explore">3. Explore</a>
+  <ul>
+  <li><a href="#a.-visually-describe-the-network" id="toc-a.-visually-describe-the-network" class="nav-link" data-scroll-target="#a.-visually-describe-the-network">3a. Visually Describe the Network</a></li>
+  <li><a href="#sociograms-with-ggraph" id="toc-sociograms-with-ggraph" class="nav-link" data-scroll-target="#sociograms-with-ggraph">Sociograms with ggraph</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-4" id="toc-your-turn-4" class="nav-link" data-scroll-target="#your-turn-4">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  <li><a href="#b.-describe-the-network-mathematically" id="toc-b.-describe-the-network-mathematically" class="nav-link" data-scroll-target="#b.-describe-the-network-mathematically">3b. Describe the Network Mathematically</a>
+  <ul class="collapse">
+  <li><a href="#network-size" id="toc-network-size" class="nav-link" data-scroll-target="#network-size">1. Network Size</a></li>
+  <li><a href="#centralization" id="toc-centralization" class="nav-link" data-scroll-target="#centralization">2. Centralization</a></li>
+  <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density">3. Density</a></li>
+  <li><a href="#reciprocity" id="toc-reciprocity" class="nav-link" data-scroll-target="#reciprocity">4. Reciprocity</a></li>
+  <li><a href="#transitivity-clustering" id="toc-transitivity-clustering" class="nav-link" data-scroll-target="#transitivity-clustering">5. Transitivity &amp; Clustering</a></li>
+  <li><a href="#diameter-distance" id="toc-diameter-distance" class="nav-link" data-scroll-target="#diameter-distance">6. Diameter &amp; Distance</a></li>
+  <li><a href="#your-turn-5" id="toc-your-turn-5" class="nav-link" data-scroll-target="#your-turn-5">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">4. Model</a>
+  <ul>
+  <li><a href="#your-turn-6" id="toc-your-turn-6" class="nav-link" data-scroll-target="#your-turn-6">👉 Your Turn ⤵</a></li>
+  </ul></li>
+  <li><a href="#communicate" id="toc-communicate" class="nav-link" data-scroll-target="#communicate">5. Communicate</a>
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Collaboration Ties over Time</h1>
+<p class="subtitle lead">ECI 589 SNA and Education: Unit 2 Case Study</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Shaun Kellogg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 4, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="prepare" class="level2">
+<h2 class="anchored" data-anchor-id="prepare">1. Prepare</h2>
+<p>Our <em>Unit 2 Case Study: Collaboration Ties over Time</em> introduces the research of Dr.&nbsp;Alan Daly and centers around the impact No Child Left Behind reform efforts on school and district leadership networks. In this unit we move beyond visual depictions of networks from our previous SNA case study and learn to describe networks using common network-level measures. Our analyses are guided by research conducted by Daly and Finnagan <span class="citation" data-cites="daly2011ebb">Daly and Finnigan (<a href="#ref-daly2011ebb" role="doc-biblioref">2011</a>)</span> who examined the ebb and flow of social network ties between district leaders under high-stakes accountability. As we work through each step of the data-intensive workflow <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span>, we will focus on the following topics:</p>
+<ol type="1">
+<li><p><strong>Prepare</strong>: Prior to analysis, we’ll take a look at the context from which our data came and load various R packages for data science and network analysis.</p></li>
+<li><p><strong>Wrangle</strong>: In section 2 we once make use of the {readxl} and {tidygraph} packages to import and prepare relational data stored as as an adjacency matrix.</p></li>
+<li><p><strong>Explore</strong>: In our prior case study, we indirectly used the {igraph} package on which {tidygraph} depends. In section 3, we use {igraph} directly to calculate a range of network-level measures to describe and compare collaboration networks over time.</p></li>
+<li><p><strong>Model</strong>: While we don’t do any modeling of our data in this case study, we dive a little deeper into work of Daly and Finnagan <span class="citation" data-cites="daly2011ebb">Daly and Finnigan (<a href="#ref-daly2011ebb" role="doc-biblioref">2011</a>)</span> to see how modeling can be used to examine longitudinal network data.</p></li>
+<li><p><strong>Communicate</strong>: Finally, we prepare a simple “data product” consisting of a data visualization and/or table that highlights some key findings from our analysis.</p></li>
+</ol>
+<section id="a.-review-the-research" class="level3">
+<h3 class="anchored" data-anchor-id="a.-review-the-research">1a. Review the Research</h3>
+<p><img src="img/ebb-flow.png" class="img-fluid" style="width:40.0%"></p>
+<p>Daly, A. J., &amp; Finnigan, K. S. (2011). The ebb and flow of social network ties between district leaders under high-stakes accountability. <em>American Educational Research Journal</em>, <em>48</em>(1), 39-79.</p>
+<section id="abstract" class="level4">
+<h4 class="anchored" data-anchor-id="abstract">Abstract</h4>
+<p>Recent scholarship suggests the importance of school district offices in supporting reform. These studies provide strategies for building relations between central offices and sites in order to improve change efforts. However, what is frequently overlooked is that organizational reform efforts are socially constructed. Therefore, examining the underlying reform-related social networks may provide insight into how relational structures support or constrain efforts at reform. This longitudinal case study draws upon social network analysis and interviews to examine the reform-related knowledge, advice, and innovation network structures of central office and site leaders in a district facing sanction for underperformance and engaging a districtwide reform. Findings indicate that over time, the networks increased the number of superficial interactions, and more frequent exchanges remained unchanged, resulting in a centralized network structure.</p>
+</section>
+<section id="your-turn" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn">👉 Your Turn&nbsp;⤵</h4>
+<p>Take a look at the article <em>The Ebb and Flow of Social Network Ties Between District Leaders Under High-Stakes Accountability</em> located in the lit folder of your files pane and answer the following questions:</p>
+<ol type="1">
+<li><p>What research questions were the authors of this study trying to address and why did they consider these questions important?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How were participants selected for this study and what was the rationale?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How did the authors collect social network data for this study and what specific information about actors and ties were collected?</p>
+<ul>
+<li></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="b.-load-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="b.-load-libraries">1b. Load Libraries</h3>
+<p>Recall that R <a href="https://en.wikipedia.org/wiki/R_package"><strong>packages</strong></a>, sometimes referred to as libraries, are shareable collections of R code that can contain functions, data, and/or documentation and extend the functionality of R. Before loading an R package, you must first make sure it has been installed in your environment. You can always check to see which packages have already been installed and loaded into RStudio Cloud by looking at the the Files, Plots, &amp; Packages Pane in the lower right hand corner.</p>
+<section id="core-sna-packages" class="level4">
+<h4 class="anchored" data-anchor-id="core-sna-packages">Core SNA Packages</h4>
+<p><strong>tidygraph 📦</strong></p>
+<p><img src="img/tidygraph.png" class="img-fluid" style="width:20.0%"></p>
+<p>The {<a href="https://tidygraph.data-imaginist.com/">tidygraph</a>} package is a huge package that exports 280 different functions and methods, including access to almost all of the&nbsp;<code>dplyr</code>&nbsp;verbs plus a few more, developed for use with relational data. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. The {tidygraph} package provides a way to switch between the two tables and uses&nbsp;<code>dplyr</code>&nbsp;verbs to manipulate them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
+<p><strong>ggraph 📦</strong></p>
+<p><img src="img/ggraph.png" class="img-fluid" style="width:20.0%"></p>
+<p>Created by the same developer as {tidygraph}, {<a href="https://ggraph.data-imaginist.com/index.html">ggraph</a>} – pronounced gg-raph or g-giraffe hence the logo – is an extension of {<a href="https://ggplot2.tidyverse.org/">ggplot</a>} aimed at supporting relational data structures such as networks, graphs, and trees. Both packages are more modern and widely adopted approaches data visualization in R.</p>
+<p>While ggraph builds upon the foundation of ggplot and its API, it comes with its own self-contained set of geoms, facets, etc., as well as adding the concept of&nbsp;<em>layouts</em>&nbsp;to the&nbsp;<a href="https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics">grammar of graphics</a>, i.e.&nbsp;the “gg” in ggplot and ggraph.</p>
+<p><strong>igraph 📦</strong></p>
+<p><img src="img/igraph.png" class="img-fluid" style="width:20.0%"></p>
+<p>Both {tidygraph} and {ggraph} depend heavily&nbsp;<a href="https://igraph.org/">igraph network analysis package</a>. The main goals of the igraph package and the collection of network analysis tools it contains are to provide a set of data types and functions for:</p>
+<ol type="1">
+<li><p>pain-free implementation of graph algorithms,</p></li>
+<li><p>fast handling of large graphs, with millions of vertices (i.e., actors or nodes) and edges,</p></li>
+<li><p>allowing rapid prototyping via high level languages like R.</p></li>
+</ol>
+</section>
+<section id="new-packages" class="level4">
+<h4 class="anchored" data-anchor-id="new-packages">New Packages</h4>
+<p><strong>readxl 📦</strong></p>
+<p><img src="img/readxl.png" class="img-fluid" style="width:20.0%"></p>
+<p>The <a href="https://readxl.tidyverse.org/">{readxl}</a> package makes it easy to get data out of Excel and into R. Compared to many of the existing packages (e.g.&nbsp;gdata, xlsx, xlsReadWrite) readxl has no external dependencies, so it’s easy to install and use on all operating systems. It is designed to work with&nbsp;<em>tabular</em>&nbsp;data.</p>
+<p>Since one of our data wrangling steps in the next section is importing network matrices stored in excel files, this package will come in handy.</p>
+</section>
+<section id="your-turn-1" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-1">👉 Your Turn ⤵</h4>
+<p>Use the code chunk below to load the tidyverse, igraph, tidygraph, ggraph, and readxl packages that we’ll be using in this case study:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'igraph'
+
+The following objects are masked from 'package:dplyr':
+
+    as_data_frame, groups, union
+
+The following objects are masked from 'package:purrr':
+
+    compose, simplify
+
+The following object is masked from 'package:tidyr':
+
+    crossing
+
+The following object is masked from 'package:tibble':
+
+    as_data_frame
+
+The following objects are masked from 'package:stats':
+
+    decompose, spectrum
+
+The following object is masked from 'package:base':
+
+    union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'tidygraph'
+
+The following object is masked from 'package:igraph':
+
+    groups
+
+The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="wrangle" class="level2">
+<h2 class="anchored" data-anchor-id="wrangle">2. Wrangle</h2>
+<p>In general, data wrangling involves some combination of cleaning, reshaping, transforming, and merging data<span class="citation" data-cites="wickham2016r">(<a href="#ref-wickham2016r" role="doc-biblioref">Wickham and Grolemund 2016</a>)</span>. As highlighted in&nbsp;Estrellado et al. <span class="citation" data-cites="estrellado2020e">Estrellado et al. (<a href="#ref-estrellado2020e" role="doc-biblioref">2020</a>)</span>, wrangling network data can be even more challenging than other data sources since network data often includes variables about both individuals and their relationships. For data wrangling in this unit, we’re keeping it simple since working with relational data, especially in the form of matrices, is a bit of a departure from our working with rectangular data frames.</p>
+<section id="a.-import-data" class="level3">
+<h3 class="anchored" data-anchor-id="a.-import-data">2a. Import Data</h3>
+<p>One of our primary goals for this case study is to examine how collaboration networks among school and district leaders changed over time. To do so, we’ll need to import two Excel files from the <a href="https://studysites.sagepub.com/carolan/study/resources.htm">Social Network Analysis and Education companion site</a>. Both files contain edges stored as a square matrix (more on this later) for the first and third year of a study examining the impact of national reform efforts <span class="citation" data-cites="daly2011ebb">(<a href="#ref-daly2011ebb" role="doc-biblioref">Daly and Finnigan 2011</a>)</span>.</p>
+<p>These files are included in the data folder of your R Studio project. A description of each file from the companion website is linked above and each data file is linked below:</p>
+<ol type="1">
+<li><p><a href="https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds7.xls"><strong>year_1_collaboration.xlsx</strong></a> This adjacency matrix reports on “collaboration” ties among 43 school leaders in year 1 of a three-year study. This is a directed valued (weighted) network measured on five-point scale ranging from 0 to 4, with higher values indicating more frequent collaborations (1–2 times/week). These data are used throughout Chapter 9.</p></li>
+<li><p><a href="https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/materials/datasets/99472_ds8.xlsx"><strong>year_3_collaboration.xlsx</strong></a> This adjacency matrix reports on “collaboration” ties among 43 school leaders in year 3 of a three-year study. This is a directed valued (weighted) network measured on five-point scale ranging from 0 to 4, with higher values indicating more frequent collaborations (1–2 times/week).&nbsp;</p></li>
+</ol>
+<p>Recall from above that our relations, or edges, are stored as a valued <a href="https://en.wikipedia.org/wiki/Adjacency_matrix">adjacency matrix</a> in which columns and rows consist of the same actors and each cell contains information about the tie between each pair of actors. In our case, the tie is a directed and valued “arc” where the value indicates the frequency of collaboration.</p>
+<p>Let’s use the <code>read_excel()</code> function to import the <code>year_1_collaboration.xlsx</code> file, add an argument setting the column names to <code>FALSE</code> since our file is a simple matrix with no header or column names, and assign the matrix to a variable named <code>year_1_collaboration</code>:</p>
+<p><strong>R Studio Tip:</strong> Type <code>?read_excel</code> into the console and check the arguments section to examine the different arguments that can be used with this function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>year_1_collaboration <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/year_1_collaboration.xlsx"</span>, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...1`
+• `` -&gt; `...2`
+• `` -&gt; `...3`
+• `` -&gt; `...4`
+• `` -&gt; `...5`
+• `` -&gt; `...6`
+• `` -&gt; `...7`
+• `` -&gt; `...8`
+• `` -&gt; `...9`
+• `` -&gt; `...10`
+• `` -&gt; `...11`
+• `` -&gt; `...12`
+• `` -&gt; `...13`
+• `` -&gt; `...14`
+• `` -&gt; `...15`
+• `` -&gt; `...16`
+• `` -&gt; `...17`
+• `` -&gt; `...18`
+• `` -&gt; `...19`
+• `` -&gt; `...20`
+• `` -&gt; `...21`
+• `` -&gt; `...22`
+• `` -&gt; `...23`
+• `` -&gt; `...24`
+• `` -&gt; `...25`
+• `` -&gt; `...26`
+• `` -&gt; `...27`
+• `` -&gt; `...28`
+• `` -&gt; `...29`
+• `` -&gt; `...30`
+• `` -&gt; `...31`
+• `` -&gt; `...32`
+• `` -&gt; `...33`
+• `` -&gt; `...34`
+• `` -&gt; `...35`
+• `` -&gt; `...36`
+• `` -&gt; `...37`
+• `` -&gt; `...38`
+• `` -&gt; `...39`
+• `` -&gt; `...40`
+• `` -&gt; `...41`
+• `` -&gt; `...42`
+• `` -&gt; `...43`</code></pre>
+</div>
+</div>
+<p>Before importing our Year 3 file, let’s quickly inspect the R object we just imported to see what we’ll be working with.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>year_1_collaboration</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 43 × 43
+    ...1  ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9 ...10 ...11 ...12 ...13
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     0     0     3     0     0     0     0     0     0     0     0     0     0
+ 2     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 3     4     0     0     0     0     0     0     0     0     0     0     0     0
+ 4     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 5     0     0     0     0     0     0     0     0     3     0     0     0     0
+ 6     3     0     0     0     0     0     0     0     0     0     0     0     0
+ 7     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 8     0     0     0     0     0     0     0     0     0     4     0     0     0
+ 9     0     0     0     0     4     0     0     0     0     0     0     0     0
+10     0     0     0     0     0     0     0     4     0     0     0     0     0
+# … with 33 more rows, and 30 more variables: ...14 &lt;dbl&gt;, ...15 &lt;dbl&gt;,
+#   ...16 &lt;dbl&gt;, ...17 &lt;dbl&gt;, ...18 &lt;dbl&gt;, ...19 &lt;dbl&gt;, ...20 &lt;dbl&gt;,
+#   ...21 &lt;dbl&gt;, ...22 &lt;dbl&gt;, ...23 &lt;dbl&gt;, ...24 &lt;dbl&gt;, ...25 &lt;dbl&gt;,
+#   ...26 &lt;dbl&gt;, ...27 &lt;dbl&gt;, ...28 &lt;dbl&gt;, ...29 &lt;dbl&gt;, ...30 &lt;dbl&gt;,
+#   ...31 &lt;dbl&gt;, ...32 &lt;dbl&gt;, ...33 &lt;dbl&gt;, ...34 &lt;dbl&gt;, ...35 &lt;dbl&gt;,
+#   ...36 &lt;dbl&gt;, ...37 &lt;dbl&gt;, ...38 &lt;dbl&gt;, ...39 &lt;dbl&gt;, ...40 &lt;dbl&gt;,
+#   ...41 &lt;dbl&gt;, ...42 &lt;dbl&gt;, ...43 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>As you can see, we have a 43 x 43 “<a href="https://tibble.tidyverse.org">tibble</a>” or data table representing our collaboration ties. In Section 2, we’ll learn how to restructure this data into a formal matrix and then convert to a network class R object so we can explore our data through network visualization and analyses.</p>
+<section id="your-turn-2" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-2">👉 Your Turn ⤵</h4>
+<p>Use the code chunk below to import the Year 3 collaboration network located in data folder of your R project and then inspect your newly created object to make sure it imported as expected.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>year_3_collaboration <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/year_3_collaboration.xlsx"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...1`
+• `` -&gt; `...2`
+• `` -&gt; `...3`
+• `` -&gt; `...4`
+• `` -&gt; `...5`
+• `` -&gt; `...6`
+• `` -&gt; `...7`
+• `` -&gt; `...8`
+• `` -&gt; `...9`
+• `` -&gt; `...10`
+• `` -&gt; `...11`
+• `` -&gt; `...12`
+• `` -&gt; `...13`
+• `` -&gt; `...14`
+• `` -&gt; `...15`
+• `` -&gt; `...16`
+• `` -&gt; `...17`
+• `` -&gt; `...18`
+• `` -&gt; `...19`
+• `` -&gt; `...20`
+• `` -&gt; `...21`
+• `` -&gt; `...22`
+• `` -&gt; `...23`
+• `` -&gt; `...24`
+• `` -&gt; `...25`
+• `` -&gt; `...26`
+• `` -&gt; `...27`
+• `` -&gt; `...28`
+• `` -&gt; `...29`
+• `` -&gt; `...30`
+• `` -&gt; `...31`
+• `` -&gt; `...32`
+• `` -&gt; `...33`
+• `` -&gt; `...34`
+• `` -&gt; `...35`
+• `` -&gt; `...36`
+• `` -&gt; `...37`
+• `` -&gt; `...38`
+• `` -&gt; `...39`
+• `` -&gt; `...40`
+• `` -&gt; `...41`
+• `` -&gt; `...42`
+• `` -&gt; `...43`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>year_3_collaboration</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 43 × 43
+    ...1  ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9 ...10 ...11 ...12 ...13
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     0     2     4     3     1     1     1     3     1     1     1     1     1
+ 2     0     0     1     0     0     0     0     1     0     0     0     0     0
+ 3     4     1     0     1     2     2     2     3     2     2     2     2     2
+ 4     3     2     0     0     0     0     0     1     0     0     1     0     0
+ 5     1     0     2     0     0     1     1     2     3     0     1     1     2
+ 6     3     0     0     0     0     0     0     1     1     0     0     0     0
+ 7     2     1     1     1     2     1     4     2     1     4     1     1     1
+ 8     3     2     4     1     3     3     2     0     3     3     2     3     3
+ 9     2     0     2     0     4     2     0     3     0     1     2     2     1
+10     2     1     3     2     2     1     4     4     3     0     3     2     2
+# … with 33 more rows, and 30 more variables: ...14 &lt;dbl&gt;, ...15 &lt;dbl&gt;,
+#   ...16 &lt;dbl&gt;, ...17 &lt;dbl&gt;, ...18 &lt;dbl&gt;, ...19 &lt;dbl&gt;, ...20 &lt;dbl&gt;,
+#   ...21 &lt;dbl&gt;, ...22 &lt;dbl&gt;, ...23 &lt;dbl&gt;, ...24 &lt;dbl&gt;, ...25 &lt;dbl&gt;,
+#   ...26 &lt;dbl&gt;, ...27 &lt;dbl&gt;, ...28 &lt;dbl&gt;, ...29 &lt;dbl&gt;, ...30 &lt;dbl&gt;,
+#   ...31 &lt;dbl&gt;, ...32 &lt;dbl&gt;, ...33 &lt;dbl&gt;, ...34 &lt;dbl&gt;, ...35 &lt;dbl&gt;,
+#   ...36 &lt;dbl&gt;, ...37 &lt;dbl&gt;, ...38 &lt;dbl&gt;, ...39 &lt;dbl&gt;, ...40 &lt;dbl&gt;,
+#   ...41 &lt;dbl&gt;, ...42 &lt;dbl&gt;, ...43 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="b.-create-a-tidy-graph" class="level3">
+<h3 class="anchored" data-anchor-id="b.-create-a-tidy-graph">2b. Create a Tidy Graph</h3>
+<p>As noted above, before we can begin exploring our data through network visualization and analysis, we must first restructure our data into a formal matrix and then convert to a network class R object required by the igraph, tidygraph, and ggraph packages.</p>
+<p>However, one thing you may have noticed from our inspection of the data above is that our data table is missing the names of the school leaders in our network, which are needed for determining dyads in our network. R has packages for creating random names to help anonymize data, but to keep things simple, we’ll just assign the numbers 1-43 as names for our rows and columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(year_1_collaboration) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">43</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Setting row names on a tibble is deprecated.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(year_1_collaboration) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">43</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You may have seen a warning stating: <code>Setting row names on a tibble is deprecated.</code> You can ignore that for now but it’s basically telling us these functions are old we we need to use newer function or our code will some day stop working.</p>
+<p>Again, let quickly inspect our <code>year_1_collaboration</code> data table to see if this worked:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>year_1_collaboration</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 43 × 43
+     `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`  `10`  `11`  `12`  `13`
+ * &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     0     0     3     0     0     0     0     0     0     0     0     0     0
+ 2     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 3     4     0     0     0     0     0     0     0     0     0     0     0     0
+ 4     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 5     0     0     0     0     0     0     0     0     3     0     0     0     0
+ 6     3     0     0     0     0     0     0     0     0     0     0     0     0
+ 7     0     0     0     0     0     0     0     0     0     0     0     0     0
+ 8     0     0     0     0     0     0     0     0     0     4     0     0     0
+ 9     0     0     0     0     4     0     0     0     0     0     0     0     0
+10     0     0     0     0     0     0     0     4     0     0     0     0     0
+# … with 33 more rows, and 30 more variables: `14` &lt;dbl&gt;, `15` &lt;dbl&gt;,
+#   `16` &lt;dbl&gt;, `17` &lt;dbl&gt;, `18` &lt;dbl&gt;, `19` &lt;dbl&gt;, `20` &lt;dbl&gt;, `21` &lt;dbl&gt;,
+#   `22` &lt;dbl&gt;, `23` &lt;dbl&gt;, `24` &lt;dbl&gt;, `25` &lt;dbl&gt;, `26` &lt;dbl&gt;, `27` &lt;dbl&gt;,
+#   `28` &lt;dbl&gt;, `29` &lt;dbl&gt;, `30` &lt;dbl&gt;, `31` &lt;dbl&gt;, `32` &lt;dbl&gt;, `33` &lt;dbl&gt;,
+#   `34` &lt;dbl&gt;, `35` &lt;dbl&gt;, `36` &lt;dbl&gt;, `37` &lt;dbl&gt;, `38` &lt;dbl&gt;, `39` &lt;dbl&gt;,
+#   `40` &lt;dbl&gt;, `41` &lt;dbl&gt;, `42` &lt;dbl&gt;, `43` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>As you can see, we now have names for our rows and columns corresponding to each school leader in our network. So we can see that leader 1 collaborated with leader 3 and with a frequency of “3” but obviously did not collaborate with 2 as indicated by the “0” in the corresponding cell. Note that leader 3 also indicated that they collaborated with 1, but on a slightly more frequent basis as indicated by the “4” in the corresponding cell.</p>
+<section id="convert-to-matrix-object" class="level4">
+<h4 class="anchored" data-anchor-id="convert-to-matrix-object">Convert to Matrix Object</h4>
+<p>Now that we have names included for our rows and columns, we need to convert our data table, or tibble, to a formal matrix class object. To do so is relatively simple using the <code>as.matrix()</code> function built into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>year_1_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(year_1_collaboration )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The word “class” and “object” have been used quite a bit in this case-study and warrant a brief explanation. Classes and objects are basic concepts of Object-Oriented Programming environments like R. An <strong>object</strong> is simply a data structure that has some methods and attributes. Everything in R is essentially an object. A <strong>class</strong> is just a blueprint or a sketch of these objects. It represents the set of properties or methods that are common to all objects of one type.</p>
+<p>Let’s use the <code>class()</code> function on the <code>year_1_collaboration</code> and <code>year_1_matrix</code> to see the types of objects we just created:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(year_1_collaboration)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(year_1_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "matrix" "array" </code></pre>
+</div>
+</div>
+<p>Great! We can now see that our <code>year_1_matrix</code> is formally an object of the “matrix” class.</p>
+</section>
+<section id="convert-to-graph-object" class="level4">
+<h4 class="anchored" data-anchor-id="convert-to-graph-object">Convert to Graph Object</h4>
+<p>Our final step before we’re able to begin exploring our data is to convert our matrix to a network object recognized by the {igraph} and {tidygraph} packages. The&nbsp;<a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html"><code>as_tbl_graph()</code></a>&nbsp;function can easily convert relational data from all common network data formats such as matrices, <code>network</code>,&nbsp;<code>phylo</code>,&nbsp;<code>dendrogram</code>,&nbsp;<code>data.tree</code>,&nbsp;<code>graph</code>, etc.&nbsp;</p>
+<p>Run the following code to convert our matrix to directed network graph and save as a new object called <code>year_1_network</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>year_1_network <span class="ot">&lt;-</span> <span class="fu">as_tbl_graph</span>(year_1_matrix, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (is.null(rownames(x)) &amp;&amp; is.null(colnames(x))) || colnames(x) == :
+'length(x) = 43 &gt; 1' in coercion to 'logical(1)'</code></pre>
+</div>
+</div>
+<p>Again, let’s inspect our new object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>year_1_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tbl_graph: 43 nodes and 82 edges
+#
+# A directed simple graph with 3 components
+#
+# Node Data: 43 × 1 (active)
+  name 
+  &lt;chr&gt;
+1 1    
+2 2    
+3 3    
+4 4    
+5 5    
+6 6    
+# … with 37 more rows
+#
+# Edge Data: 82 × 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1     3      3
+2     3     1      4
+3     3    24      3
+# … with 79 more rows</code></pre>
+</div>
+</div>
+<p>As you can see, our <code>year_1_network</code> provides a range of information about out network including network size, type, number of components, and a preview of the node and edge lists that it created. The node and edge lists are treated just like a typical data frame and can now be used with other tidyverse packages and functions to create new actor-level network variables like degree, reciprocity, and centrality measures.</p>
+</section>
+<section id="your-turn-3" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-3">👉 Your Turn ⤵</h4>
+<p>Use the code chunk below to complete the following data wrangling steps for our Year 3 collaboration network from the Excel file you imported earlier:</p>
+<ol type="1">
+<li><p>Add row and column names to the data frame;</p></li>
+<li><p>Convert the resulting data frame to a matrix class object and check to confirm that it is indeed a matrix;</p></li>
+<li><p>Convert the matrix to a network graphs object with directed edges;</p></li>
+<li><p>Inspect the Year 3 collaboration network and answer the questions after the code chunk.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(year_3_collaboration) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">43</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Setting row names on a tibble is deprecated.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(year_3_collaboration) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">43</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>year_3_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(year_3_collaboration)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(year_3_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "matrix" "array" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>year_3_network <span class="ot">&lt;-</span> <span class="fu">as_tbl_graph</span>(year_3_matrix, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (is.null(rownames(x)) &amp;&amp; is.null(colnames(x))) || colnames(x) == :
+'length(x) = 43 &gt; 1' in coercion to 'logical(1)'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>year_3_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tbl_graph: 43 nodes and 1314 edges
+#
+# A directed multigraph with 1 component
+#
+# Node Data: 43 × 1 (active)
+  name 
+  &lt;chr&gt;
+1 1    
+2 2    
+3 3    
+4 4    
+5 5    
+6 6    
+# … with 37 more rows
+#
+# Edge Data: 1,314 × 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1     2      2
+2     1     3      4
+3     1     4      3
+# … with 1,311 more rows</code></pre>
+</div>
+</div>
+<p>Section 2 Questions:</p>
+<ol type="1">
+<li><p>What is the size of the Year 3 collaboration network?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How many components are in this network?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How many nodes and edges variables are in our tidy graph and what does each variable (e.g., weight) represent?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How does collaboration in Year 3 compare to Year 1 and what inferences might you already be able to make just based on the size of the two networks?</p>
+<ul>
+<li></li>
+</ul></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="explore" class="level2">
+<h2 class="anchored" data-anchor-id="explore">3. Explore</h2>
+<p>Relevant to our case study of school leader collaboration, Carolyn notes in SNA and Education <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span> that:</p>
+<blockquote class="blockquote">
+<p>… to address questions that probe a network’s dynamics (i.e., its change over time), it is necessary to first figure out what the network looks like at one point in time, what is commonly referred to as the network’s topography.</p>
+</blockquote>
+<p>In order to describe a network’s <strong>topography</strong>, social network researchers utilize an array of algorithms and indices to describe both visually and numerically different characteristics of social networks. These algorithms and indices rely on both simple and somewhat sophisticated mathematical computation.</p>
+<p>In this section we revisit the {tidygraph} and {ggraph} packages for creating sociograms and computing basic node and edge-level measures, and then introduce some key functions from the {igraph} package for obtaining complete network-level measures.</p>
+<section id="a.-visually-describe-the-network" class="level3">
+<h3 class="anchored" data-anchor-id="a.-visually-describe-the-network">3a. Visually Describe the Network</h3>
+<p>One of the defining characteristics of the social network perspective is its use of graphic imagery to represent actors and their relations with one another. To emphasize this point, Carolyn (2013) reported that:</p>
+<blockquote class="blockquote">
+<p>The visualization of social networks has been a core practice since its foundation more than 90 years ago and remains a hallmark of contemporary social network analysis.&nbsp;</p>
+</blockquote>
+<p>Network visualization can be used for a variety of purposes, ranging from highlighting key actors to even serving as works of art. Katya Ognyanova’s also excellent tutorial on <a href="https://kateto.net/network-visualization/">Static and Dynamic Network Visualization with R</a> helps illustrate the variety of goals a good network visualization can accomplish.</p>
+<p>Recall from our previous SNA case study examining Twitter networks surrounding the Common Core State Standards that we introduced the dead simple <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot()</code></a> function built into R to quickly generate a sociogram showing the nodes and edges in our network.</p>
+<p>Let’s supply our <code>year-1-network</code> object as the first argument of this function and see what it produces:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/plot_network-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>While not the most aesthetically pleasing plot, it definitely is functional. As indicated by our tidy graph output from section 1, we can see that there is one large network component and two additional components consisting of isolated school leaders with no collaboration ties.</p>
+<p>If this had been a larger network with more nodes and edges, however, the utility of the basic <code>plot()</code> function would evaporate quickly. For example, try this function out with the Year 3 network in the console and see what it produces.</p>
+<p>Fortunately, the {ggraph} package includes a plethora of plotting parameters for graph layouts, edges and nodes to improve the visual design and readability of network graphs.</p>
+<p><strong>Note:</strong> If you’re having trouble seeing the plot you can run the code in the console and see the plot in the Viewer pane or click the little arrow/window icon in the output of the code chunk to open the plot in a new window and resize.</p>
+</section>
+<section id="sociograms-with-ggraph" class="level3">
+<h3 class="anchored" data-anchor-id="sociograms-with-ggraph">Sociograms with ggraph</h3>
+<p>One thing to keep in mind when building a network viz with the {ggraph} package is that just like it’s {ggplot} counterpart for making more traditional charts and graphs, there is a minimal code template for producing a basic plot. Specifically, ggraph requires 3 main functions</p>
+<ul>
+<li><p><a href="https://ggraph.data-imaginist.com/articles/Layouts.html"><code>ggraph()</code></a> takes care of setting up the plot object along with creating the layout of the graph (default = “stress”).</p></li>
+<li><p><a href="https://ggraph.data-imaginist.com/articles/Layouts.html"><code>geom_node_*()</code></a> functions and their associated arguments add and modify the nodes of the network plot.</p></li>
+<li><p><a href="https://ggraph.data-imaginist.com/articles/Edges.html"><code>geom_edge_*()</code></a> functions and their associated arguments add and modify the edgez of the network plot.</p></li>
+</ul>
+<p>Like the basic plotting function above, ggraph has a similar <code>autograph()</code> function for automatically generating a simple sociogram to get a quick snapshot of your network. Run the following code supplying our <code>year_1_network</code> object as the first argument for this function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autograph</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/autograph_network-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, this produces a very basic plot that includes our network nodes and edges with minimal styling.</p>
+<p>Within this function, however, are the three core functions noted above that can be modified though different arguments or by adding additional layers of functions to change the visual aesthetics of your sociogram to highlight key characteristics of the network, like edge weight or central actors.</p>
+<p>Let generate the same basic plot above but explicitly call our ggraph, node, and edge functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(year_1_network) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using "stress" as default layout</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/year_1_sociogram-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We won’t spend a lot of time on polishing our graph here. We’ll save that effort for when we are ready to communicate our findings to a specific audience, but lets make some quick functional and aesthetic changes: Run the following code to:</p>
+<ul>
+<li><p>Change the graph layout to the Fruchterman-Reingold (FR) layout using the <code>layout = "fr"</code> argument to help highlight areas of clustering;</p></li>
+<li><p>Change the size of our nodes using the <code>size = 3</code> argument to make them more visible;</p></li>
+<li><p>Add color to our edges based using the <code>aes(colour = weight)</code> argument to highlight more frequent collaborations; and,</p></li>
+<li><p>Add the <code>theme_graph()</code> layer to remove the gray background.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(year_1_network, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">colour =</span> weight)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/modify_sociogram-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>That is perhaps slightly better, but before sharing with an education partner, I would likely do quite a bit more clean up to highlight key findings specific to network measures that we’ll explore in the next section. For example, I might change the size of nodes for school leaders based on measures of centralization to highlight more central actors in the network and add arrows to indicate directionality of the ties since this is a directed network.</p>
+<section id="your-turn-4" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-4">👉 Your Turn ⤵</h4>
+<p>Use the code chunk below created a simple sociogram for the Year 3 collaboration network and answer the questions that follow:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(year_3_network, <span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">colour =</span> weight)) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/year_3_sociogram-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ol type="1">
+<li><p>How does the Year 3 collaboration network compare to Year 1? What are some similarities and differences?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>How might you modify this graph to make it more insightful and useful? For ideas check out these nework viz tutorials <a href="http://mr.schochastics.net/netVizR.html">here</a>, <a href="https://kateto.net/network-visualization">here</a> and <a href="https://rpubs.com/neloe/ggraph_intro">here</a>.</p>
+<ul>
+<li></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="b.-describe-the-network-mathematically" class="level3">
+<h3 class="anchored" data-anchor-id="b.-describe-the-network-mathematically">3b. Describe the Network Mathematically</h3>
+<p>This section include some of the most common measures used to describe the features of complete networks, as well was .</p>
+<blockquote class="blockquote">
+<p>Network-level structural measures are those that are calculated from the entire network. Therefore, they provide an excellent snapshot of the network’s structure—the pattern of relations among the network’s actors.</p>
+</blockquote>
+<p>In addition to providing an overall summary of the network, these measures provide a concrete means to compare relations such as whether the friendship, social support, and advice seeking networks within the same fraternity, for example, are comparable. In our case study, for example, were are</p>
+<section id="network-size" class="level4">
+<h4 class="anchored" data-anchor-id="network-size">1. Network Size</h4>
+<p>One simple but important property of a social network is its size, or the number of nodes and edges in a network. As Carolan notes:</p>
+<blockquote class="blockquote">
+<p>Size plays an important role in determining what happens in the network— what resources are exchanged among actors, for example… Size affects other network measures, but on a conceptual level, it influences the structure of relations, as actors only have so many resources and capacities for creating and maintaining ties with others.</p>
+</blockquote>
+<p>As we saw in the previous section, the <code>year_1_network</code> output provided us with basic information about our networks size, including the number of nodes and edges in our network. The {igraph} package also has some basic functions for retrieving the number of nodes and edges in a network.</p>
+<p>Run the following code chunk to use the <a href="https://igraph.org/r/html/latest/gorder.html"><code>gorder()</code></a> and <a href="https://igraph.org/r/html/latest/gsize.html"><code>gsize()</code></a> functions obtain the number of vertices and edges respectively:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gorder</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsize</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 82</code></pre>
+</div>
+</div>
+</section>
+<section id="centralization" class="level4">
+<h4 class="anchored" data-anchor-id="centralization">2. Centralization</h4>
+<p>A key structural property of complete networks, and often the focus of network studies is the concept of centralization, or the extent to which relations are focused on one or a small set of actors. Centralization is an important concept in network because, as Carolan notes:</p>
+<blockquote class="blockquote">
+<p>Central actors likely wield a disproportionate amount of influence on the network. Therefore, high centralization provides fewer actors with more power and control.</p>
+</blockquote>
+<p>Centralization can be based on a number of different measures, but degree is one of the most common. Degree refers to the number of ties an actor either sends (out-degree), receives (in-degree), or in the case of a non-directed network or both sent and received in a directed network, simply just “degree” for all actors to which one is connected.</p>
+<p>The <a href="https://igraph.org/r/html/latest/centr_degree.html"><code>centr_degree()</code></a> function in {igraph} provides a centralization score based on the metric selected, as well as the degree for each actors in the network. Let’s first take a look at the centralization measure based on number of actors individuals have ties with regardless of directionality:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(year_1_network, <span class="at">mode =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$res
+ [1] 5 0 5 3 3 3 4 8 4 7 4 1 0 4 4 3 2 5 4 4 5 4 3 6 4 4 4 3 8 4 4 3 3 6 3 3 4 3
+[39] 6 2 3 4 2
+
+$centralization
+[1] 0.05102041
+
+$theoretical_max
+[1] 3528</code></pre>
+</div>
+</div>
+<p>The first variable <code>$res</code> provides node-level centrality scores. So for example, the first school leader in our network is connected to 5 other actors in the network. The <code>$centralization</code> variable provides our actual centrality score, which is quite small suggesting a very decentralized network. And the final <code>$theoretical_max</code> provides the maximum theoretical graph level centralization score for our graph based on the number of vertices.</p>
+<p>Let’s also take a quick look at centralization scores for in-degree and out-degree:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(year_1_network, <span class="at">mode =</span> <span class="st">"out"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$res
+ [1] 1 0 2 2 1 3 2 2 1 3 3 1 0 3 2 2 1 2 2 3 3 2 1 3 2 1 3 3 2 2 2 2 2 3 1 3 0 3
+[39] 2 1 2 2 1
+
+$centralization
+[1] 0.02602436
+
+$theoretical_max
+[1] 1806</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(year_1_network, <span class="at">mode =</span> <span class="st">"in"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$res
+ [1] 4 0 3 1 2 0 2 6 3 4 1 0 0 1 2 1 1 3 2 1 2 2 2 3 2 3 1 0 6 2 2 1 1 3 2 0 4 0
+[39] 4 1 1 2 1
+
+$centralization
+[1] 0.09745293
+
+$theoretical_max
+[1] 1806</code></pre>
+</div>
+</div>
+<p>Again, we still have a very decentralize graph, though slightly more centralized around in-degree.</p>
+<p>While our primary concern is complete network-level measures so we can compare Year 1 &amp; 3 networks, obtaining node-level measures is also very useful for helping to describe the network, particularly for visualization. For example, we might want to adjust the size of nodes in a network based on degree, so those actors with more connections stand out more prominently.</p>
+<p>The {tidygraph} package has an unique function called <code>activate()</code> that allows us to treat the nodes and edges in our network object as if they were a standard data frame that we can then apply standard tidyverse functions to like <code>select()</code>, <code>filter()</code>, and <code>mutate()</code>.</p>
+<p>The latter function, <code>mutate()</code>, can be use to create new variables for node-level measures of degree, in-degree, and out-degree using the <code>centrality_degree()</code> function in the {tidygraph} package.</p>
+<p>Run the following code to add each actor’s degree to our Year 1 collaboration network and assign the output <code>year_1_network</code> again so the results are saved:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>year_1_network <span class="ot">&lt;-</span> year_1_network <span class="sc">|&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"all"</span>))</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>year_1_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tbl_graph: 43 nodes and 82 edges
+#
+# A directed simple graph with 3 components
+#
+# Node Data: 43 × 2 (active)
+  name  degree
+  &lt;chr&gt;  &lt;dbl&gt;
+1 1          5
+2 2          0
+3 3          5
+4 4          3
+5 5          3
+6 6          3
+# … with 37 more rows
+#
+# Edge Data: 82 × 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1     3      3
+2     3     1      4
+3     3    24      3
+# … with 79 more rows</code></pre>
+</div>
+</div>
+<p>Now we could adjust the size of more central actors in our sociogram from above like so to highlight the full range of collaboration ties in our network:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(year_1_network) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> degree, <span class="at">color =</span> degree)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">color =</span> weight)) <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using "stress" as default layout</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/udpate_sociogram-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="density" class="level4">
+<h4 class="anchored" data-anchor-id="density">3. Density</h4>
+<p>Since we know the number of ties, or edges, in our network, we can examine the overall density of our network, which is directly linked to network size. As Carolan explains:</p>
+<blockquote class="blockquote">
+<p>Density refers to the number of ties in the network reported as a fraction of the total possible number of ties… The closer this number is to 1.0, the denser the network.</p>
+</blockquote>
+<p>The igraph packages has two different function for calculating the density of a network, <a href="https://igraph.org/r/html/latest/edge_density.html"><code>edge_density()</code></a> and <a href="https://igraph.org/r/html/latest/edge_density.html"><code>graph.density()</code></a>, but both yield the exact same result. The <code>edge_density()</code> function is the more recent function and should be used, but let’s try them both out:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04540421</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph.density</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04540421</code></pre>
+</div>
+</div>
+<p>As you can see, our collaboration network in Year 1 has a VERY low density, which suggests that collaboration in this network is quite limited and may impact the flow of information, resources, and innovations among school leaders.</p>
+</section>
+<section id="reciprocity" class="level4">
+<h4 class="anchored" data-anchor-id="reciprocity">4. Reciprocity</h4>
+<p>Reciprocity is an important measure because it reveals the direction through which resources in networks flow and whether or not it flows in both directions. The tendency towards reciprocity in most networks, sometimes referred to as the “norm” of reciprocity, has been acknowledge by ancient writers such as Cicero who stated:</p>
+<blockquote class="blockquote">
+<p>There is no duty more indispensable than that of returning a kindness… all men distrust one forgetful of a benefit.</p>
+</blockquote>
+<p>At the network-level, reciprocity is defined as reciprocity is <strong>a measure of the likelihood of vertices in a directed network to be mutually linked</strong>. Using the <a href="https://igraph.org/r/html/latest/reciprocity.html"><code>reciprocity()</code></a> function, we can directly calculate this measure:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reciprocity</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1707317</code></pre>
+</div>
+</div>
+<p>As illustrated by the reciprocity measure above, the tendency towards reciprocated collaboration ties is, surprisingly, very low in our Year 1 network.</p>
+<p>And if we wanted to highlight this lack of reciprocity in a network visual, we could use the <a href="https://tidygraph.data-imaginist.com/reference/edge_types.html"><code>edge_is_mutual()</code></a> function to create a new edge variable called <code>reciprocated</code> that indicates whether the tie is mutual or asymmetric.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>year_1_network <span class="ot">&lt;-</span> year_1_network <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reciprocated =</span> <span class="fu">edge_is_mutual</span>())</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>year_1_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tbl_graph: 43 nodes and 82 edges
+#
+# A directed simple graph with 3 components
+#
+# Edge Data: 82 × 4 (active)
+   from    to weight reciprocated
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;lgl&gt;       
+1     1     3      3 TRUE        
+2     3     1      4 TRUE        
+3     3    24      3 FALSE       
+4     4    29      3 FALSE       
+5     4    41      4 FALSE       
+6     5     9      3 TRUE        
+# … with 76 more rows
+#
+# Node Data: 43 × 2
+  name  degree
+  &lt;chr&gt;  &lt;dbl&gt;
+1 1          5
+2 2          0
+3 3          5
+# … with 40 more rows</code></pre>
+</div>
+</div>
+<p>As shown in the output above, the tie between school leader 1 and 3 is reciprocated, but the tie between 3 and 24 is not.</p>
+<p>Let’s now add this new variable to our sociogram to highlight reciprocated ties in our Year 1 network:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(year_1_network) <span class="sc">+</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> degree)) <span class="sc">+</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">color =</span> reciprocated)) <span class="sc">+</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using "stress" as default layout</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-2-case-study-key_files/figure-html/add_reciprocated_ties-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, there only appear to be seven dyads with reciprocated ties!</p>
+</section>
+<section id="transitivity-clustering" class="level4">
+<h4 class="anchored" data-anchor-id="transitivity-clustering">5. Transitivity &amp; Clustering</h4>
+<p>Transitivity, also known as the “friend of a friend” phenomenon, focuses on triads, or any “triple” of actors, rather than dyads like reciprocity. Just like a networks tendency towards reciprocity, there is also a tendency toward transitivity. For example, in the figure below Teacher A collaborates with Teacher B and Teacher B collaborates with Teacher C, then Teacher A is more likely at some point to collaborates with Teacher C and “complete” the triangle and less likely to collaborate with Teacher E since they do now share a connection:</p>
+<p><img src="img/transitivity.png" class="img-fluid" style="width:60.0%"></p>
+<p>As Carolan points out, establishing a network’s transitivity is important, as it is theoretically connected to actors’ tendencies to divide into exclusive subgroups or cluster over time, especially around positive relations such as friendship. While the algorithms behind network transitivity are not trivial, the defining network transitivity is rather straightforward:</p>
+<blockquote class="blockquote">
+<p>Transitivity measures the probability that the adjacent vertices of a vertex are connected. This is sometimes also called the clustering coefficient.</p>
+</blockquote>
+<p>The <a href="https://igraph.org/r/html/latest/transitivity.html"><code>transitivity()</code></a> function provides a convenient means to calculate a network-level transitive measures:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transitivity</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2435897</code></pre>
+</div>
+</div>
+<p>For our particular network, a relatively small value of 24.4% is not too surprising since this is the start of the research study and since the density of our network overall is very low.</p>
+</section>
+<section id="diameter-distance" class="level4">
+<h4 class="anchored" data-anchor-id="diameter-distance">6. Diameter &amp; Distance</h4>
+<p>Whereas transitivity focuses on the importance of certain configurations of triads, diameter and distance are more straightforward. A network’s diameter simply refers to the longest path between any two actors. A related measure is the average path length, which measures the mean distance between all pairs of actors in the network.</p>
+<p>The two functions for computing diameter and average path length are <code>diameter()</code> and <code>mean_distance()</code> respectively. Let’s apply both of these to our <code>year_1_network</code> object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_distance</span>(year_1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16.43005</code></pre>
+</div>
+</div>
+<p>Carolan notes that both diameter and average path length are important network-level structural properties. Similar to diameter and distance measures for our Year 1 network above, he notes that a network with a large diameter and small average path length suggests a structure in which there are parts of the network that some network actors may be unable to access.</p>
+</section>
+<section id="your-turn-5" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-5">👉 Your Turn ⤵</h4>
+<p>Use the code chunk below to calculate the following measures for the Year 3 collaboration newtwork, then answer the questions below:</p>
+<ol type="1">
+<li>Size</li>
+<li>Centralization</li>
+<li>Density</li>
+<li>Reciprocity</li>
+<li>Transitivity &amp; Clustering</li>
+<li>Diameter &amp; Distance</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co">#size</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gorder</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsize</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1314</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cetnralization </span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(year_3_network, <span class="at">mode =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$res
+ [1] 76 36 80 41 68 37 73 81 65 64 75 50 56 66 73 35 68 81 38 67 62 76 52 71 58
+[26] 45 55 80 33 69 37 55 72 76 48 53 74 77 54 50 68 60 73
+
+$centralization
+[1] 0.2423469
+
+$theoretical_max
+[1] 3528</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">#density</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7275748</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reciprocity</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">reciprocity</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7837423</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#transitivity</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transitivity</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9013133</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co">#diameter &amp; distance </span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_distance</span>(year_3_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.851052</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>How do network-level measures for Year 1 and Year 3 collaboration compare? What are some similarities and differences?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>What do these measures suggest about changes in collaboration among school leaders over time? In your response, cite some specific measures from Year 1 &amp; 3 as evidence for your conclusions.</p>
+<ul>
+<li></li>
+</ul></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="model" class="level2">
+<h2 class="anchored" data-anchor-id="model">4. Model</h2>
+<p>A developing area of network research is the advancement of statistical models and tools to examine network change over time <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span>. These models are used to empirically test if changes in key structure measures are statistically significant, and also explain potential mechanisms driving those changes. Stochastic actor-based models, for example, are a family of models that have the purpose of representing network dynamics on the basis of observed longitudinal data. These stochastic actor-based models allow users to test hypotheses about these tendencies toward reciprocity, homophily, and transitivity over time and to estimate parameters expressing their strengths while controlling for other tendencies (“confounders”).</p>
+<section id="your-turn-6" class="level4">
+<h4 class="anchored" data-anchor-id="your-turn-6">👉 Your Turn ⤵</h4>
+<p>Take a look at the article <em>The Ebb and Flow of Social Network Ties Between District Leaders Under High-Stakes Accountability</em> located in the lit folder of your files pane and answer the following questions:</p>
+<ol type="1">
+<li><p>What model(s) did Daly and Finnagan use in their longitudinal case study to examine changes in reform-related knowledge, advice, and innovation network structures?</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>What findings about network changes (list 2-3) did you find most interesting and why?</p>
+<ul>
+<li></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="communicate" class="level2">
+<h2 class="anchored" data-anchor-id="communicate">5. Communicate</h2>
+<p>The final(ish) step in our workflow/process is sharing the results of analysis with wider audience. Krumm et al.&nbsp;(2018) outlined the following 3-step process for communicating with education stakeholders what you have learned through analysis:</p>
+<ol type="1">
+<li><p><strong>Select</strong>. Communicating what one has learned involves selecting among those analyses that are most important and most useful to an intended audience, as well as selecting a form for displaying that information, such as a graph or table in static or interactive form, i.e.&nbsp;a “data product.”</p></li>
+<li><p><strong>Polish</strong>. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.</p></li>
+<li><p><strong>Narrate</strong>. Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.</p></li>
+</ol>
+<p>For your Independent Analysis assignment next week, you will have an opportunity to create a simple “data product” designed to illustrate key insights about about the student and/or teacher reported middle school friendship networks.</p>
+<p>For now, we will wrap up this assignment by converting our work into a webpage that can be used to communicate your learning and demonstrate some of your new R skills To do so, you will need to “Knit” your document by clicking the drop down arrow next to the ball of yarn in the menu bar at that the top of this markdown file, and then selecting “Knit top HTML” or another preferred output format. This will do two things:</p>
+<ol type="1">
+<li><p>it will check through all your code for any errors; and,</p></li>
+<li><p>it will created a file in your directory that you can use to share you work through <a href="https://pages.github.com">GitHub Pages</a>, <a href="https://rpubs.com/about/getting-started">RPubs</a> (see screeshot below), or any other preferred means.</p></li>
+</ol>
+<p><img src="img/publish.png" class="img-fluid" style="width:70.0%"></p>
+<p>Congratulations - you’ve completed the Unit 2 case study!</p>
+<section id="references" class="level3 unnumbered">
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-carolan2014" class="csl-entry" role="doc-biblioentry">
+Carolan, Brian. 2014. <span>“Social Network Analysis and Education: Theory, Methods &amp; Applications.”</span> <a href="https://doi.org/10.4135/9781452270104">https://doi.org/10.4135/9781452270104</a>.
+</div>
+<div id="ref-daly2011ebb" class="csl-entry" role="doc-biblioentry">
+Daly, Alan J, and Kara S Finnigan. 2011. <span>“The Ebb and Flow of Social Network Ties Between District Leaders Under High-Stakes Accountability.”</span> <em>American Educational Research Journal</em> 48 (1): 39–79.
+</div>
+<div id="ref-estrellado2020e" class="csl-entry" role="doc-biblioentry">
+Estrellado, Ryan A., Emily A. Freer, Jesse Mostipak, Joshua M. Rosenberg, and Isabella C. Velásquez. 2020. <em>Data Science in Education Using r</em>. Routledge. <a href="https://doi.org/10.4324/9780367822842">https://doi.org/10.4324/9780367822842</a>.
+</div>
+<div id="ref-krumm2018" class="csl-entry" role="doc-biblioentry">
+Krumm, Andrew, Barbara Means, and Marie Bienkowski. 2018. <em>Learning Analytics Goes to School</em>. Routledge. <a href="https://doi.org/10.4324/9781315650722">https://doi.org/10.4324/9781315650722</a>.
+</div>
+<div id="ref-wickham2016r" class="csl-entry" role="doc-biblioentry">
+Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.". <a href="https://r4ds.had.co.nz">https://r4ds.had.co.nz</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
