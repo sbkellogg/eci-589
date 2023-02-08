@@ -18,10 +18,10 @@ bibliography: lit/references.bib
 
 ## 1. Prepare
 
-For our second case study, *A Tale of Two MOOCs*, we move beyond visual
-depictions of networks from our previous SNA case study and learn to
-describe networks using common network-level measures. Our analyses are
-based on *A social network perspective on peer supported learning in
+For our second SNA case study, *A Tale of Two MOOCs*, we move beyond
+visual depictions of networks from our previous SNA case study and learn
+to describe networks using common network-level measures. Our analyses
+are based on *A social network perspective on peer supported learning in
 MOOCs for educators* [@kellogg2014social], and use an open educational
 dataset prepared by Kellogg and Edelman @kellogg2015massively. As we
 work through each step of the data-intensive workflow [@krumm2018], we
@@ -35,10 +35,10 @@ will focus on the following topics:
     packages to import and prepare relational data stored as as an
     adjacency matrix.
 
-3.  **Explore**: In our prior case study, we indirectly used the
-    {igraph} package on which {tidygraph} depends. In section 3, we use
-    {igraph} directly to calculate a range of network-level measures to
-    describe and compare collaboration networks over time.
+3.  **Explore**: In our prior case study, we use the {igraph} package on
+    which {tidygraph} depends. In section 3, we use {igraph} directly to
+    calculate a range of network-level measures to describe and compare
+    collaboration networks over time.
 
 4.  **Model**: While we don't do any modeling of our data in this case
     study, we dive a little deeper into work of Kellogg et al. to see
@@ -110,9 +110,9 @@ Digital Learning Transition in K-12 Schools (DLT 1) that was not
 included in this study.
 
 **Note**: In the data we're using, instructors have not yet been removed
-and only direct replies to forum posts have been included, though
-"weaker" ties like reactions with emoticons and even views of posts were
-captured in this study.
+and only direct replies to forum posts have been included, though "weak"
+ties like reactions with emoticons and even views of posts were captured
+in this study.
 
 #### **👉 Your Turn** **⤵**
 
@@ -196,13 +196,14 @@ right hand corner.
 
 The {[tidygraph](https://tidygraph.data-imaginist.com/)} package is a
 huge package that exports 280 different functions and methods, including
-access to almost all of the `dplyr` verbs plus a few more, developed for
-use with relational data. While network data itself is not tidy, it can
-be envisioned as two tidy tables, one for node data and one for edge
-data. The {tidygraph} package provides a way to switch between the two
-tables and uses `dplyr` verbs to manipulate them. Furthermore it
-provides access to a lot of graph algorithms with return values that
-facilitate their use in a tidy workflow.
+access to almost all of the {[dplyr](https://dplyr.tidyverse.org)} verbs
+plus a few more, developed for use with relational data. While network
+data itself is not tidy, it can be envisioned as two tidy tables, one
+for node data and one for edge data. The {tidygraph} package provides a
+way to switch between the two tables and uses `dplyr` verbs to
+manipulate them. Furthermore it provides access to a lot of graph
+algorithms with return values that facilitate their use in a tidy
+workflow.
 
 **ggraph 📦**
 
@@ -213,7 +214,7 @@ Created by the same developer as {tidygraph},
 gg-raph or g-giraffe hence the logo -- is an extension of
 {[ggplot](https://ggplot2.tidyverse.org/)} aimed at supporting
 relational data structures such as networks, graphs, and trees. Both
-packages are more modern and widely adopted approaches data
+packages use widely adopted approaches for data wrangling and
 visualization in R.
 
 While ggraph builds upon the foundation of ggplot and its API, it comes
@@ -222,16 +223,16 @@ adding the concept of *layouts* to the [grammar of
 graphics](https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics),
 i.e. the "gg" in ggplot and ggraph.
 
-#### New (ish) SNA Packages
+#### New(ish) SNA Packages
 
 **igraph 📦**
 
 ![](img/igraph.png){width="20%"}
 
-Both {tidygraph} and {ggraph} depend heavily [igraph network analysis
-package](https://igraph.org/). The main goals of the igraph package and
-the collection of network analysis tools it contains are to provide a
-set of data types and functions for:
+Both {tidygraph} and {ggraph} depend heavily the [igraph network
+analysis package](https://igraph.org/). The main goals of the igraph
+package and the collection of network analysis tools it contains are to
+provide a set of data types and functions for:
 
 1.  pain-free implementation of graph algorithms,
 
@@ -259,7 +260,7 @@ library(ggraph)
 
 In general, data wrangling involves some combination of cleaning,
 reshaping, transforming, and merging data[@wickham2016r]. As highlighted
-in Estrellado et al. @estrellado2020e, wrangling network data can be
+in Estrellado et al. @estrellado2020e, wrangling network data can be
 even more challenging than other data sources since network data often
 includes variables about both individuals and their relationships. For
 data wrangling in this lab, we're keeping it simple since working with
@@ -304,7 +305,7 @@ as we'll see later, {tidygraph} has a special function to remove these
 self loops from a sociogram, or network visualization.
 
 The edge-list format is slightly different than other formats you have
-likely worked with before in that the values in the first two columns
+likely worked with before in that the values in the first two columns of
 each row represent a dyad, or tie between two nodes in a network. An
 edge-list can also contain other information regarding the strength,
 duration, or frequency of the relationship, sometime called "weight", in
@@ -346,8 +347,9 @@ dlt1_ties
 Note the addition of the `col_types =` argument for changing the column
 types to character strings since the numbers for those particular
 columns indicate actors (`Sender` and `Reciever`) and attributes
-(`Comment_ID` and `Discussion_Id`). We also skipped the `Category Text`
-since this was left blank for deidentification purposes.
+(`Comment_ID` and `Discussion_Id`) rather than numerical values. We also
+skipped the `Category Text` since this was left blank for
+deidentification purposes.
 
 #### **👉 Your Turn** **⤵**
 
@@ -573,7 +575,7 @@ accomplish.
 Recall from our previous SNA case study examining student friendships in
 middle school that we introduced the dead simple
 [`plot()`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot)
-function built into R, as well as the \`autograph()\` function from the
+function built into R, as well as the `autograph()` function from the
 {ggraph} package to quickly generate a sociogram showing the nodes and
 edges in our network.
 
@@ -588,15 +590,15 @@ autograph(dlt1_network)
 
 ```
 
-Yuck! Neither a aesthetically pleasing plot, nor terribly functional. As
-indicated by our tidy graph output from section 1, however, we can see
-that there is one large network component and three additional
-components consisting of isolated MOOC-Ed participants who neither sent
-or received replies to their colleagues.
+Yuck! Neither is an aesthetically pleasing plot, nor terribly
+functional. As indicated by our tidy graph output from section 1,
+however, we can see that there is one large network component and three
+additional components consisting of isolated MOOC-Ed participants who
+neither sent or received replies to their colleagues.
 
 As you may have realized already, the utility of the basic `plot()`
 function is not very useful for large networks like this one.
-Fortunately, the {ggraph} package that we learned about in Lab 1
+Fortunately, the {ggraph} package that we learned about in Unit 1
 includes a plethora of plotting parameters for graph
 [layouts](https://ggraph.data-imaginist.com/articles/Layouts.html),
 [edges](https://ggraph.data-imaginist.com/articles/Edges.html) and
@@ -610,7 +612,7 @@ new window and resize.
 
 #### **Sociograms with ggraph**
 
-Recall from Lab 1 that just like it's {ggplot} counterpart for making
+Recall from Unit 1 that just like it's {ggplot} counterpart for making
 more traditional charts and graphs, there is a minimal code template for
 producing a basic plot with {ggraph}. Specifically, it requires 3 main
 functions
@@ -638,8 +640,9 @@ node, and edge functions:
 ```{r dlt1_sociogram}
 
 ggraph(dlt1_network) +
-  geom_node_point() +
-  geom_edge_link()
+  geom_edge_link() +
+  geom_node_point() 
+  
 
 ```
 
