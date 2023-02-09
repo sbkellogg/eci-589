@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-02-07">
+<meta name="dcterms.date" content="2023-02-09">
 
 <title>A Tale of Two MOOCs</title>
 <style>
@@ -147,7 +147,7 @@ div.csl-indent {
   <li><a href="#b.-load-libraries" id="toc-b.-load-libraries" class="nav-link" data-scroll-target="#b.-load-libraries">1b. Load Libraries</a>
   <ul class="collapse">
   <li><a href="#core-sna-packages" id="toc-core-sna-packages" class="nav-link" data-scroll-target="#core-sna-packages">Core SNA Packages</a></li>
-  <li><a href="#new-ish-sna-packages" id="toc-new-ish-sna-packages" class="nav-link" data-scroll-target="#new-ish-sna-packages">New (ish) SNA Packages</a></li>
+  <li><a href="#newish-sna-packages" id="toc-newish-sna-packages" class="nav-link" data-scroll-target="#newish-sna-packages">New(ish) SNA Packages</a></li>
   <li><a href="#your-turn-2" id="toc-your-turn-2" class="nav-link" data-scroll-target="#your-turn-2">👉 Your Turn ⤵</a></li>
   </ul></li>
   </ul></li>
@@ -214,7 +214,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 7, 2023</p>
+      <p class="date">February 9, 2023</p>
     </div>
   </div>
   
@@ -226,11 +226,11 @@ div.csl-indent {
 
 <section id="prepare" class="level2">
 <h2 class="anchored" data-anchor-id="prepare">1. Prepare</h2>
-<p>For our second case study, <em>A Tale of Two MOOCs</em>, we move beyond visual depictions of networks from our previous SNA case study and learn to describe networks using common network-level measures. Our analyses are based on <em>A social network perspective on peer supported learning in MOOCs for educators</em> <span class="citation" data-cites="kellogg2014social">(<a href="#ref-kellogg2014social" role="doc-biblioref">Kellogg, Booth, and Oliver 2014</a>)</span>, and use an open educational dataset prepared by Kellogg and Edelman <span class="citation" data-cites="kellogg2015massively">Kellogg and Edelmann (<a href="#ref-kellogg2015massively" role="doc-biblioref">2015</a>)</span>. As we work through each step of the data-intensive workflow <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span>, we will focus on the following topics:</p>
+<p>For our second SNA case study, <em>A Tale of Two MOOCs</em>, we move beyond visual depictions of networks from our previous SNA case study and learn to describe networks using common network-level measures. Our analyses are based on <em>A social network perspective on peer supported learning in MOOCs for educators</em> <span class="citation" data-cites="kellogg2014social">(<a href="#ref-kellogg2014social" role="doc-biblioref">Kellogg, Booth, and Oliver 2014</a>)</span>, and use an open educational dataset prepared by Kellogg and Edelman <span class="citation" data-cites="kellogg2015massively">Kellogg and Edelmann (<a href="#ref-kellogg2015massively" role="doc-biblioref">2015</a>)</span>. As we work through each step of the data-intensive workflow <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span>, we will focus on the following topics:</p>
 <ol type="1">
 <li><p><strong>Prepare</strong>: Prior to analysis, we’ll take a look at the context from which our data came and load various R packages for data science and network analysis.</p></li>
 <li><p><strong>Wrangle</strong>: In section 2 we make use of the {readr} and {tidygraph} packages to import and prepare relational data stored as as an adjacency matrix.</p></li>
-<li><p><strong>Explore</strong>: In our prior case study, we indirectly used the {igraph} package on which {tidygraph} depends. In section 3, we use {igraph} directly to calculate a range of network-level measures to describe and compare collaboration networks over time.</p></li>
+<li><p><strong>Explore</strong>: In our prior case study, we use the {igraph} package on which {tidygraph} depends. In section 3, we use {igraph} directly to calculate a range of network-level measures to describe and compare collaboration networks over time.</p></li>
 <li><p><strong>Model</strong>: While we don’t do any modeling of our data in this case study, we dive a little deeper into work of Kellogg et al.&nbsp;to see how modeling can was used to examine MOOC-Ed discussion networks.</p></li>
 <li><p><strong>Communicate</strong>: Finally, we prepare a simple “data product” consisting of a data visualization and/or table that highlights some key findings from our analysis.</p></li>
 </ol>
@@ -252,7 +252,7 @@ div.csl-indent {
 <p><strong>MOOC-Ed registration form.</strong> All participants completed a registration form for each MOOC-Ed course. The registration form consists of self-reported demographic data, including information related to their professional role and work setting, years of experience in education, and personal learning goals.</p>
 <p><strong>MOOC-Ed discussion forums.</strong> All peer interaction, including peer discussion, feedback, and reactions (e.g., likes), take place within the forum area of MOOC-Eds, which are powered by Vanilla Forums. Because of the specific focus on peer supported learning, postings to or from course facilitators and staff were removed from the data set. Finally, analyses described below exclude more passive forms of interactions (i.e., read and reaction logs), and include only postings among peers.</p>
 <p>For our second case study, we’ll take a look at data from the original Digital Learning Transition in K-12 Schools (DLT 1) that was not included in this study.</p>
-<p><strong>Note</strong>: In the data we’re using, instructors have not yet been removed and only direct replies to forum posts have been included, though “weaker” ties like reactions with emoticons and even views of posts were captured in this study.</p>
+<p><strong>Note</strong>: In the data we’re using, instructors have not yet been removed and only direct replies to forum posts have been included, though “weak” ties like reactions with emoticons and even views of posts were captured in this study.</p>
 </section>
 <section id="your-turn" class="level4">
 <h4 class="anchored" data-anchor-id="your-turn"><strong>👉 Your Turn</strong> <strong>⤵</strong></h4>
@@ -307,17 +307,17 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="core-sna-packages">Core SNA Packages</h4>
 <p><strong>tidygraph 📦</strong></p>
 <p><img src="img/tidygraph.png" class="img-fluid" style="width:20.0%"></p>
-<p>The {<a href="https://tidygraph.data-imaginist.com/">tidygraph</a>} package is a huge package that exports 280 different functions and methods, including access to almost all of the&nbsp;<code>dplyr</code>&nbsp;verbs plus a few more, developed for use with relational data. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. The {tidygraph} package provides a way to switch between the two tables and uses&nbsp;<code>dplyr</code>&nbsp;verbs to manipulate them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
+<p>The {<a href="https://tidygraph.data-imaginist.com/">tidygraph</a>} package is a huge package that exports 280 different functions and methods, including access to almost all of the {<a href="https://dplyr.tidyverse.org">dplyr</a>} verbs plus a few more, developed for use with relational data. While network data itself is not tidy, it can be envisioned as two tidy tables, one for node data and one for edge data. The {tidygraph} package provides a way to switch between the two tables and uses <code>dplyr</code> verbs to manipulate them. Furthermore it provides access to a lot of graph algorithms with return values that facilitate their use in a tidy workflow.</p>
 <p><strong>ggraph 📦</strong></p>
 <p><img src="img/ggraph.png" class="img-fluid" style="width:20.0%"></p>
-<p>Created by the same developer as {tidygraph}, {<a href="https://ggraph.data-imaginist.com/index.html">ggraph</a>} – pronounced gg-raph or g-giraffe hence the logo – is an extension of {<a href="https://ggplot2.tidyverse.org/">ggplot</a>} aimed at supporting relational data structures such as networks, graphs, and trees. Both packages are more modern and widely adopted approaches data visualization in R.</p>
+<p>Created by the same developer as {tidygraph}, {<a href="https://ggraph.data-imaginist.com/index.html">ggraph</a>} – pronounced gg-raph or g-giraffe hence the logo – is an extension of {<a href="https://ggplot2.tidyverse.org/">ggplot</a>} aimed at supporting relational data structures such as networks, graphs, and trees. Both packages use widely adopted approaches for data wrangling and visualization in R.</p>
 <p>While ggraph builds upon the foundation of ggplot and its API, it comes with its own self-contained set of geoms, facets, etc., as well as adding the concept of&nbsp;<em>layouts</em>&nbsp;to the&nbsp;<a href="https://ggplot2-book.org/introduction.html?q=grammar#what-is-the-grammar-of-graphics">grammar of graphics</a>, i.e.&nbsp;the “gg” in ggplot and ggraph.</p>
 </section>
-<section id="new-ish-sna-packages" class="level4">
-<h4 class="anchored" data-anchor-id="new-ish-sna-packages">New (ish) SNA Packages</h4>
+<section id="newish-sna-packages" class="level4">
+<h4 class="anchored" data-anchor-id="newish-sna-packages">New(ish) SNA Packages</h4>
 <p><strong>igraph 📦</strong></p>
 <p><img src="img/igraph.png" class="img-fluid" style="width:20.0%"></p>
-<p>Both {tidygraph} and {ggraph} depend heavily&nbsp;<a href="https://igraph.org/">igraph network analysis package</a>. The main goals of the igraph package and the collection of network analysis tools it contains are to provide a set of data types and functions for:</p>
+<p>Both {tidygraph} and {ggraph} depend heavily the <a href="https://igraph.org/">igraph network analysis package</a>. The main goals of the igraph package and the collection of network analysis tools it contains are to provide a set of data types and functions for:</p>
 <ol type="1">
 <li><p>pain-free implementation of graph algorithms,</p></li>
 <li><p>fast handling of large graphs, with millions of vertices (i.e., actors or nodes) and edges,</p></li>
@@ -402,7 +402,7 @@ The following object is masked from 'package:stats':
 </section>
 <section id="wrangle" class="level2">
 <h2 class="anchored" data-anchor-id="wrangle">2. Wrangle</h2>
-<p>In general, data wrangling involves some combination of cleaning, reshaping, transforming, and merging data<span class="citation" data-cites="wickham2016r">(<a href="#ref-wickham2016r" role="doc-biblioref">Wickham and Grolemund 2016</a>)</span>. As highlighted in&nbsp;Estrellado et al. <span class="citation" data-cites="estrellado2020e">Estrellado et al. (<a href="#ref-estrellado2020e" role="doc-biblioref">2020</a>)</span>, wrangling network data can be even more challenging than other data sources since network data often includes variables about both individuals and their relationships. For data wrangling in this lab, we’re keeping it simple since working with relational data, especially in the form of matrices, is a bit of a departure from our working with rectangular data frames.</p>
+<p>In general, data wrangling involves some combination of cleaning, reshaping, transforming, and merging data<span class="citation" data-cites="wickham2016r">(<a href="#ref-wickham2016r" role="doc-biblioref">Wickham and Grolemund 2016</a>)</span>. As highlighted in Estrellado et al. <span class="citation" data-cites="estrellado2020e">Estrellado et al. (<a href="#ref-estrellado2020e" role="doc-biblioref">2020</a>)</span>, wrangling network data can be even more challenging than other data sources since network data often includes variables about both individuals and their relationships. For data wrangling in this lab, we’re keeping it simple since working with relational data, especially in the form of matrices, is a bit of a departure from our working with rectangular data frames.</p>
 <p>For our data wrangling this week, we’re keeping it simple since working with network data is a bit of a departure from our working with rectangular data frames. Our primary goals for Section 2 are learning how to:</p>
 <ol type="a">
 <li><p><strong>Import Data</strong>. An obvious and also important first step, we need to “read” our data into R and learn about formatting for edge-lists and node attribute files.</p></li>
@@ -419,7 +419,7 @@ The following object is masked from 'package:stats':
 <li><p><code>dlt1-nodes.csv</code></p></li>
 </ul>
 <p>The first file <code>dlt1-edges.csv</code> is an edge-list that contains information about each tie, or relation between two actors in a network. In this context, a “tie” is a reply by one participant in the discussion forum to the post of another participant – or in some cases to their own post! These ties between a single actor are called “self-loops” and as we’ll see later, {tidygraph} has a special function to remove these self loops from a sociogram, or network visualization.</p>
-<p>The edge-list format is slightly different than other formats you have likely worked with before in that the values in the first two columns each row represent a dyad, or tie between two nodes in a network. An edge-list can also contain other information regarding the strength, duration, or frequency of the relationship, sometime called “weight”, in addition to other “edge attributes.”</p>
+<p>The edge-list format is slightly different than other formats you have likely worked with before in that the values in the first two columns of each row represent a dyad, or tie between two nodes in a network. An edge-list can also contain other information regarding the strength, duration, or frequency of the relationship, sometime called “weight”, in addition to other “edge attributes.”</p>
 <p>In addition to our <code>Sender</code> and <code>Reciever</code> dyad pairs, our DLT 1 dataset contains the following edge attributes:</p>
 <ul>
 <li><p><code>Sender</code> = Unique identifier of author of comment</p></li>
@@ -460,7 +460,7 @@ The following object is masked from 'package:stats':
 #   ⁵​comment_id, ⁶​discussion_id</code></pre>
 </div>
 </div>
-<p>Note the addition of the <code>col_types =</code> argument for changing the column types to character strings since the numbers for those particular columns indicate actors (<code>Sender</code> and <code>Reciever</code>) and attributes (<code>Comment_ID</code> and <code>Discussion_Id</code>). We also skipped the <code>Category Text</code> since this was left blank for deidentification purposes.</p>
+<p>Note the addition of the <code>col_types =</code> argument for changing the column types to character strings since the numbers for those particular columns indicate actors (<code>Sender</code> and <code>Reciever</code>) and attributes (<code>Comment_ID</code> and <code>Discussion_Id</code>) rather than numerical values. We also skipped the <code>Category Text</code> since this was left blank for deidentification purposes.</p>
 </section>
 <section id="your-turn-3" class="level4">
 <h4 class="anchored" data-anchor-id="your-turn-3"><strong>👉 Your Turn</strong> <strong>⤵</strong></h4>
@@ -625,7 +625,7 @@ The following object is masked from 'package:stats':
 <p>The visualization of social networks has been a core practice since its foundation more than 90 years ago and remains a hallmark of contemporary social network analysis.&nbsp;</p>
 </blockquote>
 <p>Network visualization can be used for a variety of purposes, ranging from highlighting key actors to even serving as works of art. Katya Ognyanova’s also excellent tutorial on <a href="https://kateto.net/network-visualization/">Static and Dynamic Network Visualization with R</a> helps illustrate the variety of goals a good network visualization can accomplish.</p>
-<p>Recall from our previous SNA case study examining student friendships in middle school that we introduced the dead simple <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot()</code></a> function built into R, as well as the `autograph()` function from the {ggraph} package to quickly generate a sociogram showing the nodes and edges in our network.</p>
+<p>Recall from our previous SNA case study examining student friendships in middle school that we introduced the dead simple <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot()</code></a> function built into R, as well as the <code>autograph()</code> function from the {ggraph} package to quickly generate a sociogram showing the nodes and edges in our network.</p>
 <p>Let’s supply our <code>year-1-network</code> object as the first argument to each of these functions and see what they produce:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dlt1_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -637,12 +637,12 @@ The following object is masked from 'package:stats':
 <p><img src="unit-2-case-study-key_files/figure-html/plot_network-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Yuck! Neither a aesthetically pleasing plot, nor terribly functional. As indicated by our tidy graph output from section 1, however, we can see that there is one large network component and three additional components consisting of isolated MOOC-Ed participants who neither sent or received replies to their colleagues.</p>
-<p>As you may have realized already, the utility of the basic <code>plot()</code> function is not very useful for large networks like this one. Fortunately, the {ggraph} package that we learned about in Lab 1 includes a plethora of plotting parameters for graph <a href="https://ggraph.data-imaginist.com/articles/Layouts.html">layouts</a>, <a href="https://ggraph.data-imaginist.com/articles/Edges.html">edges</a> and <a href="https://ggraph.data-imaginist.com/articles/Nodes.html">nodes</a> to improve the visual design and readability of network graphs.</p>
+<p>Yuck! Neither is an aesthetically pleasing plot, nor terribly functional. As indicated by our tidy graph output from section 1, however, we can see that there is one large network component and three additional components consisting of isolated MOOC-Ed participants who neither sent or received replies to their colleagues.</p>
+<p>As you may have realized already, the utility of the basic <code>plot()</code> function is not very useful for large networks like this one. Fortunately, the {ggraph} package that we learned about in Unit 1 includes a plethora of plotting parameters for graph <a href="https://ggraph.data-imaginist.com/articles/Layouts.html">layouts</a>, <a href="https://ggraph.data-imaginist.com/articles/Edges.html">edges</a> and <a href="https://ggraph.data-imaginist.com/articles/Nodes.html">nodes</a> to improve the visual design and readability of network graphs.</p>
 <p><strong>Note:</strong> If you’re having trouble seeing the plot you can run the code in the console and see the plot in the Viewer pane or click the little arrow/window icon in the output of the code chunk to open the plot in a new window and resize.</p>
 <section id="sociograms-with-ggraph" class="level4">
 <h4 class="anchored" data-anchor-id="sociograms-with-ggraph"><strong>Sociograms with ggraph</strong></h4>
-<p>Recall from Lab 1 that just like it’s {ggplot} counterpart for making more traditional charts and graphs, there is a minimal code template for producing a basic plot with {ggraph}. Specifically, it requires 3 main functions</p>
+<p>Recall from Unit 1 that just like it’s {ggplot} counterpart for making more traditional charts and graphs, there is a minimal code template for producing a basic plot with {ggraph}. Specifically, it requires 3 main functions</p>
 <ul>
 <li><p><a href="https://ggraph.data-imaginist.com/articles/Layouts.html"><code>ggraph()</code></a> takes care of setting up the plot object along with creating the layout of the graph (default = “stress”).</p></li>
 <li><p><a href="https://ggraph.data-imaginist.com/articles/Layouts.html"><code>geom_node_*()</code></a> functions and their associated arguments add and modify the nodes of the network plot.</p></li>
@@ -652,8 +652,8 @@ The following object is masked from 'package:stats':
 <p>Let generate the same basic plot above but explicitly call our ggraph, node, and edge functions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(dlt1_network) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using "stress" as default layout</code></pre>
 </div>
@@ -885,10 +885,10 @@ $theoretical_max
 </div>
 </div>
 <p>Again, we still have a rather centralized graph, especially for in-degree which suggest that a few individual may be receiving and outsized share of replies.</p>
-<p>While our primary concern is complete network-level measures so we can compare DLT 1 &amp; DLT 2 networks, obtaining node-level measures is also very useful for helping to describe the network, particularly for visualization. For example, we might want to adjust the size of nodes in a network based on degree, so those actors with more connections stand out more prominently.</p>
+<p>While our primary concern is complete network-level measures so we can compare DLT 1 &amp; DLT 2 networks, obtaining node-level measures is also very useful for helping to describe the network, particularly for visualization. For example, we might want to adjust the size of nodes in a sociogram based on degree, so those actors with more connections stand out more prominently.</p>
 <p>The {tidygraph} package has an unique function called <code>activate()</code> that allows us to treat the nodes and edges in our network object as if they were a standard data frame that we can then apply standard tidyverse functions to like <code>select()</code>, <code>filter()</code>, and <code>mutate()</code>.</p>
 <p>The latter function, <code>mutate()</code>, can be use to create new variables for node-level measures of degree, in-degree, and out-degree using the <code>centrality_degree()</code> function in the {tidygraph} package.</p>
-<p>Run the following code to add each actor’s <code>in-degree</code> (i.e.&nbsp;number of replies received) to our DLT 1 network and assign the output <code>dlt1_network</code> again so the results are saved:</p>
+<p>Run the following code to create a new variable called <code>in-degree</code> (i.e. number of incoming replies each actor received) to our DLT 1 network and assign the output <code>dlt1_network</code> again so the results are saved to our network object:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dlt1_network <span class="ot">&lt;-</span> dlt1_network <span class="sc">|&gt;</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
@@ -921,7 +921,7 @@ $theoretical_max
 # … with 2,526 more rows</code></pre>
 </div>
 </div>
-<p>Let’s temporarily convert to a data frame so we can get a better look at our nodes and the measure of <code>degree</code> instead of <code>local_size()</code> that we just created.</p>
+<p>Now let’s temporarily convert our “activated” nodes to a simple table output, or “tibble,” using the <code>as_tibble()</code> function. This will allow us to get a better look at our nodes and the measure of <code>degree</code> instead of <code>local_size()</code> that we just created.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>dlt1_network <span class="sc">|&gt;</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -975,11 +975,11 @@ $theoretical_max
 <pre><code>[1] 0.01279988</code></pre>
 </div>
 </div>
-<p>As you can see, our collaboration network in DLT 1 has a VERY low density. Interpretation of the measure greatly depends on context, however. In smaller networks, for example, it may suggest that collaboration in the network is quite limited and may impact the flow of information, resources, and innovations among actors. In a large network like this one, however, low density is very common. Moreover, even though someone may not have given or received replies very often to others, they still benefit in that since this in an online discussion, all information shared is visible to all participants.</p>
+<p>As you can see, our collaboration network in DLT 1 has a VERY low density. Interpretation of the measure greatly depends on context, however. In smaller networks, for example, it may suggest that collaboration in the network is quite limited and may impact the flow of information, resources, and innovations among actors. In a large network like this one, however, low density is very common. Moreover, even though someone may not have given or received replies very often to others, all information shared is visible to all participants.</p>
 </section>
 <section id="reciprocity" class="level4">
 <h4 class="anchored" data-anchor-id="reciprocity">4. Reciprocity</h4>
-<p>Reciprocity is an important measure because it reveals the direction through which resources in networks flow and whether or not it flows in both directions. The tendency towards reciprocity in most networks, sometimes referred to as the “norm” of reciprocity, has been acknowledge by ancient writers such as Cicero who stated:</p>
+<p>Reciprocity is an important measure because it reveals the direction through which resources in networks flow and whether or not it flows in both directions. It is commonly used to determine how inter-connected directed networks are. The tendency towards reciprocity in most networks, sometimes referred to as the “norm” of reciprocity, has been acknowledge by ancient writers such as Cicero who stated:</p>
 <blockquote class="blockquote">
 <p>There is no duty more indispensable than that of returning a kindness… all men distrust one forgetful of a benefit.</p>
 </blockquote>
@@ -990,8 +990,8 @@ $theoretical_max
 <pre><code>[1] 0.1997544</code></pre>
 </div>
 </div>
-<p>As illustrated by the reciprocity measure above, the tendency towards reciprocated ties is, surprisingly, very low in our DLT 1 network.</p>
-<p>And if we wanted to highlight this lack of reciprocity in a network visual, we could use the <a href="https://tidygraph.data-imaginist.com/reference/edge_types.html"><code>edge_is_mutual()</code></a> function to create a new edge variable called <code>reciprocated</code> that indicates whether the tie is mutual or asymmetric.</p>
+<p>As illustrated by the reciprocity measure above, the tendency towards reciprocated ties is somewhat low in our DLT 1 network; but again, the size of our network is rather large and should guide our judgement about this value. From an interpretation standpoint, however, this measure is simply the proportion of outgoing edges that also have an incoming edge. That is, approximately 20% of ties in our network are symmetrical, or reciprocated.</p>
+<p>And if we wanted to highlight this lack of reciprocity in a network graph, we could use the <a href="https://tidygraph.data-imaginist.com/reference/edge_types.html"><code>edge_is_mutual()</code></a> function to create a new edge variable called <code>reciprocated</code> that indicates whether the tie is mutual or asymmetric.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>dlt1_network <span class="ot">&lt;-</span> dlt1_network <span class="sc">|&gt;</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
@@ -1038,11 +1038,10 @@ $theoretical_max
 <p><img src="unit-2-case-study-key_files/figure-html/add_reciprocated_ties-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>As you can see, there only appear to be seven dyads with reciprocated ties!</p>
 </section>
 <section id="transitivity-clustering" class="level4">
 <h4 class="anchored" data-anchor-id="transitivity-clustering">5. Transitivity &amp; Clustering</h4>
-<p>Transitivity, also known as the “friend of a friend” phenomenon, focuses on triads, or any “triple” of actors, rather than dyads like reciprocity. Just like a networks tendency towards reciprocity, there is also a tendency toward transitivity. For example, in the figure below Teacher A collaborates with Teacher B and Teacher B collaborates with Teacher C, then Teacher A is more likely at some point to collaborates with Teacher C and “complete” the triangle and less likely to collaborate with Teacher E since they do now share a connection:</p>
+<p>Transitivity, also known as the “friend of a friend” phenomenon, focuses on triads, or any “triple” of actors, rather than dyads like reciprocity. Just like a networks tendency towards reciprocity, there is also a tendency toward transitivity. For example, in the figure below this phenomenon would predict that if Teacher A collaborates with Teacher B and Teacher B collaborates with Teacher C, then Teacher A is more likely at some point to collaborates with Teacher C and “complete” the triangle and less likely to collaborate with Teacher E since they do not share a connection:</p>
 <p><img src="img/transitivity.png" class="img-fluid" style="width:60.0%"></p>
 <p>As Carolan points out, establishing a network’s transitivity is important, as it is theoretically connected to actors’ tendencies to divide into exclusive subgroups or cluster over time, especially around positive relations such as friendship. While the algorithms behind network transitivity are not trivial, the defining network transitivity is rather straightforward:</p>
 <blockquote class="blockquote">
@@ -1076,7 +1075,7 @@ $theoretical_max
 </section>
 <section id="your-turn-7" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn-7">👉 Your Turn ⤵</h3>
-<p>Use the code chunk below to calculate the following measures for the DLT 2 network, then answer the questions below:</p>
+<p>Use the code chunk below to import data for the DLT 2 network, create a network object, and calculate the following measures:</p>
 <ol type="1">
 <li>Size</li>
 <li>Centralization</li>
@@ -1171,8 +1170,8 @@ $theoretical_max
 </section>
 <section id="model" class="level2">
 <h2 class="anchored" data-anchor-id="model">4. Model</h2>
-<p>As highlighted in&nbsp;<a href="https://datascienceineducation.com/c03.html">Chapter 3 of Data Science in Education Using R</a>, the&nbsp;<strong>Model</strong>&nbsp;step of the data science process entails “using statistical models, from simple to complex, to understand trends and patterns in the data.” The authors note that while descriptive statistics and data visualization during the&nbsp;<strong>Explore</strong> step can help us to identify patterns and relationships in our data, statistical models can be used to help us determine if relationships, patterns and trends are actually meaningful.</p>
-<p>We will not explore the use of models for SNA until Lab 4, but recall from above that our study was guided by the following questions:</p>
+<p>As highlighted in&nbsp;<a href="https://datascienceineducation.com/c03.html">Chapter 3 of Data Science in Education Using R</a>, the <strong>Model</strong> step of the data science process entails “using statistical models, from simple to complex, to understand trends and patterns in the data.” The authors note that while descriptive statistics and data visualization during the <strong>Explore</strong> step can help us to identify patterns and relationships in our data, statistical models can be used to help us determine if relationships, patterns and trends are actually meaningful.</p>
+<p>We will not explore the use of models for SNA until Unit 4, but recall from above that our study was guided by the following questions:</p>
 <ol type="1">
 <li><p>What are the patterns of peer interaction and the structure of peer networks that emerge over the course of a MOOC-Ed?</p></li>
 <li><p>To what extent do participant and network attributes (e.g., homophily, reciprocity, transitivity) account for the structure of these networks?</p></li>
@@ -1192,7 +1191,7 @@ $theoretical_max
 <li><p><strong>Polish</strong>. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.</p></li>
 <li><p><strong>Narrate.</strong> Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.</p></li>
 </ol>
-<p>For your Independent Analysis assignment next week, you will have an opportunity to create a simple “data product” designed to illustrate additional insights about the MOOC datasets or another dataset of your choosing.</p>
+<p>For your Independent Study next week, you will have an opportunity to create a simple “data product” designed to illustrate additional insights about the MOOC datasets or another dataset of your choosing.</p>
 <p>For now, we will wrap up this assignment by converting our work into a webpage that can be used to communicate your learning and demonstrate some of your new R skills. To do so, you will need to “Knit” your document by clicking the drop down arrow next to the ball of yarn in the menu bar at that the top of this markdown file, and then selecting “Knit top HTML” or another preferred output format. This will do two things; it will:</p>
 <ol type="1">
 <li><p>check through all your code for any errors; and,</p></li>

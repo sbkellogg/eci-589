@@ -808,7 +808,7 @@ While our primary concern is complete network-level measures so we can
 compare DLT 1 & DLT 2 networks, obtaining node-level measures is also
 very useful for helping to describe the network, particularly for
 visualization. For example, we might want to adjust the size of nodes in
-a network based on degree, so those actors with more connections stand
+a sociogram based on degree, so those actors with more connections stand
 out more prominently.
 
 The {tidygraph} package has an unique function called `activate()` that
@@ -820,9 +820,10 @@ The latter function, `mutate()`, can be use to create new variables for
 node-level measures of degree, in-degree, and out-degree using the
 `centrality_degree()` function in the {tidygraph} package.
 
-Run the following code to add each actor's `in-degree` (i.e. number of
-replies received) to our DLT 1 network and assign the output
-`dlt1_network` again so the results are saved:
+Run the following code to create a new variable called `in-degree` (i.e.
+number of incoming replies each actor received) to our DLT 1 network and
+assign the output `dlt1_network` again so the results are saved to our
+network object:
 
 ```{r compute_node_degree}
 dlt1_network <- dlt1_network |>
@@ -833,9 +834,10 @@ dlt1_network
 
 ```
 
-Let's temporarily convert to a data frame so we can get a better look at
-our nodes and the measure of `degree` instead of `local_size()` that we
-just created.
+Now let's temporarily convert our "activated" nodes to a simple table
+output, or "tibble," using the `as_tibble()` function. This will allow
+us to get a better look at our nodes and the measure of `degree` instead
+of `local_size()` that we just created.
 
 ```{r as-tibble}
 dlt1_network |>
@@ -886,16 +888,16 @@ collaboration in the network is quite limited and may impact the flow of
 information, resources, and innovations among actors. In a large network
 like this one, however, low density is very common. Moreover, even
 though someone may not have given or received replies very often to
-others, they still benefit in that since this in an online discussion,
-all information shared is visible to all participants.
+others, all information shared is visible to all participants.
 
 #### 4. Reciprocity
 
 Reciprocity is an important measure because it reveals the direction
 through which resources in networks flow and whether or not it flows in
-both directions. The tendency towards reciprocity in most networks,
-sometimes referred to as the "norm" of reciprocity, has been acknowledge
-by ancient writers such as Cicero who stated:
+both directions. It is commonly used to determine how inter-connected
+directed networks are. The tendency towards reciprocity in most
+networks, sometimes referred to as the "norm" of reciprocity, has been
+acknowledge by ancient writers such as Cicero who stated:
 
 > There is no duty more indispensable than that of returning a
 > kindness... all men distrust one forgetful of a benefit.
@@ -912,10 +914,15 @@ reciprocity(dlt1_network)
 ```
 
 As illustrated by the reciprocity measure above, the tendency towards
-reciprocated ties is, surprisingly, very low in our DLT 1 network.
+reciprocated ties is somewhat low in our DLT 1 network; but again, the
+size of our network is rather large and should guide our judgement about
+this value. From an interpretation standpoint, however, this measure is
+simply the proportion of outgoing edges that also have an incoming edge.
+That is, approximately 20% of ties in our network are symmetrical, or
+reciprocated.
 
 And if we wanted to highlight this lack of reciprocity in a network
-visual, we could use the
+graph, we could use the
 [`edge_is_mutual()`](https://tidygraph.data-imaginist.com/reference/edge_types.html)
 function to create a new edge variable called `reciprocated` that
 indicates whether the tie is mutual or asymmetric.
@@ -940,19 +947,17 @@ ggraph(dlt1_network) +
   theme_graph()
 ```
 
-As you can see, there only appear to be seven dyads with reciprocated
-ties!
-
 #### 5. Transitivity & Clustering
 
 Transitivity, also known as the "friend of a friend" phenomenon, focuses
 on triads, or any "triple" of actors, rather than dyads like
 reciprocity. Just like a networks tendency towards reciprocity, there is
 also a tendency toward transitivity. For example, in the figure below
-Teacher A collaborates with Teacher B and Teacher B collaborates with
-Teacher C, then Teacher A is more likely at some point to collaborates
-with Teacher C and "complete" the triangle and less likely to
-collaborate with Teacher E since they do now share a connection:
+this phenomenon would predict that if Teacher A collaborates with
+Teacher B and Teacher B collaborates with Teacher C, then Teacher A is
+more likely at some point to collaborates with Teacher C and "complete"
+the triangle and less likely to collaborate with Teacher E since they do
+not share a connection:
 
 ![](img/transitivity.png){width="60%"}
 
@@ -977,7 +982,7 @@ transitive measures:
 transitivity(dlt1_network)
 ```
 
-For our particular network, a very small value of 8% is not too
+For our particular network, a very small value of .088 is not too
 surprising since, again, this is rather large network.
 
 #### 6. Diameter & Distance
@@ -1009,8 +1014,8 @@ unable to access.
 
 ### 👉 Your Turn ⤵
 
-Use the code chunk below to calculate the following measures for the DLT
-2 network, then answer the questions below:
+Use the code chunk below to import data for the DLT 2 network, create a
+network object, and calculate the following measures:
 
 1.  Size
 2.  Centralization
@@ -1021,6 +1026,10 @@ Use the code chunk below to calculate the following measures for the DLT
 
 ```{r analyze_dlt2}
 #YOUR CODE HERE
+
+#Import Data
+
+#Create Network Object
 
 #size
 g
@@ -1037,23 +1046,23 @@ g
 
 ```
 
-1.  How do network-level measures for DLT 1 and DLT 3 collaboration
-    compare? What are some similarities and differences?
+How do network-level measures for DLT 1 and DLT 2 discussion compare?
+What are some similarities and differences?
 
-    -   YOUR RESPONSE HERE
+-   YOUR RESPONSE HERE
 
 ## 4. Model
 
 As highlighted in [Chapter 3 of Data Science in Education Using
-R](https://datascienceineducation.com/c03.html), the **Model** step of
+R](https://datascienceineducation.com/c03.html), the **Model** step of
 the data science process entails "using statistical models, from simple
 to complex, to understand trends and patterns in the data." The authors
-note that while descriptive statistics and data visualization during
-the **Explore** step can help us to identify patterns and relationships
-in our data, statistical models can be used to help us determine if
+note that while descriptive statistics and data visualization during the
+**Explore** step can help us to identify patterns and relationships in
+our data, statistical models can be used to help us determine if
 relationships, patterns and trends are actually meaningful.
 
-We will not explore the use of models for SNA until Lab 4, but recall
+We will not explore the use of models for SNA until Unit 4, but recall
 from above that our study was guided by the following questions:
 
 1.  What are the patterns of peer interaction and the structure of peer
@@ -1137,10 +1146,9 @@ findings from an analysis:
     product, and explaining the ways in which the data product helps
     answer the research question.
 
-For your Independent Analysis assignment next week, you will have an
-opportunity to create a simple "data product" designed to illustrate
-additional insights about the MOOC datasets or another dataset of your
-choosing.
+For your Independent Study next week, you will have an opportunity to
+create a simple "data product" designed to illustrate additional
+insights about the MOOC datasets or another dataset of your choosing.
 
 For now, we will wrap up this assignment by converting our work into a
 webpage that can be used to communicate your learning and demonstrate
