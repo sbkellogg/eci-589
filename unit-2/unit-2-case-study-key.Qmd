@@ -862,9 +862,10 @@ dlt1_network
 ```
 
 Now let's temporarily convert our "activated" nodes to a simple table
-output, or "tibble," using the `as_tibble()` function. This will allow
-us to get a better look at our nodes and the measure of `degree` instead
-of `local_size()` that we just created.
+output, or "[tibble](https://tibble.tidyverse.org)," using the
+`as_tibble()` function. This will allow us to get a better look at our
+nodes and the measure of `degree` instead of `local_size()` that we just
+created.
 
 ```{r as-tibble}
 dlt1_network |>
