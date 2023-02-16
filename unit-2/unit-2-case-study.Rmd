@@ -58,7 +58,7 @@ Bienkowski 2018), we will focus on the following topics:
 
 Kellogg, S., Booth, S., & Oliver, K. (2014). [A social network
 perspective on peer supported learning in MOOCs for
-educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf). *International
+educators](https://github.com/sbkellogg/eci-589/blob/main/unit-2/lit/sna_mooc_irrodl_bjet_articles.pdf). *International
 Review of Research in Open and Distributed Learning*, *15*(5), 263-289.
 
 #### Research Context
@@ -687,13 +687,17 @@ save as an image file.
 
 #### 👉 Your Turn ⤵
 
-Use the code chunk below created a sociogram for the DLT 2 MOOC network
-and answer the questions that follow:
+Use the code chunk below to create a sociogram for the DLT 2 MOOC
+network and answer the questions that follow:
 
 ```{r dlt2_sociogram}
-#YOUR CODE HERE
+#Import Data
 
 
+#Create a network object
+
+
+#Create a sociogram
 
 ```
 
@@ -1015,8 +1019,8 @@ unable to access.
 
 ### 👉 Your Turn ⤵
 
-Use the code chunk below to import data for the DLT 2 network, create a
-network object, and calculate the following measures:
+Use the code chunk below to calculate the following measures for the DLT
+2 network:
 
 1.  Size
 2.  Centralization

@@ -56,7 +56,7 @@ will focus on the following topics:
 
 Kellogg, S., Booth, S., & Oliver, K. (2014). [A social network
 perspective on peer supported learning in MOOCs for
-educators](https://github.com/sbkellogg/eci-589/blob/main/unit-1/lit/sna_mooc_irrodl_bjet_articles.pdf). *International
+educators](https://github.com/sbkellogg/eci-589/blob/main/unit-2/lit/sna_mooc_irrodl_bjet_articles.pdf). *International
 Review of Research in Open and Distributed Learning*, *15*(5), 263-289.
 
 #### Research Context
@@ -692,8 +692,8 @@ save as an image file.
 Use the code chunk below created a sociogram for the DLT 2 MOOC network
 and answer the questions that follow:
 
-```{r year_3_sociogram}
-#YOUR CODE HERE
+```{r dlt2_sociogram}
+#Import Data
 
 dlt2_ties <- read_csv("data/dlt2-edges.csv", 
                       col_types = cols(Sender = col_character(), 
@@ -710,10 +710,14 @@ dlt2_actors <- read_csv("data/dlt2-nodes.csv",
                                     connect = col_character())) |>
   clean_names()
 
+#Create a network object
+
 dlt2_network <- tbl_graph(edges = dlt2_ties,
                           nodes = dlt2_actors,
                           node_key = "uid",
                           directed = TRUE)
+
+#Create a sociogram
 
 ggraph(dlt2_network, layout = "fr") +
   geom_edge_link(alpha = .2) +
@@ -1042,8 +1046,8 @@ unable to access.
 
 ### 👉 Your Turn ⤵
 
-Use the code chunk below to import data for the DLT 2 network, create a
-network object, and calculate the following measures:
+Use the code chunk below to calculate the following measures for the DLT
+2 network:
 
 1.  Size
 2.  Centralization
