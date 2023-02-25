@@ -13,25 +13,13 @@ theme:
 bibliography: lit/references.bib
 ---
 
-Our primary goal in this unit is to examine common approaches to data management and measurement in network analysis. The required and self-selected readings provide an introduction the collection and management of relational data, as well as how we can begin to describe what a complete network looks like, not just visually, but mathematically. A secondary goal of readings and discussion is to help you start generating ideas for independent application of network analysis. As part of our readings, for example, you'll learn how to specify a network "boundary" for your study based on different approaches.
+Our primary goal in this unit is to examine the use of different algorithms to analyze a network's groups, positions and individual actors. The required and self-selected readings introduce both "top-down" and "bottom-up" approaches through which groups are identified, as well as ways in which properties of ego networks are conceptualized and measured. A secondary goal of readings and discussion is to help you start generating ideas for independent application of network analysis. As part of our readings, for example, you'll learn approaches to identifying groups appropriate to your own research area of interest.
 
 ## Readings
 
-For Unit 2, read chapters 4 and 5 from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) [@carolan2014] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.
+For Unit 3, you will read chapters 6 and7 from Social Network Analysis and Education \[\@carolan2014\] and locate one additional research article, presentation, or informal study to help address our discussion questions for the week.SNA and Education Part II: Methods and MeasuresThe second half of Part II focuses on ways to partition a network into groups based on relations rather than on the attributes that one may share with others. In addition, we learn how a network can also be divided into distinct positions, i.e. actors who occupy similar positions have similar relations to others but need not be directly tied to each other.Chapter 6: Groups and Positions in Complete NetworksChapter 7: Measures for Egocentric Network AnalysisSelf-Selected StudyUse the NCSU Library, Google Scholar or search engine to locate a research or practitioner-focused article, presentation, or resource that applies social network analysis to an educational context or topic of interest. More specifically, locate an egocentric network study OR a study that identifies a network's groups and/or positions. You are also welcome to select one of the research papers listed in the syllabus or in our course text that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
 
-### SNA and Education Part II: Methods and Measures
-
-The following readings for this unit illustrate how social network analysis provides educational researchers with a different way of thinking about and measuring learning processes and outcomes that explicitly account for the importance of one's relationships with others, as well as the larger pattern in which these relationships are embedded.
-
--   [Chapter 4: Collecting and Managing Network Data](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n4.xml)
-
--   [Chapter 5: Structural Measures for Complete Networks](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n5.xml)
-
-### Self-Selected Study
-
-Use the [NCSU Library](https://www.lib.ncsu.edu/#articles), [Google Scholar](https://scholar.google.com/) or search engine to locate one research or practitioner-focused article, presentation, or resource **that illustrates the use of one or more network measures to describe a social network in an educational context** of interest to you. You are also welcome to select one of the research papers listed in the [syllabus](https://sbkellogg.github.io/eci-589/) or in our [course text](https://catalog.lib.ncsu.edu/catalog/NCSU2803782) that may have peaked your interest. Your selection should address one or more of the discussion topics/questions (see below) and you're welcome to identify SNA resources outside of the field of education.
-
-## Discussion
+Discussion
 
 In lieu of the peer interaction and discussion of course materials that normally take place "in-class", you'll be asked to engage with other members of our learning community through discussion. **With the exception of the Self-Selected Study questions, you are not required to address every guiding question**, particularly if you feel others in the class have thoroughly addressed the topic or questions. Our aim for these discussions is to collectively build our understanding of SNA through back-and-forth dialogue and avoid a "collective monologue" in which we see 20 variations of effectively the same post.
 

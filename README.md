@@ -86,7 +86,7 @@ Statistical Inference and Network Selection wraps up our work with SNA and exami
 
 5.  **R Tutorials (24 pts; Non-Certificate Track):** In the final week of each unit, non-certificate track students will gain hands-on experience with tools and processes using R. Tutorials and resources will introduce students to importing and wrangling data for analysis, exploring data for interesting patterns or trends, and reporting data in a reproducible way. Full credit will be provided for successful completion of tutorials. 
 
-6.  **Final Project (24 pts)**: In lieu of a final exam, students will conduct an independent analysis and develop For your final course project, you'll be asked to prepare your own small scale "case study" that brings together some of the workflow approaches we've learned this semester to help answer a research question you have about a dataset of your own choosing. a data product that demonstrates concepts learned in each unit (i.e. mechanics, visual design, ethics, & story telling) as applied to a dataset of their choosing.
+6.  **Final Project (24 pts)**: In lieu of a final exam, students will conduct an independent analysis and develop a "data product" that addresses a research question using some of the SNA approaches we've learned this semester and applied to a dataset of their choosing.
 
 ### **Grading Policies**
 
@@ -94,7 +94,7 @@ Course grades are based on the following 100 point scale:
 
 A+ (97-100), A (94-96), A- (90-93), 
 
-B+ (87-89), B (84-86), B- (80-83)
+B+ (87-89), B (84-86), B- (80-83),
 
 C+ (77-79), C (74-76), C- (70-73), 
 
