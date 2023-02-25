@@ -1,5 +1,5 @@
 ---
-title: 'Unit 3 Readings: Groups, Positions, & Egocentric Analysis '
+title: 'Unit 3 Readings: Groups, Positions, & Egocentric Analysis'
 subtitle: "ECI 589 Social Network Analysis and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
