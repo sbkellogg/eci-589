@@ -664,8 +664,8 @@ following questions:
 
     -   YOUR RESPONSE HERE
 
-2.  What do you think "components" refers to? **Hint:** see Chapter 6 of
-    [@carolan2014].
+2.  What do you think "components" refers to? Hint: see Chapter 6
+    of @carolan2014.
 
     -   YOUR RESPONSE HERE
 
@@ -673,16 +673,14 @@ following questions:
 
     -   YOUR RESPONSE HERE
 
-A quick note about "directed" networks. A **directed network** indicates
-that a connection or tie is not necessarily reciprocated or mutual. For
-example, our network is directed because even though a user may follow,
-mention or reply to someone else, they may not necessarily receive a
-follow, mention or reply back. A facebook friendship network is
-undirected, however, since someone can not "friend" someone on Facebook
-without them also indicating a "friend" relationship, so the friendship
-is mutual or reciprocated.
-
-------------------------------------------------------------------------
+A quick reminder about "directed" networks. A **directed network**
+indicates that a connection or tie is not necessarily reciprocated or
+mutual. For example, our network is directed because even though a user
+may follow, mention or reply to someone else, they may not necessarily
+receive a follow, mention or reply back. A facebook friendship network
+is undirected, however, since someone can not "friend" someone on
+Facebook without them also indicating a "friend" relationship, so the
+friendship is mutual or reciprocated.
 
 ## 3. EXPLORE
 
@@ -766,10 +764,10 @@ components(ccss_network, mode = c("strong"))
 Wow! If your code was correct, you'll see that we have a whopping 92
 distinct components!
 
-One issue with this output that the {tidygraph} package is great at
-solving is identifying and saving as a new variable who belongs to which
-component. We can sort of see from above that the most twitter users in
-our network belong to component 11.
+One issue with this {igraph} output, and that the {tidygraph} package is
+great at solving, is identifying and saving as a new variable who
+belongs to which component. We can sort of see from above that the most
+twitter users in our network belong to component 11.
 
 As demonstrated in the previous case study, the {tidygraph} package has
 a very useful `activate()` function for working with our nodes and edges
@@ -789,8 +787,8 @@ ccss_network <- ccss_network |>
   mutate(weak_component = group_components(type = "weak"))
 ```
 
-Let's take a look at the nodes in our new `ccss_network`, which should
-now contain our new variable.
+Now take a look at the nodes in our new `ccss_network`, which should now
+contain our new variable.
 
 ```{r print-components}
 ccss_network
@@ -1055,10 +1053,6 @@ ccss_network |>
   select(actors, size)
 ```
 
-Not surprisingly, the egos with the most alters are the course
-facilitators who played a very active role in this course and therefore
-have an outsize influence on the structure of this network.
-
 #### Centrality
 
 As we learned in our previous case study and readings, a key structural
@@ -1097,10 +1091,11 @@ ccss_network |>
 **A Quick Note about Multigraphs and Tie Strength**
 
 You may have noticed in this network that indegree for twitter user
-"rdsathene" exceeds the total number of nodes in our network and are are
-wondering how that is possible. Recall that our network is currently
-treated at a "multigraph," indicating that some dyads have multiple
-edges. Therefore, some edges between dyads are counted more than once.
+"rdsathene" exceeds the total number of nodes in our network and are
+probably wondering how that is possible. Recall that our network is
+currently treated at a "multigraph," indicating that some dyads have
+multiple edges. Therefore, some edges between dyads are counted more
+than once.
 
 Alternatively, we could
 "[simplify](https://igraph.org/r/doc/simplify.html)" our network by
@@ -1111,11 +1106,13 @@ process of simplifying our network, we would lose important contextual
 information about the context of each tie, such as the when (timestamp)
 each tie was created.
 
+#### **👉 Your Turn** **⤵**
+
 Let's dust off our
 [`ggplot()`](https://ggplot2-book.org/getting-started.html#basic-use)
-skills and take a look at the distribution of `in_degree`, or the number
-of replies or mentions a user has received, by using in
-`geom_histogram()` function for creating histograms.
+skills by completing the following code to create a histogram that shows
+the distribution of `in_degree` (i.e. the number of replies or mentions
+a user has received) for Twitter users in our network.
 
 ```{r geom_histogram}
 ccss_network |> 
@@ -1124,13 +1121,13 @@ ccss_network |>
   geom_histogram(aes(x = in_degree))
 ```
 
-We can see that roughly half the egos in the network received about 5
+Hint: Your output should look something like this:
+
+![](img/histogram.png){width="80%"}
+
+As you can see, roughly half the egos in the network received about 5
 replies or mentions from other users, and no one received more than 6
 replies.
-
-```{r}
-
-```
 
 #### **Compositional and Variance Measures**
 
@@ -1141,7 +1138,7 @@ egocentric network variables. Variance measures, on the other hand, are
 simply those that are derived by calculating the variance or standard
 deviation of the egocentric network variables.
 
-While we could calculate invdividually the mean and variance for each
+While we could calculate individually the mean and variance for each
 egocentric measure created above using the `summarise()` function
 demonstrated earlier, R has a package and function to save us the
 effort.
@@ -1162,7 +1159,7 @@ average just 2.8 alters. Notice also that our mean for in-degree and
 out-degree are identical. This will always be the case since for every
 tie that goes "in" there is always one going "out."
 
-Finally, the {skimr} package like our {tidgraph} package plays nicely
+Just like our {tidygraph} package, the {skimr} package also plays nicely
 with other {tidyverse} packages for data wrangling and analysis. For
 example, let's select twitter users connected with fewer than 51 alters
 and `group_by()` their `weak_component` id to calculate compositional
@@ -1244,8 +1241,8 @@ ccss_network |>
     -   YOUR RESPONSE HERE
 
 Again, we've only scratched the surface of the vast number of centrality
-meaures available in the {igraph} and {tidygraph} packages. Feel free to
-explore [other functions to calculate node and edge
+measures available in the {igraph} and {tidygraph} packages. Feel free
+to explore [other functions to calculate node and edge
 centrality](https://tidygraph.data-imaginist.com/reference/centrality.html)
 in these two packages.
 
@@ -1305,9 +1302,9 @@ primary "transmitters":
 
 ```{r}
 ggraph(ccss_network, layout = "fr") + 
-geom_node_point(aes(size = out_degree,
-                    color = out_degree)) +
   geom_edge_link() +
+  geom_node_point(aes(size = out_degree,
+                    color = out_degree)) +
   theme_graph()
 ```
 
@@ -1318,20 +1315,20 @@ set to `TRUE` will avoid overlapping text.
 
 ```{r}
 ggraph(ccss_network, layout = "fr") + 
-  geom_node_point(aes(size = out_degree,
-                      color = out_degree)) +
   geom_node_text(aes(label = actors,
                      size = out_degree/2,
                      color = out_degree),
                  repel=TRUE) +
   geom_edge_link() +
+  geom_node_point(aes(size = out_degree,
+                      color = out_degree)) +
     theme_graph()
 ```
 
 **Note:** If you're having difficulty seeing the sociogram in the small
 R Markdown code chunk, you can copy and paste the code in the console
-and it will show in the viewpane and then you can enlarge and even save
-as an image file.
+and it will show in the Viewer pane and then you can enlarge and even
+save as an image file.
 
 #### Modify Edges
 
@@ -1362,9 +1359,9 @@ or adding new ones for
 [layouts](https://ggraph.data-imaginist.com/articles/Layouts.html),
 [nodes](https://ggraph.data-imaginist.com/articles/Nodes.html), and
 [edges](https://ggraph.data-imaginist.com/articles/Edges.html) to
-highlight the main "transenders" or "tranceivers" in our network. See if
-you can also make your plot either more "aesthetically pleasing" and/or
-more purposeful in what it's trying to communicate.
+highlight the main "transcenders" or "transceivers" in our network. See
+if you can also make your plot either more "aesthetically pleasing"
+and/or more purposeful in what it's trying to communicate.
 
 There are no right or wrong answers, just have some fun trying out
 different approaches!
@@ -1372,8 +1369,6 @@ different approaches!
 ```{r your-sociogram, warning=FALSE}
 #YOUR CODE HERE
 ggraph(ccss_network, layout = "fr") + 
-  geom_node_point(aes(size = out_degree,
-                      color = out_degree)) +
   geom_node_text(aes(label = actors,
                      size = out_degree/2,
                      color = out_degree),
@@ -1381,6 +1376,8 @@ ggraph(ccss_network, layout = "fr") +
   geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
                  end_cap = circle(3, 'mm'),
                  alpha = .2) +
+  geom_node_point(aes(size = out_degree,
+                      color = out_degree)) +
     theme_graph()
 ```
 
@@ -1396,7 +1393,6 @@ change your network depending on the analyses you need to perform.
 ```{r voronoi-sociogram}
 ccss_network |>
   ggraph(layout = "fr") + 
-  geom_node_point() +
   geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
                  end_cap = circle(3, 'mm'),
                  alpha = .2) + 
@@ -1404,32 +1400,33 @@ ccss_network |>
   geom_node_voronoi(aes(fill = factor(sub_group),
                          alpha = .05), 
                     max.radius = .5,
-                    show.legend = FALSE) 
+                    show.legend = FALSE) +
+  geom_node_point()
 ```
 
-This clearly does not provide any much insight, nor is it any
-improvement to our previous sociogram, but it definitely is colorful!!
+This clearly does not provide much insight, nor is it any improvement to
+our previous sociogram, but it definitely is colorful!!
 
 ## 4. MODEL
 
 As highlighted in [Chapter 3 of Data Science in Education Using
-R](https://datascienceineducation.com/c03.html), the **Model** step of
+R](https://datascienceineducation.com/c03.html), the **Model** step of
 the data science process entails "using statistical models, from simple
 to complex, to understand trends and patterns in the data." The authors
-note that while descriptive statistics and data visualization during
-the **Explore** step can help us to identify patterns and relationships
-in our data, statistical models can be used to help us determine if
+note that while descriptive statistics and data visualization during the
+**Explore** step can help us to identify patterns and relationships in
+our data, statistical models can be used to help us determine if
 relationships, patterns and trends are actually meaningful.
 
-### 4a. Sentiment Analysis (Optional)
+### 4a. Sentiment Analysis
 
 We will not explore the use of statistical inference and models for
-social networks until Learning Lab 4, but take a look at [The Mood of
-the Common Core Factions](https://www.hashtagcommoncore.com/#4-2)
-section from the #COMMONCORE project. Sentiment analysis is a common
-text mining technique that tries to evaluate words for their emotional
-association, or even "mood", similar to the approached used by the
-#COMMONCORE project.
+social networks until Unit 4, but take a look at [The Mood of the Common
+Core Factions](https://www.hashtagcommoncore.com/#4-2) section from the
+#COMMONCORE project. Sentiment analysis is a common text mining
+technique that tries to evaluate words for their emotional association,
+or even "mood", similar to the approached used by the #COMMONCORE
+project.
 
 The tidytext package we tapped into earlier provides access to several
 sentiment lexicons for text analysis based on unigrams, i.e., single
@@ -1459,25 +1456,24 @@ Let's go ahead and load the VADER library:
 library(vader)
 ```
 
-**Note:** The {vader} package can take quite some time to run on a large
-dataset like ours so it's included in our R-each section for you to
-explore at your leisure. The example show in the reach section includes
-just a small(ish) subset of tweets for demonstration purposes.
+**Note:** The {vader} package can take quite some time to run on large
+datasets, but the example shown with our small subset of tweets should
+run fairly quickly.
 
 #### Come to the Dark Side
 
 ![](img/dark-side.jpeg){width="80%"}
 
-Unlike other approaches demonstrated in the Text Mining Learning Lab 2,
-which assign sentiment to each individual word in a corpus of tweets,
-the VADER assigns a number of different sentiment measures based on the
-context of the entire social-media post or in our case a tweet. This
-saves quite a bit of data wrangling allowing us to work with our tweets
-in their original format.
+Unlike other approaches demonstrated in the ECI 588, which assign
+sentiment to each individual word in a corpus of tweets, the VADER
+assigns a number of different sentiment measures based on the context of
+the entire social-media post, or in our case a tweet. This saves quite a
+bit of data wrangling allowing us to work with our tweets in their
+original format.
 
 VADER basically has just one function, `vader_df()` that does one thing
-and expects just one column from one frame. He's very single minded!
-Let's give VADER our `ccss_tweets` data frame we created in the
+and expects just one column from one data frame. He's very single
+minded! Let's give VADER our `ccss_tweets` data frame we created in the
 beginning of this case study and include the `$` operator to include
 only the `text` column containing our tweets.
 
@@ -1547,16 +1543,15 @@ vader_ccss_summary <- vader_ccss |>
 vader_ccss_summary
 ```
 
-Not quite as bleak as we might have expected according to VADER! But
-then again, VADER brings an entirely different perspective coming from
-the dark side.
+Not quite as bleak as we might have expected according to something with
+the name VADER!
 
 #### **👉 Your Turn** **⤵**
 
 Use the code chunk below to see if you can identify the "haters" in our
-network merging the sentiment scores results stored in our `vader_ccss`
-data frame with our original `ccss_tweets` data frame. **Hint:** you may
-need to use a `join_()` function.
+network by merging the sentiment scores results stored in our
+`vader_ccss` data frame with our original `ccss_tweets` data frame.
+**Hint:** you may need to use a `join_()` function.
 
 ```{r}
 # YOUR CODE HERE
@@ -1594,7 +1589,8 @@ findings from an analysis:
 
 For your Independent Study next week, you will have an opportunity to
 create a simple "data product" designed to illustrate additional
-insights about the MOOC datasets or another dataset of your choosing.
+insights about the the Twitter datasets included in your data folder or
+another dataset of your choosing.
 
 For now, we will wrap up this assignment by converting our work into a
 webpage that can be used to communicate your learning and demonstrate
