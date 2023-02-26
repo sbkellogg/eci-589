@@ -14,6 +14,8 @@ theme:
   light: cosmo
   dark: cyborg
 bibliography: lit/references.bib
+execute: 
+  warning: false
 ---
 
 ## 1. PREPARE
@@ -31,7 +33,7 @@ education standards. Although these standards once enjoyed bipartisan
 support, we saw in our previous case study how these standards have
 become a political punching bag.
 
-In our Text Mining Lab 2 case study, we examined public sentiment around
+In ECI 588 Text Mining in Education, we examine public sentiment around
 the Common Core and Next Generation Science Standards. This analysis
 compliments that investigation by examining groups and central actors in
 networks that developed around tweets about the common core.
@@ -39,15 +41,15 @@ Specifically, this case study will cover the following topics pertaining
 to each data-intensive workflow process:
 
 1.  **Prepare**: Prior to analysis, we'll take a look at the context
-    from which our data came, formulate some research questions, and get
-    introduced the {tidygraph} and {ggraph} packages for analyzing
-    relational data.
+    from which our data originated, formulate some research questions,
+    and get introduced the {tidygraph} and {ggraph} packages for
+    analyzing relational data.
 
 2.  **Wrangle**: In the wrangling section of our case study, we will
     learn some basic techniques for manipulating, cleaning,
     transforming, and merging network data.
 
-3.  **Explore**: With our network data tidied, we learn to calculate
+3.  **Explore**: With our network data now tidy, we learn to calculate
     some key measures for individuals in our network and illustrate key
     actors through network visualization.
 
@@ -55,8 +57,9 @@ to each data-intensive workflow process:
     detection algorithms for identifying groups and revisiting sentiment
     about the common core.
 
-5.  **Communicate**: Finally, we clean up our analysis create a polished
-    data product to help communicate some key findings.
+5.  **Communicate**: Finally, we prepare our case study for sharing by
+    rendering our [Quarto](https://quarto.org) file to a webpage writing
+    a brief reflection.
 
 ### 1a. Review the Research
 
