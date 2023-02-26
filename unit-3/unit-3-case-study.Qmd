@@ -13,7 +13,7 @@ editor_options:
 theme: 
   light: cosmo
   dark: cyborg
-bibliography: lit/references.bib
+bibliography: references.bib
 execute:
   eval: false
 ---
@@ -63,10 +63,9 @@ to each data-intensive workflow process:
 
 ### 1a. Review the Research
 
-Recall from [Social Network Analysis and Education: Theory, Methods &
-Applications](https://methods.sagepub.com/book/social-network-analysis-and-education)
-that the following four features used by Freeman (2004) to define the
-social network perspective:
+Recall from Social Network Analysis and Education: Theory, Methods &
+Applications that the following four features used by
+\@freeman2004development to define the social network perspective:
 
 1.  Social network analysis is **motivated by a relational intuition**
     based on ties connecting social actors.
@@ -123,8 +122,8 @@ interact and communicate on Twitter.
 
 To collect data on keywords related to the Common Core, the project used
 a customized data collection tool developed by two of our co-authors,
-Miguel del Fresno and Alan J. Daly, called *Social Runner Lab*. Similar
-to an approach we used in the Text Mining Lab 2 case study, [*Twitter
+Miguel del Fresno and Alan J. Daly, called *Social Runner Lab*. Similar
+to an approach we use in ECI 588 Text Mining in Education, [*Twitter
 Sentiment and School
 Reform*](https://sbkellogg.github.io/eci-588/unit-2/unit-2-walkthrough.html#2_WRANGLE),
 the authors downloaded data in real time directly from Twitter's
@@ -157,7 +156,7 @@ boundaries are somewhat porous). For lexical tendencies, the authors
 used the Linguistic Inquiry and Word Count (LIWC) lexicons to determine
 psychological drive, diagnose their level of conviction, make inferences
 about thinking styles, and even determine sentiment similar to what we
-examine in the Text Mining Lab 2 case study.
+examine in ECI 588.
 
 For a nice summary of the data used for the analysis, as well as the
 samples of actors and tweets, the keywords, and the methods that were
@@ -212,10 +211,9 @@ following:
 
 For our SNA Lab 3 case study, we'll apply some of the same techniques
 used by this study including calculating some basic network measures of
-centrality. For example, take a look at the [*Explore the
-Networks*](https://www.hashtagcommoncore.com/#2-1){style="font-size: 10pt;"}
-section from Act 2: Central Actors and the Transmitters, Transceivers
-and Transcenders.
+centrality. For example, take a look at the [Explore the
+Networks](https://www.hashtagcommoncore.com/#2-1) section from Act 2:
+Central Actors and the Transmitters, Transceivers and Transcenders.
 
 Click on each of the boxes for a select time period and in the space
 below list a couple Twitter users identified by their analysis as the
@@ -237,8 +235,8 @@ completed for you.
 -   ***Transceivers*** YOUR RESPONSE HERE
 
 -   ***Transcenders*** is measured by *degree* and consists of actors
-    (i.e. Twitter uers) who have both high out-degree, as well as
-    having high in-degree.
+    (i.e. Twitter uers) who have both high out-degree, as well as having
+    high in-degree.
 
 ### 1b. Identify a Question(s)
 
@@ -248,7 +246,7 @@ Project was:
 > How are social media-enabled social networks changing the discourse in
 > American politics that produces and sustains education policy?
 
-For Unit 4, we are going to focus our questions on something a bit less
+For Unit 3, we are going to focus our questions on something a bit less
 ambitious but inspired by this work:
 
 1.  Who are the transmitters, transceivers, and transcenders in our
@@ -259,8 +257,8 @@ ambitious but inspired by this work:
 3.  Which actors in our network tend to be more opposed to the Common
     Core?
 
-To address the last question, we'll revisit our techniques we learned
-from our Unit 3 VADER sentiment analysis.
+To address the last question, we'll introduce the {VADER} package for
+sentiment analysis in our modeling section.
 
 #### **👉 Your Turn** **⤵**
 
@@ -282,17 +280,17 @@ RStudio. Recall that:
 > A **Project** is the home for all of the files, images, reports, and
 > code that are used in any given project
 
-In the `network-analysis` GitHub repository you clonded, an RStudio
-Project has already been set up for you as indicated by the `.Rproj`
-file in your main directory in the Files pane. Got there and see if you
-can locate it.
+In our ECI 589 SNA and Education Workspace on Posit Cloud, an RStudio
+Project titled `Unit 3 - Case Study` has already been set up for you and
+includes a `.Rproj` file in the main directory in the Files pane. Go
+there and see if you can locate it.
 
 #### Load Libraries
 
-In Lab 1, we also learned about **packages**, or libraries, which are
+In Unit 1, we also learned about **packages**, or libraries, which are
 shareable collections of R code that can contain functions, data, and/or
 documentation and extend the functionality of R. You can always check to
-see which packages have already been installed and loaded into RStudio
+see which packages have already been installed and loaded into Posit
 Cloud by looking at the the Files, Plots, & Packages Pane in the lower
 right hand corner.
 
@@ -326,10 +324,12 @@ For our data wrangling this week, we're keeping it simple since working
 with relational data is a bit of a departure from our working with
 rectangular data frames. In this lab, we'll revisit how to:
 
-a.  **Import Data**.
+a.  **Import Data**. We revisit the `read_csv()` function from the
+    tidyverse {readr} package to read the `ccss-tweets-fresh.csv` file
+    from the data folder.
 
-b.  **Format Network Data**. We learn to shape our data files into two
-    common formats for storing network data: edgelists and nodelists.
+b.  **Format Network Data**. We shape our data files into two common
+    formats for storing network data: edgelists and nodelists.
 
 c.  **Create a Network Object**. Finally, we'll need to convert our data
     frames into special data format, an R network object, for working
@@ -337,14 +337,14 @@ c.  **Create a Network Object**. Finally, we'll need to convert our data
 
 ### 2a. Import Data
 
-We'll be using a data download from twitter that only includes
-relatively small set of tweets from one week to help keep things simple.
+To help keep things simple, we'll be using a data download from twitter
+that only includes relatively small set of tweets from a single week.
 Network graphs can quickly get unwieldy as the nodes in your network
 grow.
 
 The #commoncore project does an excellent job visualizing large networks
 using advanced techniques. We'll focus on a relatively small network
-since we'll be introduce some very basic techniques for visualization.
+since we are using some very basic techniques for visualization.
 
 Run the following code to use the `read_csv()` function from the {readr}
 package to read the `ccss-tweets-fresh.csv` file from the data folder
@@ -381,12 +381,12 @@ used to denote connections among actors in educational research include:
 
 #### Create Edgelist
 
-The **edgelist** format is slightly different than other formats you
-have likely worked with in that the values in the first two columns of
-each row represent a dyad, or tie between two nodes in a network. An
-edge-list can also contain other information regarding the strength,
-duration, or frequency of the relationship, sometime called weight, in
-addition to other "edge attributes."
+Recall that the **edgelist** format is slightly different than other
+formats you have likely worked with in that the values in the first two
+columns of each row represent a dyad, or tie between two nodes in a
+network. An edge-list can also contain other information regarding the
+strength, duration, or frequency of the relationship, sometime called
+weight, in addition to other "edge attributes."
 
 For our analysis of tweets in this case study, we'll use an approach
 similar to that used by @supovitz2017commoncore. Specifically, each node
@@ -401,7 +401,8 @@ that follows:
 
 ```{r view-data, eval=FALSE}
 #YOUR CODE HERE
-view(ccss_tweets)
+
+
 ```
 
 1.  Which columns you think could be used to construct an edge list.
@@ -430,10 +431,13 @@ included in the mentions, let's:
 
 3.  assign our new data frame to `ties_1`.
 
+Note that we also use R's new built in `|>` pipe operator, which serves
+the same purpose as the older tidyverse `%>%` pipe operator.
+
 ```{r extract-edges}
-ties_1 <-  ccss_tweets %>%
+ties_1 <-  ccss_tweets |>
   relocate(sender = screen_name, # rename scree_name to sender
-           target = mentions_screen_name) %>% # rename to receiver
+           target = mentions_screen_name) |> # rename to receiver
   select(sender,
          target,
          created_at,
@@ -478,7 +482,7 @@ to reference.
 
 #### "Unnest" User Names
 
-The {tidy text} package has a very handy `unnest_tokens()` function to
+The {tidytext} package has a very handy `unnest_tokens()` function to
 extract individual words from tweets. We'll use it to place target of
 each tweet into separate rows corresponding to the sender of each tweet.
 
@@ -486,16 +490,16 @@ Run the following code and take a look at the new data frame to make
 sure it looks as expect and to spot any potential issues:
 
 ```{r unnest-tokens}
-ties_2 <- ties_1 %>%
+ties_2 <- ties_1 |>
   unnest_tokens(input = target,
                 output = receiver,
-                to_lower = FALSE) %>%
+                to_lower = FALSE) |>
   relocate(sender, receiver)
 
 ties_2
 ```
 
-You probably notice one issue that we could deal with in a couple
+You probably noticed one issue that we could deal with in a couple
 different ways. Specifically, many tweets are not directed at other
 users and hence the value for receiver is *`NA`*. We could keep these
 users as "isolates" in our network, but let's simply remove them since
@@ -511,15 +515,15 @@ frame since they are incomplete dyads. Save your final edgelist as
 
 ```{r remove-NAs}
 #YOUR CODE HERE
-ties <- ties_2 %>%
-  drop_na(receiver)
+
 ```
 
 Now use the code chunk below to take a quick look at our final edgelist
 and answer the questions that follow:
 
 ```{r inspect-edges, eval=FALSE}
-ties
+#YOUR CODE HERE
+
 ```
 
 1.  How many edges are in our CCSS network?
@@ -552,18 +556,17 @@ demographic group, country, gender, etc. This file or data frame is
 sometimes referred to as a **nodelist** or node attribute file.
 
 To construct our basic nodelist, we will use the `pivot_longer()`
-function from the {dplyr} package, an updated version of the `gather()`
-function introduced in the [RStudio Reshape Data
-Primer](https://rstudio.cloud/learn/primers/4.1) shared in Foundations
-Learning Lab 3.
+function from the tidyverse {dplyr} package, an updated version of the
+`gather()` function introduced in the [RStudio Reshape Data
+Primer](https://rstudio.cloud/learn/primers/4.1).
 
 Run the following code to select the usernames form our `ties` edgelist,
 merge our sender and receiver columns into a single column, and take a
 quick look at our new data frame.
 
 ```{r pivot-long}
-actors_1 <- ties %>%
-  select(sender, receiver) %>%
+actors_1 <- ties |>
+  select(sender, receiver) |>
   pivot_longer(cols = c(sender,receiver))
 
 actors_1
@@ -579,9 +582,9 @@ rename it to actors, and use the `distinct()` function from {dplyr} to
 keep only unique names and remove duplicates:
 
 ```{r select-actors}
-actors <- actors_1 %>%
-  select(value) %>%
-  rename(actors = value) %>% 
+actors <- actors_1 |>
+  select(value) |>
+  rename(actors = value) |> 
   distinct()
 ```
 
@@ -1529,12 +1532,12 @@ positive, neutral, or negative. Typical threshold values are:
 Let's give that a try and see how things shake out:
 
 ```{r}
-vader_ccss_summary <- vader_ccss %>% 
+vader_ccss_summary <- vader_ccss |> 
   mutate(sentiment = ifelse(compound >= 0.05, "positive",
-                            ifelse(compound <= -0.05, "negative", "neutral"))) %>%
-  count(sentiment, sort = TRUE) %>% 
-  spread(sentiment, n) %>% 
-  relocate(positive) %>%
+                            ifelse(compound <= -0.05, "negative", "neutral"))) |>
+  count(sentiment, sort = TRUE) |> 
+  spread(sentiment, n) |> 
+  relocate(positive) |>
   mutate(ratio = negative/positive)
 
 vader_ccss_summary
@@ -1591,18 +1594,19 @@ insights about the MOOC datasets or another dataset of your choosing.
 
 For now, we will wrap up this assignment by converting our work into a
 webpage that can be used to communicate your learning and demonstrate
-some of your new R skills. To do so, you will need to "Knit" your
-document by clicking the drop down arrow next to the ball of yarn in the
-menu bar at that the top of this markdown file, and then selecting "Knit
-top HTML" or another preferred output format. This will do two things;
-it will:
+some of your new R skills. To do so, you will need to "render" your
+document by clicking the ![](img/render.png){width="4%"} Render button
+in the menu bar at that the top of this Quarto file. This will do two
+things; it will:
 
 1.  check through all your code for any errors; and,
 
 2.  create a file in your directory that you can use to share you work
-    through [GitHub Pages](https://pages.github.com),
-    [RPubs](https://rpubs.com/about/getting-started) (see screeshot
-    below to publish), or any other preferred means.
+    through [RPubs](https://rpubs.com/about/getting-started) (see
+    screenshot below to publish), [GitHub
+    Pages](https://pages.github.com), [Quarto
+    Pub](https://quarto.org/docs/publishing/quarto-pub.html), or any
+    [other methods](https://quarto.org/docs/publishing/).
 
 ![](img/publish.png){width="70%"}
 
