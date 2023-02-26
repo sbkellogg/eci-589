@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shaun Kellogg">
+<meta name="dcterms.date" content="2023-02-26">
+
+<title>Tidy Data &amp; Network Substructures</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="unit-3-independent-study_files/libs/clipboard/clipboard.min.js"></script>
+<script src="unit-3-independent-study_files/libs/quarto-html/quarto.js"></script>
+<script src="unit-3-independent-study_files/libs/quarto-html/popper.min.js"></script>
+<script src="unit-3-independent-study_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="unit-3-independent-study_files/libs/quarto-html/anchor.min.js"></script>
+<link href="unit-3-independent-study_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="unit-3-independent-study_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="unit-3-independent-study_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="unit-3-independent-study_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="unit-3-independent-study_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="unit-3-independent-study_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="unit-3-independent-study_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#posit-primers-r-beginners" id="toc-posit-primers-r-beginners" class="nav-link active" data-scroll-target="#posit-primers-r-beginners">Posit Primers (R Beginners)</a>
+  <ul>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#assessment" id="toc-assessment" class="nav-link" data-scroll-target="#assessment">Assessment</a></li>
+  </ul></li>
+  <li><a href="#independent-analysis-prior-r-experience" id="toc-independent-analysis-prior-r-experience" class="nav-link" data-scroll-target="#independent-analysis-prior-r-experience">Independent Analysis (Prior R Experience)</a>
+  <ul>
+  <li><a href="#assignment-1" id="toc-assignment-1" class="nav-link" data-scroll-target="#assignment-1">Assignment</a></li>
+  <li><a href="#assessment-1" id="toc-assessment-1" class="nav-link" data-scroll-target="#assessment-1">Assessment</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tidy Data &amp; Network Substructures</h1>
+<p class="subtitle lead">ECI 589 SNA and Education: Unit 3 Independent Study</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shaun Kellogg </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 26, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The final week of each unit is designed to provide you some space for gaining proficiency with R and conducting an independent analysis. For students new to R and have not completed ECI 589: Intro to Learning Analytics, you will be required to complete three Posit Primers focused on data essential wrangling skills in R. For students who have completed ECI 586 or are already comfortable with R basics, you will be required to create a simple “data product” designed to illustrate key insights about about the student and/or teacher reported middle school friendship networks.</p>
+<section id="posit-primers-r-beginners" class="level2">
+<h2 class="anchored" data-anchor-id="posit-primers-r-beginners">Posit Primers (R Beginners)</h2>
+<p>For students new to R, this week you will learn to how to make and use tidy data, the data format designed for R.</p>
+<section id="assignment" class="level3">
+<h3 class="anchored" data-anchor-id="assignment">Assignment</h3>
+<p>Your assignment this week is to complete the following primers located in the <a href="https://posit.cloud/learn/primers/4">Tidy Your Data</a> section on <a href="https://posit.cloud/learn/primers">Posit Cloud</a>:</p>
+<ol type="1">
+<li><a href="https://posit.cloud/learn/primers/4.1">Reshape Data</a>. Data comes in many formats, but R prefers just one: Tidy Data. Learn to recognize and make tidy data in this tutorial, as well as how to reshape the layout of any data set.</li>
+<li><a href="https://posit.cloud/learn/primers/4.2">Separate and Unite Columns</a>. Here you will learn to separate a column into multiple columns and to reverse the process by uniting multiple columns into a single column. Then you’ll practice your data wrangling skills on messy real world data.</li>
+<li><a href="https://posit.cloud/learn/primers/4.3">Join Data Sets</a>. Complete your data wrangling education by learning to work with relational data. Here you will learn how to augment data sets with information from related data sets, as well as how to filter one data set against another.</li>
+</ol>
+</section>
+<section id="assessment" class="level3">
+<h3 class="anchored" data-anchor-id="assessment">Assessment</h3>
+<p>To assess your knowledge and skills, you will complete a brief online quiz worth 6 points. This is an “open book” quiz and you are welcome to refer to the course readings, primers and case study to complete. You will be able to attempt this quiz more than once, though penalties may be assigned for incorrect responses.</p>
+<p>It is recommend that you navigate to the&nbsp;<a href="https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog">ECI 589 SNA and Education workspace</a>, access the Unit 2 - Independent Study R Studio project assignment, and create an .R script as you’re working through this quiz. This will allow you to type all of your code, add comments, and then save your .R script for reference as needed. In addition, some quiz items may ask you to open and manipulate a data file saved in the data folder.</p>
+</section>
+</section>
+<section id="independent-analysis-prior-r-experience" class="level2">
+<h2 class="anchored" data-anchor-id="independent-analysis-prior-r-experience">Independent Analysis (Prior R Experience)</h2>
+<p>For those who completed ECI 586 or are already comfortable with R, you will be required to conducted an independent analysis and create a simple “data product” designed to illustrate key insights about the student and/or teacher reported middle school friendship networks.</p>
+<section id="assignment-1" class="level3">
+<h3 class="anchored" data-anchor-id="assignment-1">Assignment</h3>
+<p>For your independent analysis, <strong>your primary goal is to describe a social network both visually and numerically (including node-level measures)</strong> by applying the knowledge and skills acquired from the Unit 3 course readings and case study. Grading for this week is fairly lenient and you’ll receive 1 point (6 points total) for completing each of the following tasks:</p>
+<ol type="1">
+<li><p><strong>Identity a data source.</strong>&nbsp;I’ve included a data folder located in the Unit 3 Analysis Project in our&nbsp;<a href="https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog">RStudio Cloud ECI 589 Workspace</a> that contains several Twitter datasets from focused on the Common Core State Standards and Next Generation Science Standards. You are also welcome use the datasets from our SNA and Education course text described <a href="https://studysites.sagepub.com/carolan/study/resources.htm">here</a> or identify your own network data source related to an area of professional interest. However, if you choose to use an alternative data source, you will need to specify the context in which it was collected and the audience for whom your analysis intended.</p></li>
+<li><p><strong>Formulate a question.</strong> I recommend keeping this simple and limiting to no more than one or two questions. Your question(s) should be appropriate to your data set and ideally be answered by applying concepts and skills from our course readings and case study. For example, you may be interested in determining measures of centrality for a network and identifying key actors.</p></li>
+<li><p><strong>Analyze the data.</strong> I highly recommend creating a new R script in the Unit 3 Independent project space to use as you work through data wrangling and analysis. Your R script will likely contain code that doesn’t make it into your R Markdown presentation or report since you will likely experiment with different approaches and figure out code that works and code that does not.</p></li>
+<li><p><strong>Create a data product.</strong>&nbsp;When you feel you’ve wrangled and analyzed the data to your satisfaction, create an R Markdown file that includes a polished sociogram and/or data table and a narrative highlighting your research question, data source, and key findings and potential implications. Your R Markdown file should include a polished sociogram and/or table, a title and narrative, and all code necessary to read, wrangle, and explore your data.</p></li>
+<li><p><strong>Share your findings.</strong>&nbsp;Render (Quarto) or knit (R Markdown) your data product to a desired output format. This may be a simple&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/html-document.html">HTML</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">PDF</a>, or&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/word-document.html">MS Word</a>&nbsp;file; or something more complex like&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html">HTML5 slides</a>, a&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html">Tufte-style handout</a>,&nbsp;<a href="https://rmarkdown.rstudio.com/flexdashboard/">dashboard</a>, or&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">website</a>. Then create a new forum post below to share your analysis. Include in the post your published web link (e.g., via <a href="https://rpubs.com/about/getting-started">RPubs</a>, <a href="https://pages.github.com">GitHub Pages</a>, <a href="https://quarto.org/docs/publishing/quarto-pub.html">Quarto Pub</a>, or any <a href="https://quarto.org/docs/publishing/">other methods</a>) or attached file (e.g.&nbsp;Word or PDF) and add a short reflection including one thing you learned and one thing you’d like to explore further.</p></li>
+</ol>
+</section>
+<section id="assessment-1" class="level3">
+<h3 class="anchored" data-anchor-id="assessment-1">Assessment</h3>
+<p>As noted in our Unit 1 Case Study, the final step in our workflow/process is sharing the results of analysis with wider audience. <span class="citation" data-cites="krumm2018">Krumm, Means, and Bienkowski (<a href="#ref-krumm2018" role="doc-biblioref">2018</a>)</span> outlined the following 3-step process for communicating with education stakeholders what you have learned through analysis:</p>
+<ol type="1">
+<li><p><strong>Select</strong>. Communicating what one has learned involves selecting among those analyses that are most important and most useful to an intended audience, as well as selecting a form for displaying that information, such as a graph or table in static or interactive form, i.e.&nbsp;a “data product.”</p></li>
+<li><p><strong>Polish</strong>. After creating initial versions of data products, research teams often spend time refining or polishing them, by adding or editing titles, labels, and notations and by working with colors and shapes to highlight key points.</p></li>
+<li><p><strong>Narrate</strong>. Writing a narrative to accompany the data products involves, at a minimum, pairing a data product with its related research question, describing how best to interpret the data product, and explaining the ways in which the data product helps answer the research question.</p></li>
+</ol>
+<p>For the purpose of this assignment, imagine that you have been asked to share your research with teachers and administrators at the middle school in which this data was collected. Remember, your audience will have limited background in SNA and so adapt the process accordingly. This assignment is worth a total of 6 points and will be assessed based on the following criteria.</p>
+<ol type="1">
+<li><p><strong>Polished Sociogram (2 points).</strong> The sociogram you selected to share should be visually appealing and help illustrate for your audience similarities and differences in classroom friendships reported by teachers and/or students.</p></li>
+<li><p><strong>Clear Narrative (2 points).</strong> Include a brief narrative to accompany your visualization and/or table that includes the following:</p>
+<ul>
+<li>The question or questions guiding the analysis;</li>
+<li>The conclusions you’ve reached based on our findings;</li>
+<li>How your audience might use this information;</li>
+<li>How you might revisit or improve upon this analysis in the future.</li>
+</ul></li>
+<li><p><strong>Peer Feedback (2 points).</strong> Finally, take look at the posted data products of your peers and provide some brief (1 paragraph) but constructive feedback to at least two of your peers. Your feedback should include one thing you liked about their data product and why and one suggestion for improvement or extension of the analysis.</p></li>
+</ol>
+</section>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<p>If you have any questions about the assignment or run into any technical issues, don’t hesitate to email me at&nbsp;<a href="http://sbkellog@ncsu.edu/">sbkellog@ncsu.edu</a> or set up a Zoom meeting at&nbsp;<a href="http://calendly.com/sbkellogg">calendly.com/sbkellogg</a>.</p>
+<p>I also encourage you to post to the <strong>Questions &amp; Troubleshooting</strong> thread, especially if others might benefit from the response to your question or issue. You are also more than welcome to respond to the questions posted by your peers.</p>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-krumm2018" class="csl-entry" role="doc-biblioentry">
+Krumm, Andrew, Barbara Means, and Marie Bienkowski. 2018. <em>Learning Analytics Goes to School</em>. Routledge. <a href="https://doi.org/10.4324/9781315650722">https://doi.org/10.4324/9781315650722</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

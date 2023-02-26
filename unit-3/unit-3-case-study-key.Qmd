@@ -664,8 +664,8 @@ following questions:
 
     -   YOUR RESPONSE HERE
 
-2.  What do you think "components" refers to? Hint: see Chapter 6
-    of @carolan2014.
+2.  What do you think "components" refers to? Hint: see Chapter 6 of
+    @carolan2014.
 
     -   YOUR RESPONSE HERE
 
