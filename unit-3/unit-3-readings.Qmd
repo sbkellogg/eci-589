@@ -10,7 +10,7 @@ format:
 theme: 
   light: cosmo
   dark: cyborg
-bibliography: lit/references.bib
+bibliography: references.bib
 ---
 
 In Unit 3 we examine common approaches and various algorithms used to analyze a network's groups, positions and individual actors. The required and self-selected readings introduce both "top-down" and "bottom-up" approaches through which groups are identified, as well as ways in which properties of ego networks are conceptualized and measured. A secondary goal of readings and discussion is to help you start generating ideas for independent application of network analysis. As part of our readings, for example, you'll learn approaches to identifying groups appropriate to your own research area of interest.
@@ -55,7 +55,7 @@ Consider a network of which you are a part or a network you might be interested 
 
 As Carolan notes in Chapter 6, sometimes researchers use a cut-off value from valued data to identify whether a relationship between two nodes exists or not before analyzing the data. For example,
 
-1.  How did Daly and Finnagan @daly2011ebb use cut-off values in their study and what was the rationale?
+1.  How did [Daly and Finnagan](https://github.com/sbkellogg/eci-589/blob/main/unit-3/lit/daly-ebb-flow.pdf) @daly2011ebb use cut-off values in their study and what was the rationale?
 
 2.  What might be some advantages and disadvantages of using cut-off values in networks with valued ties?
 
