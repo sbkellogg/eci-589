@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-02-26">
+<meta name="dcterms.date" content="2023-03-04">
 
 <title>Components, Cliques, &amp; Key Actors</title>
 <style>
@@ -240,7 +240,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 26, 2023</p>
+      <p class="date">March 4, 2023</p>
     </div>
   </div>
   
@@ -400,7 +400,7 @@ div.csl-indent {
 </section>
 <section id="b.-format-network-data" class="level3">
 <h3 class="anchored" data-anchor-id="b.-format-network-data">2b. Format Network Data</h3>
-<p>Recall from Chapter 1 of 1 that ties, or relations, are what connect actors to one another. These ties are often referred to as “edges” when formatting and graphing network data and the range of ties in a network can be extensive. Some of the more common ties, or edges, used to denote connections among actors in educational research include:</p>
+<p>Recall from Chapter 1 of <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span> that ties, or relations, are what connect actors to one another. These ties are often referred to as “edges” when formatting and graphing network data and the range of ties in a network can be extensive. Some of the more common ties, or edges, used to denote connections among actors in educational research include:</p>
 <ul>
 <li><p>Behavioral interaction (e.g., talking to each other or sending messages)</p></li>
 <li><p>Physical connection (e.g., sitting together at lunch, living in the same neighborhood)</p></li>
@@ -649,10 +649,7 @@ div.csl-indent {
 <ul>
 <li>YOUR RESPONSE HERE</li>
 </ul></li>
-<li><p>What do you think “components” refers to? Hint: see Chapter 6 of</p>
-<ol class="example" type="1">
-<li></li>
-</ol>
+<li><p>What do you think “components” refers to? Hint: see Chapter 6 of Carolan (2014).</p>
 <ul>
 <li>YOUR RESPONSE HERE</li>
 </ul></li>
@@ -894,7 +891,7 @@ $no
 <p>One community detection algorithm similar to our clique analysis above is the <code>group_edge_betweenness()</code> function, which groups densely connected nodes together. The betweenness centrality measures is something we will look at more closely in the next section.</p>
 <p>Because this function can only be used with undirected networks, we will need to pipe <code>|&gt;</code> our <code>dlt_network</code> through the following functions in sequence:</p>
 <ol type="1">
-<li><strong><code>morph()</code></strong> with the <code>to_undirected</code> argument will temporarily change our directed network to an undirected network, or “symmetrize” our network as discussed in Carolan 1;</li>
+<li><strong><code>morph()</code></strong> with the <code>to_undirected</code> argument will temporarily change our directed network to an undirected network, or “symmetrize” our network as discussed in Carolan <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span>;</li>
 <li><strong><code>activate()</code></strong> will select just our <code>nodes</code> list;</li>
 <li><strong><code>mutate()</code></strong> will created a new <code>subgroup</code> variable using the <code>group_edgebetweenness()</code> function;</li>
 <li><strong><code>unmorph()</code></strong> will change our undirected network back to a directed network.</li>
@@ -999,7 +996,7 @@ $no
 <blockquote class="blockquote">
 <p>An individual’s (<strong>ego</strong>) connections with others (<strong>alters</strong>) provides access to some instrumental (e.g., advice) or expressive (e.g., support) resource that may, in turn, be beneficial.</p>
 </blockquote>
-<p>As summarized by Carolan 1, the structure and content of these relations between an ego and a set of alters is the focus of egocentric network analysis. Since our research question aims to identify “key actors” in our network, we will look at two characteristics of an ego’s connections that are indicative their importance: size and centrality.</p>
+<p>As summarized by Carolan <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span>, the structure and content of these relations between an ego and a set of alters is the focus of egocentric network analysis. Since our research question aims to identify “key actors” in our network, we will look at two characteristics of an ego’s connections that are indicative their importance: size and centrality.</p>
 <section id="size" class="level4">
 <h4 class="anchored" data-anchor-id="size">Size</h4>
 <p>Recall from our previous case study focused on complete network analysis, one simple and often ignored structural property of a social network is its size. This also applies to egocentric analysis.</p>
@@ -1094,7 +1091,7 @@ $no
 </section>
 <section id="compositional-and-variance-measures" class="level4">
 <h4 class="anchored" data-anchor-id="compositional-and-variance-measures"><strong>Compositional and Variance Measures</strong></h4>
-<p>Carolan 1 notes that there are two types of measures that can emerge from egocentric data: compositional and variance. Compositional measures are those created by counting or taking the average of egocentric network variables. Variance measures, on the other hand, are simply those that are derived by calculating the variance or standard deviation of the egocentric network variables.</p>
+<p>Carolan <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span> notes that there are two types of measures that can emerge from egocentric data: compositional and variance. Compositional measures are those created by counting or taking the average of egocentric network variables. Variance measures, on the other hand, are simply those that are derived by calculating the variance or standard deviation of the egocentric network variables.</p>
 <p>While we could calculate individually the mean and variance for each egocentric measure created above using the <code>summarise()</code> function demonstrated earlier, R has a package and function to save us the effort.</p>
 <p>To quickly calculate summary statistics for our nodes, including compositional and variance measures for our egocentric measures, we can use the <code>skim()</code> function from the {skimr} package to take a quick look at the variables in our node list:</p>
 <div class="cell">
@@ -1613,7 +1610,7 @@ $no
 </section>
 <section id="c.-visualize-network-descriptives" class="level3">
 <h3 class="anchored" data-anchor-id="c.-visualize-network-descriptives">3c. Visualize Network Descriptives</h3>
-<p>If you recall from <a href="#a.-review-the-research">1a. Review the Research</a> section, one of the defining characteristics of the social network perspective is its use of graphic imagery to represent actors and their relations with one another. To emphasize this point, 1 reported that:</p>
+<p>If you recall from <a href="#a.-review-the-research">1a. Review the Research</a> section, one of the defining characteristics of the social network perspective is its use of graphic imagery to represent actors and their relations with one another. To emphasize this point, <span class="citation" data-cites="carolan2014">Carolan (<a href="#ref-carolan2014" role="doc-biblioref">2014</a>)</span> reported that:</p>
 <blockquote class="blockquote">
 <p>The visualization of social networks has been a core practice since its foundation more than 90 years ago and remains a hallmark of contemporary social network analysis.&nbsp;</p>
 </blockquote>
