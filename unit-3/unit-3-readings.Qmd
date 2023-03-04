@@ -55,7 +55,7 @@ Consider a network of which you are a part or a network you might be interested 
 
 As Carolan notes in Chapter 6, sometimes researchers use a cut-off value from valued data to identify whether a relationship between two nodes exists or not before analyzing the data. For example,
 
-1.  How did [Daly and Finnagan](https://github.com/sbkellogg/eci-589/blob/main/unit-3/lit/daly-ebb-flow.pdf) @daly2011ebb use cut-off values in their study and what was the rationale?
+1.  How did @daly2011ebb use cut-off values in their study, [The Ebb and Flow of Social Network Ties Between District Leaders Under High-Stakes Accountability](https://github.com/sbkellogg/eci-589/blob/main/unit-3/lit/daly-ebb-flow.pdf)? What was the rationale?
 
 2.  What might be some advantages and disadvantages of using cut-off values in networks with valued ties?
 
