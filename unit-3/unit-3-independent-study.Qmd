@@ -31,7 +31,7 @@ Your assignment this week is to complete the following primers located in the [T
 
 To assess your knowledge and skills, you will complete a brief online quiz worth 6 points. This is an "open book" quiz and you are welcome to refer to the course readings, primers and case study to complete. You will be able to attempt this quiz more than once, though penalties may be assigned for incorrect responses.
 
-It is recommend that you navigate to the [ECI 589 SNA and Education workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog), access the Unit 2 - Independent Study R Studio project assignment, and create an .R script as you're working through this quiz. This will allow you to type all of your code, add comments, and then save your .R script for reference as needed. In addition, some quiz items may ask you to open and manipulate a data file saved in the data folder.
+For this quiz you will need to navigate to the [ECI 589 SNA and Education workspace](https://posit.cloud/spaces/322769/join?access_code=ZuCVwxEaX0MeAI5aj_P1_9gnl2D9I7SjMRYk6bog), **access the Unit 3 - Independent Study R Studio project assignment, and open the unit-3-quiz.R file to use as you\'re working through this quiz.** This will allow you to type all of your code, add comments, and then save your .R script for reference as needed. In addition, some quiz items may ask you to open and manipulate a data file saved in the data folder. 
 
 ## Independent Analysis (Prior R Experience)
 
