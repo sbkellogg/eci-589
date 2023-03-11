@@ -48,7 +48,7 @@ distinct(ccss_edges, screen_name) |>
 distinct(ccss_edges, status_id) |>
   count()
 
-ccss_edges |>
+ccss_tweets |>
 count(screen_name, sort = T)
 
 
@@ -126,9 +126,10 @@ ccss_actors <- ccss_unite |>
   gather(key = "direction", 
          value = "name",
          screen_name,
-         to_screen_name) |>
-  filter(name != "")
+         to_screen_name)
+
+
+ccss_actors |> count(name)
 
 ccss_actors
 
-ccss_actors |> count(name)
