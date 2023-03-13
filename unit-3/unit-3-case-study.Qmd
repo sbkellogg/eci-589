@@ -1161,11 +1161,6 @@ ccss_network |>
   skim()
 ```
 
-As illustrated by the output above, we can see that "otheredprof" (i.e.,
-other educational professionals including our facilitators) were
-connected with the most individuals on average (18.9), while educators
-in "Operations" connected with the fewest individuals on average (3).
-
 **Closeness & Betweenness**
 
 Two other centrality measures for identifying key actors in a network
