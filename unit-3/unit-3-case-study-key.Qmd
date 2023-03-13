@@ -1225,8 +1225,7 @@ ccss_network |>
   as_tibble()
 ```
 
-1.  Which two actors have the highest betweenness and what is unique
-    about their role in the course?
+1.  Which two actors have the highest betweenness?
 
     -   YOUR RESPONSE HERE
 
