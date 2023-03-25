@@ -1,0 +1,764 @@
+---
+title: "Statistical Inference & Network Models"
+subtitle: "SNA Learning Lab 4 Overview"
+author: "Dr. Shaun Kellogg"
+institute: "The LASER Institute"
+date: "2022/07/11 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css:
+     - default
+     - css/wolfpack.css
+     - css/wolfpack-fonts.css
+    lib_dir: libs                        # creates directory for libraries
+    seal: false                          # false: custom title slide
+    nature:
+      highlightStyle: default         # highlighting syntax for code
+      highlightLines: true               # true: enables code line highlighting 
+      highlightLanguage: ["r"]           # languages to highlight
+      countIncrementalSlides: false      # false: disables counting of incremental slides
+      ratio: "16:9"                      # 4:3 for standard size,16:9
+      slideNumberFormat: |
+       <div class="progress-bar-container">
+        <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+        </div>
+       </div>
+       </div>
+---
+class: clear, title-slide, inverse, center, top, middle
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+# then load all the relevant packages
+pacman::p_load(pacman, 
+               knitr, 
+               tidyverse, 
+               readxl, 
+               tidygraph, 
+               ggraph,
+               statnet,
+               ergm)
+```
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+# these allow any code snippets to be copied to the clipboard so they 
+# can be pasted easily
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+```{r xaringan-extras, echo=FALSE}
+xaringanExtra::use_tile_view()
+
+```
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$subtitle`
+### `r rmarkdown::metadata$author`
+### `r format(Sys.time(), "%B %d, %Y")`
+
+---
+# Agenda
+
+.pull-left[
+## Part 1: Core Concepts
+### Inference in Networks
+- Applications of Inference
+- Questions & Models
+- A Selection Model Example
+
+]
+
+.pull-right[
+
+## Part 2: R Code-Along
+#### Exponential Random Graph Models
+- {statnet} Package
+- Model Parameters
+- Interpreting Outputs
+]
+
+
+???
+- In previous labs we focused on ways in which different algorithms can be used to describe properties related to ego or complete networks. 
+- In This chapter moves beyond these static snapshots and provides an introduction to the ways in which recent advances in inferential statistics can be used to make predictions from social network data and address the questions in the previous paragraph.
+- Part 1 will focus on..
+- Part 2 will focus on..   
+
+---
+# A Quick Refresher
+
+
+.pull-left[
+## Network Visualization
+.center[
+```{r, echo=FALSE, warning=FALSE, message=FALSE, out.width = '400px'}
+year_1_collaboration <- read_excel("data/year-1-collaboration-ties.xlsx", 
+                            col_names = FALSE)
+
+year_3_collaboration <- read_excel("data/year-3-collaboration-ties.xlsx", 
+                            col_names = FALSE)
+
+year_1_confidential <- read_excel("data/year-1-confidential-ties.xlsx", 
+                            col_names = FALSE)
+
+year_3_confidential <- read_excel("data/year-3-collaboration-ties.xlsx", 
+                            col_names = FALSE)
+
+rownames(year_1_collaboration) <- 1:43
+
+colnames(year_1_collaboration) <- 1:43
+
+rownames(year_3_collaboration) <- 1:43
+
+colnames(year_3_collaboration) <- 1:43
+
+rownames(year_1_confidential) <- 1:43
+
+colnames(year_1_confidential) <- 1:43
+
+rownames(year_3_confidential) <- 1:43
+
+colnames(year_3_confidential) <- 1:43
+
+year_1_collab_matrix <- as.matrix(year_1_collaboration)
+
+year_3_collab_matrix <- as.matrix(year_3_collaboration)
+
+year_1_conf_matrix <- as.matrix(year_1_confidential)
+
+year_3_conf_matrix <- as.matrix(year_3_confidential)
+
+year_1_collab_network <- as_tbl_graph(year_1_collab_matrix, directed = TRUE)
+
+year_3_collab_network <- as_tbl_graph(year_3_collab_matrix, directed = TRUE)
+
+year_1_conf_network <- as_tbl_graph(year_1_conf_matrix, directed = TRUE)
+
+year_3_conf_network <- as_tbl_graph(year_3_conf_matrix, directed = TRUE)
+
+leader_nodes <- read_csv("data/school-leader-nodes.csv")
+
+leader_edges <- read_csv("data/school-leader-edges.csv")
+
+leader_graph <- tbl_graph(edges = leader_edges,
+                          nodes = leader_nodes,
+                          directed = TRUE)
+
+
+leader_measures <- leader_graph |>
+  activate(nodes) |>
+  mutate(in_degree = centrality_degree(mode = "in")) |>
+  mutate(out_degree = centrality_degree(mode = "out"))
+
+ggraph(leader_measures, layout = 'fr') +
+  geom_node_point(aes(size = in_degree)) +
+  geom_edge_link() +
+  theme_graph()
+
+```
+]
+]
+
+
+.pull-right[
+## Network Measures
+
+- degree and betweeness **Centrality**
+
+- **Reciprocity** in directed networks
+
+- complete network, group, or neighborhood **Density**
+]
+
+
+???
+
+- Recall that in previous labs we focused on ways in which data visualization and network measurement can be used to describe properties of complete networks, groups within a network, or even individual's place within a network.  
+- Network visualizations like this sociogram of school and district leaders, for example, can be a very useful tool for showing what your network looks like and highlighting network properties. For example, just like with this network, sociograms are usually constructed in such a way so that actor that are more central to the network are place in the center of the graph. 
+- Network Measures, on the other hand, help to describe mathematically what your network "looks like." 
+- For example, measures of centrality can put a number on how much a network as whole centers around a handful of individuals, and which individuals are more central to the network.  
+- In directed networks, measures of reciprocity can inform about the flow of information in a network or potential hierarchies in a network.  
+- And measures of density, whether for a whole network, group, or even individual actors' "neighborhoods" can can help describe how well connected individuals are in a network. 
+
+
+---
+class: clear, inverse, middle, center
+
+# Part 1: Core Concepts
+----
+
+Inference, Models, and Exemplar 
+
+???
+
+- In Part 1, we move beyond network visualization and measurement and learn how the evolution of statistical inference and models allow social network analysis to not just describe networks and their properties, but attempt to explain and make predictions about them. 
+- We'll then take a close look at a study by Alan Daly and colleagues that illustrated how these statistical models for netowrk analysis can be used to gain insight into educational settings. 
+
+---
+
+#  Inference in Networks
+
+.panelset[
+
+.panel[.panel-name[Evolution]
+
+.pull-left[### Aim of Inference
+1. Examine "relationships"
+
+1. Test hypotheses
+
+1. Analyze change
+]
+
+.pull-right[### Obstacles to Overcome
+1. Violation of assumptions
+
+1. Conventional formulas
+
+1. Network dynamism 
+]
+]
+
+.panel[.panel-name[Permutations]
+
+.pull-left[
+
+- Matrices are rearranged over and over (even thousands of times!)
+
+- Permutations are then compared to your observed data
+
+- If network properties of interest occur often, likely due to chance.
+
+]
+
+.pull-right[
+```{r}
+year_1_collab_matrix[1:8,1:8]
+```
+]
+]
+
+
+.panel[.panel-name[Applications]
+
+1. Is there a relationship between the frequency of collaboration between school leaders and their discussion of confidential issues? 
+2. Do school leaders prefer to collaborate with those with whom they have collaborated in the past? 
+3. Does gender or some other individual attribute predicts confidential exchanges between school leaders, or does some previous relation have a stronger effect? 
+4. Does collaboration between leaders explain one's level of trust in colleagues? 
+5. Can we distinguish among different groups of school leaders based on how frequently they collaborate, and if so, are these groupings related to the level at which they work (school versus district)?
+
+]
+
+.panel[.panel-name[Discussion]
+
+Think about a network you are a part of or may be interested in studying. What research question(s) might you ask about the relationship between:  
+- different types of **ties** (e.g., relationship or interaction)
+- actor **attributes** (e.g., attitudes, test scores) and **ties**
+- **network properties** (e.g., centrality, density) and actor **attributes**
+- groups in the network
+
+]
+
+]
+
+???
+## Evolution
+### Aims of Inference
+- note 
+### Obstacles to Overcome
+- note
+## Permutations
+- note
+
+
+---
+# Models in Networks
+
+.panelset[
+
+
+.panel[.panel-name[QAP]
+
+.pull-left[
+```{r y1-collaboration, echo=FALSE, message=FALSE, warning=FALSE, out.width = '350px'}
+ggraph(year_1_collab_network) +
+  geom_node_point(size = 3) +
+  geom_edge_link() +
+  theme_graph() +
+  ggtitle("Year 1 Collaboration Ties")
+```
+]
+
+
+.pull-right[
+```{r y3-confidential, echo=FALSE, message=FALSE, warning=FALSE, out.width = '350px'}
+ggraph(year_1_conf_network) +
+  geom_node_point(size = 3) +
+  geom_edge_link() +
+  theme_graph() +
+  ggtitle("Year 3 Confidential Ties")
+```
+
+
+]
+]
+
+.panel[.panel-name[MR-QAP]
+
+.pull-left[
+*Do school leaders prefer to collaborate with those with whom they have collaborated in the past or with those that they have discussed confidential issues?*
+]
+
+.pull-right[
+.center[<img src="img/qap-table.png" height="350px"/>]
+]
+]
+
+
+.panel[.panel-name[P1 & P-Star]
+
+
+.pull-left[
+
+*Does gender or some other individual attribute predicts confidential exchanges between school leaders, or does some previous relation have a stronger effect?*
+
+]
+
+
+.pull-right[
+.center[<img src="img/p-star-table.png" height="350px"/>]
+
+]
+
+]
+
+.panel[.panel-name[Regression]
+
+
+.pull-left-narrow[
+
+*Does collaboration between leaders explain one's level of trust in colleagues?*
+
+]
+
+
+.pull-right-wide[
+```{r, message=FALSE}
+leader_nodes <- read_csv("data/school-leader-nodes.csv")
+
+leader_edges <- read_csv("data/school-leader-edges.csv")
+
+leader_graph <- tbl_graph(edges = leader_edges,
+                          nodes = leader_nodes,
+                          directed = TRUE)
+
+
+leader_measures <- leader_graph |>
+  activate(nodes) |>
+  mutate(in_degree = centrality_degree(mode = "in")) |>
+  mutate(out_degree = centrality_degree(mode = "out"))
+
+node_measures <- leader_measures |> 
+  activate(nodes) |>
+  as_tibble()
+
+head(node_measures)
+```
+
+]
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about potential research questions we raised in the previous slide. What model might be appropriate for answering that question?
+
+Hint: think about the what relationship is being tested:    
+- **ties-ties**: QAP/MR-QAP
+- **attributes-ties**: P1 & P-Star
+- **network properties-attributes**: t-tests, anova, regression
+
+]
+
+]
+
+???
+## QAP
+- The quadratic assignment procedure developed by Hubert (1987) and Krackhardt (1987b) tests the null hypothesis of no correlation between the two networks and adjusts for this dependence between networks by repeatedly permuting the order of rows and columns of one of the networks while keeping the other network intact.
+- It is useful, for example, in determining whether there is a relationship between collaboration among school leaders in year 1 and how often they engage in confidential exchanges in year 3. Or you could examine the relationship between how frequently school leaders turn to each other to discuss issues of a confidential nature in year 1 and collaboration in year 3.
+- 
+
+
+
+---
+# A Research Exemplar
+
+.panelset[
+
+.panel[.panel-name[Context]
+
+.pull-left[
+
+This longitudinal case study **examines reform-related knowledge, advice, and innovation network structures** among administrators in a district under sanction for under-performance and engaging in district-wide reform efforts.
+]
+
+.pull-right[
+
+.center[<img src="img/daly-net.jpeg" height="320px"/>]
+]
+
+]
+
+.panel[.panel-name[Questions]
+
+This study involves **quantifying and visualizing the ties and overall structure** of informal networks to answer the following research questions: 
+
+1. In what ways have reform-related social networks between district and site leaders evolved **over a 2-year period**? 
+2. How do district and school leaders perceive the evolution of the social networks and its **effect on the exchange of reform-related resources** within the district?
+]
+
+.panel[.panel-name[Data]
+To answer RQ1, Daly and Finnigan administered **online survey consisting of network relations and demographic questions** asking participants to:
+- select the administrators in the La Estasis network that they interact with for the purpose of **advice seeking, collaboration, knowledge exchanges**,
+- assess their relationships on a **5-point interaction scale** ranging from 1 (no interaction) to 5 (1 to 2 times a week).
+
+]
+
+
+.panel[.panel-name[Model Findings]
+
+.pull-left[
+### QAP
+- weak correlation between knowledge and innovation and advice and innovation
+- leaders with knowledge ties also likely to have advice relations
+]
+
+.pull-right[
+
+### P-Star (SIENA)
+- Leaders with more experience more likely to be selected for reform-related advice
+- over time, leaders tended to create ties with those frequently identified as resources for innovative practices
+]
+
+]
+
+
+.panel[.panel-name[Takeaways]
+
+Overall, the findings from SNA and qualitative interviews indicate that over time: 
+- Networks **increased the number of superficial interactions**.
+- More frequent exchanges, however, remained unchanged. 
+- The result was a centralized network structure.
+]
+
+]
+
+
+.footnote[
+Daly, A. et al. (2011). [The ebb and flow of social network ties between district leaders.](https://via.hypothes.is/https://drive.google.com/file/d/1RPDTFTGlYV5RfN1EflPS8f8o_7giVGhX/view?usp=sharing)
+]
+
+???
+
+---
+class: clear, inverse, middle, center
+
+# part_2(R, code_along)
+----
+ERGM, Model Specification, and Interpretation
+
+
+
+---
+# Prepare
+
+.panelset[
+
+.panel[.panel-name[Research Question]
+
+*Does gender or some other individual attribute predict confidential exchanges between school leaders?*
+
+]
+
+
+.panel[.panel-name[ergm 📦]
+
+- ERGMs are the primary building blocks of statistically testing network structural effects.
+- Uses simulation to determine the probability of network feature (e.g., reciprocity, clique, homophily)
+- Evolved to allow actor attributes for covariates
+- The {ergm} package is used to fit exponential-family random graph models (ERGMs) in R
+
+]
+
+
+.panel[.panel-name[Your Turn]
+
+Let's start by creating a new R script and loading the following packages:
+- readxl
+- ergm
+- statnet
+
+```{r, echo=FALSE, message=FALSE}
+library(readxl)
+library(ergm)
+library(statnet)
+```
+
+```{r load-libraries, echo=TRUE}
+# YOUR CODE HERE
+
+
+```
+
+]
+
+]
+
+???
+
+### ERGM
+Suppose an empirical network consists of 100 teachers and 1,000 ties among them, for a density value of 10%. We might be interested in examining whether there is a tendency for reciprocity: If Teacher A nominated B, was B more likely to nominate A? To figure out whether there is a tendency toward reciprocal relations, hundreds or perhaps even thousands of networks are generated with the same number of actors and ties as in the empirical network—100 actors and 1,000 ties. The average of the simulated distribution of reciprocal ties is calculated and then compared to the value in the empirical (observed) network. Then, if the reciprocity in the empirical network differs from the average reciprocity in the simulated networks more than it would be expected to by chance, we can conclude that there is indeed a tendency towards reciprocity.
+
+---
+
+# Import Data   
+
+.panelset[
+
+.panel[.panel-name[Import Data]
+
+Let's import two Excel files from the Social Network Analysis and Education companion site. year_1_collaboration.xlsx 
+
+```{r import-data, echo=TRUE, message=FALSE}
+leader_nodes <- read_csv("data/school-leader-nodes.csv")
+
+leader_edges <- read_csv("data/school-leader-edges.csv")
+```
+
+
+]
+
+.panel[.panel-name[Inspect Data]
+
+In the corresponding line of your R script, take a look at the node and edge lists we just imported:
+
+```{r inspect-data, echo=TRUE}
+# ADD CODE BELOW
+#
+#
+
+```
+
+
+]
+
+.panel[.panel-name[Discuss]
+
+Think about the questions below and be prepared to share your response:              
+1. What do you think the values for each tie represent?
+1. What do you think the "trust" and "efficacy" variables represent?
+1. What else do you notice about this data? 
+1. What else do you wonder about this data?
+
+Hint: Take a look at the SNA in Ed [companion site](https://studysites-sagepub-com.prox.lib.ncsu.edu/carolan/study/resources.htm) 
+
+
+]
+
+.panel[.panel-name[Answer]
+
+- Edge values indicate the frequency of interactions leaders have with nominated individuals on a four-point frequency scale ranging from 1 (the least frequent) to 4 (1–2 times a week). 
+- `efficacy` measures a belief in their ability to have an effect derived from a scale that includes 18 items rated on a 9-point Likert scale ranging from 1 (None at all) to 9 (A great deal). 
+- `trust` measures perceptions of the level of trust their school and district is a composite score based on scale contains eight items rated on a 7-point Likert scale ranging from 1 (Strongly disagree) to 7 (Strongly agree). 
+]
+]
+
+---
+# Wrangle  
+
+.panelset[
+
+
+.panel[.panel-name[as.network() function]
+
+The {ergm} package requires an object of the class "network" — the format that {statnet} uses to store and work with network data.
+
+The `as.network()` function does just that. Run the following code in your console to pull up the help page for the `as.network()` function and let's take a look:
+
+```{r as.network, echo=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
+?as.network
+```
+
+
+]
+
+.panel[.panel-name[Convert to Network]
+
+Run the following code in your R script to combine our edge and node lists into a single "network" object: 
+
+```{r dichotomize-matrix, echo=TRUE, message=FALSE, warning=FALSE}
+leader_network <- as.network(leader_edges,
+                             vertices = leader_nodes)
+
+```
+
+
+]
+
+.panel[.panel-name[Check Class]
+
+Now let's use the `class()` function to verify that it is indeed a network object/data structure:
+
+```{r add-names, echo=TRUE, message=FALSE, warning=FALSE}
+
+class(leader_network)
+```
+]
+
+.panel[.panel-name[View Network]
+
+In the corresponding line of your R script, type the name of network object we just created and run the code:
+
+```{r view-netwok, echo=TRUE}
+# ADD CODE BELOW
+#
+#
+
+```
+
+
+]
+
+
+]
+
+---
+# Model
+
+.panelset[
+
+
+.panel[.panel-name[Model Specification]
+
+The syntax for specifying a model in the `ergm` package follows **R**'s
+formula convention:
+`my_network ~ ergm_term_1 + ergm_term_2 + ergm_term_3` and so forth.
+
+In the Help tab, search for "ergm-terms" and select the `ergm::ergm-terms` help page to take a quick peek at the plethora of parameters you can include in your model. 
+
+]
+
+.panel[.panel-name[ERGM 1]
+
+Let's start with with a simple model that contains the following ergm-terms 
+- **`edges`** a required term that represents the total number of edges in the network
+- **`mutual`** examines the tendency for ties to be reciprocated,
+i.e. "mutuality".
+
+```{r ERGM-1, echo=TRUE, message=FALSE, warning=FALSE}
+
+# ensure reproducibility of our model
+set.seed(589) 
+
+# fit our ergm model 
+ergm_mod_1 <-ergm(leader_network ~ edges + mutual) 
+
+# get summary statistics for our model
+summary(ergm_mod_1) 
+
+```
+
+
+]
+
+.panel[.panel-name[ERGM 2]
+
+Let's now test for homophily -- or the "birds of a feather" phenomenon -- in our network. The `ergm()` function now includes a `nodematch()` term to answer the following question:
+
+*Are school leaders more likely to confide in colleagues of their own gender or who work at the same site level (e.g., school vs. central office)?*
+
+```{r ERGM-2, echo=TRUE, message=FALSE, warning=FALSE}
+
+# fit our ergm model 
+ergm_mod_2 <-ergm(leader_network ~ edges + mutual + nodematch('male') + nodematch('district_site')) 
+
+# get summary statistics for our model
+summary(ergm_mod_2) 
+
+```
+]
+
+.panel[.panel-name[ERGM 3]
+
+Let's now test for homophily -- or the "birds of a feather" phenomenon -- in our network. The `ergm()` function now includes a `nodematch()` term to answer the following question:
+
+*Are school leaders with higher levels of trust more likely to have confidential exchanges?*
+
+```{r ERGM-3, echo=TRUE, message=FALSE, warning=FALSE}
+
+# fit our ergm model 
+ergm_mod_3 <-ergm(leader_network ~ edges + mutual + nodematch('male') + nodematch('district_site') + nodecov('trust')) 
+
+# get summary statistics for our model
+summary(ergm_mod_3) 
+
+```
+]
+]
+
+
+
+
+
+
+---
+# What's Next
+
+.pull-left[
+## Essential Readings
+
+- [Statistical Inference With Network Data](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-4/carolan-sna-ch-8.pdf)
+
+- [Network Data and Statistical Models](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-4/carolan-sna-ch-9.pdf)  
+
+] 
+
+.pull-right[
+## Case Study
+
+- [SNA Case Study: Birds of a Feather Lead Together](https://laser-institute.github.io/network-analysis/lab-4/sna-lab-4-case-key.html)
+
+- [Guiding Study: The ebb and flow of social network ties between district leaders.](https://github.com/laser-institute/essential-readings/blob/main/sna-labs/sna-lab-4/daly-ebb-flow.pdf)
+
+]
+
+
+
+
+---
+class: clear, center
+
+## .font130[.center[**Thank you!**]]
+
+
+.center[<img style="border-radius:50%;" src="img/kellogg.jpeg" height="200px"/><br/>**Shaun Kellogg**<br/><mailto:sbkellog@ncsu.edu>]
+
+.pull-left-narrow[.center[<img style="border-radius: 50%;" src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo.png" height="150px"/> ]]
+
+.pull-right-wide[
+.left[.font70[
+
+This work was supported by the National Science Foundation grant DRL-2025090 (ECR:BCSER). Any opinions, findings, and conclusions expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
+]]]
