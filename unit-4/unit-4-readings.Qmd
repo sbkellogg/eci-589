@@ -1,5 +1,5 @@
 ---
-title: 'Statistical Inference and Network Models'
+title: 'Statistical Inference & Network Models'
 subtitle: "ECI 589 SNA and Education: Unit 4 Readings"
 author: "Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
