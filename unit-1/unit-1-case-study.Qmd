@@ -11,6 +11,8 @@ theme:
   light: cosmo
   dark: cyborg
 bibliography: lit/references.bib
+execute:
+  eval: false
 ---
 
 ## 1. PREPARE
@@ -129,9 +131,8 @@ Use the code chunk below load the {tidygraph}, {ggraph}, and {readxl} packages:
 
 ```{r load-packages}
 # YOUR CODE HERE
-library(tidygraph)
-library(ggraph)
-library(readxl)
+
+
 ```
 
 ## 2. WRANGLE
@@ -216,14 +217,8 @@ Complete the code chunk below to import the `teacher-reported-friends.xlsx` fil
 
 ```{r import-teacher}
 # YOUR CODE HERE
-teacher_friends <- read_excel("data/teacher-reported-friends.xlsx", 
-                              col_names = FALSE)
 
-rownames(teacher_friends) <- 1:27
 
-colnames(teacher_friends) <- 1:27
-
-teacher_friends
 ```
 
 **RStudio Tip:** If you happen to run into issues with data import, RStudio has a handy "Import Dataset" feature for a point and click approach to adding data to your environment.
@@ -361,20 +356,8 @@ Complete the code chunk below to convert your `teacher_friends` object first to 
 
 ```{r teacher-network}
 # YOUR CODE HERE
-teacher_matrix <- as.matrix(teacher_friends)
 
-teacher_network <- as_tbl_graph(teacher_matrix,
-                                directed = TRUE)
 
-teacher_edges <- teacher_network |>
-  activate(edges) |>
-  as_tibble()
-
-teacher_network <- tbl_graph(edges = teacher_edges, 
-                             nodes = student_attributes, 
-                             directed = TRUE)
-
-teacher_network
 ```
 
 Now answer the questions that following questions:
@@ -447,11 +430,8 @@ Use the code chunk below to try out these simple sociogram functions on your `te
 
 ```{r teacher-sociogram}
 # YOUR CODE HERE
-plot(teacher_network)
 
-autograph(teacher_network,
-          node_size = local_size(),
-          node_colour = local_size())
+
 ```
 
 Not exactly great graphs, but they already provided some insight into our research questions. Specifically, we can see visually that teacher and student reported peer networks are very different!
@@ -485,8 +465,9 @@ To add our nodes, we'll added the `geom_node_point()` function. Again, just like
 Now "add" the `geom_node_point()` function to our code using the `+` operator:
 
 ```{r add-nodes}
-ggraph(student_network) + 
-  geom_node_point() 
+# YOUR CODE HERE
+
+
 ```
 
 Well, at least we have our nodes now!
@@ -599,16 +580,9 @@ Now that you have a sense of how the {ggraph} package works to build network gra
 There are no right or wrong answers, just have some fun trying out different options for graph [layouts](https://ggraph.data-imaginist.com/articles/Layouts.html), [edges](https://ggraph.data-imaginist.com/articles/Edges.html) and [nodes](https://ggraph.data-imaginist.com/articles/Nodes.html) and see if you can build something that is visually pleasing to you.
 
 ```{r your-sociogram}
-ggraph(teacher_network, layout = "fr") + 
-  geom_edge_link(arrow = arrow(length = unit(1, 'mm')), 
-                 end_cap = circle(3, 'mm'),
-                 start_cap = circle(3, 'mm'),
-                 alpha = .2) +
-  geom_node_point(aes(size = local_size(),
-                      color = gender)) +
-  geom_node_text(aes(label = id),
-                 repel=TRUE) +
-  theme_graph()
+# YOUR CODE HERE
+
+
 ```
 
 Congrats, you made it to the end of the EXPLORE section and created your first sociogram in R!
