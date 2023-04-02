@@ -27,18 +27,18 @@ Analysis and Education [@carolan2014]. For your final course project,
 you'll be asked to prepare your own small scale "case study" that brings
 together some of the workflow approaches we've learned this semester to
 help answer a research question you have about a dataset of your own
-choosing. 
+choosing.
 
 ## Assignment
 
-In preparation of your final project, you will read [Chapter
+In preparation for your final project, you will read [Chapter
 12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf)
 from [Social Network Analysis and
 Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which
 summarizes the theories, methods, and applications that constitute the
 interdisciplinary field of social network analysis; reiterate its
-limitations and and provides some guidance for doing your own social
-network analysis in educational research.
+limitations and provides some guidance for doing your own social network
+analysis in educational research.
 
 This week also provides some space to plan and conceptualize your
 **final course project, due May 4th**. More details about the actual

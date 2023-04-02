@@ -1,6 +1,6 @@
 ---
-title: 'Unit 4 Case Study: Birds of a Feather Lead Together'
-subtitle: "ECI 589 Social Network Analysis and Education"
+title: 'Birds of a Feather Lead Together'
+subtitle: "ECI 589 SNA and Education: Unit 4 Case Study"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:

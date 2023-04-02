@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-03-31">
+<meta name="dcterms.date" content="2023-04-02">
 
-<title>Unit 4 Case Study: Birds of a Feather Lead Together</title>
+<title>Birds of a Feather Lead Together</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -205,8 +205,8 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Unit 4 Case Study: Birds of a Feather Lead Together</h1>
-<p class="subtitle lead">ECI 589 Social Network Analysis and Education</p>
+<h1 class="title">Birds of a Feather Lead Together</h1>
+<p class="subtitle lead">ECI 589 SNA and Education: Unit 4 Case Study</p>
 </div>
 
 
@@ -223,7 +223,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 31, 2023</p>
+      <p class="date">April 2, 2023</p>
     </div>
   </div>
   
@@ -344,6 +344,16 @@ div.csl-indent {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Installed ReposVer Built  
+ergm           "4.1.2"   "4.4.0"  "4.1.0"
+ergm.count     "4.0.2"   "4.1.1"  "4.1.0"
+network        "1.17.1"  "1.18.1" "4.1.0"
+networkDynamic "0.11.0"  "0.11.3" "4.1.0"
+sna            "2.6"     "2.7-1"  "4.1.0"
+statnet.common "4.5.0"   "4.8.0"  "4.1.0"
+tergm          "4.0.2"   "4.1.1"  "4.1.0"</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -366,11 +376,11 @@ div.csl-indent {
 </ol>
 <p>Since we are working with Excel files, we’ll need to use the <code>read_excel()</code> function from {readxl} tidyverse package to import our data. Let’s import the <code>School Leaders Data Chapter 9_e.xlsx</code> node file located in the <code>data/</code> folder first:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>leader_nodes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/School Leaders Data Chapter 9_e.xlsx"</span>, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"text"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>leader_nodes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>leader_nodes <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/School Leaders Data Chapter 9_e.xlsx"</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"text"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>leader_nodes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 43 × 5
    id    efficacy trust district_site  male
@@ -395,13 +405,13 @@ div.csl-indent {
 <p>Use the <code>read_excel()</code> function to import the <code>School Leaders Data Chapter 9_d.xlsx</code> file, add an argument setting the column names to <code>FALSE</code> since our file is a simple matrix with no header or column names, and assign the matrix to a variable named <code>leader_matrix</code>:</p>
 <p><strong>Hint:</strong> Type <code>?read_excel</code> into the console and check the arguments section to find the name of the argument used to set column headers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>leader_matrix <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/School Leaders Data Chapter 9_d.xlsx"</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>leader_matrix <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/School Leaders Data Chapter 9_d.xlsx"</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use the code chunk below to inspect the matrix you just imported and answer the questions that follow:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>leader_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>leader_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 43 × 43
     ...1  ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9 ...10 ...11 ...12 ...13
@@ -455,10 +465,10 @@ div.csl-indent {
 <p>As the title of their article suggests, however, <span class="citation" data-cites="thomas2011valued">Thomas and Blitzstein (<a href="#ref-thomas2011valued" role="doc-biblioref">2011</a>)</span> argue that the motivations for dichotomization should be revisited as dichotomization produces a range of problematic issues.</p>
 <p>With that in mind, and before we can dichotomize our “matrix,” we first need to convert it to a matrix object recognized by R using the <code>as.matrix()</code> function. We can then check to data format of our <code>leader_matrix</code> using the <code>class()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>leader_matrix <span class="ot">&lt;-</span> leader_matrix <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leader_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>leader_matrix <span class="ot">&lt;-</span> leader_matrix <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leader_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "matrix" "array" </code></pre>
 </div>
@@ -466,19 +476,19 @@ div.csl-indent {
 <p>Both the collaboration and confidential help network data were dichotomized by recoding values originally coded as a 3 and 4 recoded to 1, indicating the presence of a directed tie for both relations, and zero otherwise.</p>
 <p>To dichotomize our our matrix, the following code will “assign” 0’s to all values in our matrix that are less than or equal to 2, and 1’s to all values that are greater the or equal to 3:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>leader_matrix[leader_matrix <span class="sc">&lt;=</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>leader_matrix[leader_matrix <span class="sc">&gt;=</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>leader_matrix[leader_matrix <span class="sc">&lt;=</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>leader_matrix[leader_matrix <span class="sc">&gt;=</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="add-row-and-column-names" class="level4">
 <h4 class="anchored" data-anchor-id="add-row-and-column-names">Add Row and Column Names</h4>
 <p>Before we can convert to an edge-list, we will also need to add the names of our nodes to the columns and rows of our matrix. These are stored in the <code>ID</code> column of our <code>leader_node</code> data frame. We can use the <code>$</code> operator to select these names and assign to our <code>leader_matrix</code> using the <code>rownames()</code> and <code>colnames()</code> functions respectively:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(leader_matrix) <span class="ot">&lt;-</span> leader_nodes<span class="sc">$</span>id</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(leader_matrix) <span class="ot">&lt;-</span> leader_nodes<span class="sc">$</span>id</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>leader_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(leader_matrix) <span class="ot">&lt;-</span> leader_nodes<span class="sc">$</span>id</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(leader_matrix) <span class="ot">&lt;-</span> leader_nodes<span class="sc">$</span>id</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>leader_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
 1  0 0 0 0 0 0 0 0 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
@@ -580,18 +590,18 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="get-edges">Get Edges</h4>
 <p>The {igraph} package introduced in Unit 1 has a convenient <code>get.data.frame()</code> function for extracting an edge list from a matrix, but first we need to convert our matrix to an igraph network object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>adjacency_matrix <span class="ot">&lt;-</span> <span class="fu">graph.adjacency</span>(leader_matrix,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">diag =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(adjacency_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>adjacency_matrix <span class="ot">&lt;-</span> <span class="fu">graph.adjacency</span>(leader_matrix,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">diag =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(adjacency_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "igraph"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>adjacency_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>adjacency_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH a86e93d DN-- 43 143 -- 
+<pre><code>IGRAPH 66c26ce DN-- 43 143 -- 
 + attr: name (v/c)
-+ edges from a86e93d (vertex names):
++ edges from 66c26ce (vertex names):
  [1] 3 -&gt;1  3 -&gt;27 3 -&gt;28 3 -&gt;36 3 -&gt;38 4 -&gt;16 4 -&gt;28 4 -&gt;34 4 -&gt;36 5 -&gt;9 
 [11] 7 -&gt;10 7 -&gt;20 8 -&gt;3  8 -&gt;10 8 -&gt;25 8 -&gt;27 8 -&gt;28 8 -&gt;37 8 -&gt;38 9 -&gt;5 
 [21] 9 -&gt;14 10-&gt;3  10-&gt;7  10-&gt;8  10-&gt;11 10-&gt;18 10-&gt;20 10-&gt;38 11-&gt;10 11-&gt;21
@@ -606,12 +616,12 @@ div.csl-indent {
 <p>Note that we included the <code>diag = FALSE</code> argument which converts all values along the diagonal to 0s, thereby removing self-loops. I believe they may have been included when calculating the network descriptives included in Table 9.1, and our own descriptives may not match exactly, but we’ll need to remove these from our network for the ERGM analysis so this will save us a step.</p>
 <p>Now we can use the <code>get.data.frame()</code> function to covert our matrix to a standard edge-list:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>leader_edges <span class="ot">&lt;-</span> <span class="fu">get.data.frame</span>(adjacency_matrix) <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">from =</span> <span class="fu">as.character</span>(from)) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to =</span> <span class="fu">as.character</span>(to))</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>leader_edges</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>leader_edges <span class="ot">&lt;-</span> <span class="fu">get.data.frame</span>(adjacency_matrix) <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">from =</span> <span class="fu">as.character</span>(from)) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to =</span> <span class="fu">as.character</span>(to))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>leader_edges</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    from to
 1      3  1
@@ -770,13 +780,13 @@ div.csl-indent {
 <li><p><code>directed =</code> specifies whether the constructed graph be directed.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>leader_graph <span class="ot">&lt;-</span> <span class="fu">tbl_graph</span>(<span class="at">edges =</span> leader_edges,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nodes =</span> leader_nodes,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>leader_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>leader_graph <span class="ot">&lt;-</span> <span class="fu">tbl_graph</span>(<span class="at">edges =</span> leader_edges,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nodes =</span> leader_nodes,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>leader_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tbl_graph: 43 nodes and 143 edges
 #
@@ -824,12 +834,12 @@ div.csl-indent {
 <p>We can use the <code>mutate()</code> functions to create new variables for nodes such as measures of degree, in-degree, and out-degree using the <code>centrality_degree()</code> function in the {tidygraph} package.</p>
 <p>Run the following code to add in- and out-degree measures to each of our nodes and examine the output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="ot">&lt;-</span> leader_graph <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">in_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"in"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">out_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"out"</span>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>leader_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="ot">&lt;-</span> leader_graph <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">in_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"in"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">out_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"out"</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>leader_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tbl_graph: 43 nodes and 143 edges
 #
@@ -861,13 +871,13 @@ div.csl-indent {
 <p>We now see that, in addition to the previously included attributes <code>trust</code> and <code>efficacy</code>, in-degree and out-degree measures have been added to the nodes in our network. But what if we also want to know to total number of “alters” each “ego” is connected to, i.e.&nbsp;the total number of individuals each school leader are connected to?</p>
 <p>Modify the code below to calculate <code>degree</code> for each school leader in our network. <strong>Hint:</strong> <code>centrality_degree</code> is a wrapper for <code>igraph::degree()</code> and the <code>mode =</code> argument can be found in the corresponding help documentation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="ot">&lt;-</span> leader_graph <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"all"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">in_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"in"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">out_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"out"</span>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>leader_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="ot">&lt;-</span> leader_graph <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"all"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">in_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"in"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">out_degree =</span> <span class="fu">centrality_degree</span>(<span class="at">mode =</span> <span class="st">"out"</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>leader_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tbl_graph: 43 nodes and 143 edges
 #
@@ -898,11 +908,11 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="summarize-node-measures">Summarize Node Measures</h4>
 <p>We can also use the <code>activate()</code> function combined with the <code>as_tibble()</code> function introduced in our previous unit to extract our new measures to a separate data frame we’ll call <code>node_measures</code> so we can inspect our nodes individually and later use to calculate some summary stats:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="ot">&lt;-</span> leader_measures <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>node_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="ot">&lt;-</span> leader_measures <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>node_measures</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 43 × 8
    id    efficacy trust district_site  male degree in_degree out_degree
@@ -922,7 +932,7 @@ div.csl-indent {
 </div>
 <p>Now let’s view some basic summary statistics for each of the variables using the handy <code>summary()</code> function included in the R {base} package and the <code>skim()</code> functions from the {skimr} package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(node_measures)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(node_measures)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      id               efficacy         trust       district_site   
  Length:43          Min.   :4.610   Min.   :3.630   Min.   :0.0000  
@@ -939,7 +949,7 @@ div.csl-indent {
  3rd Qu.:1.0000   3rd Qu.: 9.500   3rd Qu.:5.000   3rd Qu.: 4.000  
  Max.   :1.0000   Max.   :27.000   Max.   :8.000   Max.   :20.000  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(node_measures)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(node_measures)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <caption>Data summary</caption>
@@ -1153,12 +1163,12 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="schooldistrict-level-stats">School/District-Level Stats</h4>
 <p>Since we are now working with a standard data frame, we can also apply <a href="https://dplyr.tidyverse.org/index.html">{dyplr}</a> functions like <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> and <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a> to calculate basic summary stats such as counts, mean, and standard deviation as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(in_degree), </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(in_degree)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(in_degree), </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(in_degree)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   district_site     n  mean    sd
@@ -1173,12 +1183,12 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="your-turn-5">👉 Your Turn ⤵</h4>
 <p>Use the code chunk below and additional chunks if needed to try and replicate the school and district level findings for out-degree, trust and efficacy measures.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(out_degree), </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(out_degree)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(out_degree), </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(out_degree)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   district_site     n  mean    sd
@@ -1186,12 +1196,12 @@ div.csl-indent {
 1             0    25  2.44  3.01
 2             1    18  4.56  5.41</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(trust), </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(trust)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(trust), </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(trust)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   district_site     n  mean    sd
@@ -1199,12 +1209,12 @@ div.csl-indent {
 1             0    25  4.90 0.719
 2             1    18  4.62 0.688</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(efficacy), </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(efficacy)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>node_measures <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(district_site) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(efficacy), </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(efficacy)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
   district_site     n  mean    sd
@@ -1227,12 +1237,12 @@ div.csl-indent {
 <h4 class="anchored" data-anchor-id="your-turn-6">👉 Your Turn ⤵</h4>
 <p>Try creating a <strong>Year 3 Confidential Exchange Network</strong> by modifying the code below and tweaking the included function/arguments or adding new ones for <a href="https://ggraph.data-imaginist.com/articles/Layouts.html">layouts</a>, <a href="https://ggraph.data-imaginist.com/articles/Nodes.html">nodes</a>, and <a href="https://ggraph.data-imaginist.com/articles/Edges.html">edges</a> to make our plot either more “aesthetically pleasing” or more purposeful in what it’s trying to communicate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="sc">|&gt;</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span> </span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span> </span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>leader_measures <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">"fr"</span>) <span class="sc">+</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>() <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>() <span class="sc">+</span> </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="unit-4-case-study-key_files/figure-html/improve-sociogram-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1273,10 +1283,10 @@ div.csl-indent {
 </ul>
 <p>Similar to the <code>tbl_graph</code> function from {tidygraph} that we used above, let’s add our <code>leader_edges</code> edge-list and our <code>leader_nodes</code> data frame as the <code>x =</code> and <code>vertices =</code> arguments in the <code>as.network()</code> function and assign to a new object called <code>leader_network</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>leader_network <span class="ot">&lt;-</span> <span class="fu">as.network</span>(leader_edges,</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">vertices =</span> leader_nodes)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>leader_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>leader_network <span class="ot">&lt;-</span> <span class="fu">as.network</span>(leader_edges,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">vertices =</span> leader_nodes)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>leader_network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Network attributes:
   vertices = 43 
@@ -1298,7 +1308,7 @@ No edge attributes</code></pre>
 <p>Note that we could also have supplied our <code>leader_matrix</code> as the first argument, but using and edgelist vastly simplifies the process of adding node attributes.</p>
 <p>Let’s also check the be sure that our <code>leader_network</code> is indeed a <code>network</code> object by using the <code>class()</code> function to identify object type:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leader_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leader_network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "network"</code></pre>
 </div>
@@ -1322,7 +1332,7 @@ No edge attributes</code></pre>
 <h4 class="anchored" data-anchor-id="network-structure-parameters">Network Structure Parameters</h4>
 <p>Let’s start with with a simple model similar to the P<sub>1</sub> model in Table 9.4. This model contains the required ergm-term <strong><code>edges</code></strong> that represents the total number of edges in the network, and the ergm-term <strong><code>mutual</code></strong> that examines the tendency for ties to be reciprocated, i.e.&nbsp;“mutuality”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> mutual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> mutual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> edges mutual 
    143     36 </code></pre>
@@ -1332,11 +1342,11 @@ No edge attributes</code></pre>
 <p>Since the <code>ergm()</code> function uses a stochastic MCMC-based estimation algorithm, use the <code>set.seed()</code> function and set the value to 589 (note this could be any number besides our course number) so we produce the same results each time.</p>
 <p>Now let’s estimate our model, save the results as <code>ergm_mod_1</code>, and use the <code>summary()</code> function again to take a look at our estimates. Also,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">589</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ergm_mod_1 <span class="ot">&lt;-</span><span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> mutual)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_mod_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">589</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>ergm_mod_1 <span class="ot">&lt;-</span><span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> mutual)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_mod_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = leader_network ~ edges + mutual)
@@ -1344,15 +1354,15 @@ ergm(formula = leader_network ~ edges + mutual)
 Monte Carlo Maximum Likelihood Results:
 
        Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges   -3.1094     0.1247      0  -24.94   &lt;1e-04 ***
-mutual   3.0984     0.2825      0   10.97   &lt;1e-04 ***
+edges   -3.1101     0.1283      0  -24.23   &lt;1e-04 ***
+mutual   3.1246     0.3003      0   10.40   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
      Null Deviance: 2503.6  on 1806  degrees of freedom
- Residual Deviance:  892.4  on 1804  degrees of freedom
+ Residual Deviance:  891.8  on 1804  degrees of freedom
  
-AIC: 896.4  BIC: 907.4  (Smaller is better. MC Std. Err. = 0.9802)</code></pre>
+AIC: 895.8  BIC: 906.8  (Smaller is better. MC Std. Err. = 0.7447)</code></pre>
 </div>
 </div>
 <p>Since ERGMs predict the presence of a network tie, with estimates indicating the importance of each to the presence of a tie, estimated coefficients can be explained in terms similar to logistic regression. That is, positive significant coefficients indicate that the corresponding parameters in the observed network (e.g.&nbsp;reciprocated ties between school leaders), controlling for all other parameters in the model, occur more than would be expected by chance, thus increasing the likelihood that a tie will occur, and vice-versa for negative coefficients.</p>
@@ -1361,10 +1371,10 @@ AIC: 896.4  BIC: 907.4  (Smaller is better. MC Std. Err. = 0.9802)</code></pre>
 <p>Ergm-terms for transitivity such as <code>triangles</code> and <code>transitive</code> in particular are prone to model degeneration. Fortunately, the {ergm} package includes a “more robust way of modeling triangles: the geometrically-weighed edgewise shared partner term (GWESP).”</p>
 <p>Let’s add the <code>gwesp</code> term to our model with the suggested defaults from the Statnet Tutorial section on <a href="http://statnet.org/Workshops/ergm_tutorial.html#What_it_looks_like_when_a_model_fails">What it looks like when a model fails</a> and take a look at the summary first:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>          mutual <span class="sc">+</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>          transitive <span class="sc">+</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>          mutual <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>          transitive <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           edges           mutual       transitive gwesp.fixed.0.25 
         143.0000          36.0000         202.0000         116.2971 </code></pre>
@@ -1373,11 +1383,11 @@ AIC: 896.4  BIC: 907.4  (Smaller is better. MC Std. Err. = 0.9802)</code></pre>
 <p>As you can see, we have 202 transitive triad types.</p>
 <p>Now lets run our model including transitivity and take a look at our estimates. Note that this make take a couple minutes to run. If you’d like to watch the number of iterations of the model set <code>message = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ergm_mod_2 <span class="ot">&lt;-</span><span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                    mutual <span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T))</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_mod_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>ergm_mod_2 <span class="ot">&lt;-</span><span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                    mutual <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T))</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_mod_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = leader_network ~ edges + mutual + gwesp(0.25, 
@@ -1386,16 +1396,16 @@ ergm(formula = leader_network ~ edges + mutual + gwesp(0.25,
 Monte Carlo Maximum Likelihood Results:
 
                  Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges             -3.9739     0.1562      0 -25.446   &lt;1e-04 ***
-mutual             2.2925     0.3076      0   7.453   &lt;1e-04 ***
-gwesp.fixed.0.25   1.0718     0.1306      0   8.205   &lt;1e-04 ***
+edges             -3.9745     0.1522      0 -26.117   &lt;1e-04 ***
+mutual             2.2989     0.3171      0   7.250   &lt;1e-04 ***
+gwesp.fixed.0.25   1.0713     0.1305      0   8.207   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
      Null Deviance: 2503.6  on 1806  degrees of freedom
- Residual Deviance:  805.9  on 1803  degrees of freedom
+ Residual Deviance:  805.7  on 1803  degrees of freedom
  
-AIC: 811.9  BIC: 828.4  (Smaller is better. MC Std. Err. = 0.563)</code></pre>
+AIC: 811.7  BIC: 828.2  (Smaller is better. MC Std. Err. = 0.487)</code></pre>
 </div>
 </div>
 <p>Contrary to the analysis in Chapter 9, our model so far suggest that there is a tendency toward transitivity, that is a confidential exchange is likely to occur between two people who both have a confidential exchange with the same individual.</p>
@@ -1407,15 +1417,15 @@ AIC: 811.9  BIC: 828.4  (Smaller is better. MC Std. Err. = 0.563)</code></pre>
 <p>The attributes were included as both sender and receiver effects, which again can be very computationally intensive and thus timely to run, while sometimes prone to model degeneracy without some model fine tuning.</p>
 <p>To simplify this approach, I’ve include these attributes using the <code>nodefactor()</code> and <code>nocov()</code> ergm-terms respectively which allow us to test whether those who are Male or have higher efficacy scores are more likely to either send or receive a confidential exchange.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>ergm_3 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                 mutual <span class="sc">+</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T) <span class="sc">+</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodefactor</span>(<span class="st">'male'</span>) <span class="sc">+</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodecov</span>(<span class="st">'efficacy'</span>)</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>ergm_3 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                 mutual <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodefactor</span>(<span class="st">'male'</span>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodecov</span>(<span class="st">'efficacy'</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>               )</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = leader_network ~ edges + mutual + gwesp(0.25, 
@@ -1424,18 +1434,18 @@ ergm(formula = leader_network ~ edges + mutual + gwesp(0.25,
 Monte Carlo Maximum Likelihood Results:
 
                   Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges             -4.35982    0.42755      0 -10.197   &lt;1e-04 ***
-mutual             2.30115    0.30923      0   7.442   &lt;1e-04 ***
-gwesp.fixed.0.25   1.05071    0.13056      0   8.048   &lt;1e-04 ***
-nodefactor.male.1  0.10542    0.06519      0   1.617    0.106    
-nodecov.efficacy   0.02292    0.03008      0   0.762    0.446    
+edges             -4.35415    0.42693      0 -10.199   &lt;1e-04 ***
+mutual             2.29853    0.31875      0   7.211   &lt;1e-04 ***
+gwesp.fixed.0.25   1.05200    0.13281      0   7.921   &lt;1e-04 ***
+nodefactor.male.1  0.10622    0.06547      0   1.622    0.105    
+nodecov.efficacy   0.02230    0.02967      0   0.752    0.452    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-     Null Deviance: 2504  on 1806  degrees of freedom
- Residual Deviance:  802  on 1801  degrees of freedom
+     Null Deviance: 2503.6  on 1806  degrees of freedom
+ Residual Deviance:  802.5  on 1801  degrees of freedom
  
-AIC: 812  BIC: 839.4  (Smaller is better. MC Std. Err. = 0.683)</code></pre>
+AIC: 812.5  BIC: 840  (Smaller is better. MC Std. Err. = 0.4733)</code></pre>
 </div>
 </div>
 <p>Although there appears to be a very slight, though not statistically significant tendency towards male leaders being more likely to send or receive ties, the primary drivers of network formation appear to be structural features of the network including reciprocity and transitivity.</p>
@@ -1448,16 +1458,16 @@ AIC: 812  BIC: 839.4  (Smaller is better. MC Std. Err. = 0.683)</code></pre>
 <li>Controlling for edges, reciprocity, and transitivity, are school leaders more likely to confide in colleagues of their own gender or who work at the same district-site level?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>ergm_4 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                 mutual <span class="sc">+</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T) <span class="sc">+</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodematch</span>(<span class="st">'male'</span>) <span class="sc">+</span></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodematch</span>(<span class="st">'district_site'</span>)</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>ergm_4 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(leader_network <span class="sc">~</span> edges <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                 mutual <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">gwesp</span>(<span class="fl">0.25</span>, <span class="at">fixed=</span>T) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodematch</span>(<span class="st">'male'</span>) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">nodematch</span>(<span class="st">'district_site'</span>)</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>               )</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ergm_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 ergm(formula = leader_network ~ edges + mutual + gwesp(0.25, 
@@ -1466,18 +1476,18 @@ ergm(formula = leader_network ~ edges + mutual + gwesp(0.25,
 Monte Carlo Maximum Likelihood Results:
 
                         Estimate Std. Error MCMC % z value Pr(&gt;|z|)    
-edges                    -4.2129     0.1795      0 -23.467   &lt;1e-04 ***
-mutual                    2.1920     0.3191      0   6.869   &lt;1e-04 ***
-gwesp.fixed.0.25          1.0295     0.1335      0   7.711   &lt;1e-04 ***
-nodematch.male           -0.1281     0.1645      0  -0.779    0.436    
-nodematch.district_site   0.6135     0.1378      0   4.451   &lt;1e-04 ***
+edges                    -4.2193     0.1824      0 -23.138   &lt;1e-04 ***
+mutual                    2.1959     0.3267      0   6.723   &lt;1e-04 ***
+gwesp.fixed.0.25          1.0282     0.1317      0   7.808   &lt;1e-04 ***
+nodematch.male           -0.1249     0.1672      0  -0.747    0.455    
+nodematch.district_site   0.6147     0.1385      0   4.439   &lt;1e-04 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-     Null Deviance: 2503.6  on 1806  degrees of freedom
- Residual Deviance:  780.5  on 1801  degrees of freedom
+     Null Deviance: 2504  on 1806  degrees of freedom
+ Residual Deviance:  782  on 1801  degrees of freedom
  
-AIC: 790.5  BIC: 818  (Smaller is better. MC Std. Err. = 0.5221)</code></pre>
+AIC: 792  BIC: 819.5  (Smaller is better. MC Std. Err. = 0.4903)</code></pre>
 </div>
 </div>
 <p>Once you’ve checked the summary of your model estimates, write your interpretation of the results below:</p>
@@ -1495,9 +1505,9 @@ AIC: 790.5  BIC: 818  (Smaller is better. MC Std. Err. = 0.5221)</code></pre>
 <p>The <code>gof()</code> function is a bit different than the <code>summary()</code> and <code>ergm()</code> functions, in that it only takes 3 ergm-terms as arguments: degree, esp (edgwise share partners), and distance (geodesic distances). Each of these terms captures an aggregate network distribution, at either the node level (degree), the edge level (esp), or the dyad level (distance).</p>
 <p>Let’s go ahead and run the <code>gof()</code> function on our <code>ergm_3</code> model and plot the results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>ergm_3_gof <span class="ot">&lt;-</span> <span class="fu">gof</span>(ergm_3)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ergm_3_gof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ergm_3_gof <span class="ot">&lt;-</span> <span class="fu">gof</span>(ergm_3)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ergm_3_gof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="unit-4-case-study-key_files/figure-html/ergm-3-gof-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1525,81 +1535,75 @@ AIC: 790.5  BIC: 818  (Smaller is better. MC Std. Err. = 0.5221)</code></pre>
 <p>Fortunately, our models did not fail to converge, the AIC and BIC indicators seemed to improve with each term added to the model, and the goodness-of-fit seemed to somewhat mirror the global features of our network.</p>
 <p>Let run the <code>mcmc.diagnostics()</code> function on our final model anyways and check the results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc.diagnostics</span>(ergm_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="unit-4-case-study-key_files/figure-html/diagnose-ergm-3-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="unit-4-case-study-key_files/figure-html/diagnose-ergm-3-2.png" class="img-fluid" width="672"></p>
-</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc.diagnostics</span>(ergm_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sample statistics summary:
 
-Iterations = 753664:14974976
-Thinning interval = 8192 
+Iterations = 7393280:31387648
+Thinning interval = 4096 
 Number of chains = 1 
-Sample size per chain = 1737 
+Sample size per chain = 5859 
 
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
                      Mean     SD Naive SE Time-series SE
-edges              1.7749  51.73   1.2412          3.662
-mutual             0.6189  16.96   0.4069          1.218
-gwesp.fixed.0.25   2.2893  64.47   1.5469          4.526
-nodefactor.male.1  2.3777  59.40   1.4251          4.131
-nodecov.efficacy  25.5925 700.82  16.8153         49.649
+edges              -4.591  51.45   0.6721         2.6523
+mutual             -1.464  16.83   0.2199         0.8491
+gwesp.fixed.0.25   -4.969  63.58   0.8306         3.2645
+nodefactor.male.1  -4.895  59.53   0.7778         3.1039
+nodecov.efficacy  -62.654 696.91   9.1047        36.0250
 
 2. Quantiles for each variable:
 
-                     2.5%     25%     50%    75%  97.5%
-edges               -91.0  -37.00  1.0000  40.00   99.0
-mutual              -29.0  -12.00  0.0000  13.00   33.0
-gwesp.fixed.0.25   -106.8  -48.37  0.4879  49.89  129.2
-nodefactor.male.1  -104.0  -43.00  5.0000  46.00  113.0
-nodecov.efficacy  -1231.1 -508.51 21.0900 551.16 1347.3
+                     2.5%     25%     50%    75%   97.5%
+edges               -93.0  -45.00  -4.000  34.00   93.00
+mutual              -30.0  -15.00  -2.000  11.00   31.55
+gwesp.fixed.0.25   -108.3  -56.99  -7.051  41.82  119.66
+nodefactor.male.1  -107.5  -52.00  -5.000  39.00  107.55
+nodecov.efficacy  -1259.6 -616.21 -55.990 454.95 1263.27
 
 
 Are sample statistics significantly different from observed?
-               edges    mutual gwesp.fixed.0.25 nodefactor.male.1
-diff.      1.7748993 0.6188831        2.2892797         2.3776626
-test stat. 0.4846844 0.5081267        0.5058546         0.5755797
-P-val.     0.6279002 0.6113645        0.6129587         0.5648993
-           nodecov.efficacy    (Omni)
-diff.            25.5925446        NA
-test stat.        0.5154695 3.0476434
-P-val.            0.6062250 0.6946987
+                 edges      mutual gwesp.fixed.0.25 nodefactor.male.1
+diff.      -4.59122717 -1.46373101       -4.9694724        -4.8953746
+test stat. -1.73105929 -1.72390925       -1.5222868        -1.5771922
+P-val.      0.08344119  0.08472423        0.1279372         0.1147513
+           nodecov.efficacy Overall (Chi^2)
+diff.          -62.65407919              NA
+test stat.      -1.73918395    4.130851e+01
+P-val.           0.08200241    1.006831e-07
 
 Sample statistics cross-correlations:
                       edges    mutual gwesp.fixed.0.25 nodefactor.male.1
-edges             1.0000000 0.9787367        0.9914811         0.9646803
-mutual            0.9787367 1.0000000        0.9801889         0.9485474
-gwesp.fixed.0.25  0.9914811 0.9801889        1.0000000         0.9627593
-nodefactor.male.1 0.9646803 0.9485474        0.9627593         1.0000000
-nodecov.efficacy  0.9988576 0.9777860        0.9909358         0.9630708
+edges             1.0000000 0.9790145        0.9913763         0.9654745
+mutual            0.9790145 1.0000000        0.9813615         0.9488636
+gwesp.fixed.0.25  0.9913763 0.9813615        1.0000000         0.9623458
+nodefactor.male.1 0.9654745 0.9488636        0.9623458         1.0000000
+nodecov.efficacy  0.9988166 0.9781341        0.9906310         0.9634763
                   nodecov.efficacy
-edges                    0.9988576
-mutual                   0.9777860
-gwesp.fixed.0.25         0.9909358
-nodefactor.male.1        0.9630708
+edges                    0.9988166
+mutual                   0.9781341
+gwesp.fixed.0.25         0.9906310
+nodefactor.male.1        0.9634763
 nodecov.efficacy         1.0000000
 
 Sample statistics auto-correlation:
 Chain 1 
               edges    mutual gwesp.fixed.0.25 nodefactor.male.1
 Lag 0     1.0000000 1.0000000        1.0000000         1.0000000
-Lag 8192  0.7532308 0.7563323        0.7555241         0.7446997
-Lag 16384 0.6108966 0.6181524        0.6081408         0.6001633
-Lag 24576 0.4836537 0.5014742        0.4851481         0.4769121
-Lag 32768 0.3991104 0.4141910        0.3971020         0.3808106
-Lag 40960 0.3364470 0.3407111        0.3342213         0.3236197
+Lag 4096  0.8563656 0.8611438        0.8607252         0.8547248
+Lag 8192  0.7507988 0.7552559        0.7531766         0.7492259
+Lag 12288 0.6641857 0.6662636        0.6647575         0.6661954
+Lag 16384 0.5869818 0.5872707        0.5853704         0.5909378
+Lag 20480 0.5156311 0.5189978        0.5140322         0.5225789
           nodecov.efficacy
 Lag 0            1.0000000
-Lag 8192         0.7546606
-Lag 16384        0.6117454
-Lag 24576        0.4854987
-Lag 32768        0.4009105
-Lag 40960        0.3366392
+Lag 4096         0.8572204
+Lag 8192         0.7515372
+Lag 12288        0.6653919
+Lag 16384        0.5886474
+Lag 20480        0.5177033
 
 Sample statistics burn-in diagnostic (Geweke):
 Chain 1 
@@ -1608,24 +1612,26 @@ Fraction in 1st window = 0.1
 Fraction in 2nd window = 0.5 
 
             edges            mutual  gwesp.fixed.0.25 nodefactor.male.1 
-       -0.1613703        -0.2055039        -0.1843279        -0.3742671 
+         0.020048         -0.045774         -0.026767          0.049916 
  nodecov.efficacy 
-       -0.1934852 
+        -0.008712 
 
 Individual P-values (lower = worse):
             edges            mutual  gwesp.fixed.0.25 nodefactor.male.1 
-        0.8718018         0.8371785         0.8537562         0.7082056 
+        0.9840052         0.9634904         0.9786455         0.9601895 
  nodecov.efficacy 
-        0.8465790 
-Joint P-value (lower = worse):  0.5351774 
-
-Note: MCMC diagnostics shown here are from the last round of
-  simulation, prior to computation of final parameter estimates.
-  Because the final estimates are refinements of those used for this
-  simulation run, these diagnostics may understate model performance.
-  To directly assess the performance of the final model on in-model
-  statistics, please use the GOF command: gof(ergmFitObject,
-  GOF=~model).</code></pre>
+        0.9930490 
+Joint P-value (lower = worse):  0.4086241 .</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-4-case-study-key_files/figure-html/diagnose-ergm-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-4-case-study-key_files/figure-html/diagnose-ergm-3-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+MCMC diagnostics shown here are from the last round of simulation, prior to computation of final parameter estimates. Because the final estimates are refinements of those used for this simulation run, these diagnostics may understate model performance. To directly assess the performance of the final model on in-model statistics, please use the GOF command: gof(ergmFitObject, GOF=~model).</code></pre>
 </div>
 </div>
 <p>One simple heuristic for interpreting <code>mcmc.diagnostics()</code> results is too look for “balance.” The charts with all the squiggles, to use a non-technical term, should have a scale that ideally is centered on 0 and have roughly straight line running through it, while the chart that looks like a simple line graph should also be ideally centered at 0 and roughly normally distributed on both ends. Overall, the diagnostics indicate there is room for improvement but nothing is wildly off and hence our model did not fail to converge.</p>
@@ -1634,10 +1640,10 @@ Note: MCMC diagnostics shown here are from the last round of
 <h4 class="anchored" data-anchor-id="your-turn-8">👉 Your Turn ⤵</h4>
 <p>Use the code chunk below to check the model fit and diagnostics for the model the you created in <a href="#b.-estimate-the-ergm-model">4b. Estimate the ERGM Model</a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>ergm_4_gof <span class="ot">&lt;-</span> <span class="fu">gof</span>(ergm_4)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ergm_4_gof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#YOUR CODE HERE</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>ergm_4_gof <span class="ot">&lt;-</span> <span class="fu">gof</span>(ergm_4)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ergm_4_gof)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1653,81 +1659,75 @@ Note: MCMC diagnostics shown here are from the last round of
 <div class="cell-output-display">
 <p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-5.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc.diagnostics</span>(ergm_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-6.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-7.png" class="img-fluid" width="672"></p>
-</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc.diagnostics</span>(ergm_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sample statistics summary:
 
-Iterations = 286720:5683200
-Thinning interval = 2048 
+Iterations = 1708032:11870208
+Thinning interval = 4096 
 Number of chains = 1 
-Sample size per chain = 2636 
+Sample size per chain = 2482 
 
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
-                            Mean    SD Naive SE Time-series SE
-edges                   -0.20334 37.08   0.7222         2.8232
-mutual                  -0.05083 12.32   0.2399         0.8788
-gwesp.fixed.0.25        -0.09113 46.65   0.9085         3.6218
-nodematch.male           0.07360 18.02   0.3509         1.2225
-nodematch.district_site -0.45979 29.61   0.5768         2.3335
+                          Mean    SD Naive SE Time-series SE
+edges                   -5.030 39.19   0.7867         2.5354
+mutual                  -1.676 12.97   0.2603         0.8498
+gwesp.fixed.0.25        -6.003 48.75   0.9785         3.1802
+nodematch.male          -2.407 18.93   0.3800         1.1547
+nodematch.district_site -4.232 31.76   0.6375         2.0666
 
 2. Quantiles for each variable:
 
                           2.5%    25%    50%   75% 97.5%
-edges                   -70.12 -26.00 -1.000 24.00 74.00
-mutual                  -23.12  -9.00  0.000  8.00 25.00
-gwesp.fixed.0.25        -88.66 -33.67 -1.332 29.93 95.39
-nodematch.male          -34.00 -12.00  0.000 12.00 37.00
-nodematch.district_site -58.12 -21.00  0.000 19.00 58.00
+edges                   -80.00 -32.00 -4.000 23.00 72.00
+mutual                  -26.00 -11.00 -2.000  7.00 24.00
+gwesp.fixed.0.25        -94.29 -40.76 -6.415 28.20 90.92
+nodematch.male          -39.00 -16.00 -2.000 10.75 35.00
+nodematch.district_site -68.00 -26.00 -3.000 19.00 55.00
 
 
 Are sample statistics significantly different from observed?
                  edges      mutual gwesp.fixed.0.25 nodematch.male
-diff.      -0.20333839 -0.05083460      -0.09112638     0.07359636
-test stat. -0.07202432 -0.05784497      -0.02516034     0.06020142
-P-val.      0.94258255  0.95387212       0.97992707     0.95199522
-           nodematch.district_site    (Omni)
-diff.                   -0.4597876        NA
-test stat.              -0.1970375 5.1089352
-P-val.                   0.8437982 0.4057102
+diff.      -5.03021757 -1.67606769      -6.00268455    -2.40733280
+test stat. -1.98400873 -1.97224408      -1.88752804    -2.08472747
+P-val.      0.04725487  0.04858175       0.05908934     0.03709405
+           nodematch.district_site Overall (Chi^2)
+diff.                  -4.23166801              NA
+test stat.             -2.04764975      9.67326602
+P-val.                  0.04059433      0.08672657
 
 Sample statistics cross-correlations:
                             edges    mutual gwesp.fixed.0.25 nodematch.male
-edges                   1.0000000 0.9588717        0.9833629      0.9408934
-mutual                  0.9588717 1.0000000        0.9648095      0.8962577
-gwesp.fixed.0.25        0.9833629 0.9648095        1.0000000      0.9254296
-nodematch.male          0.9408934 0.8962577        0.9254296      1.0000000
-nodematch.district_site 0.9662867 0.9427214        0.9633991      0.9114243
+edges                   1.0000000 0.9645616        0.9843119      0.9486428
+mutual                  0.9645616 1.0000000        0.9697562      0.9114608
+gwesp.fixed.0.25        0.9843119 0.9697562        1.0000000      0.9328728
+nodematch.male          0.9486428 0.9114608        0.9328728      1.0000000
+nodematch.district_site 0.9717464 0.9491910        0.9669491      0.9215776
                         nodematch.district_site
-edges                                 0.9662867
-mutual                                0.9427214
-gwesp.fixed.0.25                      0.9633991
-nodematch.male                        0.9114243
+edges                                 0.9717464
+mutual                                0.9491910
+gwesp.fixed.0.25                      0.9669491
+nodematch.male                        0.9215776
 nodematch.district_site               1.0000000
 
 Sample statistics auto-correlation:
 Chain 1 
               edges    mutual gwesp.fixed.0.25 nodematch.male
 Lag 0     1.0000000 1.0000000        1.0000000      1.0000000
-Lag 2048  0.8427979 0.8494460        0.8525575      0.7678439
-Lag 4096  0.7402490 0.7446979        0.7472225      0.6497858
-Lag 6144  0.6546115 0.6582259        0.6645721      0.5707435
-Lag 8192  0.5788400 0.5837847        0.5871435      0.5059685
-Lag 10240 0.5105510 0.5137073        0.5177739      0.4427045
+Lag 4096  0.7797892 0.7830366        0.7841156      0.7141861
+Lag 8192  0.6421053 0.6494005        0.6422159      0.5836791
+Lag 12288 0.5396393 0.5477877        0.5430155      0.4919775
+Lag 16384 0.4500983 0.4547203        0.4560410      0.4074524
+Lag 20480 0.3723347 0.3791984        0.3767771      0.3487965
           nodematch.district_site
 Lag 0                   1.0000000
-Lag 2048                0.8441401
-Lag 4096                0.7418929
-Lag 6144                0.6653493
-Lag 8192                0.5914991
-Lag 10240               0.5232693
+Lag 4096                0.7868380
+Lag 8192                0.6489883
+Lag 12288               0.5451219
+Lag 16384               0.4526691
+Lag 20480               0.3765252
 
 Sample statistics burn-in diagnostic (Geweke):
 Chain 1 
@@ -1736,24 +1736,26 @@ Fraction in 1st window = 0.1
 Fraction in 2nd window = 0.5 
 
                   edges                  mutual        gwesp.fixed.0.25 
-               1.752290                1.808679                1.684233 
+                -0.3948                 -0.3251                 -0.3886 
          nodematch.male nodematch.district_site 
-               1.613722                1.622523 
+                -0.3761                 -0.5866 
 
 Individual P-values (lower = worse):
                   edges                  mutual        gwesp.fixed.0.25 
-             0.07972390              0.07050096              0.09213657 
+              0.6930225               0.7451379               0.6975531 
          nodematch.male nodematch.district_site 
-             0.10658767              0.10469134 
-Joint P-value (lower = worse):  0.3662796 
-
-Note: MCMC diagnostics shown here are from the last round of
-  simulation, prior to computation of final parameter estimates.
-  Because the final estimates are refinements of those used for this
-  simulation run, these diagnostics may understate model performance.
-  To directly assess the performance of the final model on in-model
-  statistics, please use the GOF command: gof(ergmFitObject,
-  GOF=~model).</code></pre>
+              0.7068578               0.5574974 
+Joint P-value (lower = worse):  0.3126747 .</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="unit-4-case-study-key_files/figure-html/check-ergm-4-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+MCMC diagnostics shown here are from the last round of simulation, prior to computation of final parameter estimates. Because the final estimates are refinements of those used for this simulation run, these diagnostics may understate model performance. To directly assess the performance of the final model on in-model statistics, please use the GOF command: gof(ergmFitObject, GOF=~model).</code></pre>
 </div>
 </div>
 </section>
