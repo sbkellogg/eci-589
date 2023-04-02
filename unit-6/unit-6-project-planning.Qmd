@@ -1,0 +1,64 @@
+---
+title: "Network Analysis Case Study Project Planning"
+subtitle: "ECI 589 SNA and Education: Final Project"
+author: "Dr. Shaun Kellogg"
+date: "`r format(Sys.Date(),'%B %e, %Y')`"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+theme: 
+  light: cosmo
+  dark: cyborg
+bibliography: lit/references.bib
+execute: 
+  warning: false
+---
+
+## Overview
+
+Throughout this course, we've completed several case studies modeled after the Data-Intensive Research Workflow from Learning Analytics Goes to School [@krumm2018] and incorporating approaches from Social Network Analysis and Education [@carolan2014]. For your final course project, you'll be asked to prepare your own small scale "case study" that brings together some of the workflow approaches we've learned this semester to help answer a research question you have about a dataset of your own choosing.
+
+## Assignment
+
+In preparation for your final project, you will read [Chapter 12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf) from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which summarizes the theories, methods, and applications that constitute the interdisciplinary field of social network analysis; reiterate its limitations and provides some guidance for doing your own social network analysis in educational research.
+
+This week also provides some space to plan and conceptualize your **final course project, due May 4th**. More details about the actual content and format of your case study are provided in Part 2, but in general, I recommend that you loosely model your write-up after one of the case studies from prior units, minus the literature review and Your Turns. While your case studies are meant to be informative rather than instructional, I would love to use your analyses in future sections of ECI 589 as models for other students.
+
+### Guiding Questions
+
+To help plan for you final project, your assignment is to create a forum post that briefly addresses the questions below (**4 pts**) and to provide some constructive feedback (**2 pts**) on proposed final course projects for at least two of your peers.
+
+#### Prepare
+
+1.  What research articles, if any, inspired your case study and what **data source(s)**, will you be using for your analysis? 
+
+2.  Why are you interested in this data/context and what **research question(s)** are you hoping to answer with your analysis? 
+
+3.  Who would most benefit from your analysis and why? How might your **target audience** use this information to take action? 
+
+#### Wrangle 
+
+1.  What **data structures** will you use to store your data and will your data be relational data be directed or undirected, valued or binary? 
+
+2.  What other **variables/features** (e.g. student grades, schools, dates, tweets, chapter numbers, demographics, etc.) will you need to include to address your research questions? 
+
+3.  What **data cleaning or transformations** are required for the types of analyses you have planned and why are they necessary? 
+
+#### Explore & Model (Analysis)
+
+1.  What **metrics** (e.g., centrality, density, reciprocity, distance, etc.) will you examine, at what level (e.g., network, group, individual), and why?
+
+2.  What **tables or graphs** might you include to help readers understand and interpret your findings?
+
+3.  What, if any, modeling **techniques** (e.g., linear regression, QAP, ERGMs, etc.) will you use to analyze your data and how do you anticipate these techniques will help you address your research questions?
+
+#### Communicate
+
+1.  What **key insights** do you anticipate finding as a result of your analysis? Why would they be useful and what actions might they result in by your target audience? 
+
+2.  What are some of the anticipated **limitations** of your analysis? 
+
+3.  What **ethical/legal issues,** if any, need to be taken into consideration? 
+
+## References

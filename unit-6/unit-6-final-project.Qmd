@@ -1,22 +1,22 @@
 ---
-title: "Unit 6 Final Project: A Network Analysis Case Study"
-subtitle: "ECI 589 Social Network Analysis and Education"
+title: "A Network Analysis Case Study"
+subtitle: "ECI 589 SNA and Education: Final Project"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
-output:
-  html_document:
-    toc: yes
-    toc_depth: 2
-    toc_float: yes
-editor_options:
-  markdown:
-    wrap: 72
+format:
+  html:
+    toc: true
+    toc-depth: 4
+theme: 
+  light: cosmo
+  dark: cyborg
 bibliography: lit/references.bib
+execute: 
+  warning: false
+editor: 
+  markdown: 
+    wrap: 72
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Overview
 
