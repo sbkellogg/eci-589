@@ -25,55 +25,61 @@ In preparation for your final project, you will read [Chapter 12](https://sbkell
 
 This week also provides some space to plan and conceptualize your **final course project, due April 28th**. More details about the actual content and format of your case study are provided in Part 2, but in general, you are welcome to model your write-up after one of the case studies from prior units, minus the Your Turns. While your case studies are meant to be informative rather than instructional, I would love to use your analyses in future sections of ECI 589 as models for other students.
 
-## Grading Criteria
-
-Grading criteria for your final project is guided by the Data-Intensive Research Workflow from [Learning analytics goes to school: A collaborative approach to improving education](https://catalog.lib.ncsu.edu/catalog/NCSU4862134) (Krumm, Means, & Bienkowski, 2018).
+To help plan for your final project, your assignment is to: 1) create a forum post that addresses the questions below and 2) provide constructive feedback on proposed final course projects for at least two of your peers.
 
 ### Prepare
 
-Your data product should demonstrate your ability to formulate clear, actionable research questions relevant to a targeted audience. Specifically, your data product should include an **introduction** that:
+1.  What prior research, if any, inspired your case study and what **data source(s)**, will you be using for your analysis?
 
-1.  Clearly describes the **purpose** of your data product, including the research question(s) guiding your analyses.
+2.  Why are you interested in this data/context and what **research question(s)** are you hoping to answer with your analysis?
 
-2.  Provides information about the **data sources**, including the context in which the data was collected and variables used to address your research questions.
+3.  Who would most benefit from your analysis and why? How might your **target audience** use this information to take action?
 
 ### Wrangle
 
-Your data project should demonstrate your ability to use R to manipulate, clean, transform, and/or merging data in order to prepare your text for analysis. Specifically, your data product should clearly describe:
+4.  What **data cleaning** steps do you anticipate taking to prepare your data for analysis and why are they necessary? 
 
-3.  **Data preprocessing** steps (e.g., renaming variables, filtering, tokenization, stemming, stop words removal, etc.) taken to clean and prepare your text for analysis and why are they necessary, as well as any steps will excluded and why.
+5.  What other **variables/features** (e.g. student grades, schools, dates, tweets, chapter numbers, demographics, etc.) might you need to include to address your research questions?
 
-4.  Any **new variables or features** you created to address your research questions; or any data **transformations** you made required for the types of analyses or packages used (e.g. reshaping, merging, joining etc.).
+### Explore & Model (Analysis)
 
-### Analyze
+6.  What **metrics** (e.g., percents, counts, p-values, sentiment values, degree, density, etc.) will you calculate and examine? And at what stage of your analysis?
 
-Your data project should demonstrate your ability to use R to apply text mining techniques appropriate to your research questions and data sources. Specifically, your data product should clearly include:
+7.  What **tables or charts** (e.g. text networks, word clouds, etc?) might you include to help readers understand and interpret your findings?
 
-5.  Clear descriptions of the **techniques** (e.g., descriptive statistics, network analysis, sentiment analysis, etc.) you applied to analyze your data.
+8.  While not required, what modeling **techniques** (e.g., logistic regression, random forests, sentiment analysis, community detection, etc.), if any, will you use to analyze your data and how do you anticipate these techniques will help you address your research questions?
 
-6.  Interpretations/meanings of specific **metrics** (e.g., counts, means, proportions, sentiment values, centrality measures, etc.) that your analysis generated. 
+### Communicate
 
-7.  Data **visualizations** that are attractive and easy to interpret, and include text or narrative for aiding their Interpretation by others.
+9.  What **key insights** do you anticipate finding as a result of your analysis? Why would they be useful and what actions might they result in by your target audience?
 
-### Communication
-
-Your data product should demonstrate your ability to clearly and effectively communicate the most important and most useful findings. Specifically, your data product should:
-
-8.  Highlights **key finding and insights** in response to your research questions. 
-
-9.  Suggests potential **action** that you and/or your target audience to better understand and improve the context in which your data product is intended to inform.  
-
-10. Discusses the **limitations** and any ethical/legal issues taken into consideration, including acknowledgments any reference materials used.
+10. What **ethical/legal issues,** if any, need to be taken into consideration?
 
 ## Potential Data Sources
 
--   Social Network Analysis and Education data sets: <https://studysites.sagepub.com/carolan/study/resources.htm>
+You are welcome to reuse any data set provided during the course, provide you use it to address a research question we have not addressed and can provide some new insight. You are also welcome to collect your own network data or locate a data set online. There are several sources where you can find social network data sets related to an educational context. Included below are links to data we have used in this course, as well as some additional sources to start with:
 
--   Massively Open Online Course for Educators (MOOC-Ed) network dataset: <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB>
+1.  **Social Network Analysis and Education**: The example data sets used in Social Network Analysis and Education [@carolan2014] are in an Excel (.xls) file format, which can either be directly imported or copied into your preferred social network analysis software. Visit the website at <https://studysites.sagepub.com/carolan/study/resources.htm>.
 
--   
+2.  **Massively Open Online Course for Educators (MOOC-Ed) network dataset**: These dataset provide detailed information on the communications taking place between learners in two offerings of the Massively Open Online Course for Educators (MOOC-Eds) titled The Digital Learning Transition in K-12 Schools. Visit the website at <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB>
+
+3.  **The UCI Network Data Repository:** This repository is an effort to facilitate the scientific study of networks. Feel free to browse and download any available datasets. If you're just getting your feet wet, check out the [Getting Started](#0) help page. Visit their website at <http://networkdata.ics.uci.edu>.
+
+4.  **Stanford Large Network Dataset Collection (SNAP)**: SNAP offers a wide variety of large network datasets, some of which are related to educational settings, like collaboration networks and online discussion platforms. Visit their website at <https://snap.stanford.edu/data/>
+
+5.  **GitHub**: Some researchers and organizations share their datasets on GitHub. You can search for educational social network datasets using appropriate keywords. For example, you can use the search query **`educational social network dataset`**. Visit GitHub at <https://github.com>.
+
+6.  **Pajek Datasets**: Pajek is a software for analyzing and visualizing large networks. They provide some datasets, including those related to educational settings, like co-authorship networks. Visit their dataset collection at <http://vlado.fmf.uni-lj.si/pub/networks/data/>
+
+7.  **Gephi Datasets**: Gephi is a popular open-source network analysis and visualization software. They provide a list of datasets, including some that are relevant to educational settings. Visit their dataset page at <https://github.com/gephi/gephi/wiki/Datasets>
+
+8.  **Academic Torrents**: Academic Torrents is a platform for researchers to share their data, including social network datasets. You can search for educational social network datasets by visiting their website at <http://academictorrents.com/>
+
+Remember to check the licensing and terms of use for each dataset, as some may have restrictions on how they can be used. Additionally, it is essential to handle any data containing personal information responsibly and adhere to privacy regulations.
 
 ## Example Data Products
+
+Your
 
 ### Dashboards
 
