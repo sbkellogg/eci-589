@@ -37,7 +37,7 @@ To help plan for your final project, your assignment is to: 1) create a forum po
 
 ### Wrangle
 
-4.  What **data cleaning** steps do you anticipate taking to prepare your data for analysis and why are they necessary? 
+4.  What **data cleaning** steps do you anticipate taking to prepare your data for analysis and why are they necessary?
 
 5.  What other **variables/features** (e.g. student grades, schools, dates, tweets, chapter numbers, demographics, etc.) might you need to include to address your research questions?
 
