@@ -1,6 +1,6 @@
 ---
-title: "Network Analysis Case Study Project Planning"
-subtitle: "ECI 589 SNA and Education: Final Project"
+title: "Part 1: Project Planning"
+subtitle: "ECI 589 SNA and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:
@@ -17,47 +17,63 @@ execute:
 
 ## Overview
 
-Throughout this course, we've completed several case studies modeled after the Data-Intensive Research Workflow from Learning Analytics Goes to School [@krumm2018] and incorporating approaches from Social Network Analysis and Education [@carolan2014]. For the end-of-course project, you'll be applying the knowledge and skills gained throughout this semester to conduct the independent analysis proposed in the previous assignment. Similar to the case studies provided in this course, your analysis should demonstrate your ability to wrangle, analyze, and communicate findings in response to a research question of interest. You will also be expected to use [R Markdown](https://bookdown.org/yihui/rmarkdown/) (or [Quarto](https://quarto.org) if preferred) to create a reproducible data product (e.g., slide show, dashboard, report, mini "data product", etc.), which contains all the code used during each step of your analysis so it can be reproduced by others.
+Throughout this course, we've completed several case studies modeled after the Data-Intensive Research Workflow from Learning Analytics Goes to School [@krumm2018] and incorporating approaches from Social Network Analysis and Education [@carolan2014]. For the end-of-course project, you'll be applying the knowledge and skills gained throughout this semester to conduct a social network analysis on a data set of your choosing. Similar to the case studies provided in this course, your analysis should demonstrate your ability to wrangle, analyze, and communicate findings in response to a research question of interest.
+
+You will also be expected to use R and [R Markdown](https://bookdown.org/yihui/rmarkdown/) (or [Quarto](https://quarto.org) if preferred) to conduct your analysis and create a reproducible data product. Your R project should contain all the code used during each step of your analysis so it can be replicated by others. Your findings can be shared in a format of your choosing (e.g., [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html), [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html), [MS Word](https://bookdown.org/yihui/rmarkdown/word-document.html), [slides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html), [Tufte-style handouts](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html), [dashboards](https://pkgs.rstudio.com/flexdashboard/), [shiny app](https://bookdown.org/yihui/rmarkdown/shiny-documents.html), [research articles](https://github.com/rstudio/rticles), etc.) and your analysis and findings should be tailored to your intended audience (e.g., teachers, district admin, policymakers, researchers).
 
 ## Assignment
 
-In preparation for your final project, you will read [Chapter 12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf) from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which summarizes the theories, methods, and applications that constitute the interdisciplinary field of social network analysis; reiterates SNA's limitations; and provides some important guidance for doing your own social network analysis in educational research. Please also skim through [Chapter 10](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml) and [Chapter 11](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education). These chapters connect the methods, measures, and techniques presented in the previous five chapters to two rich theoretical areas -- social capital and diffusion -- to which educational researchers have made important contributions.
+In preparation for your final project, this week you will read [Chapter 12](https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf) from [Social Network Analysis and Education](https://catalog.lib.ncsu.edu/catalog/NCSU2803782), which summarizes the theories, methods, and applications that constitute the interdisciplinary field of social network analysis; reiterates SNA's limitations; and provides some important guidance for doing your own social network analysis in educational research. Please also skim through [Chapter 10](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml) and [Chapter 11](https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education). These chapters connect the methods, measures, and techniques presented in the previous five chapters to two rich theoretical areas -- social capital and diffusion -- to which educational researchers have made important contributions.
 
-This week also provides some space to plan and conceptualize your **final course project, due April 28th**. More details about the actual content and format of your case study are provided in Part 2, but in general, you are welcome to model your write-up after one of the case studies from prior units, minus the Your Turns. While your case studies are meant to be informative rather than instructional, I would love to use your analyses in future sections of ECI 589 as models for other students.
+This week is intended to provide some space to plan to conceptualize your **final course project, due April 30th**. More details about the actual content, format, and grading criteria for your analysis are provided in Part 2, but in general, you are welcome to model your write-up after one of the case studies from prior units or to present your analysis and findings in a completely different format (see student example below). While your case studies are meant to be informative rather than instructional, I would like to use your analyses in future sections of ECI 589 as models for other students.
 
-To help plan for your final project, your assignment is to: 1) create a forum post that addresses the questions below and 2) provide constructive feedback on proposed final course projects for at least two of your peers.
+In addition to the required readings, your assignment this week to:
 
-### Prepare
+-   create a forum post that addresses the questions below; and,
+
+-   provide constructive feedback on proposed final course projects for at least two of your peers.
+
+### Guiding Questions
+
+Provide below are guiding questions designed to help plan for your final project and that your forum post should address:
+
+#### Prepare
 
 1.  What prior research, if any, inspired your case study and what **data source(s)**, will you be using for your analysis?
 
 2.  Why are you interested in this data/context and what **research question(s)** are you hoping to answer with your analysis?
 
-3.  Who would most benefit from your analysis and why? How might your **target audience** use this information to take action?
+3.  Who is the **primary audience** for this analysis and how might they use this information to take action?
 
-### Wrangle
+#### Wrangle
 
 4.  What **data cleaning** steps do you anticipate taking to prepare your data for analysis and why are they necessary?
 
-5.  What other **variables/features** (e.g. student grades, schools, dates, tweets, chapter numbers, demographics, etc.) might you need to include to address your research questions?
+5.  What other **variables/features** (e.g., student grades, schools, dates, tweets, chapter numbers, demographics, etc.) might you need to include to address your research questions?
 
-### Explore & Model (Analysis)
+#### Explore & Model (Analysis)
 
-6.  What **metrics** (e.g., percents, counts, p-values, sentiment values, degree, density, etc.) will you calculate and examine? And at what stage of your analysis?
+6.  What **metrics** (e.g., size, degree, density, reciprocity, etc.) will you calculate and examine? And at what stage of your analysis?
 
-7.  What **tables or charts** (e.g. text networks, word clouds, etc?) might you include to help readers understand and interpret your findings?
+7.  What **tables or graphs** might you include in your final project, and how might they be polished to help your audience understand and interpret your findings?
 
-8.  While not required, what modeling **techniques** (e.g., logistic regression, random forests, sentiment analysis, community detection, etc.), if any, will you use to analyze your data and how do you anticipate these techniques will help you address your research questions?
+8.  While not required, what modeling **techniques** (e.g., community detection, QAP, ERGMs, etc.), if any, will you use to analyze your data and how do you anticipate these techniques will help you address your research questions?
 
-### Communicate
+#### Communicate
 
 9.  What **key insights** do you anticipate finding as a result of your analysis? Why would they be useful and what actions might they result in by your target audience?
 
 10. What **ethical/legal issues,** if any, need to be taken into consideration?
 
+### Grading
+
+This assignment accounts for half of your final project grade (12 points planning, 12 points data product). Responses that adequately addresses the questions above are worth 1 point each (10 points total). In addition, you'll be expected to provide constructive feedback to two of your peers. Each response is worth 1 point each (2 points total).
+
 ## Potential Data Sources
 
-You are welcome to reuse any data set provided during the course, provide you use it to address a research question we have not addressed and can provide some new insight. You are also welcome to collect your own network data or locate a data set online. There are several sources where you can find social network data sets related to an educational context. Included below are links to data we have used in this course, as well as some additional sources to start with:
+You are welcome to use any data set provided during the course, provided that you use it to address a research question we have not addressed and can provide some new insight. You are also welcome to collect your own network data or locate a data set online. There are several sources where you can find social network data sets related to an educational context.
+
+Included below are links to data we have used in this course, as well as some additional sources to start with:
 
 1.  **Social Network Analysis and Education**: The example data sets used in Social Network Analysis and Education [@carolan2014] are in an Excel (.xls) file format, which can either be directly imported or copied into your preferred social network analysis software. Visit the website at <https://studysites.sagepub.com/carolan/study/resources.htm>.
 
@@ -77,9 +93,9 @@ You are welcome to reuse any data set provided during the course, provide you us
 
 Remember to check the licensing and terms of use for each dataset, as some may have restrictions on how they can be used. Additionally, it is essential to handle any data containing personal information responsibly and adhere to privacy regulations.
 
-## Example Data Products
+## Example Projects
 
-Your
+As noted above, you will also be expected to use R and [R Markdown](https://bookdown.org/yihui/rmarkdown/) (or [Quarto](https://quarto.org) if preferred) to create a reproducible data product, but your analysis and findings can be shared in a format of your choosing (e.g., [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html), [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html), [MS Word](https://bookdown.org/yihui/rmarkdown/word-document.html), [slides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html), [Tufte-style handouts](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html), [dashboards](https://pkgs.rstudio.com/flexdashboard/), [shiny app](https://bookdown.org/yihui/rmarkdown/shiny-documents.html), [research articles](https://github.com/rstudio/rticles), etc.). Liked below are examples of final projects created by students in past courses:
 
 ### Dashboards
 

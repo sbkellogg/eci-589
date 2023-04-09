@@ -1,6 +1,6 @@
 ---
-title: "A Network Analysis Case Study"
-subtitle: "ECI 589 SNA and Education: Final Project"
+title: "Part 2: Final Project"
+subtitle: "ECI 589 SNA and Education"
 author: "Dr. Shaun Kellogg"
 date: "`r format(Sys.Date(),'%B %e, %Y')`"
 format:
@@ -18,37 +18,49 @@ editor:
     wrap: 72
 ---
 
-## Overview
+## Assignment
 
 For the end-of-course project, you'll be applying the knowledge and
-skills gained throughout this semester to create your "case study"
-proposed in [Unit 6 Part
-1](https://sbkellogg.github.io/eci-589/unit-6/unit-6-project-planning.html).
-Similar to the case studies provided in this course, your case study
-should demonstrate your ability to wrangle, analyze, and communicate
-findings in response to a research question of interest. Also, similar
-to our Unit 1-5 case studies, you'll be expected to use R Markdown to
-create a sharable web page (or if preferred, a PDF or Word document),
-which includes the code used during each step of your analysis so it can
-be reproduced by others.
+skills gained throughout this semester to conduct and share the social
+network analysis you proposed in Unit 5 Part 1. Similar to the case
+studies provided in this course, your final project should demonstrate
+your ability to wrangle, analyze, and communicate findings in response
+to a research question of interest.
+
+Your findings can be shared in a format of your choosing (e.g.,
+[HTML](https://bookdown.org/yihui/rmarkdown/html-document.html), [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html), [MS
+Word](https://bookdown.org/yihui/rmarkdown/word-document.html),
+[slides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html),
+[Tufte-style
+handouts](https://bookdown.org/yihui/rmarkdown/tufte-handouts.html),
+[dashboards](https://pkgs.rstudio.com/flexdashboard/), [shiny
+app](https://bookdown.org/yihui/rmarkdown/shiny-documents.html),
+[research articles](https://github.com/rstudio/rticles), etc.) and your
+analysis and findings should be tailored to your intended audience
+(e.g., teachers, district admin, policymakers, researchers). You will
+also be expected to use R and [R
+Markdown](https://bookdown.org/yihui/rmarkdown/) (or
+[Quarto](https://quarto.org) if preferred) to conduct your analysis and
+create a reproducible data product. Your R project should contain all
+the code used during each step of your analysis so it can be replicated
+by others, but depending on your audience, you may choose to not display
+your code in your data product.
 
 When you are ready to share your final case study, please click "Add a
 new discussion topic" to create a new forum post. In your post, include
-a link to your knitted html case study file (or attach your Word or PDF
-file), and if you worked in RStudio desktop, also attach or link to your
-associated R markdown file use to create you case study. If your data is
-sensitive or proprietary and not suitable for including in your post,
-please let me know. 
+a link to your data product, and if you worked in RStudio desktop, also
+attach or link to the associated R markdown file use to create you case
+study. If your data is sensitive or proprietary and not suitable for
+including in your post, please let me know.
 
 ## Grading Criteria
 
 Grading criteria for your final project is guided by the Data-Intensive
 Research Workflow from Learning Analytics Goes to School [@krumm2018]
 and Social Network Analysis and Education [@carolan2014]. Your final
-project is with 24 points, or approximately one-fourth of your overall
-grade.
+project is worth 12 points and the grading criteria is detailed below.
 
-### Prepare (6 points total; 2 points each)
+### Prepare (3 points total; 1 points each)
 
 Your case study should demonstrate your ability to formulate clear,
 actionable research questions relevant to a targeted audience.
@@ -64,7 +76,7 @@ Specifically, your case study should include an **introduction** that:
 3.  Includes a description of the **target audience** that would most
     benefit from your analysis and why.
 
-### Wrangle (6 points total; 2 points each)
+### Wrangle (3 points total; 1 points each)
 
 Your data project should demonstrate your ability to use R to
 manipulate, clean, transform, and/or merge relational data in order to
@@ -82,7 +94,7 @@ clearly describe: 
     or packages used (e.g. reshaping, merging, joining, matrix
     conversions, etc.).  
 
-### Analyze (6 points total; 2 points each)
+### Analyze (3 points total; 1 points each)
 
 Your data project should demonstrate your ability to use R to apply
 network analysis techniques appropriate to your research questions and
@@ -99,7 +111,7 @@ data sources. Specifically, your case study shouldclearly include:   
     and include text or narrative for aiding their Interpretation by
     others.
 
-### Communication (6 points total; 2 points each)
+### Communication (3 points total; 1 points each)
 
 Your case study should demonstrate your ability to clearly and
 effectively communicate the most important and most useful findings.

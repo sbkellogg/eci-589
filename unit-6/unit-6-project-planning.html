@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-04-02">
+<meta name="dcterms.date" content="2023-04-09">
 
-<title>Network Analysis Case Study Project Planning</title>
+<title>Part 1: Project Planning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,10 +74,19 @@ div.csl-indent {
   <li><a href="#guiding-questions" id="toc-guiding-questions" class="nav-link" data-scroll-target="#guiding-questions">Guiding Questions</a>
   <ul class="collapse">
   <li><a href="#prepare" id="toc-prepare" class="nav-link" data-scroll-target="#prepare">Prepare</a></li>
-  <li><a href="#wrangle" id="toc-wrangle" class="nav-link" data-scroll-target="#wrangle">Wrangle&nbsp;</a></li>
+  <li><a href="#wrangle" id="toc-wrangle" class="nav-link" data-scroll-target="#wrangle">Wrangle</a></li>
   <li><a href="#explore-model-analysis" id="toc-explore-model-analysis" class="nav-link" data-scroll-target="#explore-model-analysis">Explore &amp; Model (Analysis)</a></li>
   <li><a href="#communicate" id="toc-communicate" class="nav-link" data-scroll-target="#communicate">Communicate</a></li>
   </ul></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  </ul></li>
+  <li><a href="#potential-data-sources" id="toc-potential-data-sources" class="nav-link" data-scroll-target="#potential-data-sources">Potential Data Sources</a></li>
+  <li><a href="#example-projects" id="toc-example-projects" class="nav-link" data-scroll-target="#example-projects">Example Projects</a>
+  <ul>
+  <li><a href="#dashboards" id="toc-dashboards" class="nav-link" data-scroll-target="#dashboards">Dashboards</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#reports" id="toc-reports" class="nav-link" data-scroll-target="#reports">Reports</a></li>
+  <li><a href="#case-studies" id="toc-case-studies" class="nav-link" data-scroll-target="#case-studies">Case Studies</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -87,8 +96,8 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Network Analysis Case Study Project Planning</h1>
-<p class="subtitle lead">ECI 589 SNA and Education: Final Project</p>
+<h1 class="title">Part 1: Project Planning</h1>
+<p class="subtitle lead">ECI 589 SNA and Education</p>
 </div>
 
 
@@ -105,7 +114,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 2, 2023</p>
+      <p class="date">April 9, 2023</p>
     </div>
   </div>
   
@@ -117,47 +126,102 @@ div.csl-indent {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Throughout this course, we’ve completed several case studies modeled after the Data-Intensive Research Workflow from Learning Analytics Goes to School <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span> and incorporating approaches from Social Network Analysis and Education <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span>. For your final course project, you’ll be asked to prepare your own small scale “case study” that brings together some of the workflow approaches we’ve learned this semester to help answer a research question you have about a dataset of your own choosing.</p>
+<p>Throughout this course, we’ve completed several case studies modeled after the Data-Intensive Research Workflow from Learning Analytics Goes to School <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span> and incorporating approaches from Social Network Analysis and Education <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span>. For the end-of-course project, you’ll be applying the knowledge and skills gained throughout this semester to conduct a social network analysis on a data set of your choosing. Similar to the case studies provided in this course, your analysis should demonstrate your ability to wrangle, analyze, and communicate findings in response to a research question of interest.</p>
+<p>You will also be expected to use R and <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown</a> (or <a href="https://quarto.org">Quarto</a> if preferred) to conduct your analysis and create a reproducible data product. Your R project should contain all the code used during each step of your analysis so it can be replicated by others. Your findings can be shared in a format of your choosing (e.g., <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">HTML</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">PDF</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/word-document.html">MS Word</a>, <a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html">slides</a>, <a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html">Tufte-style handouts</a>, <a href="https://pkgs.rstudio.com/flexdashboard/">dashboards</a>, <a href="https://bookdown.org/yihui/rmarkdown/shiny-documents.html">shiny app</a>, <a href="https://github.com/rstudio/rticles">research articles</a>, etc.) and your analysis and findings should be tailored to your intended audience (e.g., teachers, district admin, policymakers, researchers).</p>
 </section>
 <section id="assignment" class="level2">
 <h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
-<p>In preparation for your final project, you will read <a href="https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf">Chapter 12</a> from <a href="https://catalog.lib.ncsu.edu/catalog/NCSU2803782">Social Network Analysis and Education</a>, which summarizes the theories, methods, and applications that constitute the interdisciplinary field of social network analysis; reiterate its limitations and provides some guidance for doing your own social network analysis in educational research.</p>
-<p>This week also provides some space to plan and conceptualize your <strong>final course project, due May 4th</strong>. More details about the actual content and format of your case study are provided in Part 2, but in general, I recommend that you loosely model your write-up after one of the case studies from prior units, minus the literature review and Your Turns. While your case studies are meant to be informative rather than instructional, I would love to use your analyses in future sections of ECI 589 as models for other students.</p>
+<p>In preparation for your final project, this week you will read <a href="https://sbkellogg.github.io/eci-589/unit-6/lit/carolan-sna-ch-12.pdf">Chapter 12</a> from <a href="https://catalog.lib.ncsu.edu/catalog/NCSU2803782">Social Network Analysis and Education</a>, which summarizes the theories, methods, and applications that constitute the interdisciplinary field of social network analysis; reiterates SNA’s limitations; and provides some important guidance for doing your own social network analysis in educational research. Please also skim through <a href="https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education/n10.xml">Chapter 10</a> and <a href="https://methods-sagepub-com.prox.lib.ncsu.edu/book/social-network-analysis-and-education">Chapter 11</a>. These chapters connect the methods, measures, and techniques presented in the previous five chapters to two rich theoretical areas – social capital and diffusion – to which educational researchers have made important contributions.</p>
+<p>This week is intended to provide some space to plan to conceptualize your <strong>final course project, due April 30th</strong>. More details about the actual content, format, and grading criteria for your analysis are provided in Part 2, but in general, you are welcome to model your write-up after one of the case studies from prior units or to present your analysis and findings in a completely different format (see student example below). While your case studies are meant to be informative rather than instructional, I would like to use your analyses in future sections of ECI 589 as models for other students.</p>
+<p>In addition to the required readings, your assignment this week to:</p>
+<ul>
+<li><p>create a forum post that addresses the questions below; and,</p></li>
+<li><p>provide constructive feedback on proposed final course projects for at least two of your peers.</p></li>
+</ul>
 <section id="guiding-questions" class="level3">
 <h3 class="anchored" data-anchor-id="guiding-questions">Guiding Questions</h3>
-<p>To help plan for you final project, your assignment is to create a forum post that briefly addresses the questions below (<strong>4 pts</strong>) and to provide some constructive feedback (<strong>2 pts</strong>) on proposed final course projects for at least two of your peers.</p>
+<p>Provide below are guiding questions designed to help plan for your final project and that your forum post should address:</p>
 <section id="prepare" class="level4">
 <h4 class="anchored" data-anchor-id="prepare">Prepare</h4>
 <ol type="1">
-<li><p>What research articles, if any, inspired your case study and what&nbsp;<strong>data source(s)</strong>, will you be using for your analysis?&nbsp;</p></li>
-<li><p>Why are you interested in this data/context and what&nbsp;<strong>research question(s)</strong>&nbsp;are you hoping to answer with your analysis?&nbsp;</p></li>
-<li><p>Who would most benefit from your analysis and why? How might your&nbsp;<strong>target audience</strong>&nbsp;use this information to take action?&nbsp;</p></li>
+<li><p>What prior research, if any, inspired your case study and what <strong>data source(s)</strong>, will you be using for your analysis?</p></li>
+<li><p>Why are you interested in this data/context and what <strong>research question(s)</strong>&nbsp;are you hoping to answer with your analysis?</p></li>
+<li><p>Who is the <strong>primary audience</strong> for this analysis and how might they use this information to take action?</p></li>
 </ol>
 </section>
 <section id="wrangle" class="level4">
-<h4 class="anchored" data-anchor-id="wrangle">Wrangle&nbsp;</h4>
-<ol type="1">
-<li><p>What&nbsp;<strong>data structures</strong> will you use to store your data and will your data be relational data be directed or undirected, valued or binary?&nbsp;</p></li>
-<li><p>What other&nbsp;<strong>variables/features</strong>&nbsp;(e.g.&nbsp;student grades, schools, dates, tweets, chapter numbers, demographics, etc.) will you need to include to address your research questions?&nbsp;</p></li>
-<li><p>What&nbsp;<strong>data cleaning or transformations</strong> are required for the types of analyses you have planned and why are they necessary?&nbsp;</p></li>
+<h4 class="anchored" data-anchor-id="wrangle">Wrangle</h4>
+<ol start="4" type="1">
+<li><p>What <strong>data cleaning</strong> steps do you anticipate taking to prepare your data for analysis and why are they necessary?</p></li>
+<li><p>What other <strong>variables/features</strong>&nbsp;(e.g., student grades, schools, dates, tweets, chapter numbers, demographics, etc.) might you need to include to address your research questions?</p></li>
 </ol>
 </section>
 <section id="explore-model-analysis" class="level4">
 <h4 class="anchored" data-anchor-id="explore-model-analysis">Explore &amp; Model (Analysis)</h4>
-<ol type="1">
-<li><p>What&nbsp;<strong>metrics</strong>&nbsp;(e.g., centrality, density, reciprocity, distance, etc.) will you examine, at what level (e.g., network, group, individual), and why?</p></li>
-<li><p>What&nbsp;<strong>tables or graphs</strong> might you include to help readers understand and interpret your findings?</p></li>
-<li><p>What, if any, modeling&nbsp;<strong>techniques</strong>&nbsp;(e.g., linear regression, QAP, ERGMs, etc.) will you use to analyze your data and how do you anticipate these techniques will help you&nbsp;address your research questions?</p></li>
+<ol start="6" type="1">
+<li><p>What <strong>metrics</strong>&nbsp;(e.g., size, degree, density, reciprocity, etc.) will you calculate and examine? And at what stage of your analysis?</p></li>
+<li><p>What&nbsp;<strong>tables or graphs</strong> might you include in your final project, and how might they be polished to help your audience understand and interpret your findings?</p></li>
+<li><p>While not required, what modeling&nbsp;<strong>techniques</strong>&nbsp;(e.g., community detection, QAP, ERGMs, etc.), if any, will you use to analyze your data and how do you anticipate these techniques will help you address your research questions?</p></li>
 </ol>
 </section>
 <section id="communicate" class="level4">
 <h4 class="anchored" data-anchor-id="communicate">Communicate</h4>
-<ol type="1">
-<li><p>What&nbsp;<strong>key insights</strong>&nbsp;do you anticipate finding as a result of your analysis? Why would they be useful and what actions might they result in by your target audience?&nbsp;</p></li>
-<li><p>What are some of the anticipated&nbsp;<strong>limitations</strong>&nbsp;of your analysis?&nbsp;</p></li>
-<li><p>What&nbsp;<strong>ethical/legal issues,</strong> if any, need to be&nbsp;taken into consideration?&nbsp;</p></li>
+<ol start="9" type="1">
+<li><p>What&nbsp;<strong>key insights</strong>&nbsp;do you anticipate finding as a result of your analysis? Why would they be useful and what actions might they result in by your target audience?</p></li>
+<li><p>What&nbsp;<strong>ethical/legal issues,</strong> if any, need to be&nbsp;taken into consideration?</p></li>
 </ol>
 </section>
+</section>
+<section id="grading" class="level3">
+<h3 class="anchored" data-anchor-id="grading">Grading</h3>
+<p>This assignment accounts for half of your final project grade (12 points planning, 12 points data product). Responses that adequately addresses the questions above are worth 1 point each (10 points total). In addition, you’ll be expected to provide constructive feedback to two of your peers. Each response is worth 1 point each (2 points total).</p>
+</section>
+</section>
+<section id="potential-data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="potential-data-sources">Potential Data Sources</h2>
+<p>You are welcome to use any data set provided during the course, provided that you use it to address a research question we have not addressed and can provide some new insight. You are also welcome to collect your own network data or locate a data set online. There are several sources where you can find social network data sets related to an educational context.</p>
+<p>Included below are links to data we have used in this course, as well as some additional sources to start with:</p>
+<ol type="1">
+<li><p><strong>Social Network Analysis and Education</strong>: The example data sets used in Social Network Analysis and Education <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span> are in an Excel (.xls) file format, which can either be directly imported or copied into your preferred social network analysis software. Visit the website at <a href="https://studysites.sagepub.com/carolan/study/resources.htm" class="uri">https://studysites.sagepub.com/carolan/study/resources.htm</a>.</p></li>
+<li><p><strong>Massively Open Online Course for Educators (MOOC-Ed) network dataset</strong>: These dataset provide detailed information on the communications taking place between learners in two offerings of the Massively Open Online Course for Educators (MOOC-Eds) titled The Digital Learning Transition in K-12 Schools. Visit the website at <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB" class="uri">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZZH3UB</a></p></li>
+<li><p><strong>The UCI Network Data Repository:</strong> This repository is an effort to facilitate the scientific study of networks. Feel free to browse and download any available datasets. If you’re just getting your feet wet, check out the <a href="#0">Getting Started</a> help page. Visit their website at <a href="http://networkdata.ics.uci.edu" class="uri">http://networkdata.ics.uci.edu</a>.</p></li>
+<li><p><strong>Stanford Large Network Dataset Collection (SNAP)</strong>: SNAP offers a wide variety of large network datasets, some of which are related to educational settings, like collaboration networks and online discussion platforms. Visit their website at <a href="https://snap.stanford.edu/data/" class="uri">https://snap.stanford.edu/data/</a></p></li>
+<li><p><strong>GitHub</strong>: Some researchers and organizations share their datasets on GitHub. You can search for educational social network datasets using appropriate keywords. For example, you can use the search query <strong><code>educational social network dataset</code></strong>. Visit GitHub at <a href="https://github.com" class="uri">https://github.com</a>.</p></li>
+<li><p><strong>Pajek Datasets</strong>: Pajek is a software for analyzing and visualizing large networks. They provide some datasets, including those related to educational settings, like co-authorship networks. Visit their dataset collection at <a href="http://vlado.fmf.uni-lj.si/pub/networks/data/" class="uri">http://vlado.fmf.uni-lj.si/pub/networks/data/</a></p></li>
+<li><p><strong>Gephi Datasets</strong>: Gephi is a popular open-source network analysis and visualization software. They provide a list of datasets, including some that are relevant to educational settings. Visit their dataset page at <a href="https://github.com/gephi/gephi/wiki/Datasets" class="uri">https://github.com/gephi/gephi/wiki/Datasets</a></p></li>
+<li><p><strong>Academic Torrents</strong>: Academic Torrents is a platform for researchers to share their data, including social network datasets. You can search for educational social network datasets by visiting their website at <a href="http://academictorrents.com/" class="uri">http://academictorrents.com/</a></p></li>
+</ol>
+<p>Remember to check the licensing and terms of use for each dataset, as some may have restrictions on how they can be used. Additionally, it is essential to handle any data containing personal information responsibly and adhere to privacy regulations.</p>
+</section>
+<section id="example-projects" class="level2">
+<h2 class="anchored" data-anchor-id="example-projects">Example Projects</h2>
+<p>As noted above, you will also be expected to use R and <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown</a> (or <a href="https://quarto.org">Quarto</a> if preferred) to create a reproducible data product, but your analysis and findings can be shared in a format of your choosing (e.g., <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">HTML</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">PDF</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/word-document.html">MS Word</a>, <a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html">slides</a>, <a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html">Tufte-style handouts</a>, <a href="https://pkgs.rstudio.com/flexdashboard/">dashboards</a>, <a href="https://bookdown.org/yihui/rmarkdown/shiny-documents.html">shiny app</a>, <a href="https://github.com/rstudio/rticles">research articles</a>, etc.). Liked below are examples of final projects created by students in past courses:</p>
+<section id="dashboards" class="level3">
+<h3 class="anchored" data-anchor-id="dashboards">Dashboards</h3>
+<ul>
+<li><p>Accountability and Testing Reports Dashboard: <a href="https://jkhouchins.shinyapps.io/accountability/" class="uri">https://jkhouchins.shinyapps.io/accountability/</a></p></li>
+<li><p>Troubles with Technology for School Children in America: <a href="https://speckart.shinyapps.io/Project/" class="uri">https://speckart.shinyapps.io/Project/</a></p></li>
+</ul>
+</section>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides</h3>
+<ul>
+<li><p>Academic Mental Health on Twitter: <a href="https://jennhouchins.github.io/Sentiments/SentimentAnalysisinR.html#1" class="uri">https://jennhouchins.github.io/Sentiments/SentimentAnalysisinR.html#1</a></p></li>
+<li><p>North Carolina Goes Back to School: <a href="https://cullerth.github.io/wk_7_indpndnt_analysis/wk_7_presentation.html#1" class="uri">https://cullerth.github.io/wk_7_indpndnt_analysis/wk_7_presentation.html#1</a></p></li>
+</ul>
+</section>
+<section id="reports" class="level3">
+<h3 class="anchored" data-anchor-id="reports">Reports</h3>
+<ul>
+<li>Comparing Duke, UNC, and NC State Twitter Activity: A Text Mining Approach: <a href="https://sorayaworldwide.github.io/DukeUNCNCStateTweets.html" class="uri">https://sorayaworldwide.github.io/DukeUNCNCStateTweets.html</a></li>
+</ul>
+</section>
+<section id="case-studies" class="level3">
+<h3 class="anchored" data-anchor-id="case-studies">Case Studies</h3>
+<ul>
+<li><p>Predicting Non-success in a College Science Course: <a href="https://rpubs.com/rmlucas/845863" class="uri">https://rpubs.com/rmlucas/845863</a></p></li>
+<li><p>#BlackinSTEM and #DiversityinSTEM Twitter Analysis: <a href="https://rpubs.com/dsc21/845881" class="uri">https://rpubs.com/dsc21/845881</a></p></li>
+</ul>
 </section>
 </section>
 <section id="references" class="level2 unnumbered">
