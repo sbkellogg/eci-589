@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Shaun Kellogg">
-<meta name="dcterms.date" content="2023-04-02">
+<meta name="dcterms.date" content="2023-04-09">
 
-<title>A Network Analysis Case Study</title>
+<title>Part 2: Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,13 +68,13 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment">Assignment</a></li>
   <li><a href="#grading-criteria" id="toc-grading-criteria" class="nav-link" data-scroll-target="#grading-criteria">Grading Criteria</a>
   <ul>
-  <li><a href="#prepare-6-points-total-2-points-each" id="toc-prepare-6-points-total-2-points-each" class="nav-link" data-scroll-target="#prepare-6-points-total-2-points-each">Prepare (6 points total; 2 points each)</a></li>
-  <li><a href="#wrangle-6-points-total-2-points-each" id="toc-wrangle-6-points-total-2-points-each" class="nav-link" data-scroll-target="#wrangle-6-points-total-2-points-each">Wrangle&nbsp;(6 points total; 2 points each)</a></li>
-  <li><a href="#analyze-6-points-total-2-points-each" id="toc-analyze-6-points-total-2-points-each" class="nav-link" data-scroll-target="#analyze-6-points-total-2-points-each">Analyze (6 points total; 2 points each)</a></li>
-  <li><a href="#communication-6-points-total-2-points-each" id="toc-communication-6-points-total-2-points-each" class="nav-link" data-scroll-target="#communication-6-points-total-2-points-each">Communication&nbsp;(6 points total; 2 points each)</a></li>
+  <li><a href="#prepare-3-points-total-1-points-each" id="toc-prepare-3-points-total-1-points-each" class="nav-link" data-scroll-target="#prepare-3-points-total-1-points-each">Prepare (3 points total; 1 points each)</a></li>
+  <li><a href="#wrangle-3-points-total-1-points-each" id="toc-wrangle-3-points-total-1-points-each" class="nav-link" data-scroll-target="#wrangle-3-points-total-1-points-each">Wrangle&nbsp;(3 points total; 1 points each)</a></li>
+  <li><a href="#analyze-3-points-total-1-points-each" id="toc-analyze-3-points-total-1-points-each" class="nav-link" data-scroll-target="#analyze-3-points-total-1-points-each">Analyze (3 points total; 1 points each)</a></li>
+  <li><a href="#communication-3-points-total-1-points-each" id="toc-communication-3-points-total-1-points-each" class="nav-link" data-scroll-target="#communication-3-points-total-1-points-each">Communication&nbsp;(3 points total; 1 points each)</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -84,8 +84,8 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A Network Analysis Case Study</h1>
-<p class="subtitle lead">ECI 589 SNA and Education: Final Project</p>
+<h1 class="title">Part 2: Final Project</h1>
+<p class="subtitle lead">ECI 589 SNA and Education</p>
 </div>
 
 
@@ -102,7 +102,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 2, 2023</p>
+      <p class="date">April 9, 2023</p>
     </div>
   </div>
   
@@ -112,16 +112,17 @@ div.csl-indent {
 
 </header>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>For the end-of-course project, you’ll be applying the knowledge and skills gained throughout this semester to create your “case study” proposed in&nbsp;<a href="https://sbkellogg.github.io/eci-589/unit-6/unit-6-project-planning.html">Unit 6 Part 1</a>. Similar to the case studies provided in this course, your case study should demonstrate your ability to wrangle, analyze, and communicate findings in response to a research question of interest. Also, similar to our Unit 1-5 case studies, you’ll be expected to use R Markdown to create a sharable web page (or if preferred, a PDF or Word document), which includes the code used during each step of your analysis so it can be reproduced by others.</p>
-<p>When you are ready to share your final case study, please click “Add a new discussion topic” to create a new forum post. In your post, include a link to your knitted html case study file (or attach your Word or PDF file), and if you worked in RStudio desktop, also attach or link to your associated R markdown file use to create you case study. If your data is sensitive or proprietary and not suitable for including in your post, please let me know.&nbsp;</p>
+<section id="assignment" class="level2">
+<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
+<p>For the end-of-course project, you’ll be applying the knowledge and skills gained throughout this semester to conduct and share the social network analysis you proposed in&nbsp;Unit 5 Part 1. Similar to the case studies provided in this course, your final project should demonstrate your ability to wrangle, analyze, and communicate findings in response to a research question of interest.</p>
+<p>Your findings can be shared in a format of your choosing (e.g., <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">HTML</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">PDF</a>,&nbsp;<a href="https://bookdown.org/yihui/rmarkdown/word-document.html">MS Word</a>, <a href="https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html">slides</a>, <a href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html">Tufte-style handouts</a>, <a href="https://pkgs.rstudio.com/flexdashboard/">dashboards</a>, <a href="https://bookdown.org/yihui/rmarkdown/shiny-documents.html">shiny app</a>, <a href="https://github.com/rstudio/rticles">research articles</a>, etc.) and your analysis and findings should be tailored to your intended audience (e.g., teachers, district admin, policymakers, researchers). You will also be expected to use R and <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown</a> (or <a href="https://quarto.org">Quarto</a> if preferred) to conduct your analysis and create a reproducible data product. Your R project should contain all the code used during each step of your analysis so it can be replicated by others, but depending on your audience, you may choose to not display your code in your data product.</p>
+<p>When you are ready to share your final case study, please click “Add a new discussion topic” to create a new forum post. In your post, include a link to your data product, and if you worked in RStudio desktop, also attach or link to the associated R markdown file use to create you case study. If your data is sensitive or proprietary and not suitable for including in your post, please let me know.</p>
 </section>
 <section id="grading-criteria" class="level2">
 <h2 class="anchored" data-anchor-id="grading-criteria">Grading Criteria</h2>
-<p>Grading criteria for your final project is guided by the Data-Intensive Research Workflow&nbsp;from&nbsp;Learning Analytics Goes to School <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span> and Social Network Analysis and Education <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span>. Your final project is with 24 points, or approximately one-fourth of your overall grade.</p>
-<section id="prepare-6-points-total-2-points-each" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-6-points-total-2-points-each">Prepare (6 points total; 2 points each)</h3>
+<p>Grading criteria for your final project is guided by the Data-Intensive Research Workflow&nbsp;from&nbsp;Learning Analytics Goes to School <span class="citation" data-cites="krumm2018">(<a href="#ref-krumm2018" role="doc-biblioref">Krumm, Means, and Bienkowski 2018</a>)</span> and Social Network Analysis and Education <span class="citation" data-cites="carolan2014">(<a href="#ref-carolan2014" role="doc-biblioref">Carolan 2014</a>)</span>. Your final project is worth 12 points and the grading criteria is detailed below.</p>
+<section id="prepare-3-points-total-1-points-each" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-3-points-total-1-points-each">Prepare (3 points total; 1 points each)</h3>
 <p>Your case study should demonstrate your ability to formulate clear, actionable research questions relevant to a targeted audience. Specifically, your case study should include an <strong>introduction</strong> that:</p>
 <ol type="1">
 <li><p>Clearly describes the&nbsp;<strong>purpose</strong>&nbsp;of your case study, including the&nbsp;research&nbsp;question(s)&nbsp;guiding your analyses.</p></li>
@@ -129,8 +130,8 @@ div.csl-indent {
 <li><p>Includes a description of the&nbsp;<strong>target audience</strong>&nbsp;that would most benefit from your analysis and why.</p></li>
 </ol>
 </section>
-<section id="wrangle-6-points-total-2-points-each" class="level3">
-<h3 class="anchored" data-anchor-id="wrangle-6-points-total-2-points-each">Wrangle&nbsp;(6 points total; 2 points each)</h3>
+<section id="wrangle-3-points-total-1-points-each" class="level3">
+<h3 class="anchored" data-anchor-id="wrangle-3-points-total-1-points-each">Wrangle&nbsp;(3 points total; 1 points each)</h3>
 <p>Your data project should demonstrate your ability to use R to manipulate, clean, transform, and/or merge relational data in order to prepare your network analysis. Specifically, your case study should clearly describe:&nbsp;</p>
 <ol type="1">
 <li><p><strong>Data preprocessing</strong>&nbsp;steps (e.g., renaming variables, filtering, dichotomization, recoding values, etc.) taken to clean and prepare your text for analysis and why are they necessary.</p></li>
@@ -138,8 +139,8 @@ div.csl-indent {
 <li><p>Data <strong>transformations</strong> you made required&nbsp;for the types of analyses or packages used (e.g.&nbsp;reshaping, merging, joining, matrix conversions, etc.). &nbsp;</p></li>
 </ol>
 </section>
-<section id="analyze-6-points-total-2-points-each" class="level3">
-<h3 class="anchored" data-anchor-id="analyze-6-points-total-2-points-each">Analyze (6 points total; 2 points each)</h3>
+<section id="analyze-3-points-total-1-points-each" class="level3">
+<h3 class="anchored" data-anchor-id="analyze-3-points-total-1-points-each">Analyze (3 points total; 1 points each)</h3>
 <p>Your data project should demonstrate your ability to use R to apply network analysis techniques appropriate to your research questions and data sources. Specifically, your case study shouldclearly include: &nbsp;&nbsp;</p>
 <ol type="1">
 <li><p>Clear descriptions of the exploratory <strong>techniques and/or models</strong>&nbsp;(e.g., level of analysis, community detection, ERGMs, etc.) you applied to analyze your data.</p></li>
@@ -147,8 +148,8 @@ div.csl-indent {
 <li><p>Data&nbsp;<strong>visualizations</strong>&nbsp;that are attractive and easy to interpret, and include text or narrative for aiding their Interpretation by others.</p></li>
 </ol>
 </section>
-<section id="communication-6-points-total-2-points-each" class="level3">
-<h3 class="anchored" data-anchor-id="communication-6-points-total-2-points-each">Communication&nbsp;(6 points total; 2 points each)</h3>
+<section id="communication-3-points-total-1-points-each" class="level3">
+<h3 class="anchored" data-anchor-id="communication-3-points-total-1-points-each">Communication&nbsp;(3 points total; 1 points each)</h3>
 <p>Your case study should demonstrate your ability to clearly and effectively communicate the most important and most useful findings. Specifically, your case study should:</p>
 <ol type="1">
 <li><p>Highlights&nbsp;<strong>key finding and insights</strong>&nbsp;in response to your research questions.&nbsp;</p></li>
